@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+:root {
+  --background: #f2efe7;
+  --foreground: #172019;
+  --accent: #773438;
+  --muted: #66675f;
+  --line: rgb(23 32 25 / 16%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-sans: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgb(119 52 56 / 18%);
+}
+
+.holding-page {
+  background-image:
+    radial-gradient(circle at 88% 46%, rgb(119 52 56 / 8%), transparent 30rem),
+    linear-gradient(120deg, rgb(255 255 255 / 36%), transparent 48%);
+}

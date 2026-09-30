@@ -1,8 +1,9 @@
 # Dikko & Mahmoud Website
 
-The local project foundation for the Dikko & Mahmoud website revamp. This
-repository currently contains setup and documentation only; website design,
-content, routes, components, CMS schemas, and integrations have not started.
+The local project foundation for the Dikko & Mahmoud website revamp. The root
+route currently presents a temporary, no-index holding page while discovery and
+design are pending. Production website design, content, routes, components, CMS
+schemas, and integrations have not started.
 
 ## Stack
 
@@ -43,7 +44,7 @@ pnpm start      # Run the production build
 pnpm format     # Format the repository
 pnpm format:check # Check formatting without writing
 pnpm lint       # Run ESLint
-pnpm typecheck  # Run TypeScript without emitting files
+pnpm typecheck  # Generate Next.js types and run TypeScript checks
 ```
 
 ## Project structure
@@ -64,9 +65,9 @@ needs a clear owner.
 
 ## Current boundary
 
-This repository is local only. It has no Git remote, CMS connection, email,
-database, rate limiting, analytics, or deployment configuration. The eventual
-repository location is expected to be `VextraHQ/dikko-mahmoud-website`, but no
-remote has been created or connected.
+This repository has no CMS connection, email, database, rate limiting,
+analytics, or deployment configuration. The temporary holding page is not an
+approved design-system direction and should be replaced when the designer's
+work is approved.
 
 See [`docs/README.md`](./docs/README.md) for the documentation reading order.

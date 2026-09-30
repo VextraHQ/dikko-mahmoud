@@ -1,7 +1,7 @@
 # Dikko & Mahmoud Website Agent Guide
 
 This repository is the future public website for Dikko & Mahmoud. The current
-milestone is setup only.
+milestone is the verified foundation plus a temporary holding page.
 
 ## Start here
 
@@ -15,6 +15,8 @@ milestone is setup only.
 
 - Do not implement website design, production pages, components, copy, CMS
   schemas, or business logic until that work is explicitly approved.
+- Preserve the temporary root holding page as a replaceable interim surface;
+  do not treat its visual choices as the approved design system.
 - Do not connect Sanity, Resend, Upstash, analytics, databases, or deployment
   services during the setup milestone.
 - Do not invent client claims, people, practice areas, contact details,

@@ -5,7 +5,11 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Dikko & Mahmoud",
-  description: "Dikko & Mahmoud website.",
+  description: "The new Dikko & Mahmoud website is currently in development.",
+  robots: {
+    index: false,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

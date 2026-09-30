@@ -1,5 +1,16 @@
 # Implementation log
 
+## 2026-09-30 — Temporary holding page
+
+- Added a restrained responsive development notice to the root route for use
+  before the approved website design is implemented.
+- Kept the page dependency-free and free of CMS, forms, navigation, service
+  claims, contact details, or business logic.
+- Added temporary metadata with `noindex, follow` and documented that the
+  visual treatment is not the future design-system direction.
+- Stopped tracking Next.js-generated `next-env.d.ts`; type checking now runs
+  Next.js type generation before TypeScript.
+
 ## 2026-09-30 — Repository foundation
 
 - Created the local Next.js App Router foundation with TypeScript, Tailwind CSS,
