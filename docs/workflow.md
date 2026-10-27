@@ -13,7 +13,8 @@
 - Keep each change focused on one approved outcome.
 - Prefer the smallest file set that completes the request.
 - Do not invent client content, claims, imagery, or integrations.
-- Agree substantial UI direction with a wireframe before coding it.
+- Use supplied approved designs where available. Clarify missing states and
+  content before inventing behaviour; use wireframes for genuinely new scope.
 - Add dependencies only when an approved requirement needs them.
 - Update the canonical document when a durable boundary or decision changes.
 
@@ -30,8 +31,23 @@
 Local checks do not confirm deployment, DNS, CMS access, message delivery, or
 analytics collection.
 
+`biome.json` enables Tailwind v4 parsing for optional Biome editor diagnostics.
+Biome formatting and assists are disabled; ESLint and Prettier remain the
+project's linting and formatting tools. Do not suppress accessibility rules to
+hide markup errors. Local Cursor workspace settings explicitly bind
+`biome.configurationPath` to `biome.json`; changing that setting restarts its
+language server. This cleared a cached Tailwind diagnostic in an already-open
+CSS file after the parser configuration had loaded. Editor settings remain
+local under the existing `.vscode/` ignore rule.
+
 Use `pnpm format` for an intentional repository-wide formatting pass. When a
 worktree contains unrelated changes, format only the files in the active task.
+
+For section work, iterate in `pnpm dev` with targeted formatting and browser
+review. Batch lint/typecheck once the section slice is ready. A production
+build belongs at the completed runtime handoff or a route/layout/configuration/
+dependency checkpoint; do not repeat it for each visual adjustment. Planning
+and documentation-only changes need formatting/path review, not a build.
 
 ## Implementation log
 

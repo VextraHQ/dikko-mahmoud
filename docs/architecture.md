@@ -3,14 +3,18 @@
 ## Current boundary
 
 The project is a single-package Next.js App Router application with no `src/`
-directory. It is intentionally limited to the framework foundation.
+directory. The runtime contains brand/navigation/hero, firm-at-a-glance and
+firm-story presentation.
+The homepage milestone and remaining content gates are described in
+`design-system.md`, `layout-system.md`, and `routes/home.md`.
 
 ```text
 app/          Routes, layouts, metadata, and global styles
 components/   Presentation grouped by stable shared or route ownership
 lib/          Shared helpers and future service boundaries
 types/        Shared TypeScript contracts
-public/       Approved static assets
+content/      Code-owned navigation and homepage presentation copy
+public/       Supplied static assets used by the preview
 sanity/       Reserved future CMS boundary
 docs/         Durable decisions, workflow, status, and history
 ```
@@ -38,11 +42,41 @@ ordering.
 The following are deliberately undecided and unimplemented:
 
 - final route and information architecture
-- design system, tokens, typography, and component primitives
+- remaining component states and final publication content
 - Sanity schemas, Studio, preview, and data fetching
 - contact form delivery and abuse protection
 - analytics, consent, hosting, and deployment
 - automated test layers beyond lint, type checking, and production build
 
-These decisions should be made from an approved content inventory, wireframe,
-and delivery scope rather than inferred from the legacy website.
+Shared chrome lives in `components/layout/`, Home sections in `components/home/`,
+primitives in `components/ui/`, and source-supplied preview copy/collections in
+`content/`. These boundaries now exist. Button uses CVA and Radix Slot; Sheet
+uses Radix Dialog. The horizontal Carousel follows shadcn composition with
+Embla for swiping, looping and selection. Its matching Fade plugin owns the
+hero photograph transition; scoped global CSS owns text motion. Lucide supplies
+ordinary UI icons. No autoplay plugin or general animation framework is installed.
+
+`app/fonts/` holds local Latin variable Newsreader/Manrope files and their OFL
+licences. The root layout owns fonts and metadata. `app/(site)/layout.tsx` owns
+the shared header, skip link and main landmark; its homepage is a thin Server
+Component. The footer will join this layout when its source section is built.
+Header and hero presentation remain Server Components; MobileNavigation,
+Sheet/notices, Carousel, HeroCarousel/Copy and HeroControls own their local
+client interactions. Hero remains the server-rendered composition and source
+copy mapping; the CTA is a single persistent element.
+Secondary destinations display an explicit preparation notice until those
+routes exist.
+
+Section entry files follow `*-section.tsx`; supporting presentation components
+retain descriptive `.tsx` names. Plain `.ts` content belongs in `content/`,
+and custom CSS/keyframes belong in scoped blocks in `app/globals.css`.
+The hero entry is `hero-section.tsx`, with its motion migrated into global
+CSS. `content/firm.ts` owns shared facts and the firm preview, available to the
+future firm page without duplicating copy in homepage JSX. The facts and story
+remain Server Components; `components/shared/reveal-group.tsx` adds one-time
+IntersectionObserver enhancement to server-rendered children. Missing office
+and portrait media use explicitly labelled slots in `firm-image.tsx`; their
+nullable source/alt fields live in the firm content module.
+
+Use the supplied Figma design and explicit delivery scope for remaining
+decisions; the temporary page and legacy website are not design-system sources.

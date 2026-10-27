@@ -1,9 +1,12 @@
 # Dikko & Mahmoud Website
 
 The local project foundation for the Dikko & Mahmoud website revamp. The root
-route currently presents a temporary, no-index holding page while discovery and
-design are pending. Production website design, content, routes, components, CMS
-schemas, and integrations have not started.
+route now presents the first homepage review checkpoint: brand typography and
+theme, shared Button, responsive navigation, expertise hero, firm facts and
+firm-story preview. It remains
+no-index. All five hero photographs are now local and connected; the full
+homepage and secondary pages remain unfinished. Office and portrait slots
+are explicitly labelled placeholders pending supplied assets.
 
 ## Stack
 
@@ -11,6 +14,7 @@ schemas, and integrations have not started.
 - React 19
 - TypeScript in strict mode
 - Tailwind CSS 4
+- Minimal shadcn-style Button/Sheet, Embla Carousel, and Lucide icons
 - ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
 - Prettier with Tailwind class sorting
 - pnpm
@@ -51,7 +55,8 @@ pnpm typecheck  # Generate Next.js types and run TypeScript checks
 
 ```text
 app/          App Router entry points, layouts, metadata, and global styles
-components/   Shared and route-specific React components when approved
+components/   Shared and route-specific React presentation
+content/      Navigation and homepage presentation copy
 lib/          Framework-independent helpers and future service boundaries
 types/        Shared TypeScript contracts
 public/       Static assets
@@ -65,9 +70,9 @@ needs a clear owner.
 
 ## Current boundary
 
-This repository has no CMS connection, email, database, rate limiting,
-analytics, or deployment configuration. The temporary holding page is not an
-approved design-system direction and should be replaced when the designer's
-work is approved.
+CMS, email, database, rate limiting and deployment remain outside this
+presentation milestone. The user-added analytics component is preserved. The supplied Figma frames define the design direction. This is a local visual
+review checkpoint, not a publication-ready website. See the homepage brief for
+known gaps and review decisions.
 
 See [`docs/README.md`](./docs/README.md) for the documentation reading order.

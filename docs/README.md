@@ -9,16 +9,20 @@ small so a developer or agent can resume work without relying on chat history.
 2. `roadmap.md`
 3. `architecture.md`
 4. `workflow.md`
-5. the latest `implementation-log.md` entry
+5. `design-system.md`, `layout-system.md`, and `routes/home.md` for UI work
+6. the latest `implementation-log.md` entry
 
 ## Ownership
 
-| Document                | Owns                                       |
-| ----------------------- | ------------------------------------------ |
-| `roadmap.md`            | Current milestone and future work gates    |
-| `architecture.md`       | Folder ownership and technical boundaries  |
-| `workflow.md`           | Change and verification process            |
-| `implementation-log.md` | Append-only factual implementation history |
+| Document                | Owns                                                         |
+| ----------------------- | ------------------------------------------------------------ |
+| `roadmap.md`            | Current milestone and future work gates                      |
+| `architecture.md`       | Folder ownership and technical boundaries                    |
+| `workflow.md`           | Change and verification process                              |
+| `design-system.md`      | Brand roles, Tailwind/shadcn rules, and primitives           |
+| `layout-system.md`      | Width, spacing, and responsive composition                   |
+| `routes/home.md`        | Figma references, section map, content gaps, and build order |
+| `implementation-log.md` | Append-only factual implementation history                   |
 
 Code is the source of truth for implemented behavior. Documentation owns
 approved intent and current status. Do not document planned work as complete,
