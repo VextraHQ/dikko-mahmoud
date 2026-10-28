@@ -33,8 +33,9 @@ copying Figma's fixed widths, fixed text heights, or absolute section positions.
   compact mobile accordion in source reading order.
 - Selected matters stack the feature above its selector on mobile. Selection
   requires click/tap or keyboard activation; hover never changes the preview.
-- People are four columns on desktop and four stacked profiles in the supplied
-  mobile reference. Any future horizontal rail is a design change to discuss.
+- People use the approved four-column grid from `lg` and compact two-by-two
+  grid below it, superseding the source mobile stack. Homepage stays capped
+  at four, independently of the future full directory's size.
 - Insights reorder the introduction above the feature and supporting list on
   mobile. Match DOM reading order to the mobile composition.
 - The enquiry callout stacks its copy and action on mobile. Footer groups
@@ -151,6 +152,8 @@ selection. When no area is selected, desktop shows the first panel while
 mobile/tablet remain collapsed.
 Copy and content determine height, without viewport scroll pinning. Missing
 photographs use clearly labelled, numbered navy slots with reserved dimensions.
+The later approved media polish replaces photograph-pending text with numbered
+decorative navy covers; dimensions and interaction remain the same.
 
 ## Selected matters
 
@@ -161,3 +164,28 @@ feature, then the four selectors. Card copy wraps naturally and inactive cards
 reserve the largest record's height. The selected selector has a pale blue fill
 and blue leading rule. Mobile selection brings the feature back into view,
 accounting for the shared sticky-header scroll padding, and moves focus to it.
+
+## People, client perspectives and insights
+
+People keeps the shared section gutters and natural card copy. Portraits reserve
+a 4:5 crop, two columns below `lg` and four above. Names wrap without truncation;
+roles align at the bottom of each row. No horizontal rail, pagination or autoplay.
+
+Client perspectives stack a circular portrait/initials slot above the copy below
+`lg`; desktop puts a 16rem identity column beside the quote with a fine divider.
+Manual controls/counter sit outside the changing slides. Each slide includes its
+own identity and quote so they change together; the track reserves the tallest
+slide's height. No autoheight plugin, scroll capture or fixed quote truncation.
+
+Insights keeps DOM order introduction, feature, supporting list. Below `md` these
+stack; tablet places the feature/list side by side beneath the introduction.
+At `xl`, the visual order is feature left, introduction middle and list right.
+Supporting cards wrap titles/categories; image slots reserve square crops and
+the feature reserves a taller editorial crop. Media is lazy-loaded when supplied.
+
+Fallbacks preserve those same crops when images are absent or fail. Portraits
+use centered initials, editorial images use brand typography and client cards
+use supplied organisation names when logos are missing. Text logos use compact,
+at-most-three-line visual wrapping inside the existing 64/80px cards while
+retaining the full name as accessible text. Missing content does not create
+empty cards; anonymous development collections remain visibly under review.

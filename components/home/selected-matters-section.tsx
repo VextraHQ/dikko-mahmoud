@@ -5,6 +5,10 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { matterRecords, selectedMatters as content } from "@/content/matters";
 
 export function SelectedMattersSection() {
+  const matters = matterRecords.filter(
+    (matter) => matter.organisation.trim() && matter.summary.trim(),
+  );
+  if (!matters.length) return null;
   return (
     <section
       id="selected-matters"
@@ -37,7 +41,7 @@ export function SelectedMattersSection() {
             </PreviewDestination>
           </div>
         </div>
-        <MatterExplorer matters={matterRecords} />
+        <MatterExplorer matters={matters} />
       </div>
     </section>
   );

@@ -152,6 +152,19 @@ artwork. Download needed Figma assets into `public/` during implementation;
 temporary MCP URLs must not become runtime dependencies. Never use a screenshot
 of a complete design section as an implementation asset.
 
+Missing images use intentional fallbacks: decorative navy editorial covers,
+portrait initials, text client names or a neutral anonymous mark. Remove visible
+“photograph/image/portrait pending” labels from these visual surfaces. Covers
+must not imply a real photograph or endorsement; keep content approval notes
+separate and explicit in this no-index preview. Decorative fallbacks are hidden
+from accessibility when adjacent text already supplies the information.
+
+Use the shared `ImageWithFallback` for image network errors as well as absent
+URLs. Owners preserve crop dimensions and normal Next Image loading/sizing;
+do not show permanent loading skeletons for assets that do not exist. Approved
+media replaces the fallback without redesigning the card. See architecture for
+the narrow client boundary and missing-content selection rules.
+
 ## Interaction boundaries
 
 Button and the mobile Sheet are implemented with the minimal shadcn pattern:
@@ -195,7 +208,8 @@ approved interaction requires it.
 
 Custom entrance CSS is kept in `app/styles/motion.css`, imported once through
 `globals.css`. Ordinary visibility/interaction states stay in component Tailwind
-classes; the hero has no CSS module. `RevealGroup` enhances the facts/story using
+classes; the hero has no CSS module. `RevealGroup` enhances facts/story and the
+approved People/insights slice using
 IntersectionObserver: offscreen items fade/rise once, then stop being observed.
 Content starts visible without JavaScript and stays visible under reduced
 motion. A live reduced-motion change completes pending reveals. Keyboard focus

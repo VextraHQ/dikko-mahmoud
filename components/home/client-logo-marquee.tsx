@@ -7,40 +7,44 @@ import { Button } from "@/components/ui/button";
 export function ClientLogoMarquee({
   children,
   note,
+  animate = true,
 }: {
   children: ReactNode;
-  note: string;
+  note?: string;
+  animate?: boolean;
 }) {
   const root = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
   useEffect(() => {
     const element = root.current;
-    if (!element) return;
+    if (!element || !animate) return;
     element.dataset.motionReady = "true";
     return () => {
       delete element.dataset.motionReady;
     };
-  }, []);
+  }, [animate]);
   return (
     <div ref={root} className="client-logo-marquee mt-8" data-paused={paused}>
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-muted-foreground text-xs/5">{note}</p>
-        <div data-motion-controls className="motion-reduce:hidden">
-          <Button
-            variant="muted"
-            onClick={() => setPaused((current) => !current)}
-            className="text-sm"
-            aria-label={paused ? "Play logo movement" : "Pause logo movement"}
-          >
-            {paused ? (
-              <Play className="size-4" />
-            ) : (
-              <Pause className="size-4" />
-            )}
-            {paused ? "Play motion" : "Pause motion"}
-          </Button>
+      {(note || animate) && (
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+          {note && <p className="text-muted-foreground text-xs/5">{note}</p>}
+          <div data-motion-controls className="motion-reduce:hidden">
+            <Button
+              variant="muted"
+              onClick={() => setPaused((current) => !current)}
+              className="text-sm"
+              aria-label={paused ? "Play logo movement" : "Pause logo movement"}
+            >
+              {paused ? (
+                <Play className="size-4" />
+              ) : (
+                <Pause className="size-4" />
+              )}
+              {paused ? "Play motion" : "Pause motion"}
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
       <div className="client-logo-window relative overflow-hidden">
         {children}
         <div

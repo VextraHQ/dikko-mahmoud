@@ -1,6 +1,6 @@
 // Verbatim copy from the supplied Figma hero component's five slide records.
 // Original image fills were recovered from the native Figma local-copy export.
-export const heroSlides = [
+const sourceHeroSlides = [
   {
     id: "dispute-resolution",
     practice: "Dispute resolution",
@@ -47,4 +47,7 @@ export const heroSlides = [
     darkenImage: true,
   },
 ] as const;
+export const heroSlides = sourceHeroSlides.filter(
+  (slide) => slide.practice.trim() && slide.title.some((line) => line.trim()),
+);
 export const heroAction = "Explore our expertise";

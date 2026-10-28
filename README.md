@@ -4,10 +4,14 @@ The local project foundation for the Dikko & Mahmoud website revamp. The root
 route now presents the first homepage review checkpoint: brand typography and
 theme, shared Button, responsive navigation, expertise hero, firm facts and
 firm-story preview, sticky navigation, a selected-clients placeholder rail and
-the editorial practice-area explorer and selected-matters feature. It remains
+the editorial practice-area explorer, selected matters, curated People grid,
+manual client-perspectives carousel and featured-plus-three insights. It remains
 no-index. All five hero photographs are now local and connected; the full
-homepage and secondary pages remain unfinished. Office and portrait slots
-and practice photographs are explicitly labelled placeholders pending supplied assets.
+homepage and secondary pages remain unfinished. Missing/failed media uses
+decorative brand covers, initials or text logos, preserving each allocated crop.
+These are intentional fallbacks, not substitute photographs. Approved originals
+are still required. Testimonials remain anonymous preview slots; profile/article
+destinations and publication content are still pending.
 
 ## Stack
 

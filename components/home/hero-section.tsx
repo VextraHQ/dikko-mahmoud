@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { ImageWithFallback } from "@/components/shared/image-with-fallback";
+import { EditorialCover } from "@/components/shared/editorial-cover";
 import { HeroCarousel } from "@/components/home/hero-carousel";
 import { HeroControls } from "@/components/home/hero-controls";
 import { HeroCopy } from "@/components/home/hero-copy";
@@ -9,6 +10,7 @@ import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { heroAction, heroSlides } from "@/content/home";
 
 export function Hero() {
+  if (!heroSlides.length) return null;
   return (
     <HeroCarousel
       aria-label="Our expertise"
@@ -59,8 +61,13 @@ export function Hero() {
             aria-hidden="true"
             className="relative h-full"
           >
-            <Image
+            <ImageWithFallback
               src={slide.image}
+              fallback={
+                <span className="absolute inset-0 lg:left-[43%]">
+                  <EditorialCover />
+                </span>
+              }
               alt=""
               fill
               preload={index === 0}

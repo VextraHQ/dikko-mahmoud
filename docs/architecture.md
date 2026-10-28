@@ -5,7 +5,8 @@
 A single-package Next.js 16 App Router application, React 19, TypeScript strict
 mode and Tailwind CSS 4. There is no `src/` directory or monorepo. The `@/*`
 alias resolves from the repository root. The current homepage contains shared
-navigation, hero, firm facts/story, clients, practice areas and selected matters.
+navigation, hero, firm facts/story, clients, practice areas, selected matters,
+People, client perspectives and insights.
 It remains a no-index local presentation preview; see `roadmap.md` for the next
 approved scope and `routes/home.md` for source/content gates.
 
@@ -21,7 +22,7 @@ approved scope and `routes/home.md` for source/content gates.
 | `app/styles/surfaces.css` | Header material pseudo-elements and browser/preference fallbacks              |
 | `components/layout/`      | Shared chrome and unavailable-destination notice                              |
 | `components/home/`        | Homepage section entries and their local interactive presentation             |
-| `components/shared/`      | Small helpers serving a real repeated need, currently RevealGroup             |
+| `components/shared/`      | RevealGroup, narrow ImageWithFallback boundary and decorative EditorialCover  |
 | `components/ui/`          | Button/ArrowButton, Eyebrow, Sheet, Carousel and Marquee primitives           |
 | `content/`                | Code-owned navigation, firm facts and homepage editorial collections          |
 | `lib/`                    | Framework-independent helpers and future service boundaries                   |
@@ -71,6 +72,7 @@ Server-rendered children may pass through a narrow client wrapper.
 | `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                         |
 | `PracticeAreaExplorer`               | Nullable selected index plus one `matchMedia` subscription through `useSyncExternalStore`                      |
 | `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; one-frame mobile preview focus/scroll after activation |
+| `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag         |
 
 The hero keeps its panel, CTA and controls outside changing slides. Only its
 opening image is explicitly preloaded; adjacent images are warmed after the
@@ -97,6 +99,47 @@ topic, summary and qualifier fields. An organisation named in a matter is not
 necessarily the advisory client. Feature cards reserve one stable grid cell;
 inactive content is inert and hidden from accessibility. Stacked-layout
 activation focuses the named preview and scrolls it clear of the sticky header.
+
+People and Insights are Server Component sections with small preparation-notice
+triggers for unavailable destinations. People caps the ordered preview at four;
+it is not the full directory. Testimonial body/identity markup is server-rendered
+through the existing carousel items; the local client wrapper owns only Embla
+options and persistent controls/status. Inactive slides are inert/hidden, slide
+heights stretch to the tallest record, and fewer than two items hide controls.
+An empty testimonial collection omits the section. Missing media uses explicit
+slots; approved names without testimonial images use derived initials.
+
+Local `content/people.ts`, `testimonials.ts` and `insights.ts` own these preview
+records. Insights excludes the feature ID and duplicate support IDs, capped at
+three. Future Sanity selection/publication filtering belongs in a normalization
+adapter rather than presentation components; no CMS client or speculative fetch
+layer has been introduced.
+
+## Media and missing content
+
+`ImageWithFallback` is the shared narrow client boundary around Next Image.
+Sections supply server-rendered fallback children and continue to own their
+layout/crop, content, alt text, loading priority and sizes. Missing/blank URLs
+render the fallback immediately; image errors replace only the failed image.
+A changed URL gets another attempt. Its only state is a failed source URL;
+there are no effects, timers or retry loops. The decorative EditorialCover
+shares brand typography/rules; it is not a section/card configuration engine.
+BrandLogo, hero, story, practice, client logos, People, testimonials and Insights
+reuse this boundary. No service, new package or global stylesheet is involved.
+
+Hero image decode rejection is allowed to complete selection into that slide's
+own fallback. The existing carousel request counter still rejects stale results.
+One filtered hero collection drives the copy, photographs and control counts.
+Empty/untitled People, practice, matters and insight collections do not render
+empty section shells. Insights can promote a valid supporting record when the
+feature is absent, then excludes duplicate IDs. Named client rows and supplied
+testimonial quotes replace anonymous sample rows when available; one client is
+static and one testimonial hides controls. A missing quote forces anonymous
+identity and ignores any attached photo, role or organisation.
+
+Review notes for unapproved article/quote/client content remain separate from
+media fallbacks. The no-JS page renders absent-media fallbacks on the server;
+replacing an image after a network error requires the client error callback.
 
 ## Accessibility and progressive enhancement
 

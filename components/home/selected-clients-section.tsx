@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { Marquee } from "@/components/ui/marquee";
 import { ClientLogoMarquee } from "@/components/home/client-logo-marquee";
 import { selectedClients as content } from "@/content/clients";
@@ -9,13 +9,21 @@ type Client = (typeof content.slots)[number];
 function LogoSlot({ client, index }: { client: Client; index: number }) {
   return (
     <li className="border-border/60 bg-background flex h-16 w-45 shrink-0 items-center justify-center rounded-xl border px-6 sm:h-20 sm:w-60 sm:px-8">
-      {client.logo && client.name ? (
-        <Image
+      {client.name?.trim() ? (
+        <ImageWithFallback
           src={client.logo}
           alt={client.name}
           width={176}
           height={64}
           className="h-12 w-full object-contain"
+          fallback={
+            <span
+              title={client.name}
+              className="text-primary line-clamp-3 text-center font-serif text-sm/5 wrap-break-word sm:text-base/5"
+            >
+              {client.name}
+            </span>
+          }
         />
       ) : (
         <span className="text-muted-foreground text-center text-xs/5 font-semibold tracking-wider uppercase">
@@ -30,6 +38,10 @@ function LogoSlot({ client, index }: { client: Client; index: number }) {
 }
 
 export function SelectedClientsSection() {
+  const namedClients = content.slots.filter((client) => client.name?.trim());
+  // Anonymous samples remain only while the entire collection is under review.
+  const clients = namedClients.length ? namedClients : content.slots;
+  if (!clients.length) return null;
   return (
     <section
       id="selected-clients"
@@ -47,17 +59,20 @@ export function SelectedClientsSection() {
         <p className="text-muted-foreground mt-6 max-w-3xl text-base/6">
           {content.description}
         </p>
-        <ClientLogoMarquee note={content.reviewNote}>
+        <ClientLogoMarquee
+          note={namedClients.length ? undefined : content.reviewNote}
+          animate={clients.length > 1}
+        >
           <Marquee
             pauseOnHover
-            repeat={4}
+            repeat={clients.length > 1 ? 4 : 1}
             className="[--duration:40s] [--gap:1rem]"
           >
             <ul
               data-client-logos
               className="grid grid-cols-2 gap-(--gap) sm:grid-cols-3 xl:grid-cols-6"
             >
-              {content.slots.map((client, index) => (
+              {clients.map((client, index) => (
                 <LogoSlot key={client.id} client={client} index={index} />
               ))}
             </ul>

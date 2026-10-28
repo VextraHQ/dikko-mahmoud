@@ -11,7 +11,6 @@ export const practiceAreasIntro = {
     "Explore the legal services relevant to your business, institution or individual matter.",
   action: "View all practice areas",
   detailAction: "Explore this area",
-  imagePlaceholder: "Practice photograph pending",
 };
 
 // Source labels are retained; approved practice photographs are still needed.

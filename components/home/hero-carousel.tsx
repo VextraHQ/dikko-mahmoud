@@ -11,7 +11,9 @@ async function preparePhotograph(index: number, api: CarouselApi) {
   if (!image) return;
   image.loading = "eager";
   // Keep the current frame while the browser fetches and decodes its replacement.
-  await image.decode();
+  // Missing/failed photos use the slide's own fallback. They must not trap
+  // navigation or pair another slide's photograph with the new copy.
+  await image.decode().catch(() => {});
 }
 
 function AdjacentPhotographs() {

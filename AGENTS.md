@@ -4,7 +4,8 @@ This repository is the future public website for Dikko & Mahmoud. The current
 milestone is design-system foundations and homepage development from the
 supplied desktop/mobile Figma references. The first runtime checkpoint covers
 fonts, theme, Button, sticky navigation, hero, firm facts/story, selected
-clients, practice areas and selected matters; consult the roadmap for review status
+clients, practice areas, selected matters, People, client perspectives and insights;
+consult the roadmap for review status
 and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 
 ## Start here
@@ -36,13 +37,17 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
   states and content without restarting a separate wireframe phase.
 - Preserve unrelated work and keep changes scoped to the active milestone.
 - The user approved the editorial practice-area explorer after reviewing
-  desktop/mobile options. Keep its photographs as explicit placeholders until
-  supplied. The user has approved moving on to selected matters and supplied
+  desktop/mobile options. Use decorative brand covers until approved photographs
+  are supplied. The user has approved moving on to selected matters and supplied
   desktop/mobile screenshots. The user approved the sourced matter summaries
   and BPE as the opening selection. The maintainability audit is implemented.
-  The current follow-up moves the hero split to `lg` while full navigation stays
-  at `xl`; verify the compact overlay header between them. Review this change
-  before analysing People or establishing the later Claude workflow.
+  Hero/header scroll refinements are implemented. The user approved the compact
+  People grid, manual client perspectives and featured-plus-three insights;
+  these are now implemented for review with explicit missing-content slots.
+  The user approved fallback polish across the whole homepage: missing/failed
+  media uses intentional typography/covers; unapproved content stays labelled
+  for review and never inherits a real client's attribution.
+  FAQ and enquiry/footer are next. The later Claude workflow remains separate.
 
 ## File ownership
 

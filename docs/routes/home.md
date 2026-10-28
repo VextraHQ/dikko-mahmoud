@@ -22,11 +22,17 @@ does not become approved production content simply because it appears in Figma.
   “Select a matter to read more”, superseding the screenshot's hover wording.
 - Preserve the approved sourced summaries and distinguish matter organisations
   from the advisory client. Keep unavailable routes as preparation notices.
+- The user-approved homepage-wide media polish uses initials, decorative brand
+  covers and text logos for missing or failed images. Image-pending labels are
+  removed; unapproved content review notes remain explicit. See the latest media
+  policy below, which supersedes dated placeholder treatments.
 - Hero/header overlay starts at `lg`, with the compact menu until full navigation
   starts at `xl`. The full header shell is hidden at the top at all widths and
   appears only after scrolling. Facts/story keep their `xl` compositions;
   practice/matters use `lg`. See `layout-system.md` for dimensions and rationale.
-- Review the earlier hero split before analysing People. The later Claude
+- People, client perspectives and insights use the approved plan below and are
+  implemented for review with labelled missing media and anonymous testimonial
+  slots. Profile/article destinations remain preparation notices. The later Claude
   workflow needs its own next scope agreed. Dated notes preserve earlier history;
   use these current rules and the canonical docs when they supersede history.
 
@@ -57,7 +63,8 @@ it, including relevant component variants and interactive states.
    shadcn baseline. Add only primitives needed by the first working slice.
 2. Implement shared navigation and the hero at desktop and mobile widths.
 3. Continue remaining homepage sections in the user-agreed checkpoint order;
-   People is proposed next, with footer still queued.
+   People/client perspectives/insights are implemented; FAQ and enquiry/footer
+   are the next slice, followed by whole-page QA.
 4. Retrieve focused source for each section and use approved static content.
 5. Connect local interactions and review the full page, accessibility, image
    loading, and responsive behaviour.
@@ -402,3 +409,133 @@ preview into view and focuses its named region. The shared scroll padding
 clears the sticky header; reduced motion removes the card fade and smooth scroll.
 The CTA retains the existing preparation notice until the experience route
 exists. No images or new packages are needed for this text-based source section.
+
+## People, client perspectives and insights — 2026-10-28
+
+Status: user-approved proposal, implemented for runtime review; no CMS setup. Sources are
+the user's five CleanShot references labelled 7:16:44–7:17:20. The response
+wireframe compares compact/paged People layouts plus desktop/mobile versions
+of all three sections. The user selected the recommended compact People grid
+and approved all three sections. Portraits, testimonial identities and image
+assets use explicit placeholders; publication content remains unapproved.
+
+### People: curated preview and a separate directory
+
+- Implemented four selected profiles on the homepage: four columns from `lg`,
+  compact two-column/two-row cards below. Avoid another
+  horizontal rail or automatic rotation. The alternative shows two profiles at
+  a time with explicit previous/next controls and a visible range counter;
+  it saves height but makes two profiles less immediately discoverable.
+- The reported 25-plus roster is a planning scale, not a verified public count.
+  The homepage stays capped at four as the roster grows. The People directory
+  can later offer name search and useful practice/office filters; profile cards
+  lead to individual profiles. Do not put directory controls on a four-card
+  homepage preview. Confirm lawyer/support-team scope before locking the full
+  directory labels and fields.
+- The four supplied preview identities are A.B. Mahmoud, SAN (Managing Partner),
+  Bello Aminu Abdullahi (Senior Partner), Aminu Sadauki (Partner), and Sefiullahi
+  Oseni (Partner). These are screenshot-supplied preview records, not independent
+  verification of the final roster. Approved portraits are still required.
+- Future Sanity stores each person once and the homepage selects up to four
+  ordered references. Reuse those records for the directory/profile pages;
+  do not duplicate biographies in homepage settings. Preserve image focal
+  points and a consistent portrait crop; use a labelled fallback meanwhile.
+
+### Client perspectives: manual, approved and anonymous while pending
+
+- Implemented the source portrait/quote composition, with one perspective visible
+  at a time, a clear counter and manual previous/next controls. No autoplay.
+  Desktop puts identity beside copy; mobile stacks them. Quote, image and
+  attribution change together, with stable height and keyboard/reduced-motion
+  support. Hide navigation if only one approved testimonial exists.
+- Uses the approved distinct heading, “Client perspectives.”, rather than repeating the
+  People heading. Current wireframe quote/identity text is explicitly pending.
+  Do not attach placeholder quotes to a named person or organisation.
+- For approved entries without a portrait, derive initials from the approved
+  display name or use an approved organisation mark; use a neutral person mark
+  when identity is pending. Do not use a substitute person's photograph.
+- Later content fields cover quote, approved display name, role, organisation,
+  optional portrait/logo and homepage placement/order. Select only approved,
+  published references. Development may show the labelled placeholder; omit
+  an empty/unapproved testimonial section for publication.
+
+### Insights: one featured story plus three supporting stories
+
+- Preserve the source desktop composition: feature left, introduction/CTA in
+  the middle, three compact supporting articles right. Mobile puts introduction
+  first, then feature and supporting articles. Use real category/date metadata
+  when available; no invented authors, dates or read times in the preview.
+- Later homepage settings can pin one featured reference and optionally up to
+  three supporting references. Fill unoccupied support slots from newest
+  eligible published articles, excluding all already-selected IDs. If no
+  feature is pinned, choose the newest eligible article. Skip unpublished,
+  future-dated or unresolvable records; render fewer items if fewer exist.
+- Article records own title, slug, excerpt, category, publication date, author,
+  images/alt and body. Homepage references do not duplicate article content.
+  The static source titles are preview copy until article content is approved;
+  links must not pretend full articles exist before those routes are built.
+
+### iProduce reference and implementation boundary
+
+Inspected iProduce's `lib/sanity/fetch/academy-preview.ts`: its homepage caps
+blog cards at three and maps existing catalogue fetch results into a display
+shape. `queries.ts` excludes drafts and orders article listings by publication
+date; featured catalogue queries support an explicit selection with a newest
+fallback. `fetch/testimonials.ts` normalizes image URLs and derives missing
+initials, while page composition omits empty testimonial collections.
+
+Reuses that separation of editorial selection, normalization and presentation;
+Dikko's one-plus-three composition is its own layout. Local `content/people.ts`,
+`testimonials.ts` and `insights.ts` records feed server section entries and a
+narrow `TestimonialCarousel` client wrapper. Button/Eyebrow/Carousel and the
+preparation notice are reused. No CMS connection,
+new animation framework or generic section engine was added for this preview. After
+these three sections, the homepage still needs FAQ, enquiry callout/footer and
+whole-page QA; the full secondary pages and service integrations remain later.
+
+The runtime uses two anonymous testimonial slots to exercise manual controls;
+the visible placeholder number and counter change together. No quote is attributed
+to a real client. Empty collections omit the section, and one item hides controls.
+The initials fallback is derived from a supplied display name when no image exists;
+the pending identity instead uses a neutral Lucide mark. Insight support IDs are
+deduplicated and exclude the feature. Pinned/latest published CMS selection is
+specified above for the later integration, not implemented as a speculative
+fetch layer now. Profile and article preview buttons retain the existing generic
+preparation notice until their destination routes exist.
+
+## Homepage-wide fallback polish — 2026-10-28
+
+The user approved all three preceding sections and requested intentional media
+and missing-content behaviour from the hero down, preserving the layouts.
+
+- Header: a failed firm logo retains the firm's actual name/descriptor and Home
+  action. Hero: each failed/missing image uses a decorative navy brand cover;
+  copy, controls and dimensions stay usable. Decode failure no longer traps
+  selection, and stale requests remain cancelled by the existing request guard.
+- Facts have no media and keep supplied literal values. Story office media uses
+  a brand cover; its portrait uses ABM initials. These are decorative fallback
+  surfaces, not new office or person photographs.
+- Client logos: approved supplied names remain visible as text when logos are
+  absent/fail. An unnamed logo is never presented as an approved client. While
+  all identities are missing, anonymous samples stay under a clear review note;
+  once named records exist, samples are excluded. A single client is static.
+- Practice panels use decorative numbered covers until media is supplied.
+  People cards use their initials without “Portrait pending”. Missing/failed
+  insight images use a brand cover or editorial icon, while article titles and
+  categories remain. None of these visual surfaces adds an invented photograph.
+- The three existing anonymous testimonial slots are retained while no quotes
+  exist. A missing/blank quote forces anonymous identity even if someone fills
+  in name/role/organisation/photo. Supplied quotes exclude sample slots; missing
+  portraits use initials or a neutral mark. A whitespace name uses the anonymous
+  label. A single quote hides controls. Publication still requires approval.
+- Empty/untitled People, practice, matter or insight collections are omitted.
+  An absent feature may promote the first valid supporting insight; remaining
+  IDs are deduplicated. No fake dates, content, outcomes or authors fill gaps.
+- The common ImageWithFallback error boundary retains Next Image sizing and
+  loading. Sections own fallback markup and dimensions. Network-error replacement
+  requires JavaScript; absent-media fallbacks are rendered without it. All media
+  remains local until a later CMS asset configuration is approved.
+
+Content modules continue to own review notes and records. No CMS, service,
+animation package, per-section CSS or new global CSS was added. FAQ and the
+enquiry/footer remain the next separate slice.

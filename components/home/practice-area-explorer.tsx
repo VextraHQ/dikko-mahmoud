@@ -1,7 +1,8 @@
 "use client";
 
 import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
+import { ImageWithFallback } from "@/components/shared/image-with-fallback";
+import { EditorialCover } from "@/components/shared/editorial-cover";
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
@@ -107,25 +108,16 @@ export function PracticeAreaExplorer({
               >
                 <div className="min-h-0 overflow-hidden lg:h-full lg:rounded-2xl">
                   <figure className="bg-secondary relative isolate mb-5 flex min-h-72 flex-col justify-end overflow-hidden rounded-xl border border-white/20 bg-linear-135 from-white/7 to-transparent to-65% p-5 sm:min-h-88 sm:p-7 lg:mb-0 lg:h-full lg:rounded-2xl lg:p-8">
-                    {area.image ? (
-                      <Image
-                        src={area.image.src}
-                        alt={area.image.alt}
-                        fill
-                        sizes="(min-width: 1440px) 615px, (min-width: 1024px) 46vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 32px)"
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-x-5 top-5 flex items-center justify-between gap-3 text-white/70 sm:inset-x-7 lg:inset-0 lg:flex-col lg:justify-center lg:pb-24">
-                        <span
-                          aria-hidden="true"
-                          className="font-serif text-5xl/none text-white/15 sm:text-6xl/none lg:text-9xl/none"
-                        >
-                          {number}
-                        </span>
-                        <p className="text-xs/5">{intro.imagePlaceholder}</p>
-                      </div>
-                    )}
+                    <ImageWithFallback
+                      src={area.image?.src}
+                      alt={area.image?.alt ?? ""}
+                      fill
+                      sizes="(min-width: 1440px) 615px, (min-width: 1024px) 46vw, (min-width: 640px) calc(100vw - 64px), calc(100vw - 32px)"
+                      className="object-cover"
+                      fallback={
+                        <EditorialCover mark={number} label={intro.eyebrow} />
+                      }
+                    />
                     <div
                       aria-hidden="true"
                       className="from-navy-deep/95 via-navy-deep/20 absolute inset-0 z-0 bg-linear-to-t to-transparent"

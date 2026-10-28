@@ -539,3 +539,96 @@
   reduced-motion behaviour, compact menu and no-JS material fallback passed,
   with no page errors. The lg top-state screenshot was inspected. No additional
   production build was run for this scoped CSS/control-style correction.
+
+## 2026-10-28 — People, client perspectives and insights proposal
+
+- Reviewed the five supplied desktop/mobile screenshots and iProduce's actual
+  homepage article adapter, featured selection, testimonials and team fetch
+  boundaries. Recorded the proposed four-profile cap, mobile grid/paged
+  tradeoff, anonymous testimonial placeholders and one-plus-three article rules
+  in the homepage brief. All remain proposals awaiting design review.
+- Created an isolated seven-layout response wireframe: compact and paged mobile
+  People options, desktop People, desktop/mobile client perspectives and
+  desktop/mobile insights. Used labelled portrait/image slots and pending
+  attribution rather than inventing photographs, endorsements or articles.
+- Isolated browser checks passed at 736px and 320px across all seven layouts,
+  including overflow, two-column profile cards, paging, testimonial state
+  changes and local detail previews. No script errors were reported; embedded
+  fonts loaded. Representative mobile People and desktop insights screenshots
+  were inspected. Documentation formatting and diff whitespace checks passed.
+- No live homepage code, dependency or service integration changed. Runtime
+  lint, typecheck and build were not repeated for this planning-only change.
+
+## 2026-10-28 — People, client perspectives and insights implementation
+
+- Implemented the user-approved three-section slice after selected matters.
+  People is capped at four supplied preview identities: four columns from `lg`,
+  compact two-by-two below, 4:5 portrait slots and preparation-notice actions.
+  It remains separate from the future full team directory.
+- Added two anonymous testimonial preview slots with a neutral image fallback,
+  explicit pending attribution, a persistent counter and manual previous/next
+  controls using the existing Embla/Fade primitives. Identity and quote move
+  together; inactive slides are inert/hidden and track height stays stable.
+  Approved names without images derive initials. No autoplay or new package.
+- Added the featured-plus-three insights composition: mobile introduction first,
+  tablet feature/list beneath the introduction, desktop feature/intro/list.
+  Titles and categories follow the supplied reference; images and article bodies
+  remain explicit placeholders. Supporting IDs exclude the feature/duplicates.
+  Profile/article actions reuse the preparation notice instead of missing routes.
+- Content lives in three domain `content/` modules. Section entries remain Server
+  Components; only testimonial carousel options/controls need a new client owner.
+  Ordinary styling stays in Tailwind; no stylesheet/global CSS changes, CMS
+  integration or generic section framework. Updated canonical status, ownership,
+  responsive rules and handoff notes while preserving the earlier proposal work.
+- Format, lint, typecheck, production build and diff whitespace checks passed.
+  Independent source review found no blocking issue; its placeholder-label polish
+  was applied. Isolated development and final production browser checks passed at
+  1440, 1280, 1024, 768, 390 and 320px: People grid/actions/focus return, manual
+  testimonial click/keyboard/wrap, active-slide isolation and stable height,
+  insight ordering/actions, and no horizontal overflow or page errors. Normal
+  motion, live reduced-motion changes and no-JS opening content passed. The
+  production test waits for Radix's focus-return lifecycle before asserting focus.
+  Desktop, tablet and mobile screenshots were inspected.
+- Stopped for review. FAQ, enquiry/footer and whole-page QA are next. Approved
+  portraits, testimonial identities/quotes, article content/images and real
+  profile/article routes remain later gates; Sanity and Claude workflow are not
+  connected.
+
+## 2026-10-28 — Homepage-wide media and missing-content polish
+
+- Applied the user-approved fallback treatment from the header/hero through
+  Insights. Missing/failed images retain their reserved geometry and use actual
+  firm-name text, portrait initials, decorative navy covers, editorial icons or
+  supplied client names. Removed image/portrait/photograph-pending labels from
+  visual surfaces; unapproved content review notes remain separate and explicit.
+- Added one narrow ImageWithFallback client boundary around Next Image's error
+  handling, plus a decorative EditorialCover. Existing section owners retain
+  their markup/copy, dimensions, image sizes, preload and lazy loading. No new
+  package, service integration, section engine or global CSS was added.
+- Hero decode errors now allow selection into the matching slide's fallback;
+  the existing request guard prevents delayed older failures overriding newer
+  selections. Healthy photos, copy, fade/controls and breakpoints are preserved.
+- Named client records replace anonymous samples, use text without a logo and
+  remain static when there is only one. Supplied quotes replace sample slots;
+  missing/blank quotes suppress all real attribution/photo fields. Preserved
+  the user's third anonymous testimonial slot. One quote hides controls; empty
+  sections are guarded. Untitled insights are skipped, a missing feature can
+  promote a support record, and duplicate IDs remain excluded.
+- Independent review identified whitespace-only testimonial names and long
+  client-name wrapping; both were corrected. Isolated SSR fixtures passed those
+  cases plus empty/blank lists, anonymous identity safety, single quote/initials,
+  named clients without logos and feature promotion/deduplication, without
+  changing repository content records for the tests.
+- Format, lint (no warnings), typecheck, production build and diff whitespace
+  checks passed. Development and final production browser checks passed at
+  1440, 1024, 768, 390 and 320px: all five healthy hero slides, stable dimensions,
+  practice selections, three manual testimonial slots, insight cards and no
+  horizontal overflow/page errors. Blocking all image requests passed desktop
+  and mobile logo/hero fallback navigation with normal/reduced motion. A delayed
+  failed photo did not override a newer selection; a long text-logo fixture fit
+  its 64px mobile card with the full accessible name. No-JS absent-media/server
+  fallbacks passed; network-error replacement remains JavaScript-dependent.
+  Representative desktop/mobile fallback screenshots were inspected.
+- Updated canonical media/empty-content policy and current handoff status.
+  Stopped before FAQ and enquiry/footer. Approved photographs, article bodies,
+  testimonial approval and actual secondary destinations remain later gates.

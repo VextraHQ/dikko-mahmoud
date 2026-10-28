@@ -19,11 +19,20 @@ Practice photography remains labelled placeholders. The mobile accordion now
 starts collapsed and can close; desktop keeps one selection. The current slice
 adds selected matters from the user's desktop/mobile screenshots. All four
 summaries now have user-approved preview copy, with BPE as the opening selection.
-The maintainability audit implements Tailwind state ownership, focused custom
-CSS files, click-only matters and synchronized docs. The current follow-up is
-the earlier hero split at `lg`, keeping full navigation at `xl`. Review that
-layout before analysing People; the later Claude workflow is not established.
-Footer/enquiry callout and other remaining sections stay queued.
+The maintainability audit and earlier `lg` hero split are implemented. Header
+scroll material is consistent at all widths; full navigation remains at `xl`.
+The user approved the People, client perspectives and insights proposal.
+All three sections are implemented for review: four curated profiles with a
+compact mobile grid, manual anonymous testimonial slots and one featured
+insight plus three supporting previews. Sanity and the later Claude workflow
+remain unconnected. FAQ and enquiry/footer are the next source-review slice;
+final imagery, approved testimonials and article/profile destinations remain
+publication gates.
+
+The approved follow-up polishes missing/failed media from the header/hero down
+to insights. Brand covers, initials and text logos replace image-pending labels;
+empty collections are guarded and supplied quotes/client names replace sample
+slots. Development content review notes remain where content is not approved.
 
 ## Status
 
@@ -39,6 +48,7 @@ Footer/enquiry callout and other remaining sections stay queued.
 | 2b.3 Practice-area explorer                 | Review   | Six source areas, desktop index, mobile accordion, photo placeholders           |
 | 2b.4 Selected matters                       | Review   | Responsive feature/selector, four sourced summaries, BPE opening selection      |
 | 2b.5 Maintainability audit                  | Review   | Style ownership, click-only matters, accessibility fixes and aligned docs       |
+| 2b.6 People, client perspectives, insights  | Review   | Compact four-person preview, manual testimonials and one-plus-three articles    |
 | 2c. Footer, remaining homepage and QA       | Next     | Next homepage slice; retrieve focused Figma context first                       |
 | 2d. Final publication content               | Open     | Approved portraits, testimonial, imagery, and destinations                      |
 | 3. Information architecture                 | Planned  | Approved routes, content ownership, and CMS boundary                            |

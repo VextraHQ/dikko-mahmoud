@@ -5,7 +5,7 @@ export const selectedClients = {
   description:
     "Experience across businesses and institutions, from ongoing legal advice to litigation.",
   reviewNote: "Client list and logos under review.",
-  placeholderLabel: "Logo placeholder",
+  placeholderLabel: "Preview",
   slots: Array.from({ length: 12 }, (_, index) => ({
     id: `client-${index + 1}`,
     name: null as string | null,

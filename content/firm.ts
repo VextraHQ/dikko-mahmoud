@@ -1,4 +1,10 @@
 // Source-supplied preview copy. Office/portrait media await approved originals.
+export const firmBrand = {
+  name: "Dikko & Mahmoud",
+  descriptor: "Solicitors and Advocates",
+  initials: "D&M",
+};
+
 export const firmFacts = [
   {
     value: "1993",
@@ -37,7 +43,7 @@ export const firmHomePreview = {
   storyTitle: ["Experience, integrity", "and a clear way forward."],
   story:
     "Founded by A.B. Dikko and A.B. Mahmoud, our firm brings public-sector understanding and a commercial perspective to disputes, transactions and government advisory.",
-  name: "Dikko & Mahmoud",
+  name: firmBrand.name,
   descriptor: "Solicitors and Advocates · Est. 1993",
   person: { name: "A.B. Mahmoud, SAN", role: "Co-founder & Managing Partner" },
   action: "Discover our story",
@@ -45,12 +51,11 @@ export const firmHomePreview = {
     office: {
       src: null as string | null,
       alt: "",
-      placeholder: "Office photograph pending",
     },
     portrait: {
       src: null as string | null,
       alt: "",
-      placeholder: "Portrait pending",
+      initials: "ABM",
     },
   },
 } as const;

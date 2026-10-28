@@ -72,7 +72,7 @@ copy, missing assets and interaction decisions in the route brief. A bounded
 handoff should identify allowed files, shared files with one owner, acceptance
 criteria and checks actually run. Another assistant must read those sources
 and the current diff before editing. Do not establish the later Claude workflow
-or begin People until that next scope is agreed.
+or begin the next homepage slice until its scope is agreed.
 
 ## Implementation log
 

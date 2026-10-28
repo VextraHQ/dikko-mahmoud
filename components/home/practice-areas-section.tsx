@@ -8,6 +8,8 @@ import {
 } from "@/content/practice-areas";
 
 export function PracticeAreasSection() {
+  const areas = practiceAreas.filter((area) => area.title.trim());
+  if (!areas.length) return null;
   return (
     <section
       id="practice-areas"
@@ -15,7 +17,7 @@ export function PracticeAreasSection() {
       className="bg-primary py-12 text-white lg:py-24"
     >
       <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
-        <PracticeAreaExplorer areas={practiceAreas}>
+        <PracticeAreaExplorer areas={areas}>
           <Eyebrow className="text-white/75">{intro.eyebrow}</Eyebrow>
           <h2
             id="practice-areas-heading"
