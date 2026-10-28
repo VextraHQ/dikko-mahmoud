@@ -1,4 +1,5 @@
 import { RevealGroup } from "@/components/shared/reveal-group";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmFacts, firmHomePreview } from "@/content/firm";
 import { cn } from "@/lib/utils";
 
@@ -9,12 +10,13 @@ export function FirmAtAGlanceSection() {
       className="bg-background py-12"
     >
       <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
-        <h2
+        <Eyebrow
+          as="h2"
           id="firm-facts-heading"
-          className="text-navy-deep text-xs/4 font-bold tracking-widest uppercase"
+          className="text-navy-deep text-xs/4"
         >
           {firmHomePreview.factsHeading}
-        </h2>
+        </Eyebrow>
         <RevealGroup className="mt-8">
           <dl className="grid gap-6 sm:grid-cols-2 sm:gap-8 xl:grid-cols-4 xl:gap-x-0">
             {firmFacts.map((fact, index) => (

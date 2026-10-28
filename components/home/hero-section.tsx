@@ -3,7 +3,8 @@ import { HeroCarousel } from "@/components/home/hero-carousel";
 import { HeroControls } from "@/components/home/hero-controls";
 import { HeroCopy } from "@/components/home/hero-copy";
 import { PreviewDestination } from "@/components/layout/preview-destination";
-import { Button, ButtonArrow } from "@/components/ui/button";
+import { ArrowButton } from "@/components/ui/arrow-button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { heroAction, heroSlides } from "@/content/home";
 
@@ -21,9 +22,9 @@ export function Hero() {
               index={index}
               label={`${index + 1} of ${heroSlides.length}: ${slide.practice}`}
             >
-              <p className="text-[11px]/4 font-bold tracking-widest uppercase sm:text-sm/5 xl:text-xl/7">
+              <Eyebrow className="text-inherit sm:text-sm/5 xl:text-xl/7">
                 {slide.practice}
-              </p>
+              </Eyebrow>
               <h1 className="mt-6 font-serif text-[44px]/[50px] font-bold sm:text-6xl/16 xl:mt-3.5 xl:text-[clamp(3.5rem,5vw,4.5rem)]/[1.11]">
                 {slide.title.map((line) => (
                   <span key={line} className="block">
@@ -38,13 +39,12 @@ export function Hero() {
           ))}
         </div>
         <PreviewDestination>
-          <Button
+          <ArrowButton
             variant="glass"
-            trailingArrow
-            className="pointer-events-auto mt-6 xl:mt-[clamp(3rem,14svh,8rem)] motion-safe:[&_svg]:transition-transform motion-safe:[&_svg]:duration-200 motion-safe:hover:[&_svg]:translate-x-0.5 motion-safe:hover:[&_svg]:-translate-y-0.5"
+            className="pointer-events-auto mt-6 xl:mt-[clamp(3rem,14svh,8rem)]"
           >
-            {heroAction} <ButtonArrow />
-          </Button>
+            {heroAction}
+          </ArrowButton>
         </PreviewDestination>
       </div>
       <CarouselContent

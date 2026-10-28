@@ -11,28 +11,29 @@ and remaining homepage sections after reviewing each focused Figma source.
 The approved hero polish now adds restrained crossfades and text motion while
 keeping autoplay deferred. Secondary pages follow the homepage.
 
-The user has selected firm-at-a-glance and firm-story as the next slice, with
-the enquiry callout/footer following it. The next-slice plan is recorded in
-`routes/home.md`. Facts and story are now implemented for review with explicit
-image placeholders; the user will supply missing originals.
+Facts and story are implemented with explicit image placeholders. The current
+review adds sticky navigation and the selected-clients placeholder section.
+Stop here before practice areas: its animation concept needs a separate brief.
+Footer/enquiry callout and other remaining sections stay queued.
 
 ## Status
 
-| Milestone                                 | Status   | Outcome                                                                         |
-| ----------------------------------------- | -------- | ------------------------------------------------------------------------------- |
-| 1. Repository foundation                  | Complete | Local Next.js, TypeScript, Tailwind, ESLint, Prettier, docs, and Git foundation |
-| 1a. Temporary holding page                | Complete | Responsive, no-index interim screen pending approved design work                |
-| 2. Figma audit and homepage brief         | Complete | Frames, brand direction, section map, and provisional content identified        |
-| 2a. Fonts, tokens, and shadcn foundations | Complete | Lean reusable system derived from the supplied design                           |
-| 2b. Navigation and hero                   | Review   | Responsive checkpoint with manual fades, text motion and image preparation      |
-| 2b.1 Firm facts and story                 | Review   | Responsive sections, shared firm content, placeholders and one-time reveals     |
-| 2c. Footer, remaining homepage and QA     | Next     | Next homepage slice; retrieve focused Figma context first                       |
-| 2d. Final publication content             | Open     | Approved portraits, testimonial, imagery, and destinations                      |
-| 3. Information architecture               | Planned  | Approved routes, content ownership, and CMS boundary                            |
-| 4. Desktop and mobile design references   | Supplied | User-provided Figma frames; missing states resolved during audit                |
-| 5. Secondary-page implementation          | Later    | Reuse the homepage system after the main milestone                              |
-| 6. CMS and service integrations           | Later    | Providers connected only when their scope is approved                           |
-| 7. Launch readiness                       | Later    | Content, accessibility, SEO, security, and deployment verified                  |
+| Milestone                                   | Status   | Outcome                                                                         |
+| ------------------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| 1. Repository foundation                    | Complete | Local Next.js, TypeScript, Tailwind, ESLint, Prettier, docs, and Git foundation |
+| 1a. Temporary holding page                  | Complete | Responsive, no-index interim screen pending approved design work                |
+| 2. Figma audit and homepage brief           | Complete | Frames, brand direction, section map, and provisional content identified        |
+| 2a. Fonts, tokens, and shadcn foundations   | Complete | Lean reusable system derived from the supplied design                           |
+| 2b. Navigation and hero                     | Review   | Responsive checkpoint with manual fades, text motion and image preparation      |
+| 2b.1 Firm facts and story                   | Review   | Responsive sections, shared firm content, placeholders and one-time reveals     |
+| 2b.2 Sticky navigation and selected clients | Review   | Route-aware header and accessible placeholder marquee                           |
+| 2c. Footer, remaining homepage and QA       | Next     | Next homepage slice; retrieve focused Figma context first                       |
+| 2d. Final publication content               | Open     | Approved portraits, testimonial, imagery, and destinations                      |
+| 3. Information architecture                 | Planned  | Approved routes, content ownership, and CMS boundary                            |
+| 4. Desktop and mobile design references     | Supplied | User-provided Figma frames; missing states resolved during audit                |
+| 5. Secondary-page implementation            | Later    | Reuse the homepage system after the main milestone                              |
+| 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                           |
+| 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                  |
 
 ## Foundation completion gate
 

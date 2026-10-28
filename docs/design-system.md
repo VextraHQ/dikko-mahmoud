@@ -70,10 +70,59 @@ white cover the light text and glass navigation treatments on navy surfaces.
 - Try standard Tailwind shadows first. Do not build a new elevation scale for
   the single enquiry-callout shadow.
 - The distinctive CTA combines a pill label and a circular trailing arrow.
-  Compose that treatment with the shared Button rather than duplicating it.
+  Use `ArrowButton`, a thin composition of the shared Button, rather than
+  assembling the circle or coordinating colour/size flags at each callsite.
 - Button references use 48px and 52px heights with 40px and 44px arrow circles.
   Carousel arrows are 44px controls. Keep visible keyboard focus and disabled
   states, and implement links as links and state changes as buttons.
+
+### Arrow buttons
+
+`components/ui/button.tsx` owns the CVA/Slot primitive for ordinary buttons and
+icon controls. `components/ui/arrow-button.tsx` owns the pill CTA composition:
+
+| Variant   | Pill                          | Arrow circle               |
+| --------- | ----------------------------- | -------------------------- |
+| `default` | Primary navy, white text      | White, navy icon           |
+| `inverse` | White, navy text              | Secondary navy, white icon |
+| `glass`   | Translucent white, white text | White, navy icon           |
+
+Sizes are `sm` (40px button/32px circle), `default` (48px/40px), and `lg`
+(52px/44px). Circle styling follows these props; callers no longer coordinate
+`inverse`, `large`, `trailingArrow`, or separate arrow markup. `icon` optionally
+accepts another Lucide icon; the default is `ArrowUpRight`. Decorative icons
+are hidden from accessibility. Hover movement respects reduced motion; focus
+and disabled styles come from Button.
+
+```tsx
+<ArrowButton variant="inverse">Make an enquiry</ArrowButton>
+<ArrowButton variant="glass">Explore our expertise</ArrowButton>
+<ArrowButton>Discover our story</ArrowButton>
+<ArrowButton size="sm" icon={ArrowRight}>Get in touch</ArrowButton>
+<ArrowButton asChild><Link href="/">Home</Link></ArrowButton>
+```
+
+Radix `Slottable` keeps `asChild` links as one anchor containing the label and
+circle. Button props, handlers and React 19 refs pass through, including when
+used as a dialog trigger. Section spacing stays at the callsite.
+
+### Eyebrows
+
+`components/ui/eyebrow.tsx` shares the existing small, bold, tracked uppercase
+brand label. It renders a paragraph by default; use `as="h2"` only when the
+label itself is the section heading. Props are limited to `children`, `as`,
+`id`, and `className`; no variant catalogue or layout abstraction is needed.
+
+```tsx
+<Eyebrow>Our firm’s story</Eyebrow>
+<Eyebrow as="h2" id="firm-facts-heading" className="text-navy-deep text-xs/4">
+  The firm at a glance
+</Eyebrow>
+```
+
+Sections retain content, alignment and margins. Existing hero responsive sizes
+and white text are preserved through `className`; facts keep their heading
+semantics, 12px size and deep-navy colour.
 
 ## Icons and assets
 
@@ -135,3 +184,27 @@ motion. A live reduced-motion change completes pending reveals. Keyboard focus
 completes the containing reveal immediately so a focused CTA cannot stay hidden.
 The founding year and practice figures remain literal, without count-up effects.
 No new animation dependency was added for these sections.
+
+## Sticky surface and client rail
+
+The enhanced top-of-page state retains the source composition: logo, glass
+navigation pill and white enquiry CTA, without a full-width header material.
+After the fixed 64px marker leaves view, a floating navy glass shell fades in
+and the nav pill's own material fades out. Controls do not move or resize.
+Both surfaces use fine highlights/borders and a quiet shadow, following the
+functional-layer principle in [Apple's material guidance](https://developer.apple.com/design/human-interface-guidelines/materials).
+
+Only surface opacity transitions over 400ms. Each backdrop filter is static
+(16px on the nav pill, 24px on the full shell), avoiding animated blur or
+layout properties. Missing JavaScript/IntersectionObserver retains the readable
+full shell rather than leaving white controls over light content. Unsupported
+blur, increased-contrast and reduced-transparency preferences use solid navy
+on the active surface; reduced motion makes the surface change immediate.
+The white logo and shared inverse CTA stay consistent in both states.
+
+The selected-clients rail uses anonymous outlined slots while assets are under
+review. It now reuses iProduce's single-row Marquee primitive, four repeats and
+40-second CSS loop, with a persistent pause/play button and hover/focus suspension. Motion is progressively enabled;
+reduced-motion/no-JavaScript keep a static, readable grid. Duplicated animation
+content is excluded from accessibility. No generic marquee/section framework
+or new dependency was introduced.

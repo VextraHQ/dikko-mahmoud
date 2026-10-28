@@ -77,3 +77,37 @@ image/stat chips, editorial card, portrait, then CTA. At `md` the image spans
 both columns above text/portrait; at `xl` the reference's three-column grouping
 uses a wide image and narrower text/portrait columns. Source dimensions are
 reserved even while the office/portrait use labelled placeholders.
+
+## Sticky header and selected-clients rail
+
+The header stays at the viewport top with two enhanced surface states: the
+original logo/glass-nav-pill/CTA composition at the top, and a full floating
+capsule after scrolling. Its content
+row stays 72px high (74px including the surface border) at every scroll
+position. Mobile/tablet use a constant 12px top inset and 16/32px gutters;
+desktop uses 20px at the top and the existing 80px gutters. Desktop still
+reserves zero flow height for the hero overlay; smaller widths reserve their
+86px header space. A non-sticky navy backing preserves the mobile hero's top
+surface and scrolls away with the page. Anchor scroll padding remains 112px.
+
+Only the outer header wrapper owns horizontal page gutters. The inner row has
+no additional horizontal padding, keeping its contents aligned with sections.
+The full glass shell's paint layer extends 12px beyond its existing border on
+each side, giving the CTA breathing room without moving the content row.
+The logo has vertical padding only and left-aligned image fitting, avoiding
+an extra inset between its artwork and the page gutter. Its source asset,
+rendered size and reserved link dimensions are preserved.
+
+Scroll changes neither height, padding, position nor logo scale. One fixed
+marker at 64px controls an opacity-only surface crossfade. The nav pill
+material fades away as the full shell appears, keeping the controls in exactly
+the same positions with 44px item targets. Without enhancement, the full shell
+remains visible for readability while scrolling.
+The mobile Sheet remains a separate solid, focus-managed surface.
+
+Selected clients use the shared content cap/gutters, a left-aligned heading and
+one moving row using the iProduce partners pattern. Four repeated groups use
+`translateX(calc(-100% - var(--gap)))` for the seamless loop. Cards are 180×64px
+on mobile and 240×80px from `sm`, with 16px gaps and gradient edge overlays.
+Rail overflow is contained.
+Static fallback uses two columns on mobile, three at `sm`, and six at `xl`.

@@ -1,7 +1,8 @@
 import { FirmImage } from "@/components/home/firm-image";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { RevealGroup } from "@/components/shared/reveal-group";
-import { Button, ButtonArrow } from "@/components/ui/button";
+import { ArrowButton } from "@/components/ui/arrow-button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmFacts, firmHomePreview as story } from "@/content/firm";
 
 export function FirmStorySection() {
@@ -12,9 +13,7 @@ export function FirmStorySection() {
     >
       <RevealGroup className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
         <div data-reveal className="mx-auto max-w-4xl text-center">
-          <p className="text-primary text-[11px]/4 font-bold tracking-widest uppercase">
-            {story.eyebrow}
-          </p>
+          <Eyebrow>{story.eyebrow}</Eyebrow>
           <h2
             id="firm-story-heading"
             className="mt-4 font-serif text-[34px]/[38px] sm:text-5xl/13 xl:text-[64px]/[1.08]"
@@ -101,9 +100,7 @@ export function FirmStorySection() {
             </figure>
             <div className="self-start xl:self-center">
               <PreviewDestination>
-                <Button trailingArrow>
-                  {story.action} <ButtonArrow />
-                </Button>
+                <ArrowButton>{story.action}</ArrowButton>
               </PreviewDestination>
             </div>
           </div>

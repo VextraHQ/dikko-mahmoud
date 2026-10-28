@@ -224,3 +224,119 @@
 - Formatting, ESLint, typecheck, production build, targeted Biome CSS/a11y and
   `git diff --check` passed. Builds were limited to preview/final refinements;
   section iteration used targeted formatting. The footer is the next slice.
+
+## 2026-10-27 — Sticky header and selected-clients checkpoint
+
+- Kept RevealGroup limited to one-time motion for facts/story; section content
+  and layout remain in their own server-rendered sections. No generic section
+  or card engine was introduced.
+- Added an observer-driven sticky header with the original desktop hero overlay
+  at the top and a condensed navy surface after scrolling. Mobile retains its
+  flow space. The default remains readable without JavaScript/IntersectionObserver,
+  and anchor padding accounts for the bar. Shared desktop/mobile navigation now
+  derives active state from pathname, including slash-delimited nested routes.
+  Route availability remains explicit; no unbuilt pages or broken links added.
+- Added the selected-clients section from the supplied screenshot with twelve
+  anonymous logo slots and a visible review note. Copy/slots are owned by
+  `content/clients.ts`; approved names and local logos can replace null fields.
+- Added two slow opposing CSS loops, soft edge masks, pause/play and hover/focus
+  suspension. Motion is progressively enabled; reduced motion/no-JavaScript
+  show the static grid. Duplicate visual groups are hidden/inert for assistive
+  technology. No packages were installed and no client relationship was invented.
+- Browser verification passed at 1440, 1280, 768, 390, 320 and 1920px: sticky
+  position/contrast, stable hero position, desktop spacing, active Home, mobile
+  menu/nested notice/focus, marquee movement and pause, equal loop-group widths,
+  twelve accessible slots, no horizontal overflow, reduced-motion and no-JS
+  fallbacks. No runtime page errors were recorded. Saved desktop/mobile PNGs
+  in the task visualization directory; no live user-screen observation used.
+- Verified active-path matching against exact, root, nested and prefix-boundary
+  cases. Format, ESLint, typecheck, production build, targeted Biome CSS/a11y
+  and `git diff --check` passed. Preserved prior work and parallel edits.
+- Stopped at the requested checkpoint. Practice areas and their animation brief,
+  footer and other remaining sections were not implemented in this slice.
+
+## 2026-10-27 — Align client marquee with iProduce
+
+- Reused iProduce's actual `components/ui/marquee.tsx` primitive and its
+  single-row partners layout: four repeat groups, 16px spacing, bordered cards
+  at 180×64px/mobile and 240×80px/from-sm, and gradient edge overlays.
+- Moved the shared animation definitions into Tailwind's theme, retaining the
+  original repeat, reverse, vertical and pause-on-hover API. Added hidden/inert
+  duplicate groups and kept Dikko's pause/readiness wrapper and static reduced-
+  motion/no-JavaScript grid. Removed the custom opposing-row/50% loop styles.
+- Preserved Dikko's copy, palette and anonymous logo slots. Preserved the
+  40-second duration currently set in the working tree rather than overwriting
+  that parallel adjustment with the iProduce partners callsite's 20 seconds.
+- Browser verification passed at 1440, 768, 390 and 320px: source card sizes,
+  one rail/four repeats, twelve accessible originals, movement, exact group-gap
+  seam, pause/play and hover pause, static reduced-motion/no-JavaScript output,
+  and no horizontal overflow or runtime page errors. Reviewed saved PNGs.
+- Format, lint, typecheck, production build, Biome CSS/a11y and diff whitespace
+  checks passed. No package added. Sticky header and practice areas unchanged.
+
+## 2026-10-27 — Arrow-button and eyebrow primitives
+
+- Added the approved `ArrowButton` composition over the existing CVA/Slot
+  Button: three brand variants, sm/default/lg sizes, automatic matching circle,
+  optional Lucide icon, shared reduced-motion-aware hover and decorative icon
+  semantics. Added the small Button size; removed duplicated arrow assembly
+  and the old ButtonArrow/trailingArrow API after migrating all current uses.
+- Used Radix Slottable to retain a single anchor for asChild composition and
+  preserve prop/ref forwarding through existing dialog triggers. Updated
+  desktop/mobile enquiry, expertise and firm-story actions.
+- Added the small Eyebrow primitive and migrated hero, facts, story and selected
+  clients. Preserved facts as h2, paragraph semantics elsewhere, responsive
+  typography, colours, content and section-owned spacing/layout.
+- Documented the APIs and examples in the design system. No packages, route
+  changes or service integrations were introduced. Preserved the main thread's
+  sticky-header, client-marquee and other unrelated edits.
+- Format, lint, typecheck and diff whitespace checks passed. Focused React SSR
+  checks passed nine arrow-button variant/size combinations, asChild anchor
+  structure, custom icon, disabled/submit attributes, ordinary icon buttons,
+  and eyebrow heading/class overrides. Tailwind compiled the isolated examples.
+- Browser verification was attempted but Chromium launch was blocked by the
+  sandbox's macOS process permissions. No broader permissions were requested.
+  No production build was run in this side conversation, to avoid changing
+  the main thread's shared build output. Browser review remains outstanding.
+
+## 2026-10-27 — Stable glass navbar polish
+
+- Replaced the changing full-width/header-plus-nav backgrounds with one
+  floating capsule. The content row stays 72px high with constant top/gutter
+  spacing; the logo no longer moves or resizes in response to scrolling.
+- Kept one IntersectionObserver with a fixed 64px marker. Scroll changes only
+  an internal navy tint over 400ms, without animating padding, height, blur or
+  position. Started from the readable top-state tint rather than briefly
+  rendering the condensed/scrolled state during initial enhancement.
+- Added a static 24px blur/saturation material, subtle border/highlight and
+  shadow. Preserved the mobile hero's backing with a non-sticky navy layer.
+  Main navigation now sits directly on the shell with 44px targets; mobile
+  Sheet, route-aware navigation and shared ArrowButton behaviour are retained.
+- Added solid fallbacks for unsupported blur, reduced transparency and increased
+  contrast, and an immediate tint update for reduced motion. No package added.
+- Updated layout, design-system and architecture docs. Format, lint, typecheck,
+  targeted Biome CSS/a11y, Tailwind compilation and diff checks passed. Focused
+  source checks confirmed scroll-state rules only alter opacity. The brightest
+  modeled glass background retained approximately 5.08:1 white-text contrast;
+  this is a calculation, not a browser screenshot contrast measurement.
+- Automatic approval review rejected the isolated browser preview because the
+  user's earlier instruction stopped screen observation. No workaround was
+  attempted; visual/scroll verification awaits explicit permission. No
+  production build was run, preserving the main thread's shared build output.
+
+## 2026-10-27 — Restore default glass-pill navigation
+
+- Adjusted the approved glass navbar to retain the original enhanced top-state
+  composition: logo, glass navigation pill and white enquiry CTA. The full
+  glass shell appears only after scrolling beyond the existing 64px marker;
+  the inner nav material fades out as the outer shell fades in.
+- Kept the fixed row height, gutters, logo dimensions and top inset unchanged
+  between states. Only pseudo-element opacity transitions; backdrop filters
+  remain static. The mobile Sheet is unaffected.
+- Used an unset initial scroll state for a readable full-shell fallback when
+  JavaScript/IntersectionObserver is unavailable, then enhanced to top/scrolled
+  surfaces. Retained solid contrast/transparency and reduced-motion fallbacks.
+- Updated design, layout and architecture documentation. Format, lint,
+  typecheck, Tailwind/CSS compilation, Biome CSS and diff checks passed.
+  Browser observation remained off following the user's response; no build,
+  browser action, package or unrelated section work was introduced.

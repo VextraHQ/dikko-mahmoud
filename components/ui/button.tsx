@@ -1,6 +1,5 @@
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { ArrowUpRight } from "lucide-react";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
@@ -19,11 +18,11 @@ const buttonVariants = cva(
           "bg-slate-100 text-secondary hover:bg-slate-200 active:bg-slate-300",
       },
       size: {
+        sm: "h-10 px-4 text-sm/5",
         default: "h-12 px-5",
         lg: "h-13 px-5",
         icon: "size-11 p-0 [&_svg]:size-5",
       },
-      trailingArrow: { true: "py-1 pr-1 pl-[18px]" },
     },
     defaultVariants: { variant: "default", size: "default" },
   },
@@ -34,7 +33,6 @@ export function Button({
   variant = "default",
   size = "default",
   asChild = false,
-  trailingArrow = false,
   type,
   ...props
 }: ComponentProps<"button"> &
@@ -44,32 +42,8 @@ export function Button({
     <Comp
       data-slot="button"
       type={asChild ? undefined : (type ?? "button")}
-      className={cn(
-        buttonVariants({ variant, size, trailingArrow }),
-        className,
-      )}
+      className={cn(buttonVariants({ variant, size }), className)}
       {...props}
     />
-  );
-}
-
-export function ButtonArrow({
-  inverse = false,
-  large = false,
-}: {
-  inverse?: boolean;
-  large?: boolean;
-}) {
-  return (
-    <span
-      aria-hidden="true"
-      className={cn(
-        "inline-flex shrink-0 items-center justify-center rounded-full",
-        large ? "size-11" : "size-10",
-        inverse ? "bg-secondary text-white" : "text-secondary bg-white",
-      )}
-    >
-      <ArrowUpRight className="size-5" strokeWidth={1.5} />
-    </span>
   );
 }

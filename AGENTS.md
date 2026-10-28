@@ -3,9 +3,8 @@
 This repository is the future public website for Dikko & Mahmoud. The current
 milestone is design-system foundations and homepage development from the
 supplied desktop/mobile Figma references. The first runtime checkpoint covers
-fonts, theme, Button, navigation, hero, firm facts and story; consult the roadmap
-for review status
-and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
+fonts, theme, Button, sticky navigation, hero, firm facts/story and selected
+clients; consult the roadmap for review status and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 
 ## Start here
 
@@ -35,6 +34,8 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 - The supplied Figma frames establish the design reference; resolve missing
   states and content without restarting a separate wireframe phase.
 - Preserve unrelated work and keep changes scoped to the active milestone.
+- Stop at the sticky-header/selected-clients review slice. Practice areas await
+  the user's separate animation brief.
 
 ## File ownership
 
@@ -55,7 +56,8 @@ components keep descriptive `.tsx` names. Keep copy and collections in
 `content/*.ts`, with shared firm facts owned by the firm domain rather than
 duplicated between previews. Keep custom CSS and keyframes in clearly scoped
 blocks in `app/globals.css`; do not add CSS modules to `components/home/`.
-The hero now uses `hero-section.tsx` and scoped global animation rules.
+The hero now uses `hero-section.tsx` and scoped global animation rules. Shared
+motion helpers must not take ownership of section layout or content.
 
 ## Verification
 

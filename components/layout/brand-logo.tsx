@@ -8,7 +8,7 @@ export function BrandLogo({ className }: { className?: string }) {
       href="/"
       aria-label="Dikko & Mahmoud — Home"
       className={cn(
-        "flex h-15 w-45 shrink-0 items-center rounded-lg p-1.5 xl:h-18.5 xl:w-48",
+        "flex h-15 w-45 shrink-0 items-center rounded-lg py-1.5 xl:h-18.5 xl:w-48",
         className,
       )}
     >
@@ -19,7 +19,7 @@ export function BrandLogo({ className }: { className?: string }) {
         height={303}
         loading="eager"
         sizes="180px"
-        className="h-full w-full object-contain"
+        className="h-full w-full object-contain object-left"
       />
     </Link>
   );

@@ -1,11 +1,11 @@
 export const navigation = [
-  { label: "Home", href: "/" },
-  { label: "The firm", href: "/the-firm" },
-  { label: "Practice areas", href: "/practice-areas" },
-  { label: "People", href: "/people" },
-  { label: "Insights", href: "/insights" },
-  { label: "Careers", href: "/careers" },
-  { label: "Contact", href: "/contact" },
+  { label: "Home", href: "/", available: true },
+  { label: "The firm", href: "/the-firm", available: false },
+  { label: "Practice areas", href: "/practice-areas", available: false },
+  { label: "People", href: "/people", available: false },
+  { label: "Insights", href: "/insights", available: false },
+  { label: "Careers", href: "/careers", available: false },
+  { label: "Contact", href: "/contact", available: false },
 ] as const;
 
 export const previewNotice = {

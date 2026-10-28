@@ -4,7 +4,7 @@
 
 The project is a single-package Next.js App Router application with no `src/`
 directory. The runtime contains brand/navigation/hero, firm-at-a-glance and
-firm-story presentation.
+firm-story and selected-clients presentation.
 The homepage milestone and remaining content gates are described in
 `design-system.md`, `layout-system.md`, and `routes/home.md`.
 
@@ -60,7 +60,8 @@ ordinary UI icons. No autoplay plugin or general animation framework is installe
 licences. The root layout owns fonts and metadata. `app/(site)/layout.tsx` owns
 the shared header, skip link and main landmark; its homepage is a thin Server
 Component. The footer will join this layout when its source section is built.
-Header and hero presentation remain Server Components; MobileNavigation,
+Header and hero presentation remain Server Components; StickyHeader,
+SiteNavigation, MobileNavigation,
 Sheet/notices, Carousel, HeroCarousel/Copy and HeroControls own their local
 client interactions. Hero remains the server-rendered composition and source
 copy mapping; the CTA is a single persistent element.
@@ -80,3 +81,27 @@ nullable source/alt fields live in the firm content module.
 
 Use the supplied Figma design and explicit delivery scope for remaining
 decisions; the temporary page and legacy website are not design-system sources.
+
+The reveal helper is deliberately motion-only: sections own their markup,
+content and layout. It is not a generic Section/card configuration layer and
+currently serves only facts/story. New sections stay direct compositions.
+
+`StickyHeader` owns one IntersectionObserver and one nullable scroll state, without
+per-scroll listeners. Its 72px row and outer spacing remain constant on scroll;
+only material pseudo-elements crossfade opacity. The enhanced top state
+shows the glass nav pill; the scrolled state shows the full shell. An unset
+initial state keeps the full shell as the readable enhancement/no-JS fallback. Desktop preserves the zero-height
+hero overlay, while mobile reserves header space. Scoped CSS in `globals.css`
+owns both surface states and solid contrast/transparency fallbacks.
+No additional animation or glass-rendering dependency is installed. `SiteNavigation` shares desktop/mobile item rendering and
+uses `usePathname` plus boundary-aware matching from `lib/navigation.ts`.
+Set a navigation record's `available` flag only when its route exists. Pending
+routes remain explicit notices; no dummy destination pages were added.
+
+`content/clients.ts` owns the selected-clients copy and anonymous logo slots.
+The section is server-rendered; its local `ClientLogoMarquee` owns only pause
+state and enhancement readiness. `components/ui/marquee.tsx` is adapted directly from iProduce and retains its
+repeat/direction/hover API; Tailwind animation tokens drive continuous motion.
+Duplicate groups
+are hidden from assistive technology and inert. Reduced motion/no-JavaScript
+use a static grid. No carousel or animation dependency was added for this rail.

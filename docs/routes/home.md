@@ -280,3 +280,41 @@ in Nigeria`. Reconcile the office/liaison wording before repeating it; do not
   source-supplied preview assets and final publication approval.
 - `Discover our story` uses the existing explicit preparation notice until
   `/the-firm` exists, then becomes a real link. Do not create missing-page links.
+
+## Sticky navigation and selected clients — 2026-10-27
+
+The user requested this bounded slice and explicitly asked to stop before
+practice areas. The supplied selected-clients screenshot establishes the
+heading, introduction and two-row logo grouping. Client names/logos remain
+under review, so twelve anonymous, visibly labelled logo slots preserve the
+section. No pictured organisation is asserted as an approved runtime client.
+Populate each slot's approved `name` and local `logo` path in
+`content/clients.ts` when available; keep the review note current.
+
+Following the user's iProduce alignment request, the rail now uses its actual
+`components/ui/marquee.tsx` pattern: one horizontal row, four repeated groups,
+a 40-second loop, 16px gaps, compact bordered cards and edge-gradient overlays. A visible pause/play control persists user
+choice; pointer hover and focus within the rail suspend motion. Duplicated
+visual groups are `aria-hidden`/inert. Reduced motion and no-JavaScript show a
+static two/three/six-column grid with each unique slot once.
+
+The header is now sticky at all widths. Desktop keeps the opening hero overlay
+and condenses to a navy/blurred surface after leaving a 24px top marker. Mobile
+retains its normal header space. A solid default keeps navigation readable
+without JavaScript; observer enhancement restores top-of-page transparency.
+Anchor scroll padding accounts for the sticky bar. Route-aware desktop/mobile
+navigation shares the same source and marks only exact or slash-delimited
+nested routes active. Home matches only `/`. Unbuilt pages keep the existing
+preparation notice; enable their `available` flags when routes are built.
+
+`RevealGroup` remains a small motion enhancer for facts/story, rather than a
+section-layout abstraction. It was not expanded into a section engine for this
+slice. No new packages were installed. Practice areas are intentionally absent
+pending the user's next animation/design discussion.
+
+The iProduce primitive API (`pauseOnHover`, `repeat`, `reverse`, `vertical`) is
+preserved, with duplicate groups hidden/inert for accessibility. Dikko keeps
+its own heading, copy, palette, review note and anonymous slots. The local
+pause/readiness wrapper still provides explicit pause and static no-JS support.
+Mobile cards match iProduce at 180×64px; from `sm`, they are 240×80px. Reduced
+motion/no-JavaScript expose the twelve originals in the responsive static grid.

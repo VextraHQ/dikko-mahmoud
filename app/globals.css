@@ -29,6 +29,25 @@
   --color-navy-deep: var(--navy-deep);
   --font-serif: var(--font-newsreader), Georgia, serif;
   --font-sans: var(--font-manrope), Arial, sans-serif;
+  --animate-marquee: marquee var(--duration) linear infinite;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 button:not(:disabled),
@@ -114,4 +133,127 @@ button:not(:disabled),
   opacity: 1;
   transform: none;
   animation: none;
+}
+
+/* Fixed header geometry; crossfade from a glass nav pill to the full shell. */
+.site-header-surface {
+  border: 1px solid transparent;
+}
+
+.site-header-surface::before,
+.site-navigation-surface::before {
+  position: absolute;
+  z-index: -1;
+  inset: -1px;
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: inherit;
+  background: var(--secondary);
+  box-shadow:
+    0 8px 28px rgb(6 26 46 / 14%),
+    inset 0 1px 0 rgb(255 255 255 / 20%);
+  pointer-events: none;
+  content: "";
+  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* The full shell remains visible when JS/IntersectionObserver is unavailable. */
+.site-header-surface::before {
+  inset-inline: -13px;
+  opacity: 1;
+}
+
+.site-navigation-surface::before {
+  opacity: 0;
+}
+
+[data-site-header][data-scrolled="false"] .site-header-surface::before {
+  opacity: 0;
+}
+
+[data-site-header][data-scrolled="false"] .site-navigation-surface::before {
+  opacity: 1;
+}
+
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  .site-header-surface::before {
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 8%), transparent 55%),
+      rgb(6 26 46 / 78%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    backdrop-filter: blur(24px) saturate(150%);
+  }
+
+  .site-navigation-surface::before {
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 12%), transparent 65%),
+      rgb(6 26 46 / 44%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    backdrop-filter: blur(16px) saturate(140%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header-surface::before,
+  .site-navigation-surface::before {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .site-header-surface::before,
+  .site-navigation-surface::before {
+    background: var(--secondary);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* Account for the floating navigation when following anchors. */
+html {
+  scroll-padding-top: 7rem;
+}
+
+/* iProduce marquee primitive, with Dikko's progressive/static fallbacks. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none;
+  }
+  .client-logo-marquee [data-slot="marquee"],
+  .client-logo-marquee [data-marquee-track] {
+    display: block;
+  }
+  .client-logo-marquee [data-marquee-copy],
+  .client-logo-marquee [data-marquee-edge] {
+    display: none;
+  }
+  .client-logo-marquee [data-client-logos] > li {
+    width: auto;
+    min-height: 5rem;
+  }
+}
+
+.client-logo-marquee:not([data-motion-ready]) [data-slot="marquee"],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-track] {
+  display: block;
+  animation: none;
+}
+.client-logo-marquee:not([data-motion-ready]) [data-client-logos] > li {
+  width: auto;
+  min-height: 5rem;
+}
+.client-logo-marquee:not([data-motion-ready]) [data-motion-controls],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-copy],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-edge] {
+  display: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .client-logo-marquee[data-motion-ready] [data-client-logos] {
+    display: flex;
+  }
+  .client-logo-marquee[data-paused="true"] [data-marquee-track],
+  .client-logo-window:hover [data-marquee-track],
+  .client-logo-window:focus-within [data-marquee-track] {
+    animation-play-state: paused;
+  }
 }

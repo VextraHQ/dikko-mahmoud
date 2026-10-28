@@ -3,7 +3,7 @@
 The local project foundation for the Dikko & Mahmoud website revamp. The root
 route now presents the first homepage review checkpoint: brand typography and
 theme, shared Button, responsive navigation, expertise hero, firm facts and
-firm-story preview. It remains
+firm-story preview, sticky navigation and a selected-clients placeholder rail. It remains
 no-index. All five hero photographs are now local and connected; the full
 homepage and secondary pages remain unfinished. Office and portrait slots
 are explicitly labelled placeholders pending supplied assets.
