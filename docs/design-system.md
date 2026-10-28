@@ -26,6 +26,23 @@ catalogue in CSS or create a parallel TypeScript token system.
 - The burgundy, cream, and Georgia holding-page treatment is temporary and is
   not the source of the new brand system.
 
+### Style ownership
+
+- Put layout, ordinary presentation, responsive changes and data/ARIA states
+  in Tailwind beside the component. Use `cn()` for readable base/state groups.
+- `app/globals.css` is the entry for theme bridges, global defaults and imports.
+  `app/styles/motion.css` owns custom keyframes and progressive reveal/marquee
+  fallbacks; `app/styles/surfaces.css` owns complex glass/browser fallbacks.
+- Keep those custom selectors scoped. Do not add a stylesheet per section,
+  CSS modules to component folders, a parallel token scale or `@apply` layers.
+- Prefer `motion-safe:` for adding a utility animation. Check a live preference
+  change as well as a reduced-motion page load; specificity can otherwise let
+  an active/group animation override a generic `motion-reduce:animate-none`.
+  If a breakpoint overrides a transition property, supply its corresponding
+  reduced-motion override too and verify the generated desktop CSS in-browser.
+- Add Motion only for an approved choreography/presence requirement. Simple
+  interaction feedback remains CSS/Tailwind and does not require a package.
+
 ## Brand roles observed in Figma
 
 | Role           | Reference                       | Implementation direction                  |
@@ -151,7 +168,7 @@ The navy panel, CTA, navigation and controls are outside the changing slides.
 Stacked copy fieldsets reserve the tallest record's space so controls do not
 jump. Only the current copy is exposed to assistive technology and focus.
 
-Motion is limited to the hero. Reduced motion removes copy animation and makes
+For the hero, reduced motion removes copy animation and makes
 button/keyboard changes immediate; drag fading is disabled in that preference,
 with previous/next buttons still available. Autoplay remains deferred. When
 revisited, it requires pause/resume, hover/focus and hidden-tab suspension, and
@@ -176,8 +193,9 @@ approved interaction requires it.
 
 ## Section entry motion
 
-Custom CSS is kept in scoped blocks in `app/globals.css`. The hero no longer
-uses a CSS module. `RevealGroup` progressively enhances the facts/story using
+Custom entrance CSS is kept in `app/styles/motion.css`, imported once through
+`globals.css`. Ordinary visibility/interaction states stay in component Tailwind
+classes; the hero has no CSS module. `RevealGroup` enhances the facts/story using
 IntersectionObserver: offscreen items fade/rise once, then stop being observed.
 Content starts visible without JavaScript and stays visible under reduced
 motion. A live reduced-motion change completes pending reveals. Keyboard focus
@@ -202,9 +220,42 @@ blur, increased-contrast and reduced-transparency preferences use solid navy
 on the active surface; reduced motion makes the surface change immediate.
 The white logo and shared inverse CTA stay consistent in both states.
 
+The hero split now starts at `lg` while full navigation still requires `xl`.
+Between those widths, the compact menu overlays the photograph with its own
+contrasting control background. The full shell stays hidden at the top and
+fades in only after scrolling, consistently at every width. Below `lg`, the
+header reserves its normal space above stacked hero content. There is no
+breakpoint exception to the scroll material state.
+
 The selected-clients rail uses anonymous outlined slots while assets are under
 review. It now reuses iProduce's single-row Marquee primitive, four repeats and
 40-second CSS loop, with a persistent pause/play button and hover/focus suspension. Motion is progressively enabled;
 reduced-motion/no-JavaScript keep a static, readable grid. Duplicated animation
 content is excluded from accessibility. No generic marquee/section framework
 or new dependency was introduced.
+
+## Practice explorer motion
+
+The approved practice-area interaction is manual, without autoplay or scroll
+capture. A fine active rule and brighter label identify the selection. Desktop
+panels crossfade over 450ms; mobile panels expand/collapse over 400ms with a
+short opacity transition. Reduced motion removes all explorer transitions.
+Controls use `aria-expanded`; only the expanded desktop control is marked
+`aria-disabled`, because desktop keeps one panel open. Mobile/tablet start
+collapsed and allow the open row to close, with at most one expanded panel.
+Native buttons support Tab, Enter and Space; inactive regions
+are hidden from accessibility and inert immediately. No animation package or
+generic accordion primitive is needed for this homepage-specific composition.
+
+Practice selectors have visible circular arrow controls before interaction.
+Pressing an inactive row gives a small 160ms scale response. The selected
+circle fills white and rotates toward the panel (right on desktop, down on
+mobile), keeping the selection clear after the pointer leaves. The incoming
+caption fades/rises 6px over 400ms. These are local CSS enhancements; reduced
+motion removes the press movement, rotations' transitions and caption animation
+while retaining the final selection cue.
+
+Selected matters use a restrained 240ms card crossfade with a persistent pale
+blue selected row. Only click/tap or keyboard activation changes the feature;
+hover is a control-colour affordance. Reduced motion removes the fade and mobile
+smooth scrolling. Card visibility/transitions are component Tailwind classes.

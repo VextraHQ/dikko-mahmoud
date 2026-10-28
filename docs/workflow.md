@@ -17,6 +17,10 @@
   content before inventing behaviour; use wireframes for genuinely new scope.
 - Add dependencies only when an approved requirement needs them.
 - Update the canonical document when a durable boundary or decision changes.
+- Read the relevant guide in `node_modules/next/dist/docs/` before framework
+  changes; use installed behaviour rather than assumptions from older Next.js.
+- Keep ordinary states in Tailwind beside their component. Read the styling
+  ownership in `architecture.md` before adding global CSS, tokens or helpers.
 
 ## Verification matrix
 
@@ -48,6 +52,27 @@ review. Batch lint/typecheck once the section slice is ready. A production
 build belongs at the completed runtime handoff or a route/layout/configuration/
 dependency checkpoint; do not repeat it for each visual adjustment. Planning
 and documentation-only changes need formatting/path review, not a build.
+
+Use an isolated local browser for responsive/interaction checks; do not inspect
+the user's open apps or screen. Review 1440, 1280/1024, 768, 390 and 320px as
+relevant, plus keyboard, reduced motion and no-JS fallbacks when affected.
+Use the configured local dev origin (`http://localhost:3000` by default) and
+wait for client readiness before testing interactive controls. Test an imported
+CSS reorganisation in a production build as well as development.
+
+## Audit and handoff discipline
+
+Keep one canonical owner for each concern using `docs/README.md`. Update that
+document when behaviour changes; append dated verification to the implementation
+log rather than leaving conflicting current rules in several places. Historical
+entries describe their original checkpoint, not current requirements.
+
+At a checkpoint, record the exact next scope in the roadmap and its design,
+copy, missing assets and interaction decisions in the route brief. A bounded
+handoff should identify allowed files, shared files with one owner, acceptance
+criteria and checks actually run. Another assistant must read those sources
+and the current diff before editing. Do not establish the later Claude workflow
+or begin People until that next scope is agreed.
 
 ## Implementation log
 

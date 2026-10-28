@@ -11,9 +11,18 @@ and remaining homepage sections after reviewing each focused Figma source.
 The approved hero polish now adds restrained crossfades and text motion while
 keeping autoplay deferred. Secondary pages follow the homepage.
 
-Facts and story are implemented with explicit image placeholders. The current
-review adds sticky navigation and the selected-clients placeholder section.
-Stop here before practice areas: its animation concept needs a separate brief.
+Facts and story are implemented with explicit image placeholders. Sticky
+navigation and the selected-clients placeholder section are implemented.
+The user approved the editorial practice explorer after reviewing options:
+desktop index/image panel, mobile accordion, and restrained manual transitions.
+Practice photography remains labelled placeholders. The mobile accordion now
+starts collapsed and can close; desktop keeps one selection. The current slice
+adds selected matters from the user's desktop/mobile screenshots. All four
+summaries now have user-approved preview copy, with BPE as the opening selection.
+The maintainability audit implements Tailwind state ownership, focused custom
+CSS files, click-only matters and synchronized docs. The current follow-up is
+the earlier hero split at `lg`, keeping full navigation at `xl`. Review that
+layout before analysing People; the later Claude workflow is not established.
 Footer/enquiry callout and other remaining sections stay queued.
 
 ## Status
@@ -27,6 +36,9 @@ Footer/enquiry callout and other remaining sections stay queued.
 | 2b. Navigation and hero                     | Review   | Responsive checkpoint with manual fades, text motion and image preparation      |
 | 2b.1 Firm facts and story                   | Review   | Responsive sections, shared firm content, placeholders and one-time reveals     |
 | 2b.2 Sticky navigation and selected clients | Review   | Route-aware header and accessible placeholder marquee                           |
+| 2b.3 Practice-area explorer                 | Review   | Six source areas, desktop index, mobile accordion, photo placeholders           |
+| 2b.4 Selected matters                       | Review   | Responsive feature/selector, four sourced summaries, BPE opening selection      |
+| 2b.5 Maintainability audit                  | Review   | Style ownership, click-only matters, accessibility fixes and aligned docs       |
 | 2c. Footer, remaining homepage and QA       | Next     | Next homepage slice; retrieve focused Figma context first                       |
 | 2d. Final publication content               | Open     | Approved portraits, testimonial, imagery, and destinations                      |
 | 3. Information architecture                 | Planned  | Approved routes, content ownership, and CMS boundary                            |

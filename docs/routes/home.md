@@ -10,6 +10,26 @@ Reviewed on 2026-10-26:
 The supplied design is the implementation reference. Its provisional content
 does not become approved production content simply because it appears in Figma.
 
+## Current implementation rules — audited 2026-10-28
+
+- Use component Tailwind for ordinary states and responsive layout; custom
+  keyframes/progressive fallbacks and glass surfaces live in the two focused
+  `app/styles/` files imported by `globals.css`. See `architecture.md`.
+- Practice areas use the approved explorer rather than the source staggered
+  gallery: desktop keeps one open; mobile/tablet can open/close, initially closed.
+- Selected matters open on BPE and change only through click/tap or keyboard
+  activation. Hover never changes selected content. The current copy says
+  “Select a matter to read more”, superseding the screenshot's hover wording.
+- Preserve the approved sourced summaries and distinguish matter organisations
+  from the advisory client. Keep unavailable routes as preparation notices.
+- Hero/header overlay starts at `lg`, with the compact menu until full navigation
+  starts at `xl`. The full header shell is hidden at the top at all widths and
+  appears only after scrolling. Facts/story keep their `xl` compositions;
+  practice/matters use `lg`. See `layout-system.md` for dimensions and rationale.
+- Review the earlier hero split before analysing People. The later Claude
+  workflow needs its own next scope agreed. Dated notes preserve earlier history;
+  use these current rules and the canonical docs when they supersede history.
+
 ## Section map
 
 | Order | Section                                | Desktop node |
@@ -36,8 +56,9 @@ it, including relevant component variants and interactive states.
 1. Establish Newsreader/Manrope, semantic brand colours, layout rhythm, and the
    shadcn baseline. Add only primitives needed by the first working slice.
 2. Implement shared navigation and the hero at desktop and mobile widths.
-3. Implement the footer early to verify both light and dark brand surfaces.
-4. Build the remaining homepage sections with approved static content.
+3. Continue remaining homepage sections in the user-agreed checkpoint order;
+   People is proposed next, with footer still queued.
+4. Retrieve focused source for each section and use approved static content.
 5. Connect local interactions and review the full page, accessibility, image
    loading, and responsive behaviour.
 
@@ -58,8 +79,8 @@ files as used rather than scaffolding speculative component trees.
 - Client logos are labelled profile-sourced. Keep publication approval distinct
   from implementing the layout.
 - Hero text records, all five original photographs, and the mobile-menu state
-  are retrieved. Selected-matter records, article destinations, and final
-  publication copy still need confirmation.
+  are retrieved. All four selected-matter preview records are sourced and
+  user-approved. Final publication approval and article destinations remain open.
 - Figma includes newsletter signup and a Lagos liaison-office entry. Confirm
   final copy and behaviour; a visual signup is not an email-service integration.
 - Keep unavailable secondary destinations explicit during development. Do not
@@ -264,7 +285,7 @@ surfaces. Keep the story CTA separate from the portrait caption.
   `*-section.tsx` suffix; helper components retain their descriptive role names.
 - `content/firm.ts` owns shared firm facts and the source-supplied Home preview.
   `app/(site)/page.tsx` stays a thin section composition.
-- `app/globals.css` owns custom CSS/keyframes in scoped blocks. Layout uses
+- Styling follows the current ownership rules above. Layout uses
   Tailwind utilities. No homepage CSS module is planned after the migration.
 - Missing media use labelled Lucide placeholders. Set `firmHomePreview.media`
   source paths and accurate alt text when originals are available, storing
@@ -318,3 +339,66 @@ its own heading, copy, palette, review note and anonymous slots. The local
 pause/readiness wrapper still provides explicit pause and static no-JS support.
 Mobile cards match iProduce at 180×64px; from `sm`, they are 240×80px. Reduced
 motion/no-JavaScript expose the twelve originals in the responsive static grid.
+
+## Practice-area explorer — 2026-10-28
+
+After discussing the source staggered gallery (`1:10733`) and reviewing desktop
+and mobile wireframe options, the user approved an editorial explorer. This
+supersedes the earlier instruction to stop before practice areas. The six
+source labels, heading, introduction and main CTA are preserved. Desktop uses
+a numbered index beside one large visual; mobile/tablet uses the same markup
+as an accordion, initially collapsed with at most one panel open. The open
+mobile/tablet row can close; desktop keeps a selected panel. No autoplay or scroll pinning.
+
+Approved practice photography is still unavailable; each nullable `image`
+record in `content/practice-areas.ts` uses an explicit numbered placeholder.
+Populate `src` and meaningful `alt` together when photographs are supplied.
+Hero photography was not substituted for the different practice-card assets.
+Practice routes remain preparation notices until their pages exist. No service
+descriptions or additional claims were invented. The Figma tool allowance was
+already exhausted; this slice follows the supplied screenshots and the user's
+approved wireframe direction rather than claiming fresh Figma retrieval.
+
+The introduction remains server-owned. A local client component owns only the
+selected index and control/panel composition. Scoped global CSS handles the
+desktop fade, mobile grid expansion, active rule and reduced-motion fallback.
+No dependency or generic section engine was added. People, perspectives,
+insights, FAQ and footer remain queued for their own source review.
+
+## Selected matters — 2026-10-28
+
+The user supplied desktop/mobile screenshots (CleanShot 05:06:36 and 05:06:44)
+after a focused `1:10755` Figma request was blocked by the Starter tool limit.
+Those screenshots establish the implementation reference for this slice.
+The heading is “Experience where the stakes are high.” and the CTA is “Explore
+our experience”. Four source records are retained:
+
+| Organisation                 | Category                         | Summary status |
+| ---------------------------- | -------------------------------- | -------------- |
+| Bureau of Public Enterprises | International arbitration        | User-approved  |
+| Central Bank of Nigeria      | Public-sector advisory           | Supplied       |
+| Kano State Government        | Settlement & government advisory | User-approved  |
+| NNPC / NPDC                  | Energy-sector advisory           | User-approved  |
+
+The screenshot opens on Central Bank of Nigeria; the user subsequently approved
+BPE (item 01) as the runtime default. CBN retains “Federal Government revenue”,
+the Production Sharing Contracts summary, and “Representative experience ·
+advisory”. The other summaries were drafted from the firm's
+[published experience](https://dikkoandmahmoud.com/experiences/) and approved
+by the user for this preview on 2026-10-28. No outcome claims were added.
+
+BPE's summary attributes lead counsel work to the managing partner. Kano's
+summary covers negotiation/mediation concerning Trovan clinical-trial
+settlements. The NNPC/NPDC matter explicitly identifies CBN as the advisory
+client for the interest transfer; its category is energy-sector advisory.
+The data uses `organisation`, rather than treating every matter label as the
+client. All four records now have a topic, summary and representative-experience
+qualifier. Final publication approval remains separate from this local preview.
+
+Desktop pairs the feature with a four-item selector. Mobile stacks the feature
+above the selector. Click/tap and keyboard activation work at every width;
+hover does not select a matter. Explicit mobile/tablet selection brings the
+preview into view and focuses its named region. The shared scroll padding
+clears the sticky header; reduced motion removes the card fade and smooth scroll.
+The CTA retains the existing preparation notice until the experience route
+exists. No images or new packages are needed for this text-based source section.

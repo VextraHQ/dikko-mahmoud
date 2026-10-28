@@ -340,3 +340,202 @@
   typecheck, Tailwind/CSS compilation, Biome CSS and diff checks passed.
   Browser observation remained off following the user's response; no build,
   browser action, package or unrelated section work was introduced.
+
+## 2026-10-28 — Editorial practice-area explorer
+
+- Implemented the user-approved explorer after the desktop/mobile options
+  review. Preserved all six supplied practice labels and introductory copy.
+  Desktop has a numbered index and one stable visual panel; mobile/tablet
+  opens the selected panel inline, keeping one area expanded at a time.
+- Kept the section introduction server-rendered and used one local state for
+  selection. CSS owns the active rule, 450ms desktop fade and 400ms mobile
+  expansion. Reduced motion removes these transitions. No effects, timers,
+  scroll listeners, animation package or generic section abstraction added.
+- Used native buttons and named sections, with expanded/disabled semantics
+  for the mandatory-open selection. Inactive panels are inert and hidden from
+  assistive technology. Reused ArrowButton, Eyebrow and preparation notices.
+- Added nullable image records in `content/practice-areas.ts` and explicit
+  numbered photo placeholders. No source hero photos were passed off as the
+  different practice-card images; no additional service claims were written.
+- Updated the active milestone, section ownership, responsive layout and
+  motion documentation. Preserved the user's committed header/client changes.
+- Format, ESLint, TypeScript, production build, targeted Biome CSS/a11y and
+  diff whitespace checks passed. An isolated headless browser passed all six
+  selections at 1440, 1024, 768, 390 and 320px, keyboard selection, selection
+  retention across resize, reduced motion, notice/focus return, server-rendered
+  readability without JavaScript, and zero page errors/horizontal overflow.
+  Desktop/tablet/mobile screenshots were inspected. No open user apps or native
+  screen were observed. The local production preview is on port 3006.
+- Practice assets and detail destinations remain publication gates. Remaining
+  homepage sections are still queued; this entry does not claim completion of
+  the whole homepage or deployment.
+- Final 320px inspection exposed placeholder text overlapping the longest
+  caption. Moved the mobile placeholder to a compact top row, rebuilt, and
+  rechecked all six captions at 320, 390 and 768px with no overlap. Format,
+  ESLint and TypeScript passed again after the correction.
+
+## 2026-10-28 — Practice selection feedback
+
+- Added visible circular selector arrows, a small press response, and a
+  persistent white selected circle. Its arrow turns right toward the desktop
+  panel or down toward the inline mobile panel. The incoming caption fades
+  and rises 6px; all added movement respects reduced motion.
+- Kept the existing state, layout and content ownership. Added no package,
+  effect, timer or event listener. Updated the motion documentation.
+- Format, lint, typecheck, Biome CSS and diff checks passed. Isolated browser
+  checks against the existing `http://localhost:3000` dev server passed press
+  feedback, persistent selection, directional rotation and caption animation
+  at 1440, 768, 390 and 320px, plus keyboard/reduced-motion checks and no page
+  errors or horizontal overflow. No additional production build was run for
+  this scoped CSS/selector polish.
+
+## 2026-10-28 — Mobile practice open/close policy
+
+- Applied the agreed mobile/tablet behaviour: initially collapsed, tap to
+  open/close, and at most one open area. Desktop still keeps a visual selected.
+- Used a nullable index and one responsive `matchMedia` subscription through
+  `useSyncExternalStore`, with a stable server snapshot. No scroll listener,
+  package or duplicate responsive component tree was added. ARIA disabled
+  semantics now apply only to the non-collapsible active desktop control.
+- Format, lint, typecheck and targeted Biome checks passed. Isolated browser
+  checks passed open/close, one-panel limit, keyboard and overflow at 320, 390
+  and 768px; mandatory-open desktop behaviour at 1024 and 1440px; and selection
+  and collapsed-state behaviour across resize, with no page errors.
+
+## 2026-10-28 — Selected matters
+
+- Used the user's two supplied screenshots after the focused Figma request was
+  blocked by its Starter allowance. Matched the introductory heading/CTA,
+  desktop navy feature and selector, and stacked mobile composition.
+- Added the four screenshot-supplied organisations/categories to
+  `content/matters.ts`. Default selection is Central Bank of Nigeria, retaining
+  the supplied Federal Government revenue topic, Production Sharing Contracts
+  summary and representative-experience qualifier. Three missing summaries
+  display an explicit pending label rather than fabricated case details.
+- Kept the introduction server-rendered; one local index drives manual hover,
+  click and keyboard selection. Overlapping inert/inactive cards reserve a
+  stable feature height and fade over 240ms. Explicit mobile selection focuses
+  and scrolls the named preview into view; reduced motion removes the fade and
+  uses instant scrolling. The shared CTA still opens the preparation notice.
+- Independent static review found no meaningful defects. Isolated browser
+  review passed all four selections, default copy, stable height, keyboard,
+  preview focus/scroll and no overflow at 1440, 1024, 768, 390 and 320px; reduced
+  motion, server-rendered default readability and zero page errors also passed.
+  Desktop/tablet/mobile screenshots were inspected against the supplied design.
+- Format, ESLint, TypeScript, targeted Biome CSS/a11y, production build and
+  whitespace checks passed. No package, service integration, matter detail
+  route or new image asset was introduced. User changes were preserved.
+- This completes the selected-matters review slice. Three summaries and final
+  publication approval remain open; people and later homepage sections follow.
+
+## 2026-10-28 — Complete selected-matters preview copy and stop
+
+- Applied the user-approved summaries drafted from the firm's published
+  [experience page](https://dikkoandmahmoud.com/experiences/). BPE now opens
+  first, following list order. CBN's supplied summary remains unchanged.
+- Added consistent topics and representative-experience qualifiers for BPE,
+  Kano and NNPC/NPDC. Attributed BPE counsel work to the managing partner and
+  identified CBN as the advisory client in the NNPC/NPDC interest transfer.
+  Renamed that category to energy-sector advisory to match the sourced role.
+- Replaced the misleading `client` data field with `organisation`. All four
+  records now require topic, summary and qualifier text; removed the unused
+  pending-summary fallback and conditional empty slots. No outcome claims added.
+- Format, ESLint, TypeScript, focused Biome a11y and diff checks passed. Isolated
+  browser checks passed BPE's client/server-rendered default, all four summaries,
+  stable card height, text containment, ARIA references, keyboard activation
+  and no horizontal overflow at 1440, 768, 390 and 320px, with no page errors.
+  Desktop and narrow-mobile screenshots were inspected. No additional production
+  build was run for this copy/data-contract update.
+- Updated the content brief, ownership notes and roadmap. Preserved unrelated
+  edits, including the user's carousel change. Stopped here at the user's
+  request; discuss the next approach before starting further homepage sections.
+
+## 2026-10-28 — Maintainability audit and styling ownership
+
+- Audited the current presentation code, content/contracts, dependencies/config,
+  client boundaries, effects/subscriptions, semantics, route handling and docs.
+  Independent read-only review confirmed cleanup/cancellation in the hero and
+  observers, explicit unavailable routes, and no unjustified new packages.
+- Moved practice states, marker/icon feedback, responsive positioning and card
+  visibility/transitions into component Tailwind classes. Hero copy visibility
+  also uses its data-state utility. Kept custom entrance/progressive fallbacks
+  in `app/styles/motion.css` and glass materials/browser fallbacks in
+  `app/styles/surfaces.css`, imported once through the root stylesheet.
+- Reduced `globals.css` from 382 to 75 lines. The two focused stylesheets total
+  196 lines, leaving 271 handwritten CSS lines overall rather than just moving
+  the original file wholesale. This is an ownership/maintenance measure, not a
+  claim about compiled bundle size or measured runtime speed.
+- Removed matter pointer-enter selection and its hover instruction. Selection
+  now requires click/tap or keyboard activation; hover only styles the control.
+  Preserved BPE as the default and the four approved summaries.
+- Fixed two audit findings: root smooth scrolling now respects reduced motion;
+  the mobile Sheet's Home logo forwards its click handler and closes the menu.
+  Added no service, dependency, generic section engine or new page section.
+- Regression checks exposed active-group and desktop-breakpoint specificity
+  conflicts during the CSS migration. Gated caption animation with `motion-safe`
+  and added the desktop reduced-transition override; verified emitted production
+  CSS behaviour in the browser rather than relying on source class order.
+- Reconciled AGENTS, README/index, architecture, workflow, design/layout rules,
+  roadmap and the homepage brief. Documented current ownership and scoped handoff
+  requirements, and distinguished current rules from dated checkpoint history.
+  Kept existing breakpoint compositions, documenting the measured header fit.
+- Format, ESLint, TypeScript, targeted Biome CSS/a11y, production build and diff
+  whitespace checks passed. Final isolated production-browser checks passed at
+  1440, 1280, 1024, 768, 390 and 320px: rendered states/keyframes, all practice
+  selections/collapse, click-only matters including non-selecting hover/focus,
+  keyboard activation and no horizontal overflow. Desktop/mobile screenshots
+  were inspected. Mobile logo close/focus return, marquee pause/play/hover,
+  scrolled header, reduced-motion scroll/caption/panel behaviour at mobile and
+  desktop widths, server/no-JS fallbacks and zero page errors also passed.
+- Preserved unrelated user changes, including the carousel focus adjustment.
+  Stopped at the audit review. People and the later Claude workflow remain
+  separate next scopes to agree; no workflow/automation was created.
+
+## 2026-10-28 — Hero split at lg
+
+- Applied the user-requested split hero from `lg` (1024px), independently of
+  full navigation's `xl` threshold. Photograph, navy panel, content and desktop
+  slide controls switch together. Kept the stacked composition below `lg`.
+- Added compact split-layout spacing/type rules between `lg` and `xl`, retained
+  the wider layout's existing type/spacing, and removed reserved header flow
+  height from `lg`. The compact menu uses its full glass surface over the photo
+  so controls remain readable. No navigation links were squeezed into 1024px.
+- Retained the two focused CSS files for shared keyframes/progressive fallbacks
+  and material rules; ordinary hero layout stays in Tailwind. No package,
+  component abstraction, carousel state or source image was changed.
+- Format, lint, typecheck, Biome surface-CSS and diff checks passed; production
+  build passed. Isolated production-browser checks passed all five slides at
+  320, 390, 768, 1023, 1024, 1152, 1279, 1280, 1440 and 1920px: heading line fit,
+  stable hero height, header/copy clearance, split/stack mode, control visibility,
+  correct full-nav/menu breakpoint and no horizontal overflow. A 1024×600
+  viewport, menu opening/desktop-resize dismissal and zero page errors passed.
+  Representative lg/xl/mobile screenshots were inspected.
+- A prior browser attempt was blocked by automatic approval-review usage limits;
+  it ran through the normal approval path after the user resumed work. Development
+  checks then isolated a stalled WebP request in the long-running local dev
+  process: the same image returned normally in production. Verified its PID/cwd,
+  restarted only that repository dev server, and rechecked all five slides and
+  the compact menu successfully on `http://localhost:3000`.
+- Updated canonical breakpoint/layout/source notes and preserved the generated
+  Next.js agent-rule block once when restarting dev regenerated it. Existing
+  unrelated edits remain. People analysis is next; no People section or Claude
+  workflow was implemented in this slice.
+
+## 2026-10-28 — Consistent header scroll material
+
+- Removed the `lg`-to-`xl` exception that forced the full glass capsule to stay
+  visible at the top. Enhanced top/scrolled/return-to-top states now follow the
+  same 64px observer marker at every width. Kept fixed geometry, the `lg` hero
+  split, `xl` full navigation and readable no-JS fallback.
+- Gave the compact menu control a small contrasting background so removing the
+  full top capsule does not leave its white icon directly over a bright photo.
+  Reused existing Button variants/utilities; added no CSS rule or state.
+- Updated architecture, design/layout rules and the homepage brief to supersede
+  the previous compact-header exception. Preserved unrelated changes.
+- Format, lint, typecheck, Biome surface-CSS and diff checks passed. Isolated
+  browser checks at 320, 390, 768, 1023, 1024, 1152, 1279, 1280, 1440 and 1920px
+  passed hidden top/shallow-scroll states, visible scrolled state, return to top,
+  fixed header dimensions/position and no overflow. Normal opacity animation,
+  reduced-motion behaviour, compact menu and no-JS material fallback passed,
+  with no page errors. The lg top-state screenshot was inspected. No additional
+  production build was run for this scoped CSS/control-style correction.

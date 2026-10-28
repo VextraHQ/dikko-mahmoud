@@ -18,7 +18,7 @@ export function StickyHeader({ children }: { children: ReactNode }) {
     <>
       <div
         aria-hidden="true"
-        className="bg-primary pointer-events-none absolute inset-x-0 top-0 h-22 xl:hidden"
+        className="bg-primary pointer-events-none absolute inset-x-0 top-0 h-22 lg:hidden"
       />
       <div
         ref={marker}
@@ -28,7 +28,7 @@ export function StickyHeader({ children }: { children: ReactNode }) {
       <header
         data-site-header
         data-scrolled={scrolled ?? undefined}
-        className="sticky top-0 z-40 text-white xl:h-0"
+        className="sticky top-0 z-40 text-white lg:h-0"
       >
         <div className="mx-auto w-full max-w-360 px-4 pt-3 sm:px-8 xl:px-20 xl:pt-5">
           <div className="site-header-surface relative isolate rounded-full">

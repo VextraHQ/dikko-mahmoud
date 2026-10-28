@@ -1,0 +1,124 @@
+/* Custom entrance keyframes and progressive motion fallbacks.
+   Ordinary component states/transitions live with their Tailwind markup. */
+
+[data-hero-copy][data-active="true"] > :not(legend) {
+  animation: hero-copy-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+[data-hero-copy][data-active="true"] > h1 {
+  animation-delay: 60ms;
+}
+
+[data-hero-copy][data-active="true"] > p:last-child {
+  animation-delay: 120ms;
+}
+
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-hero-copy][data-active="true"] > :not(legend) {
+    animation: none;
+  }
+}
+
+/* Progressive section reveals: visible by default, enhanced only offscreen. */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal-group] [data-reveal-state="pending"] {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  [data-reveal-group] [data-reveal-state="visible"] {
+    animation: section-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  }
+  [data-reveal-group] [data-reveal-state="visible"][data-reveal-order="1"] {
+    animation-delay: 80ms;
+  }
+  [data-reveal-group] [data-reveal-state="visible"][data-reveal-order="2"] {
+    animation-delay: 160ms;
+  }
+  [data-reveal-group] [data-reveal-state="visible"][data-reveal-order="3"] {
+    animation-delay: 240ms;
+  }
+}
+@keyframes section-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-reveal-group] [data-reveal]:focus-within {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* iProduce marquee primitive, with Dikko's progressive/static fallbacks. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-marquee-vertical {
+    animation: none;
+  }
+  .client-logo-marquee [data-slot="marquee"],
+  .client-logo-marquee [data-marquee-track] {
+    display: block;
+  }
+  .client-logo-marquee [data-marquee-copy],
+  .client-logo-marquee [data-marquee-edge] {
+    display: none;
+  }
+  .client-logo-marquee [data-client-logos] > li {
+    width: auto;
+    min-height: 5rem;
+  }
+}
+
+.client-logo-marquee:not([data-motion-ready]) [data-slot="marquee"],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-track] {
+  display: block;
+  animation: none;
+}
+.client-logo-marquee:not([data-motion-ready]) [data-client-logos] > li {
+  width: auto;
+  min-height: 5rem;
+}
+.client-logo-marquee:not([data-motion-ready]) [data-motion-controls],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-copy],
+.client-logo-marquee:not([data-motion-ready]) [data-marquee-edge] {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .client-logo-marquee[data-motion-ready] [data-client-logos] {
+    display: flex;
+  }
+  .client-logo-marquee[data-paused="true"] [data-marquee-track],
+  .client-logo-window:hover [data-marquee-track],
+  .client-logo-window:focus-within [data-marquee-track] {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes practice-caption-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

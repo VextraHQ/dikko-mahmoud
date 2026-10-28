@@ -3,10 +3,11 @@
 The local project foundation for the Dikko & Mahmoud website revamp. The root
 route now presents the first homepage review checkpoint: brand typography and
 theme, shared Button, responsive navigation, expertise hero, firm facts and
-firm-story preview, sticky navigation and a selected-clients placeholder rail. It remains
+firm-story preview, sticky navigation, a selected-clients placeholder rail and
+the editorial practice-area explorer and selected-matters feature. It remains
 no-index. All five hero photographs are now local and connected; the full
 homepage and secondary pages remain unfinished. Office and portrait slots
-are explicitly labelled placeholders pending supplied assets.
+and practice photographs are explicitly labelled placeholders pending supplied assets.
 
 ## Stack
 
@@ -54,7 +55,7 @@ pnpm typecheck  # Generate Next.js types and run TypeScript checks
 ## Project structure
 
 ```text
-app/          App Router entry points, layouts, metadata, and global styles
+app/          Routes, layouts, metadata, theme entry and focused styles/ files
 components/   Shared and route-specific React presentation
 content/      Navigation and homepage presentation copy
 lib/          Framework-independent helpers and future service boundaries

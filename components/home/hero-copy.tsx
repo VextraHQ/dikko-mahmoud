@@ -16,7 +16,7 @@ export function HeroCopy({
   const active = selectedIndex === index;
   return (
     <fieldset
-      className="pointer-events-auto col-start-1 row-start-1 min-w-0"
+      className="pointer-events-auto invisible col-start-1 row-start-1 min-w-0 data-[active=true]:visible"
       data-hero-copy
       data-active={active}
       aria-roledescription="slide"

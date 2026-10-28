@@ -11,19 +11,19 @@ import { cn } from "@/lib/utils";
 export function HeroControls() {
   const { scrollTo, selectedIndex, isPreparing } = useCarousel();
   return (
-    <div className="relative z-20 mx-auto flex w-full max-w-360 items-center justify-between gap-3 px-4 py-4 sm:px-8 xl:pointer-events-none xl:absolute xl:inset-x-0 xl:bottom-12 xl:flex-col xl:items-end xl:gap-4 xl:px-20 xl:py-0">
+    <div className="relative z-20 mx-auto flex w-full max-w-360 items-center justify-between gap-3 px-4 py-4 sm:px-8 lg:pointer-events-none lg:absolute lg:inset-x-0 lg:bottom-12 lg:flex-col lg:items-end lg:gap-4 lg:py-0 xl:px-20">
       <p
         aria-hidden="true"
-        className="font-serif text-sm/5 font-semibold xl:hidden"
+        className="font-serif text-sm/5 font-semibold lg:hidden"
       >
         {String(selectedIndex + 1).padStart(2, "0")} /{" "}
         {String(heroSlides.length).padStart(2, "0")}
       </p>
-      <div className="flex gap-3 xl:pointer-events-auto">
+      <div className="flex gap-3 lg:pointer-events-auto">
         <CarouselPrevious />
-        <CarouselNext className="xl:bg-primary xl:hover:bg-secondary xl:text-white" />
+        <CarouselNext className="lg:bg-primary lg:hover:bg-secondary lg:text-white" />
       </div>
-      <fieldset className="hidden min-w-0 gap-2.5 xl:pointer-events-auto xl:flex xl:w-[43%]">
+      <fieldset className="hidden min-w-0 gap-2.5 lg:pointer-events-auto lg:flex lg:w-[43%]">
         <legend className="sr-only">Choose slide</legend>
         {heroSlides.map((slide, index) => (
           <button

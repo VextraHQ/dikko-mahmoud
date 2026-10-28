@@ -119,7 +119,6 @@ export function Carousel({
         aria-label={label}
         aria-roledescription="carousel"
         aria-busy={selection.isPreparing}
-        tabIndex={0}
         data-slot="carousel"
         className={cn("relative", className)}
         onKeyDown={(event) => {

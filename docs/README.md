@@ -27,3 +27,9 @@ small so a developer or agent can resume work without relying on chat history.
 Code is the source of truth for implemented behavior. Documentation owns
 approved intent and current status. Do not document planned work as complete,
 and do not describe local verification as production proof.
+
+For another assistant's handoff, start with the roadmap's current checkpoint,
+then the architecture ownership map, workflow and affected route brief. Keep
+style ownership in architecture/design-system, responsive rules in layout-system
+and dated audit evidence in the implementation log. Do not copy a stale log
+entry into a new current rule.

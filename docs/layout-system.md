@@ -28,10 +28,11 @@ copying Figma's fixed widths, fixed text heights, or absolute section positions.
 - Hero: desktop overlays the copy panel and glass navigation on photography;
   mobile stacks navigation, copy, photograph, and carousel controls.
 - Firm facts stack on mobile. Content determines their height.
-- The staggered expertise grid is deliberate on desktop. Mobile removes empty
-  spacer cells and stacks the six practice cards in reading order.
+- Practice areas now use the user-approved editorial explorer instead of the
+  original staggered gallery: a desktop index beside one large visual, and a
+  compact mobile accordion in source reading order.
 - Selected matters stack the feature above its selector on mobile. Selection
-  must work with touch and keyboard rather than relying on hover alone.
+  requires click/tap or keyboard activation; hover never changes the preview.
 - People are four columns on desktop and four stacked profiles in the supplied
   mobile reference. Any future horizontal rail is a design change to discuss.
 - Insights reorder the introduction above the feature and supporting list on
@@ -61,12 +62,18 @@ bottom with fluid CTA spacing; it no longer depends on fixed 358px top or
 134px CTA offsets.
 
 The 390px composition uses 16px gutters, natural copy height and a 300px photo;
-tablet uses 32px gutters and a 384px photo. Tailwind's `xl` breakpoint switches
-to the desktop overlay and full navigation. Stacked copy records reserve the largest content height, keeping
+tablet below 1024px uses 32px gutters and a 384px photo. The hero switches to its
+split overlay at `lg` (1024px); full navigation remains at `xl` (1280px).
+Stacked copy records reserve the largest content height, keeping
 the single CTA and image stationary without fixing text heights. The photograph
 track crossfades independently beneath a persistent desktop panel.
 Mobile keeps the slide count on the left and two arrows on the right, matching
 the supplied crop. The existing 43% navy desktop panel is retained.
+
+Between `lg` and `xl`, copy uses 32px gutters, a 144px top allowance, 16px body
+copy and a more compact fluid CTA gap. The title scales from 56px using the
+same clamp as the wider layout. Photograph, panel, arrows and slide indicators
+all switch together at `lg`; the header must not overlap the copy.
 
 ## Facts and firm story
 
@@ -84,10 +91,14 @@ The header stays at the viewport top with two enhanced surface states: the
 original logo/glass-nav-pill/CTA composition at the top, and a full floating
 capsule after scrolling. Its content
 row stays 72px high (74px including the surface border) at every scroll
-position. Mobile/tablet use a constant 12px top inset and 16/32px gutters;
-desktop uses 20px at the top and the existing 80px gutters. Desktop still
-reserves zero flow height for the hero overlay; smaller widths reserve their
-86px header space. A non-sticky navy backing preserves the mobile hero's top
+position. Below `xl`, the header uses a constant 12px top inset and 16/32px
+gutters; `xl` uses 20px and the existing 80px gutters. From `lg`, it reserves
+zero flow height for the hero overlay; smaller widths reserve their 86px
+header space. The full shell is hidden at the top at all widths, fading in only
+after the 64px scroll marker leaves view. The compact menu control has a small
+contrasting background over the photograph. At `xl`, the
+source logo/nav-pill/CTA top state remains. A non-sticky navy backing below
+`lg` preserves the mobile hero's top
 surface and scrolls away with the page. Anchor scroll padding remains 112px.
 
 Only the outer header wrapper owns horizontal page gutters. The inner row has
@@ -111,3 +122,42 @@ one moving row using the iProduce partners pattern. Four repeated groups use
 on mobile and 240×80px from `sm`, with 16px gaps and gradient edge overlays.
 Rail overflow is contained.
 Static fallback uses two columns on mobile, three at `sm`, and six at `xl`.
+
+## Breakpoint policy
+
+Choose a breakpoint for the room a composition needs, rather than changing
+every section at the same width. Hero and header overlay begin at `lg` (1024px).
+Full navigation begins at `xl` (1280px); facts become four columns there and
+story uses its three-column grouping there. Practice/matters use `lg`;
+their 64rem browser queries match that rule.
+
+The audit measured the full desktop header at about 1056px including logo,
+seven links, enquiry action and gaps, against only 960px usable at a 1024px
+viewport with 32px gutters. Keep `xl` unless a separate compact-header design
+changes those dimensions. The earlier hero split is an independent visual
+decision, not a reason to replace every `xl:` prefix with `lg:`.
+
+## Practice-area explorer
+
+At `lg` (1024px), the introduction and numbered index occupy 46% of the shared
+content width; a stable image panel fills the right 48%. All six labels remain
+visible and controls have natural height for long names. Below `lg`, each panel
+opens directly under its own index row. Mobile/tablet start collapsed and allow
+the open row to close; opening another closes the previous row. Desktop keeps
+one panel selected. Selection never changes the desktop section height.
+
+The same buttons and panels serve every width; resizing preserves an explicit
+selection. When no area is selected, desktop shows the first panel while
+mobile/tablet remain collapsed.
+Copy and content determine height, without viewport scroll pinning. Missing
+photographs use clearly labelled, numbered navy slots with reserved dimensions.
+
+## Selected matters
+
+At `lg`, the section pairs a navy feature card with a slightly wider selector
+column, matching the supplied screenshots. The introduction is a two-column
+heading/copy-and-CTA grouping. Below `lg`, order is heading, description/CTA,
+feature, then the four selectors. Card copy wraps naturally and inactive cards
+reserve the largest record's height. The selected selector has a pale blue fill
+and blue leading rule. Mobile selection brings the feature back into view,
+accounting for the shared sticky-header scroll padding, and moves focus to it.

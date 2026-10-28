@@ -30,7 +30,12 @@ export function MobileNavigation() {
     <div className="xl:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" aria-label="Open navigation menu">
+          <Button
+            variant="glass"
+            size="icon"
+            aria-label="Open navigation menu"
+            className="bg-secondary/80 hover:bg-secondary"
+          >
             <Menu className="size-6!" strokeWidth={1.5} />
           </Button>
         </SheetTrigger>
@@ -40,7 +45,7 @@ export function MobileNavigation() {
             Explore Dikko &amp; Mahmoud. Secondary pages are coming soon.
           </SheetDescription>
           <div className="mb-4 flex h-15 items-center justify-between">
-            <BrandLogo />
+            <BrandLogo onClick={() => setOpen(false)} />
             <SheetClose asChild>
               <Button
                 variant="ghost"

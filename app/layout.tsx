@@ -33,7 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${manrope.variable} ${newsreader.variable} scroll-smooth antialiased`}
+      className={`${manrope.variable} ${newsreader.variable} antialiased motion-safe:scroll-smooth motion-reduce:scroll-auto`}
     >
       <body className="bg-background text-foreground font-sans">
         {children}
