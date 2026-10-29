@@ -30,7 +30,11 @@ overlaps on mobile too. The user authorized practical FAQ starter copy on
 2026-10-29, removing the dependency on retrieving hidden Figma answers and the
 visible draft labels. The follow-up reuse pass adopts shared shadcn-style
 Accordion/Avatar primitives and React Icons for social brands without changing
-the approved composition. Inputs wait for the real enquiry form. Whole-page presentation QA and final content review are
+the approved composition. The user subsequently authorized form primitives
+and a React Hook Form adapter ahead of the real enquiry page. A registry review
+led to CSS FAQ expansion and button press/focus polish; no third-party theme or
+motion runtime was added. The no-JS testimonial overflow is fixed with slide
+positioning containment. Whole-page presentation QA and final content review are
 next; imagery, testimonials, editorial sign-off, social URLs
 and secondary destinations remain publication gates.
 

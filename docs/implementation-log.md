@@ -718,3 +718,44 @@
   dialog-close focus effect before checking focus return; no app change needed.
 - Current canonical docs now describe these owners/dependencies. Whole-page QA,
   approved media/content/destinations and the later CMS/form workflow remain next.
+
+## 2026-10-29 — Registry review, form foundation and homepage microinteractions
+
+- Reviewed the official shadcn registry/form guidance, UIAble's current button/
+  accordion components and Animate UI's current Radix accordion. UIAble uses
+  Base UI and Animate UI requires its runtime plus Motion. Retained the existing
+  Radix system and adapted the useful small interaction patterns in local CSS;
+  no bulk registry replacement, theme reset or motion runtime was installed.
+- Added the explicitly requested Input, Textarea, Label, Field family, Checkbox,
+  NativeSelect, Separator and React Hook Form adapter (Form/FormField and related
+  label/control/description/message parts). Adapted official new-york-v4 source
+  to local imports, existing semantic roles, 44px text/select controls, 16px text,
+  native group semantics and reduced motion. Added the destructive role using
+  Tailwind red-700 and retained shadcn's MIT notice. Radix label/checkbox/separator
+  and React Hook Form are the only new runtime packages; no resolver/schema or
+  backend was added. Form context guards and field-scoped subscriptions preserve
+  the familiar iProduce API. FieldError omits blank errors and deduplicates text.
+- FAQ content opens over 260ms and closes over 200ms using Radix's content-height
+  variable. Shared buttons gain restrained 0.98 press feedback; CTA arrow feedback
+  also follows keyboard focus. Reduced motion makes these changes immediate.
+  Layout, content, manual selection behaviour and approved composition remain.
+- Isolated the previously logged no-JS root overflow to offscreen testimonial
+  fieldset legends without a local positioning context. CarouselItem now has
+  `relative`; this contains the labels inside the existing clipped viewport
+  without hiding root overflow or clipping the carousel's controls/focus rings.
+- Format, lint, typecheck, production build and diff whitespace checks passed.
+  Development and compiled-production homepage checks covered 1440, 1280, 1024,
+  768, 390 and 320px: keyboard disclosures, native no-JS FAQ, portrait fallbacks,
+  social notices/focus return and hydrated containment. No-JS whole-page widths
+  now also pass at all six sizes. Opening/closing CSS states, live reduced-motion
+  preference, real keyboard CTA feedback and press-scale states passed.
+- An isolated source fixture (no public test route, data sent or repo content
+  mutation) passed at 1440/768/390/320px: label click/focus, required/invalid email,
+  focused validation errors, successful correction, described-by targets, textarea,
+  native select, checkbox Space/label toggling, disabled controls, error filtering/
+  deduplication, target dimensions and containment. Mobile form/FAQ captures were
+  visually reviewed. The fixture assets remain outside the repository.
+- Added `docs/forms.md` as the canonical composition/validation guide, and recorded
+  registry choices and current ownership in the existing design/architecture/docs
+  index. Earlier dated entries retain their checkpoint history. The real enquiry
+  page, submission service, CMS and final content/destination approval remain later.

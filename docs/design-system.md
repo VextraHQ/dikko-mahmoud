@@ -20,7 +20,8 @@ catalogue in CSS or create a parallel TypeScript token system.
 - Bridge brand colours and font families through `app/globals.css` and Tailwind
   theme utilities.
 - Use shadcn as the starting point for reusable interactive primitives. Add
-  components individually when the homepage requires them.
+  components individually for approved uses. The user also approved a bounded
+  form foundation before the enquiry page; see `forms.md`.
 - Keep component variants in the component that owns them.
 - Prefer composition over a generic, configurable section or card engine.
 - The burgundy, cream, and Georgia holding-page treatment is temporary and is
@@ -109,7 +110,8 @@ Sizes are `sm` (40px button/32px circle), `default` (48px/40px), and `lg`
 `inverse`, `large`, `trailingArrow`, or separate arrow markup. `icon` optionally
 accepts another Lucide icon; the default is `ArrowUpRight`. Decorative icons
 are hidden from accessibility. Hover movement respects reduced motion; focus
-and disabled styles come from Button.
+and disabled styles come from Button. Keyboard focus mirrors the CTA arrow
+feedback, and pointer press adds a restrained 0.98 scale under normal motion.
 
 ```tsx
 <ArrowButton variant="inverse">Make an enquiry</ArrowButton>
@@ -172,8 +174,9 @@ Button and the mobile Sheet are implemented with the minimal shadcn pattern:
 CVA/Slot, `cn()`, and Radix Dialog focus management. `components.json` records the
 registry aliases. The custom pill and arrow compose the Button. Shared Radix
 Accordion and Avatar wrappers follow the same shadcn composition, keeping the
-brand plus/minus cues and initials fallbacks. Add future Input/Field primitives
-when the enquiry form is in scope rather than stocking unused UI files. The desktop Practice areas
+brand plus/minus cues and initials fallbacks. The user-authorized form foundation
+now includes Input/Textarea, Label/Field, Checkbox/NativeSelect, Separator and the
+React Hook Form adapter; `forms.md` owns their composition. The desktop Practice areas
 reference navigates to a page; no open dropdown variant was found, so no
 Navigation Menu package or invented dropdown was added.
 
@@ -213,7 +216,10 @@ FAQ rows use Newsreader questions, fine slate rules and persistent plus/minus
 disclosure cues. The first answer is open; shared Accordion rows support click,
 Enter/Space and arrow/Home/End focus movement. A native disclosure fallback
 keeps every answer accessible without JavaScript. Hover/focus and open-state colour changes
-are restrained and respect reduced motion. The user-authorized FAQ starter copy
+are restrained and respect reduced motion. Content uses 260ms opening and
+200ms closing keyframes with the Radix content-height variable; reduced motion
+switches immediately. There are no JavaScript measurements or Motion dependency.
+The user-authorized FAQ starter copy
 renders without editorial-status badges. The support card uses supplied team records with initials
 fallbacks; it does not introduce stock portraits or a live-chat claim.
 
@@ -294,3 +300,25 @@ Selected matters use a restrained 240ms card crossfade with a persistent pale
 blue selected row. Only click/tap or keyboard activation changes the feature;
 hover is a control-colour affordance. Reduced motion removes the fade and mobile
 smooth scrolling. Card visibility/transitions are component Tailwind classes.
+
+## Registry selection — 2026-10-29
+
+Registries distribute source we own and adapt; they are not a visual theme to
+apply wholesale. The review covered [shadcn registries](https://ui.shadcn.com/docs/registry),
+[UIAble buttons](https://uiable.com/components/button) and
+[accordions](https://uiable.com/components/accordion), and
+[Animate UI's Radix accordion](https://animate-ui.com/docs/primitives/radix-ui/accordion).
+UIAble's current components use Base UI; our existing interactive system stays
+on Radix. Animate UI's current accordion requires @animate-ui/react and Motion.
+For the approved small polish, retain our primitives and adapt the useful
+height/press-feedback patterns using CSS. No UIAble/Animate UI package, block,
+registry credentials, theme reset or animation runtime was installed.
+
+Form primitives were adapted from the official new-york-v4 registry, with local
+imports and existing semantic colours, 44px text/select controls, 16px text to
+avoid mobile input zoom, reduced-motion states and native grouping semantics.
+The destructive role bridges Tailwind red-700 for errors, not a new colour scale.
+The shadcn MIT notice is retained in `licenses/shadcn-ui.txt`. Future registry
+items should be reviewed for fit, imports, dependencies and preference/focus
+behaviour before changing shared primitives. Do not run bulk replacement tools
+over the current homepage.

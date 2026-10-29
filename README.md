@@ -26,7 +26,8 @@ still need their approved destinations. Email and phone links are available.
 - TypeScript in strict mode
 - Tailwind CSS 4
 - Shadcn-style Button/Sheet/Accordion/Avatar, Embla Carousel, Lucide UI icons
-  and React Icons for social brands
+  and React Icons for social brands; shared form controls and React Hook Form
+  adapter prepared for the later enquiry page
 - ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
 - Prettier with Tailwind class sorting
 - pnpm

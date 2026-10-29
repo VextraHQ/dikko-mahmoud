@@ -14,6 +14,7 @@
   --muted-foreground: var(--color-slate-600);
   --border: var(--color-slate-200);
   --ring: #7dadd7;
+  --destructive: var(--color-red-700);
   --navy-deep: #061a2e;
 }
 
@@ -28,6 +29,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
   --color-navy-deep: var(--navy-deep);
   --font-serif: var(--font-newsreader), Georgia, serif;
   --font-sans: var(--font-manrope), Arial, sans-serif;
@@ -35,6 +37,8 @@
     cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-accordion-down: accordion-down 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-accordion-up: accordion-up 200ms ease-out;
 
   @keyframes marquee {
     from {

@@ -53,7 +53,10 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
   keep it in the local collection until the later Sanity integration. Social
   profile URLs and secondary destinations remain unconnected. Shared shadcn-style
   Accordion/Avatar primitives and React Icons social brands preserve the current
-  design; add Input/Field primitives when the enquiry form needs them.
+  design. The user also authorized the bounded Input/Textarea, Label/Field,
+  Checkbox/NativeSelect and React Hook Form foundation before secondary pages;
+  see `docs/forms.md`. FAQ height motion and button press/focus feedback are
+  CSS-only. No UIAble/Animate UI package or theme reset was installed.
   Whole-page presentation QA and final content review are next. The later
   Claude workflow remains separate.
 

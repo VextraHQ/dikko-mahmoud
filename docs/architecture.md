@@ -24,7 +24,7 @@ approved scope and `routes/home.md` for source/content gates.
 | `components/layout/`      | Shared chrome and unavailable-destination notice                              |
 | `components/home/`        | Homepage section entries and their local interactive presentation             |
 | `components/shared/`      | RevealGroup, ImageWithFallback, EditorialCover and reusable EnquiryCta        |
-| `components/ui/`          | Button/ArrowButton, Accordion, Avatar, Eyebrow, Sheet, Carousel and Marquee   |
+| `components/ui/`          | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee      |
 | `content/`                | Code-owned navigation, firm facts and homepage editorial collections          |
 | `lib/`                    | Framework-independent helpers and future service boundaries                   |
 | `types/`                  | Shared contracts only when multiple domains need them                         |
@@ -51,7 +51,8 @@ surface/browser-preference rules. Scope selectors with component classes or
 `data-*` attributes. Do not add CSS modules or stylesheets to component folders.
 Use Tailwind v4 `@theme` bridges; no parallel token catalogue or `@apply` layer.
 
-Motion is CSS-first. No general animation library or autoplay plugin is
+Motion is CSS-first. The FAQ uses Radix height-variable CSS keyframes; button
+press and focus feedback stay in Tailwind. No general animation library or autoplay plugin is
 installed. A future Motion pass must address an approved choreography/presence
 need rather than move existing simple CSS feedback into JavaScript. Sections
 continue to own their layout and content when wrapped by a motion helper.
@@ -107,6 +108,8 @@ it is not the full directory. Testimonial body/identity markup is server-rendere
 through the existing carousel items; the local client wrapper owns only Embla
 options and persistent controls/status. Inactive slides are inert/hidden, slide
 heights stretch to the tallest record, and fewer than two items hide controls.
+Slides establish their own positioning context so offscreen sr-only legends
+remain inside the clipped viewport before hydration and without JavaScript.
 An empty testimonial collection omits the section. Missing media uses explicit
 slots; approved names without testimonial images use derived initials.
 
@@ -190,8 +193,13 @@ CVA/Radix Slot support the shared Button; Radix Dialog supports Sheet/notices;
 Embla and its Fade plugin support the hero; Radix Accordion/Avatar support shared
 disclosures and identity circles. Lucide supplies ordinary UI icons; React Icons
 Font Awesome 6 supplies social brands through the server-rendered SocialIcon map.
-Add shadcn primitives when a real control needs them; inputs/fields belong to the
-later enquiry form. Portrait cards retain Next Image rather than adopting Avatar.
+The user authorized preparation of Input, Textarea, Label, Field, Checkbox,
+NativeSelect, Separator and the React Hook Form adapter before secondary pages.
+These are local primitives, not an active enquiry form or submission service.
+`docs/forms.md` owns composition, ARIA wiring and validation ownership. Native
+controls/Field remain server-compatible; Radix and React Hook Form own narrow
+client boundaries. No schema/resolver package was added.
+Portrait cards retain Next Image rather than adopting Avatar.
 The responsive practice explorer remains a dedicated master/detail composition,
 with its approved desktop/mobile selection contract.
 ESLint owns linting and Prettier owns formatting/class ordering. Biome is an

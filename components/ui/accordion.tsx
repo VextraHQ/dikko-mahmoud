@@ -65,7 +65,10 @@ export function AccordionContent({
   return (
     <AccordionPrimitive.Content
       data-slot="accordion-content"
-      className={cn("overflow-hidden", className)}
+      className={cn(
+        "motion-safe:data-[state=open]:animate-accordion-down motion-safe:data-[state=closed]:animate-accordion-up overflow-hidden",
+        className,
+      )}
       {...props}
     />
   );

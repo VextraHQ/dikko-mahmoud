@@ -630,3 +630,19 @@ The footer uses the same typed platform-to-icon approach as iProduce, with named
 Facebook/LinkedIn/Instagram/X imports from react-icons/fa6. SVGs are decorative
 within existing labelled 44px controls; missing URLs retain preparation notices.
 No services, social URLs, global styles, tokens or motion library are added.
+
+### Registry-informed polish and form preparation — 2026-10-29
+
+The user approved exploring UIAble/Animate UI and preparing form components
+before secondary-page work. FAQ expansion now uses the shared Accordion's CSS
+height animation (260ms open, 200ms close); reduced motion is immediate. Shared
+buttons have restrained press feedback, and CTA arrows respond to keyboard
+focus as well as hover. Source typography, colours, order and spacing are retained.
+No Motion/Base UI runtime or wholesale registry component replacement was added.
+
+The prior no-JavaScript horizontal overflow was isolated to testimonial slides'
+offscreen sr-only legends, which lacked a local positioning context. Shared
+CarouselItem now has `relative`, containing those legends inside the existing
+viewport clipping without clipping control focus outlines or masking the root
+page's overflow. Form primitives are prepared separately; no form, new public
+page, CMS, service or submission behaviour is added to the homepage.

@@ -47,9 +47,9 @@ export function ArrowButton({
         <Icon
           strokeWidth={1.5}
           className={cn(
-            "size-5 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover/button:translate-x-0.5",
+            "size-5 motion-safe:transition-transform motion-safe:duration-200 motion-safe:group-hover/button:translate-x-0.5 motion-safe:group-focus-visible/button:translate-x-0.5",
             Icon === ArrowUpRight &&
-              "motion-safe:group-hover/button:-translate-y-0.5",
+              "motion-safe:group-hover/button:-translate-y-0.5 motion-safe:group-focus-visible/button:-translate-y-0.5",
           )}
         />
       </span>

@@ -177,7 +177,7 @@ export function CarouselItem({
       aria-roledescription="slide"
       aria-hidden={inactive}
       inert={inactive}
-      className={cn("min-w-0 shrink-0 grow-0 basis-full", className)}
+      className={cn("relative min-w-0 shrink-0 grow-0 basis-full", className)}
       {...props}
     >
       <legend className="sr-only">{label}</legend>
