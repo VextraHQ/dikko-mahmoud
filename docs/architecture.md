@@ -6,7 +6,8 @@ A single-package Next.js 16 App Router application, React 19, TypeScript strict
 mode and Tailwind CSS 4. There is no `src/` directory or monorepo. The `@/*`
 alias resolves from the repository root. The current homepage contains shared
 navigation, hero, firm facts/story, clients, practice areas, selected matters,
-People, client perspectives and insights.
+People, client perspectives, insights, FAQ and an enquiry CTA, followed by the
+shared footer.
 It remains a no-index local presentation preview; see `roadmap.md` for the next
 approved scope and `routes/home.md` for source/content gates.
 
@@ -15,15 +16,15 @@ approved scope and `routes/home.md` for source/content gates.
 | Location                  | Responsibility                                                                |
 | ------------------------- | ----------------------------------------------------------------------------- |
 | `app/layout.tsx`          | Local fonts, global stylesheet, root metadata, user-added analytics           |
-| `app/(site)/layout.tsx`   | Shared header, skip link, main landmark; future footer                        |
+| `app/(site)/layout.tsx`   | Shared header, skip link, main landmark and footer                            |
 | `app/(site)/page.tsx`     | Thin Server Component composing homepage sections                             |
 | `app/globals.css`         | Tailwind import, semantic theme/animation bridges, global defaults            |
 | `app/styles/motion.css`   | Custom entrance keyframes, reveal and marquee progressive fallbacks           |
 | `app/styles/surfaces.css` | Header material pseudo-elements and browser/preference fallbacks              |
 | `components/layout/`      | Shared chrome and unavailable-destination notice                              |
 | `components/home/`        | Homepage section entries and their local interactive presentation             |
-| `components/shared/`      | RevealGroup, narrow ImageWithFallback boundary and decorative EditorialCover  |
-| `components/ui/`          | Button/ArrowButton, Eyebrow, Sheet, Carousel and Marquee primitives           |
+| `components/shared/`      | RevealGroup, ImageWithFallback, EditorialCover and reusable EnquiryCta        |
+| `components/ui/`          | Button/ArrowButton, Accordion, Avatar, Eyebrow, Sheet, Carousel and Marquee   |
 | `content/`                | Code-owned navigation, firm facts and homepage editorial collections          |
 | `lib/`                    | Framework-independent helpers and future service boundaries                   |
 | `types/`                  | Shared contracts only when multiple domains need them                         |
@@ -115,6 +116,35 @@ three. Future Sanity selection/publication filtering belongs in a normalization
 adapter rather than presentation components; no CMS client or speculative fetch
 layer has been introduced.
 
+## FAQ, enquiry CTA and footer
+
+`FaqSection` remains a Server Component composing the shared shadcn-style Radix
+Accordion. Its first item opens initially, at most one stays open, and every item
+can close. Radix owns state, ARIA relationships and arrow/Home/End keyboard
+navigation; there is no section-level accordion state or height measurement.
+A `noscript` native disclosure list reuses the same server-rendered answers.
+The office thumbnail keeps ImageWithFallback; small identity circles in FAQ and
+client perspectives use the shared Radix Avatar/Image/Fallback primitives.
+Starter copy and the `Faq` record shape live
+in `content/faqs.ts`. The section accepts an optional ordered `items` collection;
+the page can pass normalized Sanity results later without changing its markup.
+Omitted props use the current local records; an empty/blank collection omits the
+section. No CMS query or integration is active yet.
+
+`EnquiryCta` is a separate Server Component in `components/shared/`, placed by
+the page so each future route can choose `variant="pale"` or `variant="white"`.
+`SiteFooter` is a Server Component mounted once by the site layout, outside
+`main`. CTA negative margins and footer top padding are a coordinated overlap
+contract; see the layout system. No pathname logic chooses CTA colours.
+
+`content/contact.ts` owns screenshot-supplied addresses, email, telephone values
+and hours; `content/enquiry.ts` owns CTA copy and `content/footer.ts` owns footer
+groups/social slots. Email/phone anchors use `mailto:`/`tel:` without a provider
+integration. Booking, unavailable routes and social profiles without approved
+URLs reuse PreviewDestination. Primary footer destinations follow navigation
+availability; footer-only practice/legal records have explicit availability
+flags so they can be enabled independently when those pages exist.
+
 ## Media and missing content
 
 `ImageWithFallback` is the shared narrow client boundary around Next Image.
@@ -124,8 +154,8 @@ render the fallback immediately; image errors replace only the failed image.
 A changed URL gets another attempt. Its only state is a failed source URL;
 there are no effects, timers or retry loops. The decorative EditorialCover
 shares brand typography/rules; it is not a section/card configuration engine.
-BrandLogo, hero, story, practice, client logos, People, testimonials and Insights
-reuse this boundary. No service, new package or global stylesheet is involved.
+BrandLogo, hero, story, practice, client logos, People and Insights reuse this
+boundary. Small identity circles use the shared Avatar boundary described above. No service, new package or global stylesheet is involved.
 
 Hero image decode rejection is allowed to complete selection into that slide's
 own fallback. The existing carousel request counter still rejects stale results.
@@ -157,7 +187,13 @@ replacing an image after a network error requires the client error callback.
 ## Dependencies and deferred work
 
 CVA/Radix Slot support the shared Button; Radix Dialog supports Sheet/notices;
-Embla and its Fade plugin support the hero; Lucide supplies ordinary UI icons.
+Embla and its Fade plugin support the hero; Radix Accordion/Avatar support shared
+disclosures and identity circles. Lucide supplies ordinary UI icons; React Icons
+Font Awesome 6 supplies social brands through the server-rendered SocialIcon map.
+Add shadcn primitives when a real control needs them; inputs/fields belong to the
+later enquiry form. Portrait cards retain Next Image rather than adopting Avatar.
+The responsive practice explorer remains a dedicated master/detail composition,
+with its approved desktop/mobile selection contract.
 ESLint owns linting and Prettier owns formatting/class ordering. Biome is an
 optional editor diagnostic with Tailwind parsing, not a second formatting stack.
 

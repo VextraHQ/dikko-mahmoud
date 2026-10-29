@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
       <main id="main-content" tabIndex={-1} className="flex-1">
         {children}
       </main>
+      <SiteFooter />
     </div>
   );
 }

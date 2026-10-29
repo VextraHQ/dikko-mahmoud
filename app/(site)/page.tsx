@@ -7,6 +7,8 @@ import { SelectedMattersSection } from "@/components/home/selected-matters-secti
 import { PeopleSection } from "@/components/home/people-section";
 import { ClientPerspectivesSection } from "@/components/home/client-perspectives-section";
 import { InsightsSection } from "@/components/home/insights-section";
+import { EnquiryCta } from "@/components/shared/enquiry-cta";
+import { FaqSection } from "@/components/home/faq-section";
 
 export default function Home() {
   return (
@@ -20,6 +22,8 @@ export default function Home() {
       <PeopleSection />
       <ClientPerspectivesSection />
       <InsightsSection />
+      <FaqSection />
+      <EnquiryCta />
     </>
   );
 }

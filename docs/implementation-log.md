@@ -632,3 +632,89 @@
 - Updated canonical media/empty-content policy and current handoff status.
   Stopped before FAQ and enquiry/footer. Approved photographs, article bodies,
   testimonial approval and actual secondary destinations remain later gates.
+
+## 2026-10-28 — FAQ, enquiry CTA and shared footer
+
+- Implemented the user's seven supplied desktop/mobile references. A focused
+  Figma FAQ request was blocked by the Starter tool limit, so the screenshots
+  establish this slice's source. The five questions and first answer are supplied;
+  four hidden answers use visibly labelled draft copy pending final wording.
+- Added a Server Component FAQ using native named disclosures: first open,
+  at most one open, current row can close, plus/minus feedback and keyboard/no-JS
+  behaviour. Reused the office media record and team initials/image fallbacks.
+  The support action uses the supplied email, without a live-chat integration.
+- Added separate reusable EnquiryCta (`pale`/`white`) and SiteFooter components.
+  The page selects its CTA; the layout mounts the footer once outside main.
+  Negative margins create 40/64/112px overlaps at mobile/sm/lg, with matched
+  footer padding leaving 56/64/80px clearance. Mobile overlap intentionally
+  follows the user's instruction beyond the supplied non-overlapping reference.
+- Added domain-owned contact, enquiry, FAQ and footer content. Screenshot office
+  addresses, two phones, email and hours were cross-checked independently; Lagos
+  remains a liaison office. Mailto/tel links are native, not provider connections.
+  Unbuilt route/booking/social actions use the preparation notice. Footer-only
+  availability flags keep future legal/practice routes independent of main nav.
+- Inspected iProduce's actual CTA/footer/social implementations. Reused its
+  component separation/negative-margin approach, without its service/motion/icon
+  dependencies. Social text marks preserve source platforms while approved
+  artwork/URLs are absent; no profile URLs or booking capability were invented.
+- Format, lint, typecheck, production build and diff whitespace checks passed.
+  Isolated development/final production browser checks passed at 1440, 1280,
+  1024, 768, 390 and 320px: native FAQ controls/default/close-all, disclosure
+  accessibility semantics, overlap/clearance, contact hrefs, preparation dialogs,
+  focus return and no overflow/page errors. White CTA rendering, no-JS FAQ and
+  contact links, normal feedback and a live reduced-motion preference passed.
+  SSR fixtures passed draft labels, empty FAQ omission and footer-only route
+  activation. Desktop/narrow-mobile screenshots were visually inspected.
+- Updated canonical ownership, design/layout rules, source/content gates and
+  roadmap. No package or stylesheet was added. The homepage presentation now
+  reaches the footer; whole-page presentation review and publication content/
+  destination approval remain next. CMS, services and deployment are unconnected.
+
+## 2026-10-29 — FAQ starter copy and editorial handoff
+
+- The user authorized useful starter answers instead of waiting for collapsed
+  Figma text. Retained the supplied first answer and refined enquiry details,
+  practice-area selection, fee questions and organisational-client answers.
+  Removed visible draft badges and the unused status field. No fee figures,
+  response times or engagement policies were asserted.
+- Kept copy in `content/faqs.ts`. FaqSection accepts an optional ordered `items`
+  collection with the same record shape, allowing a later Sanity query to supply
+  records without changing presentation. Explicit empty results omit the section;
+  omitted props retain local starter copy. No schema, query or provider added.
+- Updated current docs/status while preserving earlier implementation history.
+  Format, lint, typecheck, diff whitespace and isolated SSR checks passed. Browser
+  checks passed five answers, badge removal, native disclosure behaviour and
+  FAQ containment at 1440, 768, 390 and 320px; 390/320px no-JS FAQ checks passed.
+  An unrelated page-level horizontal overflow without JavaScript was observed
+  outside the contained FAQ and remains for whole-page QA. Hydrated page widths
+  passed. No production build was repeated for this content/presentation change.
+
+## 2026-10-29 — Shared primitives and social brand icons
+
+- At the user's request, added shared shadcn-style Radix Accordion and Avatar
+  wrappers, retaining existing styling rather than importing a new visual theme.
+  FAQ remains server-composed with the same local/future-CMS records and empty
+  collection guard. Accordion owns single/collapsible state, expanded/controls
+  relationships and arrow/Home/End focus navigation; a noscript native disclosure
+  list shares the same answer renderer. No section-level state or height effect.
+- FAQ support circles and client-perspective identities now share Avatar image/
+  fallback handling. Initials/anonymous marks remain present with absent media,
+  including server rendering. Large People and editorial images keep Next Image.
+  The specialized responsive practice explorer keeps its approved composition.
+  Input/Field primitives wait for a real enquiry form rather than unused scaffolding.
+- Installed react-icons and used iProduce's typed platform-to-brand-icon pattern
+  for Facebook, LinkedIn, Instagram and X. Named fa6 imports render within the
+  same labelled 44px controls; icons are decorative and missing URLs still open
+  preparation notices. Lucide remains the ordinary UI icon library. Existing
+  documentation/FAQ/footer work was preserved. No service or stylesheet added.
+- Format, lint, typecheck, production build and diff whitespace checks passed.
+  Development and compiled-production browser checks passed at 1440, 1280, 1024,
+  768, 390 and 320px: single-open/collapse, Enter/Space and arrow/Home/End focus,
+  avatar initials, labelled social SVGs, notice/focus return and hydrated-page
+  containment. No-JS FAQ/native fallback and initials passed at 1440/390/320px;
+  whole-page no-JS overflow remains the separately logged QA item. Normal feedback
+  and a live reduced-motion change passed. Desktop/mobile FAQ and footer captures
+  were visually reviewed. One production assertion was corrected to await the
+  dialog-close focus effect before checking focus return; no app change needed.
+- Current canonical docs now describe these owners/dependencies. Whole-page QA,
+  approved media/content/destinations and the later CMS/form workflow remain next.

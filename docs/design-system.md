@@ -143,9 +143,10 @@ semantics, 12px size and deep-navy colour.
 
 ## Icons and assets
 
-The user explicitly permits icon-library substitutions. Start with Lucide for
-UI arrows, chevrons, menu, and close controls. Use another package only for a
-specific missing icon or brand mark; keep stroke weight and size consistent.
+Use Lucide for UI arrows, chevrons, menu and close controls. The user approved
+React Icons for social brands, matching iProduce. SocialIcon maps typed platforms
+to named imports from `react-icons/fa6`; SVGs are decorative inside labelled
+links/buttons. Keep their existing sizes, circular targets and focus styles.
 
 Preserve the supplied firm logo, its emblem/tagline, photographs, and client
 artwork. Download needed Figma assets into `public/` during implementation;
@@ -169,8 +170,10 @@ the narrow client boundary and missing-content selection rules.
 
 Button and the mobile Sheet are implemented with the minimal shadcn pattern:
 CVA/Slot, `cn()`, and Radix Dialog focus management. `components.json` records the
-registry aliases. The custom pill and arrow compose the Button. FAQ Accordion
-and other primitives are deferred until used. The desktop Practice areas
+registry aliases. The custom pill and arrow compose the Button. Shared Radix
+Accordion and Avatar wrappers follow the same shadcn composition, keeping the
+brand plus/minus cues and initials fallbacks. Add future Input/Field primitives
+when the enquiry form is in scope rather than stocking unused UI files. The desktop Practice areas
 reference navigates to a page; no open dropdown variant was found, so no
 Navigation Menu package or invented dropdown was added.
 
@@ -203,6 +206,24 @@ larger size does not add source detail.
 
 Use CSS for simple hover/focus transitions. Add a motion package only when an
 approved interaction requires it.
+
+## FAQ and footer actions
+
+FAQ rows use Newsreader questions, fine slate rules and persistent plus/minus
+disclosure cues. The first answer is open; shared Accordion rows support click,
+Enter/Space and arrow/Home/End focus movement. A native disclosure fallback
+keeps every answer accessible without JavaScript. Hover/focus and open-state colour changes
+are restrained and respect reduced motion. The user-authorized FAQ starter copy
+renders without editorial-status badges. The support card uses supplied team records with initials
+fallbacks; it does not introduce stock portraits or a live-chat claim.
+
+The reusable enquiry card has two approved surfaces: `pale` uses Tailwind
+`sky-50`, while `white` uses white. Both reuse the primary ArrowButton and the
+existing section typography, radius and shadow scales; no new token is needed.
+The footer uses the existing deep navy and white/translucent-white hierarchy.
+Social controls use Facebook, LinkedIn, Instagram and X brand icons from React
+Icons. Missing profile URLs still open the preparation notice. Typography,
+44px targets and layout are unchanged; no profile URL is inferred from an icon.
 
 ## Section entry motion
 

@@ -4,20 +4,19 @@
 
 Translate the supplied desktop/mobile design into a lean Tailwind/shadcn
 foundation, then develop the homepage from navigation and hero through footer.
-The first runtime checkpoint includes all five original hero photographs.
-The approved follow-up refactor now separates shared site chrome, simplifies
-the manual carousel and improves responsive sizing. Continue with the footer
-and remaining homepage sections after reviewing each focused Figma source.
-The approved hero polish now adds restrained crossfades and text motion while
-keeping autoplay deferred. Secondary pages follow the homepage.
+The runtime now reaches the footer, with all five original hero photographs,
+shared site chrome, responsive sections and restrained manual interaction.
+Hero crossfades/text motion are implemented; autoplay remains deferred. The next
+checkpoint is whole-page presentation QA and final content review. Secondary
+pages and service integrations follow the homepage presentation milestone.
 
 Facts and story are implemented with explicit image placeholders. Sticky
 navigation and the selected-clients placeholder section are implemented.
 The user approved the editorial practice explorer after reviewing options:
 desktop index/image panel, mobile accordion, and restrained manual transitions.
-Practice photography remains labelled placeholders. The mobile accordion now
-starts collapsed and can close; desktop keeps one selection. The current slice
-adds selected matters from the user's desktop/mobile screenshots. All four
+Practice photography uses decorative fallback covers. The mobile accordion
+starts collapsed and can close; desktop keeps one selection. Selected matters
+follow the user's desktop/mobile screenshots. All four
 summaries now have user-approved preview copy, with BPE as the opening selection.
 The maintainability audit and earlier `lg` hero split are implemented. Header
 scroll material is consistent at all widths; full navigation remains at `xl`.
@@ -25,9 +24,15 @@ The user approved the People, client perspectives and insights proposal.
 All three sections are implemented for review: four curated profiles with a
 compact mobile grid, manual anonymous testimonial slots and one featured
 insight plus three supporting previews. Sanity and the later Claude workflow
-remain unconnected. FAQ and enquiry/footer are the next source-review slice;
-final imagery, approved testimonials and article/profile destinations remain
-publication gates.
+remain unconnected. FAQ, the reusable pale/white enquiry CTA and shared footer
+are now implemented for review from the user's seven screenshots. The CTA
+overlaps on mobile too. The user authorized practical FAQ starter copy on
+2026-10-29, removing the dependency on retrieving hidden Figma answers and the
+visible draft labels. The follow-up reuse pass adopts shared shadcn-style
+Accordion/Avatar primitives and React Icons for social brands without changing
+the approved composition. Inputs wait for the real enquiry form. Whole-page presentation QA and final content review are
+next; imagery, testimonials, editorial sign-off, social URLs
+and secondary destinations remain publication gates.
 
 The approved follow-up polishes missing/failed media from the header/hero down
 to insights. Brand covers, initials and text logos replace image-pending labels;
@@ -49,7 +54,8 @@ slots. Development content review notes remain where content is not approved.
 | 2b.4 Selected matters                       | Review   | Responsive feature/selector, four sourced summaries, BPE opening selection      |
 | 2b.5 Maintainability audit                  | Review   | Style ownership, click-only matters, accessibility fixes and aligned docs       |
 | 2b.6 People, client perspectives, insights  | Review   | Compact four-person preview, manual testimonials and one-plus-three articles    |
-| 2c. Footer, remaining homepage and QA       | Next     | Next homepage slice; retrieve focused Figma context first                       |
+| 2c. FAQ, enquiry CTA and footer             | Review   | Shared Accordion/Avatar, two CTA surfaces, mobile/desktop overlap and footer    |
+| 2c.1 Whole-page presentation QA             | Next     | Joined-page review and final content/destination inventory                      |
 | 2d. Final publication content               | Open     | Approved portraits, testimonial, imagery, and destinations                      |
 | 3. Information architecture                 | Planned  | Approved routes, content ownership, and CMS boundary                            |
 | 4. Desktop and mobile design references     | Supplied | User-provided Figma frames; missing states resolved during audit                |

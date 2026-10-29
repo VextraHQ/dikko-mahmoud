@@ -189,3 +189,24 @@ use supplied organisation names when logos are missing. Text logos use compact,
 at-most-three-line visual wrapping inside the existing 64/80px cards while
 retaining the full name as accessible text. Missing content does not create
 empty cards; anonymous development collections remain visibly under review.
+
+## FAQ and enquiry/footer overlap
+
+FAQ has a two-column introduction from `lg`, then full-width disclosure rows.
+The source first answer pairs copy with a 240px-wide office thumbnail on desktop;
+below `lg`, the thumbnail follows its answer. Other answers use natural text
+height. The support card sits below the list with small overlapping team circles.
+
+The enquiry card stacks copy/action below `lg` and pairs them on desktop.
+It uses the shared cap/gutters, rounded-2xl surface and natural content height.
+The page owns the CTA, while the shared site layout owns the footer. Coordinate
+their spacing: CTA bottom margins are -40px below `sm`, -64px from `sm`, -112px
+from `lg`; footer top padding is respectively 96px, 128px, 192px. This produces
+the requested mobile overlap and leaves 56/64/80px clearance after the card.
+No transforms, absolute card placement or browser height measurements are needed.
+
+Footer brand/offices stack above navigation on mobile. Navigation has two columns
+below `lg` and three on desktop; the main desktop grid pairs office information
+with navigation/social/contact groups. Email can wrap at narrow widths. Mobile
+links/social controls reserve 44px targets, and the copyright/location row stacks
+on mobile. A white CTA uses the same geometry as the pale-blue homepage card.

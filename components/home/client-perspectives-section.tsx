@@ -1,5 +1,5 @@
 import { UserRound } from "lucide-react";
-import { ImageWithFallback } from "@/components/shared/image-with-fallback";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
@@ -51,36 +51,39 @@ export function ClientPerspectivesSection() {
                   className="grid gap-8 lg:grid-cols-[16rem_1fr] lg:gap-16"
                 >
                   <div className="border-border flex flex-col items-center border-b pb-6 text-center lg:border-r lg:border-b-0 lg:pr-8 lg:pb-0">
-                    <div className="relative flex size-40 shrink-0 items-center justify-center overflow-hidden rounded-full bg-slate-100 sm:size-48">
-                      <ImageWithFallback
-                        src={quote ? item.image?.src : null}
+                    <Avatar
+                      aria-hidden="true"
+                      className="size-40 bg-slate-100 sm:size-48"
+                    >
+                      <AvatarImage
+                        src={quote ? (item.image?.src ?? undefined) : undefined}
                         alt={item.image?.alt ?? ""}
-                        fill
-                        sizes="192px"
-                        className="object-cover"
-                        fallback={
-                          name ? (
-                            <span
-                              aria-hidden="true"
-                              className="text-primary font-serif text-5xl"
-                            >
-                              {name
-                                .split(/\s+/)
-                                .filter(Boolean)
-                                .slice(0, 2)
-                                .map((part) => part[0])
-                                .join("")}
-                            </span>
-                          ) : (
-                            <UserRound
-                              aria-hidden="true"
-                              strokeWidth={1}
-                              className="text-primary/35 size-16"
-                            />
-                          )
-                        }
+                        width={192}
+                        height={192}
+                        loading="lazy"
                       />
-                    </div>
+                      <AvatarFallback>
+                        {name ? (
+                          <span
+                            aria-hidden="true"
+                            className="text-primary font-serif text-5xl"
+                          >
+                            {name
+                              .split(/\s+/)
+                              .filter(Boolean)
+                              .slice(0, 2)
+                              .map((part) => part[0])
+                              .join("")}
+                          </span>
+                        ) : (
+                          <UserRound
+                            aria-hidden="true"
+                            strokeWidth={1}
+                            className="text-primary/35 size-16"
+                          />
+                        )}
+                      </AvatarFallback>
+                    </Avatar>
                     <p className="mt-4 text-sm/6 font-semibold">
                       {name ??
                         (quote ? content.anonymousName : content.previewName)}

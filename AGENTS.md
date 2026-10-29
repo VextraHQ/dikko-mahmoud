@@ -4,7 +4,8 @@ This repository is the future public website for Dikko & Mahmoud. The current
 milestone is design-system foundations and homepage development from the
 supplied desktop/mobile Figma references. The first runtime checkpoint covers
 fonts, theme, Button, sticky navigation, hero, firm facts/story, selected
-clients, practice areas, selected matters, People, client perspectives and insights;
+clients, practice areas, selected matters, People, client perspectives, insights,
+FAQ, enquiry CTA and footer;
 consult the roadmap for review status
 and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 
@@ -47,7 +48,14 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
   The user approved fallback polish across the whole homepage: missing/failed
   media uses intentional typography/covers; unapproved content stays labelled
   for review and never inherits a real client's attribution.
-  FAQ and enquiry/footer are next. The later Claude workflow remains separate.
+  FAQ, the pale/white enquiry CTA and shared footer are implemented for review
+  from the user's screenshots. The user authorized practical FAQ starter copy;
+  keep it in the local collection until the later Sanity integration. Social
+  profile URLs and secondary destinations remain unconnected. Shared shadcn-style
+  Accordion/Avatar primitives and React Icons social brands preserve the current
+  design; add Input/Field primitives when the enquiry form needs them.
+  Whole-page presentation QA and final content review are next. The later
+  Claude workflow remains separate.
 
 ## File ownership
 

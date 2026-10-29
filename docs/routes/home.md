@@ -26,6 +26,10 @@ does not become approved production content simply because it appears in Figma.
   covers and text logos for missing or failed images. Image-pending labels are
   removed; unapproved content review notes remain explicit. See the latest media
   policy below, which supersedes dated placeholder treatments.
+- FAQ, the reusable pale/white enquiry card and shared footer are implemented
+  from the user's seven supplied screenshots. The CTA overlaps on mobile too.
+  FAQ uses user-authorized starter copy; contact values are screenshot-supplied,
+  while social URLs, booking and secondary destinations remain preparation notices.
 - Hero/header overlay starts at `lg`, with the compact menu until full navigation
   starts at `xl`. The full header shell is hidden at the top at all widths and
   appears only after scrolling. Facts/story keep their `xl` compositions;
@@ -63,8 +67,8 @@ it, including relevant component variants and interactive states.
    shadcn baseline. Add only primitives needed by the first working slice.
 2. Implement shared navigation and the hero at desktop and mobile widths.
 3. Continue remaining homepage sections in the user-agreed checkpoint order;
-   People/client perspectives/insights are implemented; FAQ and enquiry/footer
-   are the next slice, followed by whole-page QA.
+   People/client perspectives/insights and FAQ/enquiry/footer are implemented;
+   whole-page presentation QA and final content review are next.
 4. Retrieve focused source for each section and use approved static content.
 5. Connect local interactions and review the full page, accessibility, image
    loading, and responsive behaviour.
@@ -539,3 +543,90 @@ and missing-content behaviour from the hero down, preserving the layouts.
 Content modules continue to own review notes and records. No CMS, service,
 animation package, per-section CSS or new global CSS was added. FAQ and the
 enquiry/footer remain the next separate slice.
+
+## FAQ, enquiry CTA and footer — 2026-10-28
+
+The user supplied seven CleanShot references labelled 9:39:44–9:42:02 and
+requested implementation with additional mobile CTA/footer overlap. The source
+shows pale-blue and white CTA variants. The iProduce CTA/footer separation was
+inspected; its negative-margin overlap pattern was reused with Dikko's own
+surfaces, dimensions, content and layout. Its services/motion/icon packages were
+not copied. A focused Figma request for FAQ `1:10812` was blocked again by the
+Starter tool limit; implementation uses the supplied screenshots, without
+claiming fresh Figma context or exporting screenshot imagery as assets.
+
+### FAQ content and behaviour
+
+- Five screenshot-supplied questions are retained. The first answer is transcribed
+  from the screenshot. On 2026-10-29 the user authorized practical starter copy
+  for the other four, replacing their draft labels and the wait for Figma text.
+  The firm can edit these records through the later CMS. No fee
+  figures, response times, client outcomes or engagement promises were invented.
+- `content/faqs.ts` owns questions, answers and optional media. Native
+  named disclosures keep the first answer open initially, support click/Enter/
+  Space and allow the current row to close. The browser manages state, including
+  without JavaScript. This original implementation was superseded by the shared
+  Accordion reuse pass below, retaining native disclosures as the no-JS fallback.
+- The first answer's office image reuses the firm-office media record, with a
+  decorative small brand cover while absent. The support card reuses three team
+  records with initials until portraits are supplied. No stock people were added.
+- “Get in touch” is a mailto link to the supplied email, not a live-chat service.
+
+### CTA and footer ownership
+
+`EnquiryCta` is page-owned and accepts `pale`/`white`; the homepage uses pale blue.
+Its copy is “Let’s talk about / what comes next.” with the source description
+and “Make an enquiry” action. `SiteFooter` is mounted once outside `main` in
+the site layout. Both are Server Components. Overlap/clearance values belong
+to the layout system; mobile overlap supersedes the non-overlapping screenshot.
+
+`content/contact.ts` owns the three source location entries (Lagos remains a
+liaison office), two telephone numbers, email and hours. These are supplied
+preview details, not independent verification of operational/contact readiness.
+`content/footer.ts` owns the source Firm/Practice/Legal groups and social slots.
+Email and telephone links work without a backend. Book a consultation, unbuilt
+pages and absent social profile URLs open the existing preparation notice;
+they do not pretend to book, submit or navigate to missing pages. Footer-only
+availability flags enable future legal/practice pages independently of the
+primary navigation. Enable only when the actual destination exists.
+
+The original text-mark social placeholders have been replaced by React Icons
+brand SVGs at the user’s request (see the reuse pass below). Approved profile
+URLs are still required before these become external links. Final FAQ copy, original media, social destinations and
+other publication gates remain open. The joined homepage presentation is ready
+for whole-page QA/review; no CMS, email provider or deployment was connected.
+
+### FAQ editorial handoff — 2026-10-29
+
+Use the supplied first answer and user-authorized starter wording for enquiry
+details, choosing a practice area, fee discussions and organisational clients.
+These are working homepage answers, without visible draft/status badges or
+unconfirmed pricing/turnaround/engagement policies. The source of each answer
+remains documented here rather than appearing in the public UI.
+
+`FaqSection` accepts an optional ordered `items: readonly Faq[]`; local records
+remain the default. At the later Sanity milestone, resolve published FAQ records
+into the same id/question/answer/optional-media shape and pass that collection.
+An empty result should be passed as `[]`, which omits the section. The team can
+then maintain wording and order in the CMS. No schema, query, provider or
+speculative fetching layer is created in this presentation slice.
+
+### Shared primitive and social-icon reuse — 2026-10-29
+
+The user requested shadcn reuse while retaining the approved UI. FAQ now uses
+shared Radix-backed Accordion/Item/Trigger/Content wrappers with the existing
+plus/minus, first-open, single/collapsible contract and typography. Radix adds
+arrow/Home/End focus navigation and manages expanded/controls relationships.
+FaqSection and its answer content remain server-owned; only primitives are client
+boundaries. A noscript list uses the same answer renderer and native disclosures.
+
+FAQ support circles and client-perspective identities use Avatar/Image/Fallback,
+including SSR initials/anonymous marks and image-error handling. Large People
+portraits and editorial imagery retain Next Image. The specialized responsive
+practice explorer retains its approved desktop/mobile contract. Input/Field
+primitives follow when an actual enquiry form is approved. No form is added here.
+
+The footer uses the same typed platform-to-icon approach as iProduce, with named
+Facebook/LinkedIn/Instagram/X imports from react-icons/fa6. SVGs are decorative
+within existing labelled 44px controls; missing URLs retain preparation notices.
+No services, social URLs, global styles, tokens or motion library are added.

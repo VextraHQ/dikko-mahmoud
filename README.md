@@ -1,17 +1,23 @@
 # Dikko & Mahmoud Website
 
 The local project foundation for the Dikko & Mahmoud website revamp. The root
-route now presents the first homepage review checkpoint: brand typography and
+route now presents the homepage review checkpoint: brand typography and
 theme, shared Button, responsive navigation, expertise hero, firm facts and
 firm-story preview, sticky navigation, a selected-clients placeholder rail and
 the editorial practice-area explorer, selected matters, curated People grid,
-manual client-perspectives carousel and featured-plus-three insights. It remains
-no-index. All five hero photographs are now local and connected; the full
-homepage and secondary pages remain unfinished. Missing/failed media uses
+manual client-perspectives carousel, featured-plus-three insights, FAQ, overlapping
+enquiry CTA and shared footer. It remains
+no-index. All five hero photographs are now local and connected. The homepage
+presentation runs from navigation through footer; whole-page review, final
+content and secondary pages remain unfinished. Missing/failed media uses
 decorative brand covers, initials or text logos, preserving each allocated crop.
 These are intentional fallbacks, not substitute photographs. Approved originals
 are still required. Testimonials remain anonymous preview slots; profile/article
 destinations and publication content are still pending.
+The FAQ uses user-authorized starter copy, ready for later editorial replacement.
+Footer contact details
+follow the supplied reference; real social profiles and booking/secondary pages
+still need their approved destinations. Email and phone links are available.
 
 ## Stack
 
@@ -19,7 +25,8 @@ destinations and publication content are still pending.
 - React 19
 - TypeScript in strict mode
 - Tailwind CSS 4
-- Minimal shadcn-style Button/Sheet, Embla Carousel, and Lucide icons
+- Shadcn-style Button/Sheet/Accordion/Avatar, Embla Carousel, Lucide UI icons
+  and React Icons for social brands
 - ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
 - Prettier with Tailwind class sorting
 - pnpm
