@@ -1,7 +1,9 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useMediaQueryChange } from "@/hooks/use-media-query-change";
+import { mediaQueries } from "@/lib/media-queries";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { Button } from "@/components/ui/button";
@@ -18,14 +20,10 @@ import { SiteNavigation } from "@/components/layout/site-navigation";
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
-  useEffect(() => {
-    const desktop = window.matchMedia("(min-width: 80rem)");
-    const closeOnDesktop = () => {
-      if (desktop.matches) setOpen(false);
-    };
-    desktop.addEventListener("change", closeOnDesktop);
-    return () => desktop.removeEventListener("change", closeOnDesktop);
-  }, []);
+  // The sheet has no desktop layout; close it if the window grows past it.
+  useMediaQueryChange(mediaQueries.desktopNavigation, (isDesktop) => {
+    if (isDesktop) setOpen(false);
+  });
   return (
     <div className="xl:hidden">
       <Sheet open={open} onOpenChange={setOpen}>

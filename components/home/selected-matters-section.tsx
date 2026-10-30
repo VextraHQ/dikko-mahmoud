@@ -2,12 +2,12 @@ import { MatterExplorer } from "@/components/home/matter-explorer";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { matterRecords, selectedMatters as content } from "@/content/matters";
+import {
+  selectedMatters as content,
+  visibleMatters as matters,
+} from "@/content/matters";
 
 export function SelectedMattersSection() {
-  const matters = matterRecords.filter(
-    (matter) => matter.organisation.trim() && matter.summary.trim(),
-  );
   if (!matters.length) return null;
   return (
     <section

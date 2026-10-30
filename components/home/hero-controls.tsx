@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/carousel";
 import { heroSlides } from "@/content/home";
 import { cn } from "@/lib/utils";
+import { formatCount, formatIndex } from "@/lib/format";
 
 export function HeroControls() {
   const { scrollTo, selectedIndex, isPreparing } = useCarousel();
@@ -16,8 +17,7 @@ export function HeroControls() {
         aria-hidden="true"
         className="font-serif text-sm/5 font-semibold lg:hidden"
       >
-        {String(selectedIndex + 1).padStart(2, "0")} /{" "}
-        {String(heroSlides.length).padStart(2, "0")}
+        {formatIndex(selectedIndex)} / {formatCount(heroSlides.length)}
       </p>
       <div className="flex gap-3 lg:pointer-events-auto">
         <CarouselPrevious />

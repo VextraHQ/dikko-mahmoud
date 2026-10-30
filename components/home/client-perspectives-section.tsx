@@ -7,16 +7,12 @@ import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
   clientPerspectives as content,
-  testimonialPreviews,
+  suppliedTestimonials,
+  visibleTestimonials as testimonials,
 } from "@/content/testimonials";
+import { formatIndex, initialsFrom } from "@/lib/format";
 
 export function ClientPerspectivesSection() {
-  const suppliedQuotes = testimonialPreviews.filter((item) =>
-    item.quote?.trim(),
-  );
-  const testimonials = suppliedQuotes.length
-    ? suppliedQuotes
-    : testimonialPreviews;
   if (!testimonials.length) return null;
   return (
     <section
@@ -32,7 +28,7 @@ export function ClientPerspectivesSection() {
         >
           {content.heading}
         </h2>
-        {!suppliedQuotes.length && (
+        {!suppliedTestimonials.length && (
           <p className="text-muted-foreground mt-4 text-xs/5">
             {content.reviewNote}
           </p>
@@ -41,7 +37,8 @@ export function ClientPerspectivesSection() {
           <CarouselContent className="items-stretch">
             {testimonials.map((item, index) => {
               const quote = item.quote?.trim();
-              // Sample copy must never inherit a real client's identity/photo.
+              // Sample copy must never inherit a real client's identity; stock
+              // placeholder portraits are fine because they name no one.
               const name = quote ? item.name?.trim() || null : null;
               return (
                 <CarouselItem
@@ -56,7 +53,7 @@ export function ClientPerspectivesSection() {
                       className="size-40 bg-slate-100 sm:size-48"
                     >
                       <AvatarImage
-                        src={quote ? (item.image?.src ?? undefined) : undefined}
+                        src={item.image?.src ?? undefined}
                         alt={item.image?.alt ?? ""}
                         width={192}
                         height={192}
@@ -68,12 +65,7 @@ export function ClientPerspectivesSection() {
                             aria-hidden="true"
                             className="text-primary font-serif text-5xl"
                           >
-                            {name
-                              .split(/\s+/)
-                              .filter(Boolean)
-                              .slice(0, 2)
-                              .map((part) => part[0])
-                              .join("")}
+                            {initialsFrom(name)}
                           </span>
                         ) : (
                           <UserRound
@@ -111,7 +103,7 @@ export function ClientPerspectivesSection() {
                     )}
                     {!quote && (
                       <p className="text-muted-foreground mt-4 text-xs/5">
-                        Preview placeholder {String(index + 1).padStart(2, "0")}
+                        Preview placeholder {formatIndex(index)}
                       </p>
                     )}
                     <div className="mt-auto pt-8">

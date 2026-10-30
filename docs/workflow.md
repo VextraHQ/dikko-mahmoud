@@ -24,13 +24,13 @@
 
 ## Verification matrix
 
-| Change                               | Minimum verification                                                  |
-| ------------------------------------ | --------------------------------------------------------------------- |
-| Documentation only                   | `pnpm format:check`, link/path review, and content consistency review |
-| TypeScript content or helper         | `pnpm format:check`, `pnpm lint`, and `pnpm typecheck`                |
-| Route, layout, config, or dependency | `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, and `pnpm build`  |
-| Visual interface                     | Code checks plus browser review at agreed responsive widths           |
-| External integration                 | Local checks plus separately identified provider/environment evidence |
+| Change                               | Minimum verification                                                          |
+| ------------------------------------ | ----------------------------------------------------------------------------- |
+| Documentation only                   | `pnpm format:check`, link/path review, and content consistency review         |
+| TypeScript content or helper         | `pnpm format:check`, `pnpm lint`, `pnpm typecheck` and `pnpm test`            |
+| Route, layout, config, or dependency | `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test`, `pnpm build` |
+| Visual interface                     | Code checks plus browser review at agreed responsive widths                   |
+| External integration                 | Local checks plus separately identified provider/environment evidence         |
 
 Local checks do not confirm deployment, DNS, CMS access, message delivery, or
 analytics collection.

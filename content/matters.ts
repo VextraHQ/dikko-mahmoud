@@ -1,6 +1,10 @@
+import { hasText } from "@/lib/content";
+
 export type SelectedMatter = {
   id: string;
   category: string;
+  /** Large card headline: a key figure or short theme. */
+  headline: string;
   organisation: string;
   topic: string;
   summary: string;
@@ -17,22 +21,25 @@ export const selectedMatters = {
   action: "Explore our experience",
   selectorLabel: "Explore our selected matters",
   featureLabel: "Selected matter",
+  readMore: "Read full matter",
   defaultId: "bureau-public-enterprises",
 };
 
+// Card copy follows the user's selected-matters design (30 Oct 2026).
 export const matterRecords: SelectedMatter[] = [
   {
     id: "bureau-public-enterprises",
     category: "International arbitration",
+    headline: "$1.37bn",
     organisation: "Bureau of Public Enterprises",
-    topic: "Telecommunications arbitration",
-    summary:
-      "The managing partner acted as lead counsel for the Federal Government and BPE in a telecommunications-related UNCITRAL arbitration.",
-    qualifier: "Representative experience · arbitration",
+    topic: "Claim value in a UNCITRAL arbitration",
+    summary: "Our role: lead counsel in the arbitration.",
+    qualifier: "Claim value · not an award or recovery",
   },
   {
     id: "central-bank-nigeria",
     category: "Public-sector advisory",
+    headline: "Public-sector advisory",
     organisation: "Central Bank of Nigeria",
     topic: "Federal Government revenue",
     summary:
@@ -42,19 +49,26 @@ export const matterRecords: SelectedMatter[] = [
   {
     id: "kano-state-government",
     category: "Settlement & government advisory",
+    headline: "Complex settlements",
     organisation: "Kano State Government",
-    topic: "Clinical-trial settlement",
+    topic: "Government advisory and negotiations",
     summary:
-      "Represented the Kano State Government in negotiation and mediation concerning settlements arising from the Trovan clinical trial.",
-    qualifier: "Representative experience · negotiation and mediation",
+      "Counsel in settlement negotiations connected to the Pfizer Trovan clinical trial and electricity-sector privatisation.",
+    qualifier: "Representative experience · settlement",
   },
   {
     id: "nnpc-npdc",
-    category: "Energy-sector advisory",
+    category: "Energy & commercial contracts",
+    headline: "Energy & commercial",
     organisation: "NNPC / NPDC",
-    topic: "Petroleum-interest transfer",
+    topic: "OML 12 and gas-sector mandates",
     summary:
-      "Advised the Central Bank of Nigeria on the transfer of NNPC’s interests to the Nigerian Petroleum Development Company.",
-    qualifier: "Representative experience · advisory",
+      "Representation on OML 12 matters and contract novation work involving gas-sector entities.",
+    qualifier: "Representative experience · energy",
   },
 ];
+
+/** Matters ready to render (organisation and summary are required). */
+export const visibleMatters = matterRecords.filter(
+  (matter) => hasText(matter.organisation) && hasText(matter.summary),
+);

@@ -1,10 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { SquareArrowUpRight } from "lucide-react";
+import { useState } from "react";
+import { PreviewDestination } from "@/components/layout/preview-destination";
 import {
   selectedMatters as content,
   type SelectedMatter,
 } from "@/content/matters";
+import { useBringIntoView } from "@/hooks/use-bring-into-view";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { mediaQueries } from "@/lib/media-queries";
+import { formatIndex } from "@/lib/format";
 
 export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
   const [selected, setSelected] = useState(() =>
@@ -13,22 +19,13 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
       matters.findIndex((matter) => matter.id === content.defaultId),
     ),
   );
-  const featureRef = useRef<HTMLElement>(null);
+  const isDesktop = useMediaQuery(mediaQueries.desktop);
+  const { ref: featureRef, bringIntoView } = useBringIntoView<HTMLElement>();
 
   function selectMatter(index: number) {
     setSelected(index);
-    if (window.matchMedia("(min-width: 64rem)").matches) return;
-
     // On the stacked layout, bring the requested preview back into view.
-    requestAnimationFrame(() => {
-      featureRef.current?.focus({ preventScroll: true });
-      featureRef.current?.scrollIntoView({
-        block: "start",
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "instant"
-          : "smooth",
-      });
-    });
+    if (!isDesktop) bringIntoView();
   }
 
   return (
@@ -58,7 +55,7 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
                 id={`matter-title-${matter.id}`}
                 className="mt-5 font-serif text-4xl/[1.08] sm:text-5xl/[1.08] xl:text-6xl/[1.04]"
               >
-                {matter.category}
+                {matter.headline}
               </h3>
               <p className="mt-6 text-sm/6 text-sky-200/90 sm:mt-8 sm:text-base/7">
                 {matter.topic}
@@ -76,6 +73,18 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
                 <p className="mt-5 text-[11px]/5 text-sky-200/90">
                   {matter.qualifier}
                 </p>
+                <PreviewDestination>
+                  <button
+                    type="button"
+                    className="mt-8 inline-flex items-center gap-2 rounded-sm text-xs/5 font-semibold text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-sky-200 focus-visible:outline-none sm:mt-10"
+                  >
+                    {content.readMore}
+                    <SquareArrowUpRight
+                      aria-hidden="true"
+                      className="size-3.5 text-sky-200"
+                    />
+                  </button>
+                </PreviewDestination>
               </div>
             </div>
           );
@@ -96,7 +105,7 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
                 className="text-primary relative w-full border-l-2 border-transparent px-4 py-5 text-left transition-colors hover:bg-sky-50 aria-pressed:border-sky-700 aria-pressed:bg-sky-100 motion-reduce:transition-none lg:px-6 lg:py-9"
               >
                 <span className="block text-[10px]/4 font-semibold tracking-widest uppercase">
-                  {String(index + 1).padStart(2, "0")} / {matter.category}
+                  {formatIndex(index)} / {matter.category}
                 </span>
                 <span className="mt-2 block font-serif text-2xl/7">
                   {matter.organisation}

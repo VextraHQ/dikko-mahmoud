@@ -1,8 +1,13 @@
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { Marquee } from "@/components/ui/marquee";
 import { ClientLogoMarquee } from "@/components/home/client-logo-marquee";
-import { selectedClients as content } from "@/content/clients";
+import {
+  namedClients,
+  selectedClients as content,
+  visibleClients as clients,
+} from "@/content/clients";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { formatIndex } from "@/lib/format";
 
 type Client = (typeof content.slots)[number];
 
@@ -29,7 +34,7 @@ function LogoSlot({ client, index }: { client: Client; index: number }) {
         <span className="text-muted-foreground text-center text-xs/5 font-semibold tracking-wider uppercase">
           {content.placeholderLabel}
           <span className="mt-1 block font-serif text-2xl/7 font-normal tracking-normal">
-            {String(index + 1).padStart(2, "0")}
+            {formatIndex(index)}
           </span>
         </span>
       )}
@@ -38,9 +43,6 @@ function LogoSlot({ client, index }: { client: Client; index: number }) {
 }
 
 export function SelectedClientsSection() {
-  const namedClients = content.slots.filter((client) => client.name?.trim());
-  // Anonymous samples remain only while the entire collection is under review.
-  const clients = namedClients.length ? namedClients : content.slots;
   if (!clients.length) return null;
   return (
     <section

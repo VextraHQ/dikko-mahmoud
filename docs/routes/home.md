@@ -1,5 +1,14 @@
 # Homepage implementation brief
 
+## Visual review hold — 2026-10-29
+
+The user paused further homepage visual work pending client approval of visual
+identity and delivery of imagery/content. Retain the implemented presentation;
+no additional polish or redesign is authorized by the next-page handoff.
+The Firm is now implemented for review; see `the-firm.md`. Shared presentation
+has been extracted and real Firm links enabled with Home regression checks. This narrow reuse/link
+work does not mean the homepage has received final client or launch approval.
+
 ## Sources
 
 Reviewed on 2026-10-26:

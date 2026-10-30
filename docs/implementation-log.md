@@ -759,3 +759,183 @@
   registry choices and current ownership in the existing design/architecture/docs
   index. Earlier dated entries retain their checkpoint history. The real enquiry
   page, submission service, CMS and final content/destination approval remain later.
+
+## 2026-10-29 — Firm spec and fresh-chat handoff
+
+- The user put further homepage visual work on hold pending client visual-identity
+  approval and imagery/content. Recorded that status without treating it as launch
+  approval. Shared mechanical extractions and activating actual Firm destinations
+  are the narrow exceptions, with Home regression checks.
+- Added `docs/routes/the-firm.md`: eleven-section/source map, screenshot index,
+  shared ownership, canonical person/card and future-profile boundaries, optional
+  video-poster behaviour, source gaps, navigation activation, phased implementation
+  and acceptance checks. All eleven local screenshot paths and the comparison
+  file were verified. Firm Figma node links remain to be supplied, not guessed.
+- The user explicitly confirmed desktop Select a year + mobile accordion in this
+  turn. Recorded first-open 1993, one desktop selection, mobile collapse, shared
+  row/arrow state and chronological end controls. Visible advisory groups and
+  canonical people remain the baseline; preview selections are not treated as
+  confirmed group membership or historical copy.
+- Added `docs/handoffs/the-firm-next-chat.md` with a paste-ready bounded prompt:
+  targeted source reads, focused Figma requests, independent work despite media
+  gaps, minimal shared extraction, batched checks, one route-handoff build and a
+  stop at the Firm visual checkpoint. No runtime page, new chat, package or
+  integration was created.
+- Updated the roadmap, agent guide, docs index, architecture boundary, README and
+  current homepage status to agree. Preserved dated implementation history.
+  Formatting, diff whitespace and local reference checks passed (16 Markdown
+  targets, including eleven screenshots). No lint/typecheck/build/browser run was
+  repeated for this documentation-only handoff; prior runtime evidence remains
+  in its original entries.
+
+## 2026-10-29 — The Firm implementation checkpoint
+
+- Implemented `/the-firm` as a thin Server Component under the existing site
+  layout, with inherited no-index metadata, one h1/main/header/footer and all
+  eleven source sections in order. Added Firm story, values, ordered six-step
+  process, founder/advisory previews and canonical contact/presence presentation.
+  The mobile Figma frame 1:11914 returned full context and screenshot. Desktop
+  1:10924 returned the Starter-plan MCP call-limit error; used the supplied eleven
+  screenshots rather than repeatedly requesting broad context. No live user
+  apps/screen were inspected.
+- Extracted shared facts (white/pale), FAQ (explicit intro/items and a narrow
+  heading class override) and PersonCard with Home wrappers/defaults preserved.
+  Canonical people own IDs/slugs, roles, media and founder biography/milestones;
+  Home and advisory selections reference IDs. Unconfirmed advisory membership
+  stays in nine neutral slots, separate from real records. Future profile links
+  are availability-gated; no profile pages were added. Home story identity/media
+  derives from the same founder record. Contact details retain one owner.
+- Journey uses one responsive controlled Radix Accordion, 1993 initially open,
+  non-collapsible desktop selection, collapsible mobile selection and persistent
+  end-bounded desktop arrows. Resize shares state; a native-details noscript
+  fallback exposes all five milestones. No autoplay, hover/scroll selection,
+  measurement effect, motion library or additional observer was added.
+- Added the adapted shared VideoPoster facade: missing/invalid video shows no
+  play button, and a valid iframe/native video mounts only after activation.
+  Player focus and close-to-trigger return are handled. Firm has no supplied
+  video/poster; intentional media covers/initials remain. Concept images and
+  replacement portraits were not promoted to approved publication photography.
+- Activated Firm navigation, footer About us and Home Discover our story links,
+  preserving active state and mobile Sheet closing. Only the Firm mobile header
+  backing changes to deep navy. Other destinations retain preparation notices.
+  No new dependency, stylesheet, CMS/provider/deployment connection or route was
+  introduced; user-added Analytics remains.
+- Final format, lint, typecheck, production build and diff whitespace checks
+  passed. A final sandboxed compile stalled and was stopped; rebuilding outside
+  the sandbox passed and produced the static Firm route. Development and compiled
+  production checks passed at 1440, 1280, 1024, 768, 390 and 320px: containment,
+  landmarks/no-index, Journey selection/end controls/collapse, keyboard Home/End/
+  arrows/Space, resize, live reduced motion, real links, menu closing, notice/focus
+  return, FAQ and CTA overlap. No-JS Home/Firm containment and native disclosures
+  passed at all six widths. Final runs had no browser runtime errors.
+- Isolated fixtures outside the repo passed at 1440/768/390/320px: missing,
+  failed and supplied posters, no/invalid video, no player request before click,
+  local iframe and generated native-video loading, close/focus return,
+  failed person portraits and future-profile link contract. No public fixture
+  route, fake provider URL or real external video request was added. Home facts,
+  story, People and FAQ captures at 1440/390px matched the pre-extraction baseline
+  after masking the Next.js development badge. Desktop/mobile captures were
+  visually reviewed against the supplied references with the approved compact
+  People layout and intentional media fallbacks.
+- Updated current architecture/design/layout/route/roadmap/docs and marked the
+  kickoff handoff historical. Client identity/media approval, three memberships
+  per advisory group, 2021/Today stories and media/captions, exact extended 2001/
+  2016 Journey wording, four FAQ answers and source story repetition/pronoun remain
+  editorial gates. Final client visual/content review and launch approval are
+  separate; this work stops at the requested Firm presentation checkpoint.
+
+## 2026-10-29 — Firm square cards and hover/focus refinement
+
+- At the user's request, changed Firm founder/advisory media to square crops,
+  including neutral assignment slots. Added narrow optional portrait/mark class
+  overrides to PersonCard and EditorialCover; Home keeps its existing defaults.
+  Decorative numbers now fit and stay centred inside mobile square slots.
+- Added subtle surface/rule/text feedback to static story, facts, values and
+  process content, gentle lifts for Firm people and location cards, and fine
+  hover edges on the hero/presence media. Static content keeps ordinary cursor/
+  reading semantics without added buttons or tab stops. Existing FAQ/CTA feedback
+  remains. Journey rows/arrows have matching hover and keyboard-focus cues;
+  selected copy/media use the existing restrained CSS entrance and media zoom.
+  Hover still never changes the selected year. Added movement is motion-safe;
+  live reduced-motion changes remove movement/entrances and keep instant colours.
+- Format, lint, typecheck and whitespace checks passed. Isolated development
+  browser review verified all ten Firm square slots and containment at 1440,
+  1280, 1024, 768, 390 and 320px; desktop/mobile captures were inspected. Focused
+  checks covered static hover semantics, values/process/story feedback, Journey
+  arrow/row hover and keyboard focus, activation/entrance, office link focus,
+  live reduced motion and unchanged Home 4:5 person crops. No-JS history reading
+  and containment passed at 1440/390/320px. No browser runtime errors occurred
+  in the final focused run. No production build was repeated for this bounded
+  styling pass; route/shared-runtime build evidence remains in the prior entry.
+- Updated route/design/layout documentation. No copy, identity, dependency,
+  stylesheet, provider or selection behaviour was added or changed.
+
+## 2026-10-29 — Slower picture feedback and scoped Journey Motion
+
+- The user requested gentler timing, picture-local hover feedback and a real
+  Journey slide-in phase, using iProduce Africa as the reference. Read its
+  MotionFade/MotionStagger, image-card and keyed AnimatePresence implementations,
+  plus the official Motion presence/accessibility guidance. Retained its short
+  travel/easing approach, with the slower timing requested for this page.
+- Firm picture frames now remain stationary. Picture-only inner zoom and soft
+  shadows ease over 550ms; names/captions do not trigger image movement. Added
+  the narrow PersonCard `imageHoverOnly` option while preserving Home defaults.
+  Removed static text translations and location-card lifts; retained surface,
+  rule, colour and shadow feedback with roughly 500ms easing. This also removes
+  the prior arbitrary transform-transition/individual-translate mismatch.
+- Added Motion 12.x (resolved 12.43.0) only for Journey, using LazyMotion with
+  domAnimation and keyed AnimatePresence media. Desktop media has a persistent
+  overlapping grid: 16px/650ms directional entrance, 10px/250ms exit. Exiting
+  panels are immediately aria-hidden/inert; persistent rows/arrows keep focus.
+  Copy uses a 550ms short entrance. Radix height timing is scoped to Journey at
+  all widths (550ms open, 400ms close), leaving shared FAQ timing unchanged.
+- A small media presentation duplication keeps mobile figures within the open
+  disclosure and desktop figures outside the changing row. One collection and
+  selection/direction state remain. A hydration-safe live preference query uses
+  static SSR and immediately removes the animated subtree when reduced motion
+  is enabled, including mid-transition. Native noscript history remains static
+  and readable. No scroll observer, autoplay or broad Motion framework was added.
+- Final production build passed. Development and compiled-production browser
+  checks covered 1440/1280/1024/768/390/320px: slide/fade/height timing, rapid
+  selection, controls, resize, containment, live reduced motion, stationary
+  frames/text, 550ms picture hover/return and no image movement on name hover.
+  Keyboard/menu/focus, FAQ, CTA overlap, real links and Home 4:5 crops passed.
+  No-JS Home/Firm reading and containment passed at all six widths. Exiting-panel
+  accessibility and desktop/mobile 550ms height timing were checked explicitly;
+  final captures were inspected. No runtime errors occurred in final runs.
+- Updated current agent/design/architecture/route/layout guidance to record this
+  user-approved Journey exception; broader motion choreography remains later.
+  Concurrent unrelated content/testimonial/stock-avatar edits were preserved.
+  Final format, lint, typecheck and whitespace checks passed.
+
+## 2026-10-30 — Hooks layer and thin components
+
+- User asked for components to be markup-first with minimal logic, following
+  the iproduce-africa `hooks/` convention. Added a flat root `hooks/` folder
+  (one `use-*.ts` per file) and moved browser/stateful logic out of components:
+  `useMediaQuery` replaces four hand-written `matchMedia` +
+  `useSyncExternalStore` copies (practice areas, matters, journey ×2);
+  `useMediaQueryChange` (mobile nav), `useScrolledPast` (sticky header),
+  `useRevealOnScroll` (RevealGroup is now markup only), `useBringIntoView`
+  (matter preview on mobile), `useDirectionalSelection` (journey) and
+  `usePreloadAdjacentSlides` (hero).
+- Added `lib/media-queries.ts` (shared breakpoint/motion queries) and
+  `lib/video.ts` (PosterVideo type and URL check). Behaviour is unchanged.
+- Documented the rule in `docs/architecture.md`, `AGENTS.md` and `README.md`.
+
+## 2026-10-30 — Shared tokens, content rules and Vitest
+
+- Added the `--ease-editorial` theme token; 24 pasted
+  `ease-[cubic-bezier(0.22,1,0.36,1)]` classes now use `ease-editorial`. Two
+  multi-value practice-explorer transitions keep the literal curve.
+- Added `lib/format.ts` (`formatCount`, `formatIndex`, `initialsFrom`),
+  replacing 11 hand-written `padStart` calls and the testimonial initials chain.
+- Added `lib/content.ts` (`hasText`, `uniqueById`). Content modules now export
+  ready-to-render lists: `visiblePracticeAreas`, `visibleMatters`,
+  `homePeople`, `suppliedTestimonials`/`visibleTestimonials`,
+  `namedClients`/`visibleClients`, `homeInsights` and `visibleFaqs()`. Sections
+  no longer filter records. Output is unchanged.
+- Added Vitest 4 (resolved 4.1.12) mirroring iproduce-africa: root `tests/`,
+  Node environment, `vitest.config.mts`, `pnpm test`/`pnpm test:watch`. 22
+  tests cover format helpers, content rules, `playableSource` and content
+  integrity. Documented in `docs/testing.md`, AGENTS.md, README and workflow.

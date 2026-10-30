@@ -1,3 +1,5 @@
+import { hasText, uniqueById } from "@/lib/content";
+
 export type InsightPreview = {
   id: string;
   title: string;
@@ -50,3 +52,22 @@ export const supportingInsights: InsightPreview[] = [
     image: null,
   },
 ];
+
+const homeFeature = [featuredInsight, ...supportingInsights].find((item) =>
+  hasText(item.title),
+);
+
+/**
+ * Homepage selection: the first titled insight is featured, followed by up to
+ * three other titled, de-duplicated insights. `null` hides the section.
+ */
+export const homeInsights = homeFeature
+  ? {
+      feature: homeFeature,
+      supporting: uniqueById(
+        supportingInsights.filter(
+          (item) => hasText(item.title) && item.id !== homeFeature.id,
+        ),
+      ).slice(0, 3),
+    }
+  : null;

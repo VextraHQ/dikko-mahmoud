@@ -11,33 +11,87 @@ shared footer.
 It remains a no-index local presentation preview; see `roadmap.md` for the next
 approved scope and `routes/home.md` for source/content gates.
 
+## Firm review boundary
+
+The homepage remains on client visual review hold. `/the-firm` is implemented
+as a thin Server Component using `components/firm/*-section.tsx`; the route brief
+owns content gaps and review status. Home's facts/FAQ wrappers delegate to shared
+presentation, its people grid uses PersonCard, and its story CTA is a real Firm
+link. No other route or service is included.
+
 ## Ownership
 
-| Location                  | Responsibility                                                                |
-| ------------------------- | ----------------------------------------------------------------------------- |
-| `app/layout.tsx`          | Local fonts, global stylesheet, root metadata, user-added analytics           |
-| `app/(site)/layout.tsx`   | Shared header, skip link, main landmark and footer                            |
-| `app/(site)/page.tsx`     | Thin Server Component composing homepage sections                             |
-| `app/globals.css`         | Tailwind import, semantic theme/animation bridges, global defaults            |
-| `app/styles/motion.css`   | Custom entrance keyframes, reveal and marquee progressive fallbacks           |
-| `app/styles/surfaces.css` | Header material pseudo-elements and browser/preference fallbacks              |
-| `components/layout/`      | Shared chrome and unavailable-destination notice                              |
-| `components/home/`        | Homepage section entries and their local interactive presentation             |
-| `components/shared/`      | RevealGroup, ImageWithFallback, EditorialCover and reusable EnquiryCta        |
-| `components/ui/`          | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee      |
-| `content/`                | Code-owned navigation, firm facts and homepage editorial collections          |
-| `lib/`                    | Framework-independent helpers and future service boundaries                   |
-| `types/`                  | Shared contracts only when multiple domains need them                         |
-| `public/`, `app/fonts/`   | Local approved assets; variable fonts and their licences                      |
-| `sanity/`                 | Reserved boundary; no active CMS integration                                  |
-| `docs/`                   | Durable decisions, status, source references and dated implementation history |
+| Location                       | Responsibility                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------------- |
+| `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                     |
+| `app/(site)/layout.tsx`        | Shared header, skip link, main landmark and footer                                      |
+| `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                            |
+| `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                       |
+| `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                      |
+| `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                     |
+| `app/styles/surfaces.css`      | Header material pseudo-elements and browser/preference fallbacks                        |
+| `components/layout/`           | Shared chrome and unavailable-destination notice                                        |
+| `components/home/`             | Homepage section entries and their local interactive presentation                       |
+| `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation              |
+| `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback and EnquiryCta |
+| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee                |
+| `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts        |
+| `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state          |
+| `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries   |
+| `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                          |
+| `types/`                       | Shared contracts only when multiple domains need them                                   |
+| `public/`, `app/fonts/`        | Local approved assets; variable fonts and their licences                                |
+| `sanity/`                      | Reserved boundary; no active CMS integration                                            |
+| `docs/`                        | Durable decisions, status, source references and dated implementation history           |
 
 Keep full section entry files named `*-section.tsx`; supporting components keep
 descriptive names. Contracts used by one content module stay in that module.
 Do not introduce a generic Section/card configuration framework or create
 folders for speculative future features.
 
+## Components, hooks and helpers
+
+Components are for markup. A `.tsx` component should read as layout and
+content: props in, JSX out, plus at most a line or two of glue (`useState` for
+a simple toggle, an event handler that calls a hook). Anything a reader has to
+stop and work through belongs elsewhere:
+
+| Logic                                                              | Home             |
+| ------------------------------------------------------------------ | ---------------- |
+| Effects, observers, `matchMedia`, event listeners, timers, `rAF`   | `hooks/use-*.ts` |
+| State with rules (direction, derived defaults, multi-step updates) | `hooks/use-*.ts` |
+| Pure functions with no React (URL checks, formatting, constants)   | `lib/*.ts`       |
+| Copy, collections, labels                                          | `content/*.ts`   |
+| Which records are ready to show (filters, caps, fallbacks)         | `content/*.ts`   |
+
+Hook conventions follow the iproduce-africa project: a flat root `hooks/`
+folder, one hook per kebab-case `use-*.ts` file, a short doc comment saying
+what it does and why, and a small returned object (`{ ref, scrolled }`) rather
+than positional tuples. Mark hook files `"use client"`. Hooks own behaviour,
+never markup or copy. Reuse an existing hook before writing a new one; read
+media queries through `useMediaQuery(mediaQueries.*)` from
+`lib/media-queries.ts`, never a hand-written `matchMedia` subscription.
+
+Sections read ready-made lists from content (`visiblePracticeAreas`,
+`visibleMatters`, `homePeople`, `visibleTestimonials`, `visibleClients`,
+`homeInsights`, `visibleFaqs()`), built with `hasText`/`uniqueById` from
+`lib/content.ts`. A component may still check an optional field before
+showing it (a role line, for example); deciding whether a whole record is
+publishable belongs to content. This is also where a future Sanity adapter
+plugs in. Use `formatIndex`/`formatCount` from `lib/format.ts` for "01"-style
+labels and `initialsFrom` for avatar initials.
+
+Current hooks: `useMediaQuery`, `useMediaQueryChange`, `useScrolledPast`,
+`useRevealOnScroll`, `useBringIntoView`, `useDirectionalSelection` and
+`usePreloadAdjacentSlides`. shadcn primitives in `components/ui/` (such as
+Carousel) keep their own internal state, as generated.
+
 ## Styling ownership
+
+The site's signature ease-out curve is the theme token `--ease-editorial`
+(`cubic-bezier(0.22, 1, 0.36, 1)`), used as the `ease-editorial` class. Do not
+paste the raw curve into class names. Multi-value transitions
+(`ease-[curve,ease,ease]`) and CSS-file keyframes may keep the literal value.
 
 Use Tailwind beside the component for layout, ordinary presentation, responsive
 changes, hover/focus/press feedback and data/ARIA-driven visibility. `cn()` may
@@ -52,9 +106,10 @@ surface/browser-preference rules. Scope selectors with component classes or
 Use Tailwind v4 `@theme` bridges; no parallel token catalogue or `@apply` layer.
 
 Motion is CSS-first. The FAQ uses Radix height-variable CSS keyframes; button
-press and focus feedback stay in Tailwind. No general animation library or autoplay plugin is
-installed. A future Motion pass must address an approved choreography/presence
-need rather than move existing simple CSS feedback into JavaScript. Sections
+press and focus feedback stay in Tailwind. The user has now approved Motion
+for Firm Journey content transitions, using LazyMotion/domAnimation and keyed
+AnimatePresence media panels. No autoplay plugin is installed. Broader Motion
+choreography remains later; do not move simple hover feedback into JavaScript. Sections
 continue to own their layout and content when wrapped by a motion helper.
 
 ## Server and client boundaries
@@ -63,18 +118,20 @@ Pages, layouts and section entries remain Server Components. Only state,
 framework client hooks, browser APIs or event handlers justify a client boundary.
 Server-rendered children may pass through a narrow client wrapper.
 
-| Client owner                         | State and side effects                                                                                         |
-| ------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
-| `StickyHeader`                       | One IntersectionObserver and nullable scroll state; fixed header geometry, surface-opacity changes only        |
-| `SiteNavigation`                     | `usePathname` and exact/slash-boundary route matching                                                          |
-| `MobileNavigation`                   | Controlled Sheet; closes on Home/logo activation and desktop resize; media listener cleaned up                 |
-| `PreviewDestination`, Sheet          | Radix Dialog focus management for unavailable routes/menu                                                      |
-| Carousel, HeroCarousel/Copy/Controls | Embla manual selection/fade; stale image-decode requests cancelled; subscriptions cleaned up                   |
-| `RevealGroup`                        | One observer for eligible offscreen children; focus/reduced-motion completion; observer/listener cleanup       |
-| `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                         |
-| `PracticeAreaExplorer`               | Nullable selected index plus one `matchMedia` subscription through `useSyncExternalStore`                      |
-| `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; one-frame mobile preview focus/scroll after activation |
-| `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag         |
+| Client owner                         | State and side effects                                                                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| `StickyHeader`                       | `useScrolledPast` (one IntersectionObserver, nullable state) and pathname-scoped mobile backing; fixed geometry           |
+| `SiteNavigation`                     | `usePathname` and exact/slash-boundary route matching                                                                     |
+| `MobileNavigation`                   | Controlled Sheet; closes on available-route/logo activation and, via `useMediaQueryChange`, on desktop resize             |
+| `PreviewDestination`, Sheet          | Radix Dialog focus management for unavailable routes/menu                                                                 |
+| Carousel, HeroCarousel/Copy/Controls | Embla manual selection/fade; `usePreloadAdjacentSlides` decodes neighbours and cancels stale requests                     |
+| `RevealGroup`                        | Markup only; `useRevealOnScroll` owns the observer, focus/reduced-motion completion and cleanup                           |
+| `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                                    |
+| `PracticeAreaExplorer`               | Nullable selected index plus `useMediaQuery(mediaQueries.desktop)`                                                        |
+| `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; `useBringIntoView` focuses/scrolls the preview on mobile          |
+| `JourneyExplorer`                    | `useDirectionalSelection` plus desktop/reduced-motion `useMediaQuery`; controlled Accordion, end-bounded arrows           |
+| `VideoPoster`                        | Click-to-mount iframe/native video; player focus and close-to-trigger focus return; no provider request before activation |
+| `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag                    |
 
 The hero keeps its panel, CTA and controls outside changing slides. Only its
 opening image is explicitly preloaded; adjacent images are warmed after the
@@ -113,8 +170,12 @@ remain inside the clipped viewport before hydration and without JavaScript.
 An empty testimonial collection omits the section. Missing media uses explicit
 slots; approved names without testimonial images use derived initials.
 
-Local `content/people.ts`, `testimonials.ts` and `insights.ts` own these preview
-records. Insights excludes the feature ID and duplicate support IDs, capped at
+`content/people.ts` owns canonical IDs, slugs, names, roles, optional portraits,
+founder biography/milestones and ID-based Home/advisory selections. Neutral group
+slots stay separate from real records. PersonCard shows a preparation notice
+until `profileAvailable` enables the real `/people/[slug]` link. Firm uses a small
+crop/role override for its founder composition. `testimonials.ts` and `insights.ts`
+own their editorial preview records. Insights excludes the feature ID and duplicate support IDs, capped at
 three. Future Sanity selection/publication filtering belongs in a normalization
 adapter rather than presentation components; no CMS client or speculative fetch
 layer has been introduced.
@@ -129,10 +190,11 @@ A `noscript` native disclosure list reuses the same server-rendered answers.
 The office thumbnail keeps ImageWithFallback; small identity circles in FAQ and
 client perspectives use the shared Radix Avatar/Image/Fallback primitives.
 Starter copy and the `Faq` record shape live
-in `content/faqs.ts`. The section accepts an optional ordered `items` collection;
-the page can pass normalized Sanity results later without changing its markup.
-Omitted props use the current local records; an empty/blank collection omits the
-section. No CMS query or integration is active yet.
+in `content/faqs.ts`. The shared section accepts explicit `intro` and ordered `items`; its narrow
+heading class override matches the Firm mobile reference. Home retains a thin
+wrapper with its original local defaults. An empty/blank collection omits the
+section. Firm-specific questions and explicit missing-answer slots live beside
+Home records in `content/faqs.ts`. No CMS query or integration is active yet.
 
 `EnquiryCta` is a separate Server Component in `components/shared/`, placed by
 the page so each future route can choose `variant="pale"` or `variant="white"`.
@@ -210,3 +272,26 @@ rate-limiting, analytics, deployment and consent work require their own approved
 scope. No provider credentials or service clients belong in presentation
 components. Secondary pages, remaining homepage sections and the later motion
 and Claude collaboration passes remain separately scoped.
+
+## Firm Journey and video
+
+Journey retains one responsive Accordion index/content DOM and one selected
+record. At `lg`, the selected media is presented separately in a persistent
+right-hand grid, allowing old/new keyed media to overlap during a directional
+Motion slide/fade. Exiting media is immediately aria-hidden/inert. Controls stay
+mounted outside the changing panels. Below `lg`, a small media presentation
+duplication keeps the figure inside its disclosure row; that row can close. Empty mobile
+selection derives 1993 on desktop; explicit selections survive resizing. A
+server-rendered native-details noscript list keeps all five stories accessible.
+A hydration-safe, live reduced-motion query renders static content during SSR
+and cancels the animated subtree immediately when reduction is enabled. No
+hover/autoplay/scroll selection or measurement effect is used. The server
+section resolves person milestones/media from canonical people before passing
+prepared items to the interactive explorer.
+
+VideoPoster accepts an optional explicit file/embed source and rejects blank or
+invalid URLs. It renders ImageWithFallback alone without video. A valid video
+adds one play control; iframe/native video mounts only on activation and is
+removed on close, returning focus. Firm currently supplies neither approved
+poster nor video, so it shows an intentional decorative cover. No provider or
+video URL is invented. VideoPoster itself needs no provider dependency.

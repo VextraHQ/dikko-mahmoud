@@ -210,3 +210,34 @@ below `lg` and three on desktop; the main desktop grid pairs office information
 with navigation/social/contact groups. Email can wrap at narrow widths. Mobile
 links/social controls reserve 44px targets, and the copyright/location row stacks
 on mobile. A white CTA uses the same geometry as the pale-blue homepage card.
+
+## The Firm
+
+The navy hero uses the existing shared header, desktop two-column copy and a
+wide poster crop; mobile stacks copy above a 240px poster. Its mobile header
+backing alone follows the deep navy route surface. Home header geometry is
+unchanged. Firm headings follow the source 36/42px mobile hero and 32/40px
+section text, growing to the shared desktop scale.
+
+Story, values and process introductions use editorial desktop columns and
+stack on mobile. Process is a semantic ordered list: one column, two from `sm`,
+three from `lg`. Presence pairs introduction/media from `lg`; contact cards use
+one/two/three columns and the canonical Lagos liaison label.
+
+Journey switches at `lg` (64rem): 44% index, 49% stable media panel, with arrows
+below the media. The desktop figure uses a stable grid for overlapping keyed Motion panels;
+mobile/tablet keeps its figure inside the disclosure row.
+Year labels reserve space for Today; content wraps naturally. Founder content
+pairs a smaller editorial card with biography/milestones on desktop and stacks
+on mobile. Every advisory heading stays visible: three cards from `lg`, compact
+two-column cards below it, with the third wrapping to a new row. Firm founder/
+advisory media now uses square crops at every width, including
+neutral slots; Home retains its 4:5 portraits. Decorative slot numbers are
+centred and sized for the smaller mobile squares. Neutral slots do not pose
+as real lawyers. Shared CTA/footer overlap uses the existing contract.
+
+Firm picture frames and all reading text remain stationary during hover. A local
+picture group owns the inner 2% zoom and soft shadow, with 550ms eased entry and
+return; names/captions cannot trigger it. Static text uses only colour/rule
+feedback. Motion offsets belong to Journey’s incoming/outgoing content, never
+the page container or layout geometry.

@@ -3,12 +3,11 @@ import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
-  practiceAreas,
   practiceAreasIntro as intro,
+  visiblePracticeAreas as areas,
 } from "@/content/practice-areas";
 
 export function PracticeAreasSection() {
-  const areas = practiceAreas.filter((area) => area.title.trim());
   if (!areas.length) return null;
   return (
     <section

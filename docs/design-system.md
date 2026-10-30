@@ -322,3 +322,41 @@ The shadcn MIT notice is retained in `licenses/shadcn-ui.txt`. Future registry
 items should be reviewed for fit, imports, dependencies and preference/focus
 behaviour before changing shared primitives. Do not run bulk replacement tools
 over the current homepage.
+
+## Firm reuse
+
+Home delegates facts, FAQ and person-card presentation to shared components,
+retaining its defaults. Firm selects the pale facts surface and its explicit FAQ
+intro/items. VideoPoster uses the existing ImageWithFallback, EditorialCover and
+Button; no media source means no play control. Journey composes the shared
+Accordion and small Button arrows. All new layout/state classes stay beside
+components. No new stylesheet or token set is needed; Motion is now scoped to
+Journey’s approved content swaps.
+Unapproved concept imagery and replacement portraits remain covers/initials;
+missing historical/FAQ copy and team assignments stay explicit review slots.
+
+The approved Firm refinement adds restrained CSS hover/focus feedback to static
+rows, people media, location cards and Journey controls/content. Static content
+keeps ordinary semantics/cursors; keyboard feedback follows actual controls.
+Hover movement is `motion-safe`, with immediate colour feedback under reduced
+motion. PersonCard accepts `portraitClassName` for Firm’s square crop and
+`imageHoverOnly` for picture-local interaction; EditorialCover accepts
+`markClassName` for compact square numbers. Defaults preserve Home. The later
+general Motion choreography remains separate from the approved Journey swap.
+
+## Firm timing and Journey Motion — 2026-10-29
+
+Following review of iProduce Africa’s MotionFade, card zoom and keyed-content
+patterns, the user approved a slower, calmer Firm pass. CSS picture zoom/shadow
+feedback uses 550ms with `cubic-bezier(0.22,1,0.36,1)`. Frames stay stationary;
+hovering names/captions cannot move or zoom their pictures. Static text has no
+translation; colour/rule/surface feedback uses about 500ms. Location cards keep
+soft shadows without vertical movement.
+
+Journey alone uses Motion (12.x), with LazyMotion/domAnimation and keyed
+AnimatePresence panels: a 650ms 16px directional entrance, a 250ms 10px exit and
+550ms short copy entrance. Radix height timing is local to Journey at every width:
+550ms opening/400ms closing; shared FAQ timing is unchanged. This resolves a
+content-presence need rather than replacing simple CSS. Reduced motion renders
+static panels immediately, including during an in-flight transition; SSR and
+no-JS history remain readable. No new scroll observer or autoplay is introduced.

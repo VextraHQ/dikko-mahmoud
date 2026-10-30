@@ -19,6 +19,14 @@ Footer contact details
 follow the supplied reference; real social profiles and booking/secondary pages
 still need their approved destinations. Email and phone links are available.
 
+The homepage is on visual review hold pending client identity/media approval.
+The Firm (`/the-firm`) is implemented as a no-index presentation preview. It includes
+the agreed Journey, founder/advisory previews, process, presence and shared facts/FAQ/CTA.
+Original media, group assignments and some editorial copy remain approval gates. Use the
+[page spec](docs/routes/the-firm.md) and
+[new-chat prompt](docs/handoffs/the-firm-next-chat.md) for the current checkpoint. Preserve Home's
+appearance while extracting shared pieces and enabling real Firm links.
+
 ## Stack
 
 - Next.js 16 with the App Router
@@ -27,7 +35,8 @@ still need their approved destinations. Email and phone links are available.
 - Tailwind CSS 4
 - Shadcn-style Button/Sheet/Accordion/Avatar, Embla Carousel, Lucide UI icons
   and React Icons for social brands; shared form controls and React Hook Form
-  adapter prepared for the later enquiry page
+  adapter prepared for the later enquiry page; Motion is scoped to Firm Journey
+  content transitions
 - ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
 - Prettier with Tailwind class sorting
 - pnpm
@@ -62,6 +71,7 @@ pnpm format     # Format the repository
 pnpm format:check # Check formatting without writing
 pnpm lint       # Run ESLint
 pnpm typecheck  # Generate Next.js types and run TypeScript checks
+pnpm test       # Run Vitest unit tests (pnpm test:watch while working)
 ```
 
 ## Project structure
@@ -70,7 +80,9 @@ pnpm typecheck  # Generate Next.js types and run TypeScript checks
 app/          Routes, layouts, metadata, theme entry and focused styles/ files
 components/   Shared and route-specific React presentation
 content/      Navigation and homepage presentation copy
+hooks/        Reusable client hooks (use-*.ts): browser APIs and stateful rules
 lib/          Framework-independent helpers and future service boundaries
+tests/        Vitest unit tests for lib/ and content/ (see docs/testing.md)
 types/        Shared TypeScript contracts
 public/       Static assets
 sanity/       Reserved CMS boundary; Sanity is not configured

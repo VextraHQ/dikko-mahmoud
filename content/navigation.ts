@@ -1,6 +1,6 @@
 export const navigation = [
   { label: "Home", href: "/", available: true },
-  { label: "The firm", href: "/the-firm", available: false },
+  { label: "The firm", href: "/the-firm", available: true },
   { label: "Practice areas", href: "/practice-areas", available: false },
   { label: "People", href: "/people", available: false },
   { label: "Insights", href: "/insights", available: false },

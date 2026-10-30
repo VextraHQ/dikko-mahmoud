@@ -1,3 +1,5 @@
+import { hasText } from "@/lib/content";
+
 export type TestimonialPreview = {
   id: string;
   quote: string | null;
@@ -19,6 +21,8 @@ export const clientPerspectives = {
 };
 
 // Anonymous layout slots only. Never attribute sample text to a real client.
+// Images are Unsplash stock portraits (free licence), decorative placeholders
+// until approved client photos are supplied.
 export const testimonialPreviews: TestimonialPreview[] = [
   {
     id: "pending-01",
@@ -26,7 +30,7 @@ export const testimonialPreviews: TestimonialPreview[] = [
     name: null,
     role: null,
     organisation: null,
-    image: null,
+    image: { src: "/images/stock/testimonial-01.jpg", alt: "" },
   },
   {
     id: "pending-02",
@@ -34,7 +38,7 @@ export const testimonialPreviews: TestimonialPreview[] = [
     name: null,
     role: null,
     organisation: null,
-    image: null,
+    image: { src: "/images/stock/testimonial-02.jpg", alt: "" },
   },
   {
     id: "pending-03",
@@ -42,6 +46,16 @@ export const testimonialPreviews: TestimonialPreview[] = [
     name: null,
     role: null,
     organisation: null,
-    image: null,
+    image: { src: "/images/stock/testimonial-03.jpg", alt: "" },
   },
 ];
+
+/** Testimonials with an approved quote. */
+export const suppliedTestimonials = testimonialPreviews.filter((item) =>
+  hasText(item.quote),
+);
+
+/** Placeholder slots show only while no approved quote exists. */
+export const visibleTestimonials = suppliedTestimonials.length
+  ? suppliedTestimonials
+  : testimonialPreviews;

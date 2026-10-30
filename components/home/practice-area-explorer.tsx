@@ -3,30 +3,17 @@
 import { ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import {
   practiceAreasIntro as intro,
   type PracticeArea,
 } from "@/content/practice-areas";
+import { useMediaQuery } from "@/hooks/use-media-query";
+import { mediaQueries } from "@/lib/media-queries";
 import { cn } from "@/lib/utils";
-
-const desktopQuery = "(min-width: 64rem)";
-
-function subscribeToDesktopLayout(onChange: () => void) {
-  const query = window.matchMedia(desktopQuery);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-}
-
-function readDesktopLayout() {
-  return window.matchMedia(desktopQuery).matches;
-}
-
-function readServerLayout() {
-  return false;
-}
+import { formatCount, formatIndex } from "@/lib/format";
 
 export function PracticeAreaExplorer({
   areas,
@@ -36,11 +23,7 @@ export function PracticeAreaExplorer({
   children: ReactNode;
 }) {
   const [selected, setSelected] = useState<number | null>(null);
-  const isDesktop = useSyncExternalStore(
-    subscribeToDesktopLayout,
-    readDesktopLayout,
-    readServerLayout,
-  );
+  const isDesktop = useMediaQuery(mediaQueries.desktop);
   const expanded = selected ?? (isDesktop ? 0 : null);
 
   return (
@@ -49,7 +32,7 @@ export function PracticeAreaExplorer({
       <ol className="mt-10 border-t border-white/20 lg:mt-12 lg:w-[46%]">
         {areas.map((area, index) => {
           const active = expanded === index;
-          const number = String(index + 1).padStart(2, "0");
+          const number = formatIndex(index);
           const triggerId = `practice-trigger-${area.id}`;
           const panelId = `practice-panel-${area.id}`;
 
@@ -70,7 +53,7 @@ export function PracticeAreaExplorer({
                   className={cn(
                     "relative grid min-h-18 w-full grid-cols-[1.5rem_1fr_2rem] items-center gap-3 py-5 text-left text-white/70 hover:text-white sm:gap-4",
                     "transition-[color,transform] duration-[200ms,160ms] ease-[ease] motion-reduce:transition-none",
-                    "before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-300 before:ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:before:transition-none",
+                    "before:ease-editorial before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-300 motion-reduce:before:transition-none",
                     active && "text-white before:scale-y-100",
                     !(isDesktop && active) &&
                       "motion-safe:active:scale-[0.985]",
@@ -124,11 +107,16 @@ export function PracticeAreaExplorer({
                     />
                     <figcaption className="motion-safe:group-data-[active=true]/practice-panel:animate-practice-caption relative">
                       <p className="text-[11px]/4 text-white/70 tabular-nums">
-                        {number} / {String(areas.length).padStart(2, "0")}
+                        {number} / {formatCount(areas.length)}
                       </p>
                       <p className="mt-3 max-w-md font-serif text-3xl/8 sm:text-4xl/10 xl:text-5xl/12">
                         {area.title}
                       </p>
+                      {area.summary && (
+                        <p className="motion-safe:group-data-[active=true]/practice-panel:animate-practice-summary mt-4 max-w-md text-sm/6 text-white/80 sm:text-base/7">
+                          {area.summary}
+                        </p>
+                      )}
                       <PreviewDestination>
                         <ArrowButton
                           variant="glass"

@@ -6,9 +6,8 @@ import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
-  featuredInsight,
+  homeInsights,
   insightsHome as content,
-  supportingInsights,
   type InsightPreview,
 } from "@/content/insights";
 
@@ -48,17 +47,8 @@ function InsightImage({
 }
 
 export function InsightsSection() {
-  const feature = [featuredInsight, ...supportingInsights].find((item) =>
-    item?.title.trim(),
-  );
-  if (!feature) return null;
-  const supporting = supportingInsights
-    .filter((item) => item.title.trim() && item.id !== feature.id)
-    .filter(
-      (item, index, items) =>
-        items.findIndex((candidate) => candidate.id === item.id) === index,
-    )
-    .slice(0, 3);
+  if (!homeInsights) return null;
+  const { feature, supporting } = homeInsights;
   return (
     <section
       id="insights"

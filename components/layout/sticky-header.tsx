@@ -1,27 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
+import type { ReactNode } from "react";
+import { useScrolledPast } from "@/hooks/use-scrolled-past";
 
 export function StickyHeader({ children }: { children: ReactNode }) {
-  const marker = useRef<HTMLDivElement>(null);
-  // Keep a readable shell until scroll enhancement is ready (also the no-JS fallback).
-  const [scrolled, setScrolled] = useState<boolean | null>(null);
-  useEffect(() => {
-    if (!marker.current || !("IntersectionObserver" in window)) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      setScrolled(!entry.isIntersecting && entry.boundingClientRect.top < 0);
-    });
-    observer.observe(marker.current);
-    return () => observer.disconnect();
-  }, []);
+  const pathname = usePathname();
+  // `null` keeps the readable no-JS shell until scroll tracking is ready.
+  const { markerRef, scrolled } = useScrolledPast<HTMLDivElement>();
   return (
     <>
       <div
         aria-hidden="true"
-        className="bg-primary pointer-events-none absolute inset-x-0 top-0 h-22 lg:hidden"
+        className={cn(
+          "pointer-events-none absolute inset-x-0 top-0 h-22 lg:hidden",
+          pathname === "/the-firm" ? "bg-navy-deep" : "bg-primary",
+        )}
       />
       <div
-        ref={marker}
+        ref={markerRef}
         aria-hidden="true"
         className="pointer-events-none absolute top-16 left-0 h-px w-px"
       />

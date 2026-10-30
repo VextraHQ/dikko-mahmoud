@@ -1,13 +1,13 @@
 # Dikko & Mahmoud Website Agent Guide
 
-This repository is the future public website for Dikko & Mahmoud. The current
-milestone is design-system foundations and homepage development from the
-supplied desktop/mobile Figma references. The first runtime checkpoint covers
-fonts, theme, Button, sticky navigation, hero, firm facts/story, selected
-clients, practice areas, selected matters, People, client perspectives, insights,
-FAQ, enquiry CTA and footer;
-consult the roadmap for review status
-and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
+This repository is the future public website for Dikko & Mahmoud. The homepage
+presentation is implemented from navigation through footer and is on visual
+review hold while the client approves identity and supplies imagery/content.
+The Firm (`/the-firm`) is implemented for local visual review, specified in
+`docs/routes/the-firm.md`; the paste-ready prompt is
+`docs/handoffs/the-firm-next-chat.md` (historical kickoff). Original media, advisory
+assignments and missing editorial copy remain approval gates.
+Shared site chrome belongs to `app/(site)/`.
 
 ## Start here
 
@@ -17,21 +17,23 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 4. Read `docs/architecture.md` before changing structure or ownership.
 
    For UI, also read `docs/design-system.md`, `docs/layout-system.md`, and
-   `docs/routes/home.md`.
+   the affected route brief. For The Firm, use `docs/routes/the-firm.md`; read the
+   homepage brief only where shared pieces are affected.
 
 5. Inspect `git status --short` and the current diff before editing.
 
 ## Current boundaries
 
-- Prioritize the design foundations and homepage from navigation to footer.
-  Secondary pages follow this milestone.
+- Preserve the homepage visual hold. Keep The Firm within its agreed review
+  spec. Mechanical shared extractions and real Firm link activation are allowed
+  while preserving Home’s appearance. Other secondary pages follow separately.
 - Use Tailwind defaults where they fit and shadcn for reusable interactive
   primitives. Add custom tokens only for meaningful brand differences. UI icon
   packages are permitted; preserve supplied brand assets.
 - The former holding page has been replaced by the no-index homepage preview;
   do not restore its unrelated visual choices as the design system.
 - Do not connect Sanity, Resend, Upstash, analytics, databases, or deployment
-  services during the homepage presentation milestone.
+  services during this presentation checkpoint.
 - Do not invent client claims, people, practice areas, contact details,
   testimonials, awards, metrics, or imagery.
 - The supplied Figma frames establish the design reference; resolve missing
@@ -57,7 +59,10 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
   Checkbox/NativeSelect and React Hook Form foundation before secondary pages;
   see `docs/forms.md`. FAQ height motion and button press/focus feedback are
   CSS-only. No UIAble/Animate UI package or theme reset was installed.
-  Whole-page presentation QA and final content review are next. The later
+  Final homepage/client visual and content approval remain on hold. The Firm’s
+  desktop year selector + mobile accordion is confirmed, with visible advisory
+  groups, canonical people, shared cards and a conditional video poster. Read its
+  spec for source/content gaps, reuse boundaries and verification. The later
   Claude workflow remains separate.
 
 ## File ownership
@@ -65,17 +70,31 @@ and remaining content gates. Shared site chrome now belongs to `app/(site)/`.
 - `app/` owns routes, layouts, metadata, and global styles.
 - `components/` owns reusable and route-specific presentation.
 - `content/` owns presentation copy and collections.
-- `lib/` owns shared helpers and future service boundaries.
+- `hooks/` owns reusable client hooks (`use-*.ts`, one per file): effects,
+  observers, media queries and stateful rules.
+- `lib/` owns pure helpers (`format.ts`, `content.ts`, `video.ts`), shared media
+  queries and future service boundaries.
+- `tests/` owns Vitest unit tests for `lib/` and `content/`; see `docs/testing.md`.
 - `types/` owns contracts shared across domains, only when needed.
 - `public/` will own approved static assets.
 - `sanity/` reserves the future CMS boundary; it is not an active integration.
 - `docs/` owns durable project decisions, status, and workflow.
 
+Components are for markup: props in, JSX out, minimal glue. Move effects,
+observers, `matchMedia`, listeners, timers and stateful rules into a hook in
+`hooks/`, and pure functions into `lib/`. Reuse existing hooks (for example
+`useMediaQuery(mediaQueries.desktop)`) instead of re-writing browser logic.
+Content modules export ready-to-render lists (`visibleMatters`, `homePeople`);
+sections must not filter records themselves. Use `formatIndex`/`formatCount`
+for "01"-style numbers and the `ease-editorial` class for the site's easing
+curve. When adding a pure helper or content rule, add a test in `tests/`.
+See `docs/architecture.md` → "Components, hooks and helpers".
+
 Keep pages and layouts as Server Components unless interactivity requires a
 client boundary. Add abstractions only when an approved, repeated need makes
 ownership clearer.
 
-For homepage work, name full section entry files `*-section.tsx`; supporting
+For route sections, name full section entry files `*-section.tsx`; supporting
 components keep descriptive `.tsx` names. Keep copy and collections in
 `content/*.ts`, with shared firm facts owned by the firm domain rather than
 duplicated between previews. Put ordinary presentation, responsive states and
@@ -83,8 +102,9 @@ simple transitions in component Tailwind classes. `app/globals.css` owns the
 theme/global defaults and imports `app/styles/motion.css` and `surfaces.css`
 for custom keyframes/progressive fallbacks and complex header materials.
 Do not add CSS modules to component folders or a new stylesheet per section.
-Shared motion helpers must not own section layout/content. Motion remains a
-later, explicitly scoped pass; do not install a library to replace simple CSS.
+Shared motion helpers must not own section layout/content. Motion is now approved
+only for Firm Journey content swaps; the broader choreography pass remains later.
+Keep hover feedback in CSS rather than expanding the runtime to other sections.
 Selected matters change only on click/tap or keyboard activation, never hover.
 
 ## Verification
@@ -95,6 +115,7 @@ For configuration or code changes, run:
 pnpm format:check
 pnpm lint
 pnpm typecheck
+pnpm test
 pnpm build # (not always)
 ```
 

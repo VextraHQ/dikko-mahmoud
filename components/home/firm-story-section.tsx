@@ -1,5 +1,5 @@
 import { FirmImage } from "@/components/home/firm-image";
-import { PreviewDestination } from "@/components/layout/preview-destination";
+import Link from "next/link";
 import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -99,9 +99,9 @@ export function FirmStorySection() {
               </figcaption>
             </figure>
             <div className="self-start xl:self-center">
-              <PreviewDestination>
-                <ArrowButton>{story.action}</ArrowButton>
-              </PreviewDestination>
+              <ArrowButton asChild>
+                <Link href="/the-firm">{story.action}</Link>
+              </ArrowButton>
             </div>
           </div>
         </div>

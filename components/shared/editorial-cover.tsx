@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { firmBrand } from "@/content/firm";
 
 // Decorative typography, not substitute photography. Content/geometry belong
@@ -5,9 +6,11 @@ import { firmBrand } from "@/content/firm";
 export function EditorialCover({
   label,
   mark = firmBrand.initials,
+  markClassName,
 }: {
   label?: string;
   mark?: string;
+  markClassName?: string;
 }) {
   return (
     <span
@@ -16,7 +19,12 @@ export function EditorialCover({
     >
       <span className="absolute -top-12 -right-24 size-96 rounded-full border border-white/10" />
       <span className="absolute -top-4 -right-16 size-80 rounded-full border border-white/10" />
-      <span className="absolute inset-0 flex items-center justify-center pb-24 font-serif text-8xl text-white/15 sm:text-9xl">
+      <span
+        className={cn(
+          "absolute inset-0 flex items-center justify-center pb-24 font-serif text-8xl text-white/15 sm:text-9xl",
+          markClassName,
+        )}
+      >
         {mark}
       </span>
       {label && (
