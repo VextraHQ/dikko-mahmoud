@@ -939,3 +939,56 @@
   Node environment, `vitest.config.mts`, `pnpm test`/`pnpm test:watch`. 22
   tests cover format helpers, content rules, `playableSource` and content
   integrity. Documented in `docs/testing.md`, AGENTS.md, README and workflow.
+
+## 2026-10-30 — Routes, SiteLink, metadata and system pages
+
+- Added `lib/routes.ts` and `SiteLink`; navigation, footer, header, homepage
+  sections and person cards now link through the registry. Pages go live by
+  joining `launchedRoutes` (currently Home and The Firm).
+- Added `content/site.ts` and `lib/metadata.ts` (trimmed from the
+  iproduce-africa pattern), `app/robots.ts` and `app/sitemap.ts`. The site stays
+  no-index via `siteConfig.indexable`.
+- Extracted `SiteShell` and `app/fonts.ts`. Added the branded 404, the
+  `(site)`/root/global error boundaries, `StatusPage`, `ErrorView` and
+  `useReportError`.
+- Added Vitest coverage for routes and metadata.
+- Verified in the browser: 404 status and layout (desktop/mobile), preview
+  dialogs on unlaunched links, Firm meta tags, robots.txt and sitemap.xml.
+  Not verified: the error boundaries were not triggered at runtime.
+
+## 2026-10-30 — Centred status pages
+
+- The user chose the centred 404 after reviewing wireframes. `StatusPage` drops
+  the "Where to next" card, which repeated the navbar, and centres the message
+  and actions over a large faint watermark. Header and footer stay. A contact
+  card can return once phone/address details are approved.
+
+## 2026-10-30 — Hero autoplay
+
+- The designer's comp autoplays the hero; the user approved adding it. Added
+  `embla-carousel-autoplay` 8.6.0 (matching Embla core/Fade) and
+  `hooks/use-carousel-autoplay.ts`, which owns the pause rules. The plugin only
+  runs the timer and hidden-tab pause.
+- 7-second delay in `content/home.ts` (the Figma five seconds felt rushed for
+  reading). Pause/play button before the arrows; the active slide line fills
+  as a countdown via `--animate-slide-progress` in `globals.css` and
+  `slide-progress` in `motion.css`.
+- Verified in the browser: advances after 7s, pause holds the slide, play
+  resumes, Next stops autoplay for good; desktop/mobile control layout.
+  Not verified: hover, off-screen and reduced-motion pausing (the browser pane
+  can't emulate them reliably).
+- Mobile control bar (user-approved option 1 after wireframes): the three
+  identical circles felt repetitive, so pause became a light icon grouped with
+  the counter and one countdown line; arrows remain the only round buttons.
+  `ProgressLine` and `AutoplayToggle` in `hero-controls.tsx` serve both sizes.
+- Hover/off-screen now freeze and continue (user-approved UX): the hook stores
+  the plugin's `timeUntilNext()`, finishes that remainder itself, then hands
+  back to the plugin; the line's animation is paused rather than replaced by a
+  solid line. Verified by simulated pointer events (held slide, resumed with
+  remaining time); the pane does not tick CSS animations, so the visual freeze
+  itself was not observed.
+- Hover hold narrowed to the controls (user feedback): a cursor resting
+  anywhere on the full-height hero kept it from ever advancing. Only elements
+  marked `data-autoplay-hold` (desktop arrows/pause group, slide lines and the
+  hero CTA, so the headline doesn't change as it is clicked) now
+  hold the countdown; the rest of the hero keeps rotating.

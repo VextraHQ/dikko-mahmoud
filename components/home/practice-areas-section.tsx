@@ -1,11 +1,12 @@
 import { PracticeAreaExplorer } from "@/components/home/practice-area-explorer";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
   practiceAreasIntro as intro,
   visiblePracticeAreas as areas,
 } from "@/content/practice-areas";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function PracticeAreasSection() {
   if (!areas.length) return null;
@@ -27,11 +28,9 @@ export function PracticeAreasSection() {
           <p className="mt-5 max-w-md text-sm/6 text-white/75 sm:text-base/7">
             {intro.description}
           </p>
-          <PreviewDestination>
-            <ArrowButton variant="inverse" className="mt-6" size="sm">
-              {intro.action}
-            </ArrowButton>
-          </PreviewDestination>
+          <ArrowButton asChild variant="inverse" className="mt-6" size="sm">
+            <SiteLink href={routes.practiceAreas}>{intro.action}</SiteLink>
+          </ArrowButton>
         </PracticeAreaExplorer>
       </div>
     </section>

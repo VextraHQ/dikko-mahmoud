@@ -81,7 +81,7 @@ app/          Routes, layouts, metadata, theme entry and focused styles/ files
 components/   Shared and route-specific React presentation
 content/      Navigation and homepage presentation copy
 hooks/        Reusable client hooks (use-*.ts): browser APIs and stateful rules
-lib/          Framework-independent helpers and future service boundaries
+lib/          Helpers, route registry, metadata builders, service boundaries
 tests/        Vitest unit tests for lib/ and content/ (see docs/testing.md)
 types/        Shared TypeScript contracts
 public/       Static assets

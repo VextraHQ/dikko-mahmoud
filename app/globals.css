@@ -40,6 +40,8 @@
   /* Same entrance, a beat after the title, so the summary arrives second. */
   --animate-practice-summary: practice-caption-enter 450ms
     cubic-bezier(0.22, 1, 0.36, 1) 220ms both;
+  /* Hero autoplay countdown; `--duration` is set inline from the delay. */
+  --animate-slide-progress: slide-progress var(--duration) linear both;
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
   --animate-accordion-down: accordion-down 260ms cubic-bezier(0.22, 1, 0.36, 1);

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { cn } from "@/lib/utils";
 import type { Person } from "@/content/people";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function PersonCard({
   person,
@@ -87,15 +87,13 @@ export function PersonCard({
       )}
     </>
   );
-  return person.profileAvailable ? (
-    <Link href={`/people/${person.slug}`} className={cardClassName}>
+  return (
+    <SiteLink
+      href={routes.person(person.slug)}
+      available={person.profileAvailable ?? false}
+      className={cardClassName}
+    >
       {content}
-    </Link>
-  ) : (
-    <PreviewDestination>
-      <button type="button" className={cardClassName}>
-        {content}
-      </button>
-    </PreviewDestination>
+    </SiteLink>
   );
 }

@@ -3,11 +3,12 @@ import { EditorialCover } from "@/components/shared/editorial-cover";
 import { HeroCarousel } from "@/components/home/hero-carousel";
 import { HeroControls } from "@/components/home/hero-controls";
 import { HeroCopy } from "@/components/home/hero-copy";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { heroAction, heroSlides } from "@/content/home";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function Hero() {
   if (!heroSlides.length) return null;
@@ -40,14 +41,14 @@ export function Hero() {
             </HeroCopy>
           ))}
         </div>
-        <PreviewDestination>
-          <ArrowButton
-            variant="glass"
-            className="pointer-events-auto mt-6 lg:mt-[clamp(2.5rem,10svh,6rem)] xl:mt-[clamp(3rem,14svh,8rem)]"
-          >
-            {heroAction}
-          </ArrowButton>
-        </PreviewDestination>
+        <ArrowButton
+          asChild
+          variant="glass"
+          data-autoplay-hold
+          className="pointer-events-auto mt-6 lg:mt-[clamp(2.5rem,10svh,6rem)] xl:mt-[clamp(3rem,14svh,8rem)]"
+        >
+          <SiteLink href={routes.practiceAreas}>{heroAction}</SiteLink>
+        </ArrowButton>
       </div>
       <CarouselContent
         viewportClassName="bg-navy-deep relative h-75 sm:h-96 lg:absolute lg:inset-0 lg:z-0 lg:h-auto"

@@ -1,8 +1,10 @@
 "use client";
 
+import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import { useMemo, type ComponentProps } from "react";
 import { Carousel } from "@/components/ui/carousel";
+import { heroAutoplayDelay } from "@/content/home";
 import {
   prepareSlidePhotograph,
   usePreloadAdjacentSlides,
@@ -18,7 +20,19 @@ export function HeroCarousel({
   children,
   ...props
 }: ComponentProps<"section">) {
-  const plugins = useMemo(() => [Fade()], []);
+  // Autoplay starts paused; useCarouselAutoplay (in HeroControls) decides
+  // when it runs. Timing per slide lives in heroAutoplayDelay.
+  const plugins = useMemo(
+    () => [
+      Fade(),
+      Autoplay({
+        delay: heroAutoplayDelay,
+        playOnInit: false,
+        stopOnFocusIn: false,
+      }),
+    ],
+    [],
+  );
   return (
     <Carousel
       {...props}

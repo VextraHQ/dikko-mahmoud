@@ -1,9 +1,10 @@
 import { PersonCard } from "@/components/shared/person-card";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { homePeople as people, peopleHome as content } from "@/content/people";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function PeopleSection() {
   if (!people.length) return null;
@@ -29,11 +30,9 @@ export function PeopleSection() {
             <p className="text-muted-foreground text-sm/6 sm:text-base/7">
               {content.description}
             </p>
-            <PreviewDestination>
-              <ArrowButton size="sm" className="mt-6">
-                {content.action}
-              </ArrowButton>
-            </PreviewDestination>
+            <ArrowButton asChild size="sm" className="mt-6">
+              <SiteLink href={routes.people}>{content.action}</SiteLink>
+            </ArrowButton>
           </div>
         </div>
         <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:mt-12 lg:grid-cols-4">

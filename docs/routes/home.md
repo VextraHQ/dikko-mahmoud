@@ -113,7 +113,8 @@ These gaps do not block the font, token, Button, and header/hero foundation.
 - Each section matches its desktop and mobile reference, with intentional
   tablet behaviour and no narrow-screen overflow.
 - Menu, dropdown, FAQ, and carousel controls work with touch and keyboard.
-- Autoplay, if enabled, can be paused and respects reduced motion.
+- Hero autoplay (7s) can be paused, stops on manual control and respects
+  reduced motion; see `docs/design-system.md`.
 - Supplied assets are local, correctly cropped, and have suitable alt text.
 - No fabricated people, quotes, metrics, or successful form submissions.
 - Format, lint, typecheck, and production build pass; browser evidence is

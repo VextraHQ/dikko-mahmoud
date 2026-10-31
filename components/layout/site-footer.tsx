@@ -1,38 +1,21 @@
 import { ArrowUpRight, Mail } from "lucide-react";
-import Link from "next/link";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { SocialIcon } from "@/components/layout/social-icon";
 import { PreviewDestination } from "@/components/layout/preview-destination";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 import { contact } from "@/content/contact";
 import { firmBrand } from "@/content/firm";
 import { footer } from "@/content/footer";
-import { navigation } from "@/content/navigation";
 
 const footerLinkClass =
   "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white sm:min-h-9";
 
-function FooterLink({
-  label,
-  href,
-  available,
-}: {
-  label: string;
-  href: string;
-  available?: boolean;
-}) {
-  const routeAvailable =
-    available ??
-    navigation.some((item) => item.href === href && item.available);
-  return routeAvailable ? (
-    <Link href={href} className={footerLinkClass}>
+function FooterLink({ label, href }: { label: string; href: string }) {
+  return (
+    <SiteLink href={href} className={footerLinkClass}>
       {label}
-    </Link>
-  ) : (
-    <PreviewDestination>
-      <button type="button" className={footerLinkClass}>
-        {label}
-      </button>
-    </PreviewDestination>
+    </SiteLink>
   );
 }
 
@@ -142,19 +125,17 @@ export function SiteFooter() {
                 </a>
               </div>
               <div className="sm:col-span-2 lg:col-span-1 lg:self-end">
-                <PreviewDestination>
-                  <button
-                    type="button"
-                    className="inline-flex min-h-11 items-center gap-3 border-b border-sky-300 pb-1 text-left text-sm/6 text-white/85 transition-colors hover:border-white hover:text-white"
-                  >
-                    {footer.consultationAction}
-                    <ArrowUpRight
-                      aria-hidden="true"
-                      strokeWidth={1.5}
-                      className="size-4 shrink-0"
-                    />
-                  </button>
-                </PreviewDestination>
+                <SiteLink
+                  href={routes.contact}
+                  className="inline-flex min-h-11 items-center gap-3 border-b border-sky-300 pb-1 text-left text-sm/6 text-white/85 transition-colors hover:border-white hover:text-white"
+                >
+                  {footer.consultationAction}
+                  <ArrowUpRight
+                    aria-hidden="true"
+                    strokeWidth={1.5}
+                    className="size-4 shrink-0"
+                  />
+                </SiteLink>
               </div>
             </div>
           </div>

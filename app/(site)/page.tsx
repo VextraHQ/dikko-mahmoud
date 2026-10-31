@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { FirmAtAGlanceSection } from "@/components/home/firm-at-a-glance-section";
 import { FirmStorySection } from "@/components/home/firm-story-section";
 import { SelectedClientsSection } from "@/components/home/selected-clients-section";
@@ -9,6 +10,14 @@ import { ClientPerspectivesSection } from "@/components/home/client-perspectives
 import { InsightsSection } from "@/components/home/insights-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { FaqSection } from "@/components/home/faq-section";
+import { siteConfig } from "@/content/site";
+import { createPageMetadata } from "@/lib/metadata";
+import { routes } from "@/lib/routes";
+
+export const metadata: Metadata = createPageMetadata({
+  description: siteConfig.description,
+  path: routes.home,
+});
 
 export default function Home() {
   return (

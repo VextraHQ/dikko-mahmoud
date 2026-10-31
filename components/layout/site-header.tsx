@@ -1,9 +1,10 @@
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { MobileNavigation } from "@/components/layout/mobile-navigation";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { SiteNavigation } from "@/components/layout/site-navigation";
 import { StickyHeader } from "@/components/layout/sticky-header";
 import { ArrowButton } from "@/components/ui/arrow-button";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function SiteHeader() {
   return (
@@ -12,9 +13,9 @@ export function SiteHeader() {
         <BrandLogo className="h-15 w-45 xl:h-18 xl:w-48" />
         <div className="hidden items-center gap-4 xl:flex 2xl:gap-6">
           <SiteNavigation />
-          <PreviewDestination>
-            <ArrowButton variant="inverse">Make an enquiry</ArrowButton>
-          </PreviewDestination>
+          <ArrowButton asChild variant="inverse">
+            <SiteLink href={routes.contact}>Make an enquiry</SiteLink>
+          </ArrowButton>
         </div>
         <MobileNavigation />
       </div>

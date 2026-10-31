@@ -4,7 +4,6 @@ import { ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
 import { useState, type ReactNode } from "react";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import {
   practiceAreasIntro as intro,
@@ -14,6 +13,8 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { mediaQueries } from "@/lib/media-queries";
 import { cn } from "@/lib/utils";
 import { formatCount, formatIndex } from "@/lib/format";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function PracticeAreaExplorer({
   areas,
@@ -117,16 +118,17 @@ export function PracticeAreaExplorer({
                           {area.summary}
                         </p>
                       )}
-                      <PreviewDestination>
-                        <ArrowButton
-                          variant="glass"
-                          size="sm"
-                          className="mt-5"
-                          aria-label={`${intro.detailAction}: ${area.title}`}
-                        >
+                      <ArrowButton
+                        asChild
+                        variant="glass"
+                        size="sm"
+                        className="mt-5"
+                        aria-label={`${intro.detailAction}: ${area.title}`}
+                      >
+                        <SiteLink href={routes.practiceArea(area.id)}>
                           {intro.detailAction}
-                        </ArrowButton>
-                      </PreviewDestination>
+                        </SiteLink>
+                      </ArrowButton>
                     </figcaption>
                   </figure>
                 </div>

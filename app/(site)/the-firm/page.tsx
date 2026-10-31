@@ -10,12 +10,15 @@ import { FirmFactsSection } from "@/components/shared/firm-facts-section";
 import { FaqSection } from "@/components/shared/faq-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { firmFaqIntro, firmFaqs } from "@/content/faqs";
+import { createPageMetadata } from "@/lib/metadata";
+import { routes } from "@/lib/routes";
 
-export const metadata: Metadata = {
-  title: "The Firm | Dikko & Mahmoud",
+export const metadata: Metadata = createPageMetadata({
+  title: "The Firm",
   description:
     "Built on experience. Guided by principles. Discover the story, people and approach of Dikko & Mahmoud.",
-};
+  path: routes.firm,
+});
 
 export default function TheFirmPage() {
   return (

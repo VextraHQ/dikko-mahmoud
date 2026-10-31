@@ -3,6 +3,7 @@ import { firmBrand } from "@/content/firm";
 import Link from "next/link";
 import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
+import { routes } from "@/lib/routes";
 
 export function BrandLogo({
   className,
@@ -10,7 +11,7 @@ export function BrandLogo({
 }: Pick<ComponentProps<typeof Link>, "className" | "onClick">) {
   return (
     <Link
-      href="/"
+      href={routes.home}
       onClick={onClick}
       aria-label="Dikko & Mahmoud — Home"
       className={cn(

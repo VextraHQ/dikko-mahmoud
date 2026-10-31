@@ -51,3 +51,5 @@ export const heroSlides = sourceHeroSlides.filter(
   (slide) => slide.practice.trim() && slide.title.some((line) => line.trim()),
 );
 export const heroAction = "Explore our expertise";
+/** Time each hero slide stays before autoplay advances, in ms. */
+export const heroAutoplayDelay = 7000;

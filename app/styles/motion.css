@@ -140,3 +140,12 @@
     transform: translateY(0);
   }
 }
+
+@keyframes slide-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

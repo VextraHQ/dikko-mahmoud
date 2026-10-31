@@ -1,7 +1,6 @@
 import { UserRound } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TestimonialCarousel } from "@/components/home/testimonial-carousel";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -11,6 +10,8 @@ import {
   visibleTestimonials as testimonials,
 } from "@/content/testimonials";
 import { formatIndex, initialsFrom } from "@/lib/format";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function ClientPerspectivesSection() {
   if (!testimonials.length) return null;
@@ -107,9 +108,11 @@ export function ClientPerspectivesSection() {
                       </p>
                     )}
                     <div className="mt-auto pt-8">
-                      <PreviewDestination>
-                        <ArrowButton size="sm">{content.action}</ArrowButton>
-                      </PreviewDestination>
+                      <ArrowButton asChild size="sm">
+                        <SiteLink href={routes.contact}>
+                          {content.action}
+                        </SiteLink>
+                      </ArrowButton>
                     </div>
                   </div>
                 </CarouselItem>

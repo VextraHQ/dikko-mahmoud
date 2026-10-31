@@ -90,6 +90,19 @@ for "01"-style numbers and the `ease-editorial` class for the site's easing
 curve. When adding a pure helper or content rule, add a test in `tests/`.
 See `docs/architecture.md` → "Components, hooks and helpers".
 
+Internal links use `routes.*` from `lib/routes.ts` and render through
+`SiteLink` (`components/layout/site-link.tsx`); never hand-type paths or wrap a
+page link in `PreviewDestination` directly. A page goes live by adding its path
+to `launchedRoutes`: every SiteLink to it then becomes a real link, and it joins
+the sitemap. External profiles (social icons)
+are not pages and keep `PreviewDestination`. Every page exports
+`createPageMetadata({ title, description, path })` from `lib/metadata.ts`;
+`siteConfig.indexable` in `content/site.ts` is the single launch switch for
+robots/no-index. `app/not-found.tsx` and the `error.tsx`/`global-error.tsx`
+files share `StatusPage`/`ErrorView`; their copy lives in
+`content/system-pages.ts`. See `docs/architecture.md` → "Routes, metadata and
+system pages".
+
 Keep pages and layouts as Server Components unless interactivity requires a
 client boundary. Add abstractions only when an approved, repeated need makes
 ownership clearer.
@@ -103,7 +116,9 @@ theme/global defaults and imports `app/styles/motion.css` and `surfaces.css`
 for custom keyframes/progressive fallbacks and complex header materials.
 Do not add CSS modules to component folders or a new stylesheet per section.
 Shared motion helpers must not own section layout/content. Motion is now approved
-only for Firm Journey content swaps; the broader choreography pass remains later.
+only for Firm Journey content swaps and the homepage hero autoplay
+(`embla-carousel-autoplay` driven by `useCarouselAutoplay`; keep its pause
+rules intact); the broader choreography pass remains later.
 Keep hover feedback in CSS rather than expanding the runtime to other sections.
 Selected matters change only on click/tap or keyboard activation, never hover.
 

@@ -1,9 +1,10 @@
 import { FirmImage } from "@/components/home/firm-image";
-import Link from "next/link";
 import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmFacts, firmHomePreview as story } from "@/content/firm";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function FirmStorySection() {
   return (
@@ -100,7 +101,7 @@ export function FirmStorySection() {
             </figure>
             <div className="self-start xl:self-center">
               <ArrowButton asChild>
-                <Link href="/the-firm">{story.action}</Link>
+                <SiteLink href={routes.firm}>{story.action}</SiteLink>
               </ArrowButton>
             </div>
           </div>

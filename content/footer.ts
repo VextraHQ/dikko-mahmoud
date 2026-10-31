@@ -1,3 +1,5 @@
+import { routes } from "@/lib/routes";
+
 export type SocialPlatform = "facebook" | "linkedin" | "instagram" | "x";
 
 type SocialLink = {
@@ -18,10 +20,10 @@ export const footer = {
     {
       title: "Firm",
       links: [
-        { label: "About us", href: "/the-firm" },
-        { label: "Our team", href: "/people" },
-        { label: "Careers", href: "/careers" },
-        { label: "Resources", href: "/insights" },
+        { label: "About us", href: routes.firm },
+        { label: "Our team", href: routes.people },
+        { label: "Careers", href: routes.careers },
+        { label: "Resources", href: routes.insights },
       ],
     },
     {
@@ -29,31 +31,27 @@ export const footer = {
       links: [
         {
           label: "Corporate",
-          href: "/practice-areas/corporate-secretarial",
-          available: false,
+          href: routes.practiceArea("corporate-secretarial"),
         },
         {
           label: "Litigation",
-          href: "/practice-areas/dispute-resolution",
-          available: false,
+          href: routes.practiceArea("dispute-resolution"),
         },
         {
           label: "Capital market",
-          href: "/practice-areas/capital-markets-commercial",
-          available: false,
+          href: routes.practiceArea("capital-markets-commercial"),
         },
         {
           label: "Energy",
-          href: "/practice-areas/energy-natural-resources",
-          available: false,
+          href: routes.practiceArea("energy-natural-resources"),
         },
       ],
     },
     {
       title: "Legal",
       links: [
-        { label: "Privacy policy", href: "/privacy-policy", available: false },
-        { label: "Terms of use", href: "/terms-of-use", available: false },
+        { label: "Privacy policy", href: routes.privacy },
+        { label: "Terms of use", href: routes.terms },
       ],
     },
   ],

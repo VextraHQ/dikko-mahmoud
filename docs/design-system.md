@@ -189,10 +189,30 @@ jump. Only the current copy is exposed to assistive technology and focus.
 
 For the hero, reduced motion removes copy animation and makes
 button/keyboard changes immediate; drag fading is disabled in that preference,
-with previous/next buttons still available. Autoplay remains deferred. When
-revisited, it requires pause/resume, hover/focus and hidden-tab suspension, and
-reduced-motion support. The Figma specification's original five-second cycle
-is retained as a future reference, not current behaviour.
+with previous/next buttons still available.
+
+Hero autoplay (approved 2026-10-30, following the designer's autoplay intent)
+advances every 7 seconds (`heroAutoplayDelay` in `content/home.ts`); the Figma
+file's five-second cycle was lengthened so each headline can be read. Rules:
+
+- A pause/play button is always available (WCAG 2.2.2). Desktop: a round
+  button before the arrows, with the slide lines as the countdown. Mobile
+  (approved option 1): a light pause icon, then "01 ── 05" with one filling
+  line, grouped left; the arrows stay right.
+- Hovering the controls (slide lines, pause, arrows, the CTA) or scrolling the hero
+  out of view holds the countdown: the line freezes where it is and continues
+  with the remaining time afterwards. A cursor resting elsewhere on the hero
+  does not pause it, since the hero fills most of the first screen. A
+  hidden browser tab pauses and restarts that slide's countdown.
+- The pause button, previous/next, a slide line, keyboard arrows, a drag, the
+  CTA or keyboard focus entering the hero stop it until play is pressed.
+- Reduced motion never autoplays and hides the toggle.
+- The active slide line fills over the countdown (`animate-slide-progress`),
+  pauses with the countdown, and shows solid white once autoplay is stopped.
+  The counting line skips the hover brightening so its frozen fill stays
+  readable.
+- The live region is silent while rotating so screen readers aren't
+  interrupted.
 
 Button, segment and keyboard navigation keep the current photo visible while
 a requested replacement is fetched and decoded. Adjacent photographs are

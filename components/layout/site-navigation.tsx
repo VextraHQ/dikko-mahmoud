@@ -1,11 +1,11 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PreviewDestination } from "@/components/layout/preview-destination";
+import { SiteLink } from "@/components/layout/site-link";
 import { navigation } from "@/content/navigation";
 import { isActivePath } from "@/lib/navigation";
+import { isRouteAvailable, routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 
 export function SiteNavigation({
@@ -29,7 +29,8 @@ export function SiteNavigation({
         className={mobile ? "flex flex-col gap-4" : "flex items-center gap-1"}
       >
         {navigation.map((item) => {
-          const active = item.available && isActivePath(pathname, item.href);
+          const active =
+            isRouteAvailable(item.href) && isActivePath(pathname, item.href);
           const label =
             mobile && item.label === "Contact" ? "Contact us" : item.label;
           const className = cn(
@@ -41,33 +42,21 @@ export function SiteNavigation({
           );
           return (
             <li key={item.href}>
-              {item.available ? (
-                <Link
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  onClick={onNavigate}
-                  className={className}
-                >
-                  {label}
-                </Link>
-              ) : (
-                <PreviewDestination>
-                  <button
-                    type="button"
-                    aria-label={`${label} (coming soon)`}
-                    className={className}
-                  >
-                    {label}
-                    {!mobile && item.href === "/practice-areas" && (
-                      <ChevronDown
-                        aria-hidden="true"
-                        className="size-5"
-                        strokeWidth={1.5}
-                      />
-                    )}
-                  </button>
-                </PreviewDestination>
-              )}
+              <SiteLink
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                onNavigate={onNavigate}
+                className={className}
+              >
+                {label}
+                {!mobile && item.href === routes.practiceAreas && (
+                  <ChevronDown
+                    aria-hidden="true"
+                    className="size-5"
+                    strokeWidth={1.5}
+                  />
+                )}
+              </SiteLink>
             </li>
           );
         })}

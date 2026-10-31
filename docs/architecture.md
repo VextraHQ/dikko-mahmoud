@@ -24,7 +24,7 @@ link. No other route or service is included.
 | Location                       | Responsibility                                                                          |
 | ------------------------------ | --------------------------------------------------------------------------------------- |
 | `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                     |
-| `app/(site)/layout.tsx`        | Shared header, skip link, main landmark and footer                                      |
+| `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                          |
 | `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                            |
 | `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                       |
 | `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                      |
@@ -36,6 +36,13 @@ link. No other route or service is included.
 | `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback and EnquiryCta |
 | `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee                |
 | `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts        |
+| `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                |
+| `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                              |
+| `content/site.ts`              | Site name, description, fallback URL, locale and the `indexable` launch switch          |
+| `content/system-pages.ts`      | Copy for the 404 and error pages                                                        |
+| `app/robots.ts`, `sitemap.ts`  | Robots rules from `indexable`; sitemap from `launchedRoutes`                            |
+| `app/not-found.tsx`            | Branded 404 inside `SiteShell`, no-index                                                |
+| `app/**/error.tsx`, global     | Error boundaries rendering the shared `ErrorView`                                       |
 | `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state          |
 | `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries   |
 | `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                          |
@@ -86,6 +93,32 @@ Current hooks: `useMediaQuery`, `useMediaQueryChange`, `useScrolledPast`,
 `usePreloadAdjacentSlides`. shadcn primitives in `components/ui/` (such as
 Carousel) keep their own internal state, as generated.
 
+## Routes, metadata and system pages
+
+- `lib/routes.ts` is the only place paths are written. Detail pages use
+  builders (`routes.person(slug)`). `launchedRoutes` lists live pages.
+- `SiteLink` is server-compatible: live routes render `next/link`; others render
+  a button that opens the `PreviewDestination` notice with a "(coming soon)"
+  screen-reader suffix. Style it through `asChild` buttons. `available`
+  overrides the registry per record (e.g. `person.profileAvailable`).
+- Launching a page = build it, export `createPageMetadata`, add its path to
+  `launchedRoutes`. Links and the sitemap update automatically.
+- `createSiteMetadata()` (root layout) sets `metadataBase`, the title template,
+  canonical, Open Graph/Twitter defaults and robots. `createPageMetadata()`
+  rebuilds `openGraph` per page because Next.js replaces, not merges, a child's
+  `openGraph` object. Site URL: `NEXT_PUBLIC_SITE_URL`, then Vercel URLs, then
+  `siteConfig.url`.
+- `siteConfig.indexable = false` keeps every page no-index and robots.txt
+  disallowing all until launch.
+- System pages: `app/not-found.tsx` (404 status, inside `SiteShell`),
+  `app/(site)/error.tsx` (keeps chrome), `app/error.tsx` (shell failure) and
+  `app/global-error.tsx` (root layout failure; brings its own html, fonts and
+  globals.css). All render `StatusPage`: a centred message and actions on the
+  navy band with a faint serif watermark ("404", or the firm initials); errors go through the client
+  `ErrorView`, which calls Next 16's `retry()` and reports via `useReportError`.
+- Gaps: no Open Graph share image yet; `/experience` and `/insights/:id` paths
+  are provisional until those routes are specified.
+
 ## Styling ownership
 
 The site's signature ease-out curve is the theme token `--ease-editorial`
@@ -108,7 +141,8 @@ Use Tailwind v4 `@theme` bridges; no parallel token catalogue or `@apply` layer.
 Motion is CSS-first. The FAQ uses Radix height-variable CSS keyframes; button
 press and focus feedback stay in Tailwind. The user has now approved Motion
 for Firm Journey content transitions, using LazyMotion/domAnimation and keyed
-AnimatePresence media panels. No autoplay plugin is installed. Broader Motion
+AnimatePresence media panels. The homepage hero alone uses
+`embla-carousel-autoplay` (see design-system.md → hero). Broader Motion
 choreography remains later; do not move simple hover feedback into JavaScript. Sections
 continue to own their layout and content when wrapped by a motion helper.
 
@@ -124,7 +158,7 @@ Server-rendered children may pass through a narrow client wrapper.
 | `SiteNavigation`                     | `usePathname` and exact/slash-boundary route matching                                                                     |
 | `MobileNavigation`                   | Controlled Sheet; closes on available-route/logo activation and, via `useMediaQueryChange`, on desktop resize             |
 | `PreviewDestination`, Sheet          | Radix Dialog focus management for unavailable routes/menu                                                                 |
-| Carousel, HeroCarousel/Copy/Controls | Embla manual selection/fade; `usePreloadAdjacentSlides` decodes neighbours and cancels stale requests                     |
+| Carousel, HeroCarousel/Copy/Controls | Embla fade/autoplay; `usePreloadAdjacentSlides` decodes neighbours; `useCarouselAutoplay` owns pause/stop rules           |
 | `RevealGroup`                        | Markup only; `useRevealOnScroll` owns the observer, focus/reduced-motion completion and cleanup                           |
 | `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                                    |
 | `PracticeAreaExplorer`               | Nullable selected index plus `useMediaQuery(mediaQueries.desktop)`                                                        |

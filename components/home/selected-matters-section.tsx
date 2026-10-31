@@ -1,11 +1,12 @@
 import { MatterExplorer } from "@/components/home/matter-explorer";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
   selectedMatters as content,
   visibleMatters as matters,
 } from "@/content/matters";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function SelectedMattersSection() {
   if (!matters.length) return null;
@@ -34,11 +35,9 @@ export function SelectedMattersSection() {
             <p className="text-muted-foreground text-sm/6 sm:text-base/7">
               {content.description}
             </p>
-            <PreviewDestination>
-              <ArrowButton size="sm" className="mt-6">
-                {content.action}
-              </ArrowButton>
-            </PreviewDestination>
+            <ArrowButton asChild size="sm" className="mt-6">
+              <SiteLink href={routes.experience}>{content.action}</SiteLink>
+            </ArrowButton>
           </div>
         </div>
         <MatterExplorer matters={matters} />

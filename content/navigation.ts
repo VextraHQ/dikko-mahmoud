@@ -1,11 +1,14 @@
+import { routes } from "@/lib/routes";
+
+// Availability comes from `launchedRoutes` in lib/routes.ts.
 export const navigation = [
-  { label: "Home", href: "/", available: true },
-  { label: "The firm", href: "/the-firm", available: true },
-  { label: "Practice areas", href: "/practice-areas", available: false },
-  { label: "People", href: "/people", available: false },
-  { label: "Insights", href: "/insights", available: false },
-  { label: "Careers", href: "/careers", available: false },
-  { label: "Contact", href: "/contact", available: false },
+  { label: "Home", href: routes.home },
+  { label: "The firm", href: routes.firm },
+  { label: "Practice areas", href: routes.practiceAreas },
+  { label: "People", href: routes.people },
+  { label: "Insights", href: routes.insights },
+  { label: "Careers", href: routes.careers },
+  { label: "Contact", href: routes.contact },
 ] as const;
 
 export const previewNotice = {

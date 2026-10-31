@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useMediaQueryChange } from "@/hooks/use-media-query-change";
 import { mediaQueries } from "@/lib/media-queries";
 import { BrandLogo } from "@/components/layout/brand-logo";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { Button } from "@/components/ui/button";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import {
@@ -17,6 +16,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { SiteNavigation } from "@/components/layout/site-navigation";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
@@ -55,11 +56,11 @@ export function MobileNavigation() {
             </SheetClose>
           </div>
           <SiteNavigation mobile onNavigate={() => setOpen(false)} />
-          <PreviewDestination>
-            <ArrowButton variant="inverse" size="lg" className="mt-5">
+          <ArrowButton asChild variant="inverse" size="lg" className="mt-5">
+            <SiteLink href={routes.contact} onNavigate={() => setOpen(false)}>
               Make an enquiry
-            </ArrowButton>
-          </PreviewDestination>
+            </SiteLink>
+          </ArrowButton>
         </SheetContent>
       </Sheet>
     </div>

@@ -2,7 +2,6 @@
 
 import { SquareArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import {
   selectedMatters as content,
   type SelectedMatter,
@@ -11,6 +10,8 @@ import { useBringIntoView } from "@/hooks/use-bring-into-view";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { mediaQueries } from "@/lib/media-queries";
 import { formatIndex } from "@/lib/format";
+import { SiteLink } from "@/components/layout/site-link";
+import { routes } from "@/lib/routes";
 
 export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
   const [selected, setSelected] = useState(() =>
@@ -73,18 +74,16 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
                 <p className="mt-5 text-[11px]/5 text-sky-200/90">
                   {matter.qualifier}
                 </p>
-                <PreviewDestination>
-                  <button
-                    type="button"
-                    className="mt-8 inline-flex items-center gap-2 rounded-sm text-xs/5 font-semibold text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-sky-200 focus-visible:outline-none sm:mt-10"
-                  >
-                    {content.readMore}
-                    <SquareArrowUpRight
-                      aria-hidden="true"
-                      className="size-3.5 text-sky-200"
-                    />
-                  </button>
-                </PreviewDestination>
+                <SiteLink
+                  href={routes.matter(matter.id)}
+                  className="mt-8 inline-flex items-center gap-2 rounded-sm text-xs/5 font-semibold text-white underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-sky-200 focus-visible:outline-none sm:mt-10"
+                >
+                  {content.readMore}
+                  <SquareArrowUpRight
+                    aria-hidden="true"
+                    className="size-3.5 text-sky-200"
+                  />
+                </SiteLink>
               </div>
             </div>
           );
