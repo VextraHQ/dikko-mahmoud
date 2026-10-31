@@ -28,7 +28,7 @@ export function SiteLink({
 }: SiteLinkProps) {
   if (available) {
     return (
-      <Link href={href} onClick={onNavigate} {...props}>
+      <Link href={href} onNavigate={onNavigate} {...props}>
         {children}
       </Link>
     );

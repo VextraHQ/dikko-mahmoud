@@ -992,3 +992,108 @@
   marked `data-autoplay-hold` (desktop arrows/pause group, slide lines and the
   hero CTA, so the headline doesn't change as it is clicked) now
   hold the countdown; the rest of the hero keeps rotating.
+
+## 2026-10-31 — Practice areas preview and navigation
+
+- Implemented the supplied wide mega menu with a minimal local shadcn-style Radix
+  Navigation Menu wrapper, mobile Sheet/Accordion destinations and restrained CSS
+  hover/fade feedback. Added a semantic Breadcrumb primitive. Only the Navigation
+  Menu dependency was added; existing Home hero autoplay and provider boundaries
+  were preserved.
+- Added the nine-record catalogue, server-filtered hub, nine statically generated
+  slug pages, metadata/route activation, shared detail layout and optional
+  per-practice FAQ data. Corporate uses the supplied needs, services, Bello
+  contact and two manual experience cards. Other eight records retain supplied
+  summaries and explicit missing-content notes. Native navigation/disclosures
+  and static cases support no-JS access. Home's six broad areas remain unchanged
+  visually, with mapped links to the new catalogue.
+- Reviewed the user's SiteLink/route refactor: retained the registry, added
+  query/hash-aware availability and used Next Link's native onNavigate to avoid
+  an onClick supplied by Radix/Slot overwriting the close callback.
+- Source limits: Figma MCP quota was exhausted; user-supplied screenshots drove
+  implementation. No mobile frame or original hub/detail photographs were
+  available. Brand covers remain; the existing logo has a monochrome light-page
+  treatment. Cropped Corporate content and unsupplied FAQ answers are not filled
+  with invented claims. See routes/practice-areas.md for exact gaps.
+- Passed pnpm format:check, lint, typecheck, test (38 tests across seven files)
+  and production build. Build generated nine practice detail pages; hub filtering
+  remains server-rendered per query. These are local checks, not launch approval.
+- Isolated Playwright checks passed against the production server at 320, 390,
+  768, 1024, 1280 and 1440px: hub/menu/detail containment; desktop Escape/focus
+  return and keyboard entry; mobile route navigation/close; breadcrumb; sticky
+  desktop sidebar; service expansion; manual carousel end state; category filter;
+  unknown slug 404; and no runtime page errors. All nine pages returned 200 with
+  no-index/canonical metadata and valid sidebar targets. Also checked normal-motion
+  menu fade, Home/Firm header tones and hero opening content, and dark 404 tone.
+- No-JS checks passed at 320, 390 and 1440px: basic navigation, query filters,
+  native service disclosures, both static case cards and horizontal containment.
+  Captured/reviewed hub, card grid, mega menu, Corporate hero and experience
+  screenshots. Full Home autoplay pause rules were not re-audited in this pass.
+
+- Follow-up production check: the installed Next version logged an internal
+  NoFallbackError for unknown slugs under dynamicParams=false, despite returning 404. Kept the nine generated paths and used the page/metadata notFound guard
+  for unknown parameters instead. Added a shell-free site-group not-found boundary
+  sharing NotFoundView with the root boundary, so rejected parameters retain
+  exactly one header/main/footer.
+
+- Final production rerun passed the responsive suite, all-nine metadata/sidebar
+  checks and no-JS suite after the boundary change. Unknown practice slugs return
+  404 with exactly one header, main and footer. Format, lint, typecheck, all
+  38 unit tests and the production build passed for the final code.
+
+## Practice menu trigger and row polish
+
+- Fixed the Practice areas trigger vanishing when its menu opened on practice
+  detail pages: the open state replaced the active navy pill with a 15% white
+  tint while the text stayed white (white on white). On the dark hub it gave
+  navy text on dark glass. The active pill now keeps its colours when open;
+  inactive items share one hover/open tint per header tone.
+- Menu rows now centre their number, title and arrow inside a tighter hover box
+  (`min-h-16`, `py-4`), matching the supplied light-header menu reference
+  instead of top-aligned text in a tall tinted block.
+- Verified computed trigger colours open/closed on the light detail header and
+  dark hub header.
+- Follow-up from user screenshots: Corporate's supplied third need added and the
+  needs grid goes to three columns at `xl`; experience carousel gained clickable
+  case lines (no autoplay) with arrows right and bulleted services; menu rows
+  fade in a sky border/tint on hover and mark the current practice; the light
+  header uses the supplied navy logo instead of a blackened white logo.
+
+## 2026-10-31 — Navigation label ownership
+
+- Moved the mobile "Contact us" label into `content/navigation.ts` as an optional
+  `mobileLabel`. SiteNavigation uses that value or the ordinary label; desktop
+  retains "Contact". Preserved the user's menu, logo and carousel refinements.
+- Passed format:check, lint, typecheck and all 38 unit tests. No build or new
+  browser review was run for this copy-ownership change.
+
+## Mobile navigation sheet
+
+- Fixed the broken Practice areas row: the mobile link style set `display:block`,
+  overriding the accordion trigger's flex, so the plus icon wrapped under the
+  label inside a tall white "active" pill.
+- Sheet rows are now full-width serif links split by `white/10` hairlines. The
+  current page is sky-tinted text instead of a filled pill. Practice areas uses
+  a rotating chevron (new optional `indicator` prop on `AccordionTrigger`; other
+  accordions keep plus/minus) and opens a numbered list: "View all practice
+  areas" with an arrow, then the nine practices, current one highlighted.
+- Verified at 375px: no horizontal overflow, current practice marked, submenu
+  opens. Accordion animation itself not observed (browser pane doesn't play it).
+- Mobile sheet footer: offices pinned to the bottom (sheet is now a flex
+  column, footer `mt-auto`), hairline above, sky "Our offices" eyebrow, serif
+  "Abuja · Kano · Lagos" with small sky dot separators and a faint D&M monogram.
+  Cities come from `contact.offices` (no duplicate list); eyebrow copy lives in
+  `content/navigation.ts` (`mobileMenuFooter`). Checked at 375px, no overflow.
+- Production build (`pnpm build`, Next 16.3.5) passed after the practice-area,
+  mobile-sheet and code-quality changes: 19 pages generated; the nine practice
+  detail pages are prerendered via `generateStaticParams`. `/practice-areas` is
+  server-rendered on demand because the category filter reads `searchParams`.
+
+## Header enquiry button on the white header
+
+- The light (practice detail) header recoloured the `inverse` enquiry button
+  with tone overrides but kept `inverse`'s `hover:bg-slate-50`, so hover showed
+  white text on near-white. `HeaderEnquiryButton` now picks a real variant per
+  tone (`default` on light, `inverse` on dark), so hover/active come from the
+  variant. The tone rule moved to `headerTone()` in `lib/navigation.ts`, shared
+  with `StickyHeader`, and is covered by `tests/navigation.test.ts`.

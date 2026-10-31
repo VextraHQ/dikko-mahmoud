@@ -29,3 +29,22 @@ describe("routes", () => {
     for (const item of navigation) expect(known).toContain(item.href);
   });
 });
+
+describe("practice route availability", () => {
+  it("resolves query and section URLs against the built page", () => {
+    expect(isRouteAvailable(`${routes.practiceAreas}?category=advisory`)).toBe(
+      true,
+    );
+    expect(
+      isRouteAvailable(
+        `${routes.practiceArea("corporate-commercial-advisory")}#services`,
+      ),
+    ).toBe(true);
+    expect(isRouteAvailable(`${routes.contact}#form`)).toBe(false);
+    expect(isRouteAvailable("#services")).toBe(true);
+    expect(isRouteAvailable("https://example.com/practice-areas")).toBe(false);
+  });
+  it("keeps unknown practice slugs unavailable", () => {
+    expect(isRouteAvailable(routes.practiceArea("unknown"))).toBe(false);
+  });
+});

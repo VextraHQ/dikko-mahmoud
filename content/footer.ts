@@ -31,19 +31,19 @@ export const footer = {
       links: [
         {
           label: "Corporate",
-          href: routes.practiceArea("corporate-secretarial"),
+          href: routes.practiceArea("corporate-commercial-advisory"),
         },
         {
           label: "Litigation",
-          href: routes.practiceArea("dispute-resolution"),
+          href: routes.practiceArea("litigation-dispute-resolution"),
         },
         {
           label: "Capital market",
-          href: routes.practiceArea("capital-markets-commercial"),
+          href: routes.practiceAreas,
         },
         {
           label: "Energy",
-          href: routes.practiceArea("energy-natural-resources"),
+          href: routes.practiceArea("energy-oil-gas"),
         },
       ],
     },

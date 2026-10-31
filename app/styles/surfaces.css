@@ -70,3 +70,11 @@
     backdrop-filter: none;
   }
 }
+
+/* Practice detail pages use the supplied light header without shifting chrome. */
+[data-site-header][data-tone="light"] .site-header-surface::before,
+[data-site-header][data-tone="light"] .site-navigation-surface::before {
+  border-color: var(--border);
+  background: rgb(255 255 255 / 95%);
+  box-shadow: 0 8px 28px rgb(6 26 46 / 5%);
+}

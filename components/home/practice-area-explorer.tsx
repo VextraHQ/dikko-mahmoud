@@ -1,5 +1,7 @@
 "use client";
 
+import { homePracticeDestinations } from "@/content/practice-catalogue";
+
 import { ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
@@ -125,7 +127,15 @@ export function PracticeAreaExplorer({
                         className="mt-5"
                         aria-label={`${intro.detailAction}: ${area.title}`}
                       >
-                        <SiteLink href={routes.practiceArea(area.id)}>
+                        <SiteLink
+                          href={
+                            homePracticeDestinations[area.id]
+                              ? routes.practiceArea(
+                                  homePracticeDestinations[area.id]!,
+                                )
+                              : routes.practiceAreas
+                          }
+                        >
                           {intro.detailAction}
                         </SiteLink>
                       </ArrowButton>

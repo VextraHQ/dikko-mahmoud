@@ -2,7 +2,7 @@
 
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Minus, Plus } from "lucide-react";
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Accordion(
@@ -27,8 +27,12 @@ export function AccordionItem({
 export function AccordionTrigger({
   className,
   children,
+  indicator,
   ...props
-}: ComponentProps<typeof AccordionPrimitive.Trigger>) {
+}: ComponentProps<typeof AccordionPrimitive.Trigger> & {
+  /** Replaces the default plus/minus button, e.g. a navigation chevron. */
+  indicator?: ReactNode;
+}) {
   return (
     <AccordionPrimitive.Header className="flex">
       <AccordionPrimitive.Trigger
@@ -40,19 +44,21 @@ export function AccordionTrigger({
         {...props}
       >
         {children}
-        <span
-          aria-hidden="true"
-          className="text-primary group-data-[state=open]/accordion:border-primary/15 flex size-11 shrink-0 items-center justify-center rounded-full border border-transparent transition-colors group-hover/accordion:bg-white group-data-[state=open]/accordion:bg-white motion-reduce:transition-none"
-        >
-          <Plus
-            strokeWidth={1.5}
-            className="size-5 group-data-[state=open]/accordion:hidden"
-          />
-          <Minus
-            strokeWidth={1.5}
-            className="hidden size-5 group-data-[state=open]/accordion:block"
-          />
-        </span>
+        {indicator ?? (
+          <span
+            aria-hidden="true"
+            className="text-primary group-data-[state=open]/accordion:border-primary/15 flex size-11 shrink-0 items-center justify-center rounded-full border border-transparent transition-colors group-hover/accordion:bg-white group-data-[state=open]/accordion:bg-white motion-reduce:transition-none"
+          >
+            <Plus
+              strokeWidth={1.5}
+              className="size-5 group-data-[state=open]/accordion:hidden"
+            />
+            <Minus
+              strokeWidth={1.5}
+              className="hidden size-5 group-data-[state=open]/accordion:block"
+            />
+          </span>
+        )}
       </AccordionPrimitive.Trigger>
     </AccordionPrimitive.Header>
   );

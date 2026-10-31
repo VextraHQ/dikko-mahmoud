@@ -20,9 +20,18 @@ Journey bodies, milestone media/captions, four FAQ answers, advisory assignments
 source story wording and publication content still require editorial review.
 The mobile Figma frame loaded; desktop MCP context hit the Starter-plan limit,
 so the supplied desktop screenshots were used. This is not final visual or
-publication approval. Stop here for review; other routes/profile pages need a
-separately agreed scope. Sanity, providers, deployment and the later Claude
+publication approval. Practice areas has since been authorized from the supplied
+30 October screenshots; other routes/profile pages need a separately agreed scope. Sanity, providers, deployment and the later Claude
 workflow remain outside this checkpoint. User-added Analytics is preserved.
+
+**Practice areas is implemented for local review.** The hub, wide desktop menu,
+mobile disclosure and nine `/practice-areas/[slug]` routes share one catalogue.
+Corporate & Commercial Advisory has the supplied sticky sidebar, services and
+manual experience carousel. The other eight pages have sourced summaries and
+explicit missing-content notices. FAQs accept separate per-practice data; the
+hub has its own collection. See [routes/practice-areas.md](routes/practice-areas.md)
+for missing originals/copy and reference limitations. The homepage's six-area
+presentation remains intact; its links map to the new catalogue.
 
 ## Status
 
@@ -44,8 +53,9 @@ workflow remain outside this checkpoint. User-added Analytics is preserved.
 | 2d. Final publication content               | Waiting  | Approved portraits, testimonial, imagery, and destinations                         |
 | 3. Information architecture                 | Scoped   | Firm route, shared ownership and destination activation mapped; other routes later |
 | 4. Desktop and mobile design references     | Supplied | User-provided Figma frames; missing states resolved during audit                   |
-| 5. Secondary-page implementation            | Review   | The Firm preview implemented; other routes remain separate                         |
+| 5. Secondary-page implementation            | Review   | Firm and Practice areas previews; other routes remain separate                     |
 | 5a. The Firm                                | Review   | Route, shared reuse and interactions implemented; content/media gates remain       |
+| 5b. Practice areas                          | Review   | Hub/menu and nine detail previews; full detail content supplied only for Corporate |
 | 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                              |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                     |
 
@@ -70,5 +80,6 @@ as the source of truth for the future visual system. It remains `noindex` while
 the full website is unfinished.
 
 The homepage is now on visual review hold. The Firm presentation is implemented for review within its
-approved scope. Other routes, CMS, provider connections and
+approved scope. Practice areas is implemented within its screenshot-based scope.
+Other routes, CMS, provider connections and
 deployment remain separate milestones.

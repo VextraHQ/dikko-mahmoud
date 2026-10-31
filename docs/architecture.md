@@ -17,7 +17,9 @@ The homepage remains on client visual review hold. `/the-firm` is implemented
 as a thin Server Component using `components/firm/*-section.tsx`; the route brief
 owns content gaps and review status. Home's facts/FAQ wrappers delegate to shared
 presentation, its people grid uses PersonCard, and its story CTA is a real Firm
-link. No other route or service is included.
+link. Practice areas is now authorized as the next screenshot-based preview;
+its ownership and missing-content boundaries are documented below. Services
+remain outside this presentation checkpoint.
 
 ## Ownership
 
@@ -26,6 +28,7 @@ link. No other route or service is included.
 | `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                     |
 | `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                          |
 | `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                            |
+| `app/(site)/practice-areas/`   | Hub query handling, static detail parameters and practice metadata                      |
 | `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                       |
 | `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                      |
 | `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                     |
@@ -33,6 +36,7 @@ link. No other route or service is included.
 | `components/layout/`           | Shared chrome and unavailable-destination notice                                        |
 | `components/home/`             | Homepage section entries and their local interactive presentation                       |
 | `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation              |
+| `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections              |
 | `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback and EnquiryCta |
 | `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee                |
 | `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts        |
@@ -329,3 +333,33 @@ adds one play control; iframe/native video mounts only on activation and is
 removed on close, returning focus. Firm currently supplies neither approved
 poster nor video, so it shows an intentional decorative cover. No provider or
 video URL is invented. VideoPoster itself needs no provider dependency.
+
+## Practice areas
+
+`content/practice-catalogue.ts` owns nine practice records, filter normalization,
+Home destination mappings and the sidebar-section selector. It has no runtime
+imports from other domains, so the route registry can derive the nine built
+paths without a circular import. `content/practice-faqs.ts` owns hub FAQ content;
+optional `detail.faqs` owns each practice's independent FAQ collection.
+`app/(site)/practice-areas/` owns hub search parameters, static slug generation
+and metadata; `components/practices/` owns the reusable presentation. Needs copy,
+services, experience and contact IDs belong to the practice record. Empty optional
+modules do not render or receive sidebar links. Canonical people remain in the
+people collection; no other practice associations are inferred.
+
+The wide menu uses a small local shadcn-style Radix Navigation Menu wrapper;
+mobile composes the existing Sheet and Accordion. `usePracticeMenu` owns its
+controlled state and breakpoint reset. The breadcrumb uses native semantic
+markup and Slot. Hub filters use real query links and server filtering. Services
+have native details fallbacks; the manual Embla carousel has a static no-JS list.
+No autoplay, provider integration or broad Motion pass was added.
+
+The root not-found boundary adds SiteShell for unmatched URLs. The site-group
+not-found boundary renders the same NotFoundView inside its existing shell, so
+unknown dynamic parameters do not duplicate chrome.
+
+`SiteLink` now passes its callback to Next Link's native `onNavigate`, preserving
+independent `onClick` handlers supplied by Radix/Slot. Availability ignores query
+and fragment suffixes while still checking exact built paths. Fragment/query-only
+links are local navigation; unknown detail paths remain unavailable. The global
+no-index switch and user-added integrations remain unchanged.

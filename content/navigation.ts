@@ -1,15 +1,26 @@
 import { routes } from "@/lib/routes";
 
+type NavigationItem = {
+  label: string;
+  mobileLabel?: string;
+  href: string;
+};
+
 // Availability comes from `launchedRoutes` in lib/routes.ts.
-export const navigation = [
+export const navigation: readonly NavigationItem[] = [
   { label: "Home", href: routes.home },
   { label: "The firm", href: routes.firm },
   { label: "Practice areas", href: routes.practiceAreas },
   { label: "People", href: routes.people },
   { label: "Insights", href: routes.insights },
   { label: "Careers", href: routes.careers },
-  { label: "Contact", href: routes.contact },
-] as const;
+  { label: "Contact", mobileLabel: "Contact us", href: routes.contact },
+];
+
+// Mobile menu sign-off; the cities come from the canonical contact offices.
+export const mobileMenuFooter = {
+  eyebrow: "Our offices",
+};
 
 export const previewNotice = {
   title: "Our new website is taking shape.",

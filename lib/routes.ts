@@ -1,10 +1,15 @@
+import { practiceCatalogue } from "@/content/practice-catalogue";
+
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
+const practiceAreasPath = "/practice-areas";
 export const routes = {
   home: "/",
   firm: "/the-firm",
-  practiceAreas: "/practice-areas",
-  practiceArea: (slug: string) => `/practice-areas/${slug}`,
+  practiceAreas: practiceAreasPath,
+  practiceFilter: (category: string) =>
+    `${practiceAreasPath}?category=${encodeURIComponent(category)}`,
+  practiceArea: (slug: string) => `${practiceAreasPath}/${slug}`,
   experience: "/experience",
   matter: (id: string) => `/experience/${id}`,
   people: "/people",
@@ -23,8 +28,14 @@ export const routes = {
  * to a real link. Detail pages (a person, an insight) can instead be enabled
  * per record with SiteLink's `available` prop.
  */
-export const launchedRoutes: readonly string[] = [routes.home, routes.firm];
+export const launchedRoutes: readonly string[] = [
+  routes.home,
+  routes.firm,
+  routes.practiceAreas,
+  ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
+];
 
 export function isRouteAvailable(href: string) {
-  return launchedRoutes.includes(href);
+  if (href.startsWith("#") || href.startsWith("?")) return true;
+  return launchedRoutes.includes(href.split(/[?#]/, 1)[0]);
 }

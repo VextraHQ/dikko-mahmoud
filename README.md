@@ -27,13 +27,20 @@ Original media, group assignments and some editorial copy remain approval gates.
 [new-chat prompt](docs/handoffs/the-firm-next-chat.md) for the current checkpoint. Preserve Home's
 appearance while extracting shared pieces and enabling real Firm links.
 
+Practice areas now has a [hub](http://localhost:3000/practice-areas), a shared
+mega menu and nine readable detail URLs. Corporate & Commercial Advisory uses
+the supplied services/experience/contact reference; the other eight pages retain
+sourced summaries with explicit missing-content notices. Shared FAQ presentation
+supports per-practice data. See [the practice brief](docs/routes/practice-areas.md)
+for remaining source, media and editorial gaps. All routes remain no-index.
+
 ## Stack
 
 - Next.js 16 with the App Router
 - React 19
 - TypeScript in strict mode
 - Tailwind CSS 4
-- Shadcn-style Button/Sheet/Accordion/Avatar, Embla Carousel, Lucide UI icons
+- Shadcn-style Button/Sheet/Accordion/Avatar/NavigationMenu/Breadcrumb, Embla Carousel, Lucide UI icons
   and React Icons for social brands; shared form controls and React Hook Form
   adapter prepared for the later enquiry page; Motion is scoped to Firm Journey
   content transitions

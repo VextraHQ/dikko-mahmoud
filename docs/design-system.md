@@ -380,3 +380,14 @@ AnimatePresence panels: a 650ms 16px directional entrance, a 250ms 10px exit and
 content-presence need rather than replacing simple CSS. Reduced motion renders
 static panels immediately, including during an in-flight transition; SSR and
 no-JS history remain readable. No new scroll observer or autoplay is introduced.
+
+## Practice menu and detail primitives — 2026-10-31
+
+Navigation Menu is a small shadcn-style wrapper around Radix's navigation primitive,
+matching the existing Radix stack. Breadcrumb is native semantic markup with Slot
+composition. Neither imports a registry theme/reset. Wide menu links have restrained
+500ms surface feedback; the panel fades in over 300ms and out over 180ms, disabled
+under reduced motion. Static catalogue cards change border/shadow without translation.
+Practice service accordions reuse the shared primitive, and practice FAQs reuse
+FaqSection with independent data. The experience carousel reuses Embla without
+autoplay and switches instantly under reduced motion.

@@ -241,3 +241,22 @@ picture group owns the inner 2% zoom and soft shadow, with 550ms eased entry and
 return; names/captions cannot trigger it. Static text uses only colour/rule
 feedback. Motion offsets belong to Journey’s incoming/outgoing content, never
 the page container or layout geometry.
+
+## Practice areas
+
+The hub retains the navy hero and shared 90rem cap/gutters. Catalogue cards use
+one column below `md`, two from `md` and three from `xl`; filter pills wrap.
+The desktop menu opens at the existing `xl` navigation breakpoint in a centered
+viewport-bounded panel: editorial introduction plus two numbered link columns.
+It scrolls within short viewports. Mobile retains the existing Sheet, with a
+practice disclosure and all nine destinations.
+
+Practice detail uses the supplied light header treatment, a wrapping breadcrumb
+and an editorial hero pair from `lg`. Existing white logo artwork uses a monochrome
+contrast treatment pending the approved navy asset. The left navigation/contact
+card becomes sticky from `lg`, with its own viewport-bounded overflow. Below `lg`
+it returns to normal flow. Content sections use the shared width and scroll offset;
+no measured heights or page-container animation are needed. Experience cards
+show a partial next card where space permits, with manual arrows and touch swipes.
+No mobile Figma reference was available; these responsive states follow the
+existing site conventions and require client visual review.

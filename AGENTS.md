@@ -7,7 +7,10 @@ The Firm (`/the-firm`) is implemented for local visual review, specified in
 `docs/routes/the-firm.md`; the paste-ready prompt is
 `docs/handoffs/the-firm-next-chat.md` (historical kickoff). Original media, advisory
 assignments and missing editorial copy remain approval gates.
-Shared site chrome belongs to `app/(site)/`.
+Practice areas (`/practice-areas` and `/practice-areas/[slug]`) is the next
+authorized preview, now implemented from supplied screenshots. Read
+`docs/routes/practice-areas.md` for scope and outstanding content. Shared site
+chrome belongs to `app/(site)/`.
 
 ## Start here
 
@@ -26,7 +29,8 @@ Shared site chrome belongs to `app/(site)/`.
 
 - Preserve the homepage visual hold. Keep The Firm within its agreed review
   spec. Mechanical shared extractions and real Firm link activation are allowed
-  while preserving Home’s appearance. Other secondary pages follow separately.
+  while preserving Home’s appearance. Practice areas is authorized by the latest
+  supplied screenshots; other secondary pages follow separately.
 - Use Tailwind defaults where they fit and shadcn for reusable interactive
   primitives. Add custom tokens only for meaningful brand differences. UI icon
   packages are permitted; preserve supplied brand assets.
