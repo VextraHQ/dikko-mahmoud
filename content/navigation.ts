@@ -11,7 +11,7 @@ export const navigation: readonly NavigationItem[] = [
   { label: "Home", href: routes.home },
   { label: "The firm", href: routes.firm },
   { label: "Practice areas", href: routes.practiceAreas },
-  { label: "People", href: routes.people },
+  { label: "Our People", href: routes.people },
   { label: "Insights", href: routes.insights },
   { label: "Careers", href: routes.careers },
   { label: "Contact", mobileLabel: "Contact us", href: routes.contact },

@@ -37,3 +37,27 @@ real service or the Sanity adapter lands; those boundaries are worth testing.
 - Test behaviour, not implementation: inputs and expected outputs.
 - When you add a pure helper to `lib/` or a rule to `content/`, add a test.
 - Keep tests small and readable; one `describe` per function.
+
+## Alignment coverage
+
+alignment.test.ts checks fail-closed publication status, visible-list selection,
+the nine-practice projections and future enquiry choices, canonical authors,
+isolated biography drafts, and approved legal section/date handling. Runtime
+components remain covered by targeted browser review rather than a new React
+rendering test framework. Current pending records exercise the empty public
+state; approved single/multiple collections use synthetic unit fixtures.
+
+## Lint rules and unused-code check
+
+- `eslint.config.mjs` adds a few rules on top of Next's: no array-index keys,
+  key checks (including duplicates), no `console.log` (`error`/`warn` are
+  allowed), `===` instead of `==`, and no `!` non-null assertions. Tests may
+  use `!`, and `scripts/` may log. Where a rule genuinely doesn't fit, use an
+  `eslint-disable-next-line` comment with the reason, as in `marquee.tsx`.
+- Biome is not used. Prettier formats and ESLint lints. Turn the Biome editor
+  extension off for this workspace so it doesn't show conflicting warnings.
+- `pnpm knip` lists unused files, exports and packages. Run it occasionally,
+  not as part of every check. `knip.json` skips the prepared form kit
+  (`docs/forms.md`) until the Contact/Careers forms use it. Code that is
+  hidden on purpose, such as the commented-out practice experience section,
+  will show as unused; that's expected.

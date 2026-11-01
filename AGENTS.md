@@ -12,6 +12,17 @@ authorized preview, now implemented from supplied screenshots. Read
 `docs/routes/practice-areas.md` for scope and outstanding content. Shared site
 chrome belongs to `app/(site)/`.
 
+The active checkpoint is the user-approved client alignment pass in
+`docs/client-alignment.md`, including SME and legal previews. It supersedes earlier
+Home hold rules only for the specified corrections. Nine practices share a public
+index; testimonials are removed, and clients/matters require explicit publication
+approval. The user subsequently restored practice experience for visual review:
+while no-index, complete pending practice cases may render with a preview note;
+withheld cases stay hidden and launch remains approved-only. Other pending
+identities and draft biographies remain hidden. The scope
+addendum is a draft awaiting client acknowledgement; the original proposal stays
+unchanged.
+
 ## Start here
 
 1. Read `README.md`.
@@ -30,7 +41,8 @@ chrome belongs to `app/(site)/`.
 - Preserve the homepage visual hold. Keep The Firm within its agreed review
   spec. Mechanical shared extractions and real Firm link activation are allowed
   while preserving Home’s appearance. Practice areas is authorized by the latest
-  supplied screenshots; other secondary pages follow separately.
+  supplied screenshots. SME, Privacy and Terms previews are now authorized by
+  the alignment spec; other secondary pages follow separately.
 - Use Tailwind defaults where they fit and shadcn for reusable interactive
   primitives. Add custom tokens only for meaningful brand differences. UI icon
   packages are permitted; preserve supplied brand assets.
@@ -49,8 +61,8 @@ chrome belongs to `app/(site)/`.
   desktop/mobile screenshots. The user approved the sourced matter summaries
   and BPE as the opening selection. The maintainability audit is implemented.
   Hero/header scroll refinements are implemented. The user approved the compact
-  People grid, manual client perspectives and featured-plus-three insights;
-  these are now implemented for review with explicit missing-content slots.
+  People grid and featured-plus-three insights; client perspectives were later
+  removed by the alignment pass. The remaining selections are implemented for review with explicit missing-content slots.
   The user approved fallback polish across the whole homepage: missing/failed
   media uses intentional typography/covers; unapproved content stays labelled
   for review and never inherits a real client's attribution.

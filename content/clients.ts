@@ -1,3 +1,4 @@
+import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import { hasText } from "@/lib/content";
 
 // Anonymous slots only: replace with approved client names and local logo assets.
@@ -11,16 +12,16 @@ export const selectedClients = {
   slots: Array.from({ length: 12 }, (_, index) => ({
     id: `client-${index + 1}`,
     name: null as string | null,
+    publicationStatus: "pending" as PublicationStatus,
     logo: null as string | null,
   })),
 };
 
-/** Clients with an approved name. */
-export const namedClients = selectedClients.slots.filter((client) =>
-  hasText(client.name),
-);
-
-/** Anonymous samples remain only while the whole collection is under review. */
-export const visibleClients = namedClients.length
-  ? namedClients
-  : selectedClients.slots;
+/** Only named, approved clients render; preview slots never substitute for consent. */
+export function publishableClients(
+  items: readonly (typeof selectedClients.slots)[number][],
+) {
+  return approvedRecords(items).filter((client) => hasText(client.name));
+}
+export const namedClients = publishableClients(selectedClients.slots);
+export const visibleClients = namedClients;

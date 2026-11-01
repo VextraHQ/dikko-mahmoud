@@ -1,0 +1,13 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["scripts/*.mjs"],
+  "ignore": [
+    "components/ui/{checkbox,field,form,input,label,native-select,separator,textarea}.tsx"
+  ],
+  "ignoreDependencies": [
+    "@radix-ui/react-checkbox",
+    "@radix-ui/react-label",
+    "@radix-ui/react-separator",
+    "react-hook-form"
+  ]
+}

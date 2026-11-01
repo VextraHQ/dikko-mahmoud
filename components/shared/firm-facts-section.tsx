@@ -40,16 +40,22 @@ export function FirmFactsSection({
                 <dt className="mt-4 text-base/6 font-semibold">{fact.label}</dt>
                 <dd
                   className={cn(
-                    "text-primary order-first font-serif text-4xl/10 xl:text-[44px]/12",
-                    fact.value.length > 10 &&
+                    "text-primary order-first font-serif",
+                    "compact" in fact
+                      ? "text-xl/7 xl:text-2xl/8"
+                      : "text-4xl/10 xl:text-[44px]/12",
+                    !("compact" in fact) &&
+                      fact.value.length > 10 &&
                       "xl:text-[clamp(2rem,2.5vw,2.25rem)]/12",
                   )}
                 >
                   {fact.value}
                 </dd>
-                <dd className="text-muted-foreground mt-3 text-sm/6">
-                  {fact.detail}
-                </dd>
+                {fact.detail && (
+                  <dd className="text-muted-foreground mt-3 text-sm/6">
+                    {fact.detail}
+                  </dd>
+                )}
               </div>
             ))}
           </dl>

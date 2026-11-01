@@ -45,8 +45,10 @@ function CaseCard({ item, index }: { item: Case; index: number }) {
 }
 export function ExperienceSection({
   items,
+  preview = false,
 }: {
   items: PracticeDetail["experience"];
+  preview?: boolean;
 }) {
   if (!items?.length) return null;
   return (
@@ -65,6 +67,11 @@ export function ExperienceSection({
       <p className="text-muted-foreground mt-6 text-sm/6 sm:text-base/7">
         {copy.experienceDescription}
       </p>
+      {preview && (
+        <p className="text-muted-foreground mt-3 text-xs/5">
+          {copy.experiencePreviewNote}
+        </p>
+      )}
       <div className="mt-8" data-practice-experience>
         <ExperienceCarousel count={items.length}>
           {items.map((item, index) => (
@@ -72,7 +79,7 @@ export function ExperienceSection({
               key={item.id}
               index={index}
               label={`${formatIndex(index)}: ${item.organisation}`}
-              className="pl-6 sm:basis-[88%]"
+              className={items.length > 1 ? "pl-6 sm:basis-[88%]" : "pl-6"}
             >
               <CaseCard item={item} index={index} />
             </CarouselItem>

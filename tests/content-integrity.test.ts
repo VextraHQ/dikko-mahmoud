@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { selectedMatters, visibleMatters } from "@/content/matters";
+import { selectedMatters, matterRecords } from "@/content/matters";
 import {
   advisoryGroups,
   getPerson,
@@ -38,7 +38,7 @@ describe("content integrity", () => {
 
   it("opens selected matters on a matter that exists", () => {
     expect(
-      visibleMatters.some((matter) => matter.id === selectedMatters.defaultId),
+      matterRecords.some((matter) => matter.id === selectedMatters.defaultId),
     ).toBe(true);
   });
 

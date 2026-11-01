@@ -20,7 +20,10 @@ import {
 } from "@/components/ui/accordion";
 import { usePracticeMenu } from "@/hooks/use-practice-menu";
 import { navigation } from "@/content/navigation";
-import { practiceCatalogue, practiceCopy } from "@/content/practice-catalogue";
+import {
+  practiceIndex as practiceCatalogue,
+  practiceCopy,
+} from "@/content/practice-index";
 import { isActivePath } from "@/lib/navigation";
 import { isRouteAvailable, routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
@@ -51,7 +54,7 @@ export function SiteNavigation({
     // Full-width serif rows split by hairlines; the current page is sky-tinted
     // rather than a filled pill so it reads calmly on the navy sheet.
     const rowClass =
-      "flex min-h-16 w-full items-center justify-between gap-4 py-3 text-left font-serif text-[28px]/9 text-white/85 transition-colors hover:text-white aria-[current=page]:text-sky-200 data-[active=true]:text-sky-200 motion-reduce:transition-none";
+      "flex min-h-16 w-full items-center justify-between gap-4 py-3 text-left font-serif text-[28px]/9 short:min-h-12 short:py-2 short:text-2xl/8 text-white/85 transition-colors hover:text-white aria-[current=page]:text-sky-200 data-[active=true]:text-sky-200 motion-reduce:transition-none";
     return (
       <nav aria-label="Mobile navigation">
         <ul className="divide-y divide-white/10 border-y border-white/10">

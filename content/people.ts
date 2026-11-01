@@ -17,7 +17,7 @@ export const peopleHome = {
   eyebrow: "Our people",
   heading: "Experienced minds. A personal commitment.",
   description:
-    "Meet the people behind the advice. Discover their experience through individual profiles, or explore partners, senior counsel and a wider team across our offices.",
+    "Meet the four partners featured in this preview. Further team profiles will follow once confirmed by the firm.",
   action: "Meet our lawyers",
 };
 

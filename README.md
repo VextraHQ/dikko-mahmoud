@@ -1,38 +1,30 @@
 # Dikko & Mahmoud Website
 
-The local project foundation for the Dikko & Mahmoud website revamp. The root
-route now presents the homepage review checkpoint: brand typography and
-theme, shared Button, responsive navigation, expertise hero, firm facts and
-firm-story preview, sticky navigation, a selected-clients placeholder rail and
-the editorial practice-area explorer, selected matters, curated People grid,
-manual client-perspectives carousel, featured-plus-three insights, FAQ, overlapping
-enquiry CTA and shared footer. It remains
-no-index. All five hero photographs are now local and connected. The homepage
-presentation runs from navigation through footer; whole-page review, final
-content and secondary pages remain unfinished. Missing/failed media uses
-decorative brand covers, initials or text logos, preserving each allocated crop.
-These are intentional fallbacks, not substitute photographs. Approved originals
-are still required. Testimonials remain anonymous preview slots; profile/article
-destinations and publication content are still pending.
-The FAQ uses user-authorized starter copy, ready for later editorial replacement.
-Footer contact details
-follow the supplied reference; real social profiles and booking/secondary pages
-still need their approved destinations. Email and phone links are available.
+The site is a no-index local presentation preview. Home, The Firm, the nine
+Practice area routes, SME retainer, Privacy Policy and Terms of Use are implemented
+for review. The client-feedback corrections are specified in
+[client alignment](docs/client-alignment.md); the proposed scope inclusions are in
+[the draft addendum](docs/scope-addendum.md). The original proposal is unchanged.
 
-The homepage is on visual review hold pending client identity/media approval.
-The Firm (`/the-firm`) is implemented as a no-index presentation preview. It includes
-the agreed Journey, founder/advisory previews, process, presence and shared facts/FAQ/CTA.
-Original media, group assignments and some editorial copy remain approval gates. Use the
-[page spec](docs/routes/the-firm.md) and
-[new-chat prompt](docs/handoffs/the-firm-next-chat.md) for the current checkpoint. Preserve Home's
-appearance while extracting shared pieces and enabling real Firm links.
+Home retains its hero, firm story, practice selector, People, Insights, FAQ and CTA.
+The selector, hub, menus, footer and future enquiry choices share nine practices.
+Testimonials are removed. Client/logo and representative-matter collections render
+only approved records; all currently stored client/matter records await consent,
+so those Home sections and their spacing are omitted. The user restored pending
+practice-detail experience for no-index design review with a preview note; its
+publication status remains pending and it is excluded when indexing is enabled.
 
-Practice areas now has a [hub](http://localhost:3000/practice-areas), a shared
-mega menu and nine readable detail URLs. Corporate & Commercial Advisory uses
-the supplied services/experience/contact reference; the other eight pages retain
-sourced summaries with explicit missing-content notices. Shared FAQ presentation
-supports per-practice data. See [the practice brief](docs/routes/practice-areas.md)
-for remaining source, media and editorial gaps. All routes remain no-index.
+The Firm retains Journey and the agreed preview presentation. SME has Advisory
+and Secretarial tracks with explicit missing-copy notices. Legal pages share an
+editorial reading layout and actual document links; firm-approved legal text and
+update dates have not been supplied and are not invented. People biography drafts
+and article-author support are prepared without publishing unconfirmed claims.
+
+Visual identity, approved media, final practice naming/Capital Markets placement,
+biographies, article copy, publication permissions and legal/SME text remain review
+gates. People directory/profiles, Insights routes, Careers and Contact remain
+separate implementation checkpoints. Providers and deployment are not connected.
+The user-added Analytics and existing hero autoplay remain intact.
 
 ## Stack
 

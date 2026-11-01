@@ -52,7 +52,13 @@ export function FirmStorySection() {
                   <dt className="mt-1.5 text-[10px]/[14px] font-medium text-white/80 sm:text-xs/4">
                     {fact.shortLabel}
                   </dt>
-                  <dd className="order-first font-serif text-3xl/9 font-bold sm:text-4xl/10">
+                  <dd
+                    className={
+                      "compact" in fact
+                        ? "order-first text-xs/5 sm:text-sm/6"
+                        : "order-first font-serif text-3xl/9 font-bold sm:text-4xl/10"
+                    }
+                  >
                     {fact.value}
                   </dd>
                 </div>

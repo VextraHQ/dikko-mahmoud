@@ -9,7 +9,7 @@ import { firmBrand } from "@/content/firm";
 import { footer } from "@/content/footer";
 
 const footerLinkClass =
-  "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-white/80 underline-offset-4 transition-colors hover:text-white hover:underline focus-visible:text-white sm:min-h-9";
+  "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 ease-editorial motion-reduce:transition-none hover:text-white hover:underline focus-visible:text-white sm:min-h-9";
 
 function FooterLink({ label, href }: { label: string; href: string }) {
   return (
@@ -22,7 +22,7 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 export function SiteFooter() {
   return (
     <footer id="site-footer" className="bg-navy-deep text-white">
-      <div className="mx-auto w-full max-w-360 px-4 pt-24 pb-8 sm:px-8 sm:pt-32 lg:pt-48 lg:pb-10 xl:px-20">
+      <div className="mx-auto w-full max-w-360 px-4 pt-24 pb-8 group-has-[.legal-page]/site-shell:pt-12 sm:px-8 sm:pt-32 lg:pt-48 lg:pb-10 xl:px-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16 xl:grid-cols-[1.1fr_2.5fr]">
           <div className="min-w-0">
             <BrandLogo />
@@ -63,7 +63,14 @@ export function SiteFooter() {
               className="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-3"
             >
               {footer.linkGroups.map((group) => (
-                <div key={group.title}>
+                <div
+                  key={group.title}
+                  className={
+                    "wide" in group
+                      ? "max-lg:order-last max-lg:col-span-2"
+                      : undefined
+                  }
+                >
                   <h2 className="mb-2 text-sm/6 text-white/65">
                     {group.title}
                   </h2>
@@ -114,7 +121,7 @@ export function SiteFooter() {
                 </h2>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="mt-3 inline-flex min-h-11 max-w-full items-center gap-2 rounded-sm text-sm/6 text-white/85 underline-offset-4 hover:text-white hover:underline"
+                  className="ease-editorial mt-3 inline-flex min-h-11 max-w-full items-center gap-2 rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 hover:text-white hover:underline motion-reduce:transition-none"
                 >
                   <Mail
                     aria-hidden="true"

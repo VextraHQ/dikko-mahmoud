@@ -14,16 +14,22 @@ export type ErrorViewProps = {
   retry: () => void;
 };
 
+type Props = ErrorViewProps & {
+  /** True where the site shell is missing (root and global errors). */
+  fill?: boolean;
+};
+
 const content = systemPages.error;
 
 // Shared by app/(site)/error.tsx, app/error.tsx and app/global-error.tsx.
-export function ErrorView({ error, retry }: ErrorViewProps) {
+export function ErrorView({ error, retry, fill }: Props) {
   useReportError(error);
   return (
     <>
       {/* Error boundaries can't export metadata; React hoists this tag. */}
       <title>{pageTitle(content.eyebrow)}</title>
       <StatusPage
+        fill={fill}
         eyebrow={content.eyebrow}
         title={content.title}
         description={content.description}

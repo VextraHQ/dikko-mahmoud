@@ -1,5 +1,6 @@
 // Supplied desktop/mobile footer references. Confirm publication details before launch.
 export const contact = {
+  officeSummary: "Abuja & Kano offices · Lagos liaison office",
   email: "info@dikkoandmahmoud.com",
   hours: "Monday to Friday, 9am to 5pm",
   offices: [

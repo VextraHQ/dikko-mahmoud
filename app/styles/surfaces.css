@@ -78,3 +78,23 @@
   background: rgb(255 255 255 / 95%);
   box-shadow: 0 8px 28px rgb(6 26 46 / 5%);
 }
+
+@media print {
+  body:has(.legal-page) header,
+  body:has(.legal-page) [data-site-header-backing],
+  body:has(.legal-page) #site-footer,
+  body:has(.legal-page) a[href="#main-content"] {
+    display: none !important;
+  }
+  body:has(.legal-page) {
+    background: white;
+    color: black;
+  }
+  .legal-page {
+    color: black;
+  }
+  .legal-page p,
+  .legal-page li {
+    color: inherit;
+  }
+}

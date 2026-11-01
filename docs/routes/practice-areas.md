@@ -6,10 +6,12 @@ The user authorized the Practice areas hub, supplied mega menu and individual
 practice pages on 31 October 2026. These are local no-index previews. Home and
 The Firm retain their review hold; this is not publication approval.
 
-The nine-practice catalogue from the supplied design is distinct from Home's six
-broad areas. Preserve Home's labels/visuals and map their destinations to matching
-new practices. The broader Capital Markets item leads to the hub rather than an
-unrelated detail. Shared header/footer links now activate real built destinations.
+The user has approved using the nine-practice catalogue consistently across the
+site. `content/practice-index.ts` is the public source for titles/categories,
+ordering, summaries, Home and future enquiry options. `content/practice-catalogue.ts`
+adds server-owned detail and consent-sensitive experience. Navigation and route
+registry consume only the public index. All detail URLs remain unchanged. Capital
+Markets placement still needs firm confirmation; SME is a separate offering.
 
 ## Reference
 
@@ -46,8 +48,8 @@ site conventions and is locally checked rather than Figma-verified.
 - Shared detail presentation: light header, native breadcrumb, hero, sidebar
   links derived only from existing sections, sticky contact card from `lg` and
   normal-flow navigation on smaller screens.
-- Corporate & Commercial Advisory: two complete supplied needs, three services,
-  two selected-experience records and the screenshot's Bello Aminu Abdullahi
+- Corporate & Commercial Advisory: three supplied needs, three services,
+  two stored experience records, currently hidden (carousel commented out pending client consent; see client-alignment.md), previously visible for design review while no-index and the screenshot's Bello Aminu Abdullahi
   contact. Reuses canonical people records and the existing working process.
 - Services reuse the shared accordion; experience reuses a manual Embla carousel
   with touch/keyboard controls and no autoplay: one line per case on the left
@@ -59,12 +61,13 @@ site conventions and is locally checked rather than Figma-verified.
 
 ## Ownership and link review
 
-`content/practice-catalogue.ts` owns catalogue records, per-page detail data,
-category normalization, Home destination mapping and sidebar section selection.
+`content/practice-index.ts` owns public records and future enquiry choices.
+`content/practice-catalogue.ts` owns per-page detail data, category normalization,
+approved experience selection and sidebar section selection.
 `content/practice-faqs.ts` owns hub FAQ data. Each practice's `detail.faqs` can
 supply its own heading, description and FAQ items, independently of the shared UI.
-The catalogue has no runtime dependency on firm/FAQ collections, keeping the
-route-registry import acyclic. Page modules own metadata/parameters; components
+The public index has no domain imports, keeping route-registry imports acyclic
+and withholding pending experience from navigation client bundles. Page modules own metadata/parameters; components
 own presentation and `usePracticeMenu` owns menu state/breakpoint reset.
 
 The existing SiteLink/route registry architecture is retained. Its availability
@@ -89,7 +92,9 @@ CMS, submission service or deployment configuration was added.
   They show explicit preparation notes rather than borrowing Corporate claims.
 - Corporate's third need was supplied on 31 October 2026. The second case's
   organisation heading is still cropped ("Nigerian Gas Production & Transpo…")
-  and keeps a neutral matter heading until the full name is confirmed. The third case
+  and was later resolved from brochure PDF page 20 as Nigerian Gas Production &
+  Transportation Company Ltd. The record remains pending consent and may appear only in the current no-index
+  design preview, with a visible preview note. The third case
   is not supplied. Contract Drafting & Reviewing has no supplied description and
   stays an explicit editorial slot. No outcomes or additional team assignments
   are inferred.

@@ -1,6 +1,8 @@
 import { Plus, Minus, ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
+import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { smeRetainer } from "@/content/sme";
 import {
   filterPractices,
   practiceFilters,
@@ -65,10 +67,16 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
             ))}
           </ul>
         </nav>
-        <ul className="mt-8 grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {/* Cards share four row tracks (number, title, summary, footer) via
+            subgrid: closed cards line up, and opening one card's services
+            adds space below its neighbours without moving their content. */}
+        <ul className="mt-8 grid gap-x-6 md:grid-cols-2 xl:grid-cols-3">
           {practices.map((practice) => (
-            <li key={practice.slug} className="min-w-0">
-              <article className="border-border hover:border-primary/50 ease-editorial flex h-full flex-col rounded-xl border p-6 transition-[border-color,box-shadow] duration-500 hover:shadow-sm">
+            <li
+              key={practice.slug}
+              className="row-span-4 grid min-w-0 grid-rows-subgrid pb-6"
+            >
+              <article className="border-border hover:border-primary/50 ease-editorial row-span-4 grid grid-rows-subgrid rounded-xl border p-6 transition-[border-color,box-shadow] duration-500 hover:shadow-sm">
                 <div className="flex items-center justify-between gap-4">
                   <span className="font-serif text-3xl/9">
                     {formatIndex(
@@ -79,13 +87,11 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
                     {practice.category}
                   </span>
                 </div>
-                <h3 className="mt-5 min-h-14 font-serif text-xl/7">
-                  {practice.title}
-                </h3>
+                <h3 className="mt-5 font-serif text-xl/7">{practice.title}</h3>
                 <p className="text-muted-foreground mt-5 text-sm/6">
                   {practice.summary}
                 </p>
-                <div className="mt-auto pt-6">
+                <div className="self-start pt-6">
                   <details className="group/services border-border border-t">
                     <summary className="text-primary flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 py-3 text-sm/6 font-semibold [&::-webkit-details-marker]:hidden">
                       {copy.servicesAction}
@@ -124,6 +130,43 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
             </li>
           ))}
         </ul>
+        {/* An offering alongside the nine practices, not a tenth card: it
+            reuses the section's editorial two-column rhythm. */}
+        <aside
+          aria-labelledby="sme-heading"
+          className="border-border mt-12 grid gap-8 border-t pt-10 lg:mt-16 lg:grid-cols-[1fr_1.2fr] lg:gap-20 lg:pt-14"
+        >
+          <div>
+            <Eyebrow>{copy.smeHeading}</Eyebrow>
+            <h3
+              id="sme-heading"
+              className="mt-5 font-serif text-[28px]/9 sm:text-4xl/11"
+            >
+              {smeRetainer.title}
+            </h3>
+          </div>
+          <div className="flex flex-col items-start">
+            <p className="text-muted-foreground text-base/7">
+              {copy.smeDescription}
+            </p>
+            <ol className="mt-6 grid w-full gap-x-6 sm:grid-cols-2">
+              {smeRetainer.tracks.map((track, index) => (
+                <li
+                  key={track.id}
+                  className="border-border flex items-baseline gap-3 border-t py-4"
+                >
+                  <span className="text-primary text-xs/5 font-bold">
+                    {formatIndex(index)}
+                  </span>
+                  <span className="font-serif text-xl/7">{track.title}</span>
+                </li>
+              ))}
+            </ol>
+            <ArrowButton asChild className="mt-6">
+              <SiteLink href={routes.smeRetainer}>{copy.smeAction}</SiteLink>
+            </ArrowButton>
+          </div>
+        </aside>
       </div>
     </section>
   );

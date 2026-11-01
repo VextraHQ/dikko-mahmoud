@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmBrand } from "@/content/firm";
+import { cn } from "@/lib/utils";
 
 /**
  * Shared layout for the 404 and error pages: a calm, centred editorial
@@ -12,17 +13,25 @@ export function StatusPage({
   title,
   description,
   actions,
+  fill = false,
 }: {
   mark?: string;
   eyebrow: string;
   title: string;
   description: string;
   actions: ReactNode;
+  /** Fill the screen when no header/footer surrounds the page (root errors). */
+  fill?: boolean;
 }) {
   return (
     <section
       aria-labelledby="status-heading"
-      className="bg-primary relative isolate overflow-hidden pt-16 pb-24 text-white sm:pt-24 sm:pb-32 lg:pt-52 lg:pb-40"
+      className={cn(
+        "bg-primary relative isolate overflow-hidden text-white",
+        fill
+          ? "flex min-h-svh flex-col justify-center py-16"
+          : "pt-16 pb-24 sm:pt-24 sm:pb-32 lg:pt-52 lg:pb-40",
+      )}
     >
       <span
         aria-hidden="true"

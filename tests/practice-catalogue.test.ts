@@ -5,7 +5,6 @@ import {
   getPractice,
   getPracticeFilter,
   getPracticeSections,
-  homePracticeDestinations,
 } from "@/content/practice-catalogue";
 import { getPerson } from "@/content/people";
 import { isRouteAvailable, routes } from "@/lib/routes";
@@ -33,13 +32,7 @@ describe("practice catalogue", () => {
   it("links only to sections present in each practice", () => {
     const corporate = getPractice("corporate-commercial-advisory")!;
     expect(getPracticeSections(corporate).map((section) => section.id)).toEqual(
-      [
-        "needs",
-        "services",
-        "experience",
-        "practice-people",
-        "working-together",
-      ],
+      ["needs", "services", "practice-people", "working-together"],
     );
     expect(
       getPracticeSections(getPractice("energy-oil-gas")!).map(
@@ -69,9 +62,6 @@ describe("practice catalogue", () => {
     ).toBe(false);
   });
   it("keeps Home destinations and supplied contact references valid", () => {
-    for (const slug of Object.values(homePracticeDestinations)) {
-      if (slug) expect(getPractice(slug)).toBeDefined();
-    }
     for (const practice of practiceCatalogue) {
       if (practice.detail?.contactId)
         expect(getPerson(practice.detail.contactId)).toBeDefined();

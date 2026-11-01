@@ -1,3 +1,4 @@
+import { contact } from "@/content/contact";
 import { requirePerson } from "@/content/people";
 
 const founder = requirePerson("ab-mahmoud");
@@ -23,10 +24,11 @@ export const firmFacts = [
     shortLabel: "Years of practice",
   },
   {
-    value: "2 + 1",
-    label: "Offices & liaison presence",
-    detail: "Abuja & Kano · Lagos liaison",
-    shortLabel: "Offices & liaison",
+    value: contact.officeSummary,
+    compact: true,
+    label: "Our presence",
+    detail: "",
+    shortLabel: "Our presence",
   },
   {
     value: "Public + Private",
@@ -223,7 +225,7 @@ export const firmPeople = {
   heading: ["Founded on experience.", "Led with purpose."],
   founderId: "ab-mahmoud",
   closing:
-    "Alongside our partners and wider team, that experience supports a multidisciplinary approach to complex legal questions.",
+    "Meet the partners whose experience supports the practice. Further team profiles are awaiting confirmation.",
   assignmentNote:
     "Advisory group selections are awaiting confirmation. These preview slots do not represent named lawyers or confirmed group membership.",
   pendingPerson: "Selection pending",

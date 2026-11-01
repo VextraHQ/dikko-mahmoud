@@ -10,7 +10,7 @@ export const practiceHubFaq = {
       media: firmHomePreview.media.office,
       question: "Which practice areas does the firm cover?",
       answer:
-        "Our multidisciplinary practice spans dispute resolution, corporate and commercial law, capital markets, energy and resources, and policy and government matters. Explore the practice areas above for more detail.",
+        "Explore the nine practice areas above for more detail on the firm’s services and the support relevant to your matter.",
     },
     {
       id: "overlap",

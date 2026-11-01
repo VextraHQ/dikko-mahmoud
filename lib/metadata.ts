@@ -2,6 +2,31 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/content/site";
 
 type OpenGraph = NonNullable<Metadata["openGraph"]>;
+type ShareImage = {
+  url: string;
+  alt: string;
+  width?: number;
+  height?: number;
+};
+
+const shareImageAlt =
+  "Dikko & Mahmoud — Built on experience. Guided by principles.";
+const openGraphImage = {
+  url: "/opengraph-image.png",
+  width: 2400,
+  height: 1260,
+  alt: shareImageAlt,
+};
+const twitterImage = {
+  url: "/twitter-image.png",
+  width: 2400,
+  height: 1200,
+  alt: shareImageAlt,
+};
+
+function absoluteImage(image: ShareImage) {
+  return { ...image, url: new URL(image.url, getSiteUrl()).toString() };
+}
 
 function trimSlash(url: string) {
   return url.endsWith("/") ? url.slice(0, -1) : url;
@@ -41,7 +66,7 @@ function openGraph({
   title: string;
   description: string;
   path: string;
-  image?: { url: string; alt: string };
+  image?: ShareImage;
 }): OpenGraph {
   return {
     type: "website",
@@ -50,7 +75,28 @@ function openGraph({
     url: path,
     title,
     description,
-    ...(image ? { images: [image] } : {}),
+    images: [
+      image
+        ? absoluteImage(image)
+        : { ...absoluteImage(openGraphImage), type: "image/png" },
+    ],
+  };
+}
+
+function twitter({
+  title,
+  description,
+  image,
+}: {
+  title: string;
+  description: string;
+  image?: ShareImage;
+}): Metadata["twitter"] {
+  return {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [absoluteImage(image ?? twitterImage)],
   };
 }
 
@@ -71,7 +117,10 @@ export function createSiteMetadata(): Metadata {
       description: siteConfig.description,
       path: "/",
     }),
-    twitter: { card: "summary_large_image" },
+    twitter: twitter({
+      title: siteConfig.name,
+      description: siteConfig.description,
+    }),
     robots,
   };
 }
@@ -89,7 +138,7 @@ export function createPageMetadata({
   title?: string;
   description: string;
   path: string;
-  image?: { url: string; alt: string };
+  image?: ShareImage;
 }): Metadata {
   const fullTitle = pageTitle(title);
   return {
@@ -97,5 +146,6 @@ export function createPageMetadata({
     description,
     alternates: { canonical: path },
     openGraph: openGraph({ title: fullTitle, description, path, image }),
+    twitter: twitter({ title: fullTitle, description, image }),
   };
 }

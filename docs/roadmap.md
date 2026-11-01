@@ -2,36 +2,29 @@
 
 ## Current objective
 
-The homepage is implemented from navigation through footer as a no-index visual
-preview. It is now on a client review hold pending visual-identity approval and
-approved imagery/content. Preserve its appearance; this is not launch approval.
-Prior technical checks and microinteraction/fallback work remain recorded in the
-implementation log, with homepage-specific behaviour in `routes/home.md`.
+The client-alignment pass is implemented for local review; see
+[client-alignment.md](client-alignment.md) for the authoritative before/after scope.
+Home and The Firm retain their identity/media review holds except for the approved
+corrections. The public practice index now drives nine practices across Home,
+hub, navigation, footer and future enquiry options. Testimonials are removed.
+Pending clients/logos and named matters are stored but hidden on Home; empty sections reserve no space. The user has
+restored practice-detail experience for no-index visual review with a preview
+note. Consent stays pending; withheld records and unapproved launch content
+remain hidden.
 
-**The Firm (`/the-firm`) is implemented for local visual review.** See
-[routes/the-firm.md](routes/the-firm.md) for its current state and remaining gates.
-Its desktop year selector and mobile accordion share state; founder/advisory
-previews use canonical people, with neutral slots for unconfirmed memberships.
-Facts, PersonCard and FAQ are shared while Home retains its visual treatment.
-Firm navigation, footer About us and Home story links are active.
+SME retainer, Privacy Policy and Terms of Use previews are implemented. SME tracks
+await supplied copy; legal bodies and approved dates are absent and explicitly
+marked. These are working route presentations, not publication approval.
+Article-author references and brochure biography drafts are prepared; no author or
+unconfirmed profile copy is invented. People, Insights, Careers and Contact routes
+remain separate milestones; their client requirements are listed in
+`client-alignment.md` → "Requirements for pages not yet built". The scope addendum includes nine practices, SME and
+Terms at the existing fee, but remains a draft awaiting client acknowledgement.
 
-The route uses intentional covers/initials pending approved media. The 2021/Today
-Journey bodies, milestone media/captions, four FAQ answers, advisory assignments,
-source story wording and publication content still require editorial review.
-The mobile Figma frame loaded; desktop MCP context hit the Starter-plan limit,
-so the supplied desktop screenshots were used. This is not final visual or
-publication approval. Practice areas has since been authorized from the supplied
-30 October screenshots; other routes/profile pages need a separately agreed scope. Sanity, providers, deployment and the later Claude
-workflow remain outside this checkpoint. User-added Analytics is preserved.
-
-**Practice areas is implemented for local review.** The hub, wide desktop menu,
-mobile disclosure and nine `/practice-areas/[slug]` routes share one catalogue.
-Corporate & Commercial Advisory has the supplied sticky sidebar, services and
-manual experience carousel. The other eight pages have sourced summaries and
-explicit missing-content notices. FAQs accept separate per-practice data; the
-hub has its own collection. See [routes/practice-areas.md](routes/practice-areas.md)
-for missing originals/copy and reference limitations. The homepage's six-area
-presentation remains intact; its links map to the new catalogue.
+Capital Markets placement, final practice names, current biographies, media,
+permissions, SME/legal text and missing contact details remain firm review gates.
+Sanity, other providers, deployment and the later Claude workflow remain outside
+this checkpoint. User-added Analytics, hero autoplay and Firm Journey are preserved.
 
 ## Status
 
@@ -44,18 +37,19 @@ presentation remains intact; its links map to the new catalogue.
 | 2b. Navigation and hero                     | Review   | Responsive checkpoint with manual fades, text motion and image preparation         |
 | 2b.1 Firm facts and story                   | Review   | Responsive sections, shared firm content, placeholders and one-time reveals        |
 | 2b.2 Sticky navigation and selected clients | Review   | Route-aware header and accessible placeholder marquee                              |
-| 2b.3 Practice-area explorer                 | Review   | Six source areas, desktop index, mobile accordion, photo placeholders              |
-| 2b.4 Selected matters                       | Review   | Responsive feature/selector, four sourced summaries, BPE opening selection         |
+| 2b.3 Practice-area explorer                 | Review   | Nine shared practices, desktop index, mobile accordion, photo placeholders         |
+| 2b.4 Selected matters                       | Review   | Consent-gated records; pending matters hidden; approved selection fallback         |
 | 2b.5 Maintainability audit                  | Review   | Style ownership, click-only matters, accessibility fixes and aligned docs          |
-| 2b.6 People, client perspectives, insights  | Review   | Compact four-person preview, manual testimonials and one-plus-three articles       |
+| 2b.6 People, client perspectives, insights  | Review   | Four-person preview, testimonials removed, article-author support                  |
 | 2c. FAQ, enquiry CTA and footer             | Review   | Shared Accordion/Avatar, two CTA surfaces, mobile/desktop overlap and footer       |
 | 2c.1 Whole-page presentation QA             | Hold     | Homepage visuals held for client identity/content/imagery review                   |
-| 2d. Final publication content               | Waiting  | Approved portraits, testimonial, imagery, and destinations                         |
+| 2d. Final publication content               | Waiting  | Approved portraits, imagery, publication consent and destinations                  |
 | 3. Information architecture                 | Scoped   | Firm route, shared ownership and destination activation mapped; other routes later |
 | 4. Desktop and mobile design references     | Supplied | User-provided Figma frames; missing states resolved during audit                   |
 | 5. Secondary-page implementation            | Review   | Firm and Practice areas previews; other routes remain separate                     |
 | 5a. The Firm                                | Review   | Route, shared reuse and interactions implemented; content/media gates remain       |
 | 5b. Practice areas                          | Review   | Hub/menu and nine detail previews; full detail content supplied only for Corporate |
+| 5c. Client alignment and SME/legal previews | Review   | Shared catalogue, consent controls, copy corrections and three route previews      |
 | 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                              |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                     |
 
@@ -81,5 +75,5 @@ the full website is unfinished.
 
 The homepage is now on visual review hold. The Firm presentation is implemented for review within its
 approved scope. Practice areas is implemented within its screenshot-based scope.
-Other routes, CMS, provider connections and
-deployment remain separate milestones.
+SME and legal previews are implemented under the alignment spec. Other routes,
+CMS, provider connections and deployment remain separate milestones.

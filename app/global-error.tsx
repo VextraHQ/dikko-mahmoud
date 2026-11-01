@@ -10,7 +10,7 @@ export default function GlobalError(props: ErrorViewProps) {
   return (
     <html lang="en" className={`${fontVariables} antialiased`}>
       <body className="bg-background text-foreground font-sans">
-        <ErrorView {...props} />
+        <ErrorView {...props} fill />
       </body>
     </html>
   );

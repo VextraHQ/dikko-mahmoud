@@ -31,7 +31,8 @@ export function Marquee({
     >
       {Array.from({ length: repeat }).map((_, i) => (
         <div
-          // biome-ignore lint/suspicious/noArrayIndexKey: <We need a key for the Marquee component>
+          // Identical repeated copies: the position is their only identity.
+          // eslint-disable-next-line react/no-array-index-key
           key={i}
           data-marquee-track
           data-marquee-copy={i > 0 ? "true" : undefined}

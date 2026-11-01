@@ -1,7 +1,9 @@
+import { getPerson } from "@/content/people";
 import { hasText, uniqueById } from "@/lib/content";
 
 export type InsightPreview = {
   id: string;
+  authorId?: string | null;
   title: string;
   excerpt: string | null;
   category: string;
@@ -9,8 +11,8 @@ export type InsightPreview = {
 };
 
 export const insightsHome = {
-  eyebrow: "Perspectives & insights",
-  heading: "Perspectives that keep you informed.",
+  eyebrow: "Insights",
+  heading: "Dikko & Mahmoud Legal Insights Series",
   description:
     "Explore ideas on business, disputes and the changing legal landscape from our lawyers.",
   action: "Explore all insights",
@@ -71,3 +73,9 @@ export const homeInsights = homeFeature
       ).slice(0, 3),
     }
   : null;
+
+/** Shared by cards and future article pages; an unknown ID never becomes a byline. */
+export function getInsightAuthor(article: Pick<InsightPreview, "authorId">) {
+  return article.authorId ? getPerson(article.authorId) : undefined;
+}
+export const insightAuthorPending = "Author awaiting firm confirmation";

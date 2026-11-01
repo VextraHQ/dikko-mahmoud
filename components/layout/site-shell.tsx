@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 // by app/not-found.tsx, which renders outside that layout.
 export function SiteShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex min-h-svh flex-col">
+    <div className="group/site-shell relative flex min-h-svh flex-col">
       <a
         href="#main-content"
         className="text-primary fixed top-4 left-4 z-70 -translate-y-24 rounded-full bg-white px-5 py-3 focus:translate-y-0"

@@ -260,3 +260,20 @@ no measured heights or page-container animation are needed. Experience cards
 show a partial next card where space permits, with manual arrows and touch swipes.
 No mobile Figma reference was available; these responsive states follow the
 existing site conventions and require client visual review.
+
+## Alignment layouts — 2026-10-31
+
+Home retains the practice selector with all nine full titles. Its media remains
+inside the existing desktop column; the index can grow naturally. The office fact
+uses a compact textual value instead of a numerical office count. Footer practice
+links wrap full canonical titles; the SME link belongs to the Firm group.
+
+SME uses the site's cap/gutters, a light-header editorial introduction and two
+track surfaces (one column on mobile, two from md). No pricing table or new imagery
+is introduced. The shared enquiry/footer overlap remains unchanged.
+
+Legal pages use the light header, max-3xl reading column and a 15rem document nav
+on the right from lg. Smaller screens show a wrapping two-link row above the
+article. Footer spacing is ordinary page-to-footer spacing; no enquiry card is
+inserted. Print hides site chrome and document links, expands the reading column
+and keeps text visible without colour-dependent meaning.

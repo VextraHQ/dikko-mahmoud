@@ -15,7 +15,7 @@ export const faqIntro = {
     "Practical answers to help you understand our services and start a conversation with the right team.",
   supportHeading: "Still have questions?",
   supportDescription:
-    "Can’t find the answer you’re looking for? Please chat to our friendly team.",
+    "Can’t find the answer you’re looking for? Contact the firm.",
   supportAction: "Get in touch",
 };
 
@@ -35,7 +35,7 @@ export const faqs: Faq[] = [
     id: "services",
     question: "What legal services does the firm offer?",
     answer:
-      "Our multidisciplinary practice advises businesses, institutions and individuals on disputes, corporate and commercial matters, capital markets, energy and resources, and policy and government matters.",
+      "Explore our nine practice areas for the services relevant to your business, institution or individual matter.",
     media: firmHomePreview.media.office,
   },
   {

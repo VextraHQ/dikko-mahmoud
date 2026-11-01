@@ -1,3 +1,4 @@
+import { InsightByline } from "@/components/shared/insight-byline";
 import { ArrowUpRight, Newspaper } from "lucide-react";
 import { EditorialCover } from "@/components/shared/editorial-cover";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
@@ -103,6 +104,10 @@ export function InsightsSection() {
             <span className="relative mt-auto pt-40 font-serif text-3xl/9 decoration-white/50 underline-offset-4 group-hover:underline">
               {feature.title}
             </span>
+            <InsightByline
+              article={feature}
+              className="relative text-white/80"
+            />
             {feature.excerpt && (
               <span className="relative mt-4 text-sm/6 text-white/80">
                 {feature.excerpt}
@@ -133,6 +138,10 @@ export function InsightsSection() {
                     <span className="text-muted-foreground mt-2 block text-[10px]/4 uppercase">
                       {article.category}
                     </span>
+                    <InsightByline
+                      article={article}
+                      className="text-muted-foreground"
+                    />
                   </span>
                   <ArrowUpRight
                     aria-hidden="true"

@@ -94,6 +94,19 @@ white cover the light text and glass navigation treatments on navy surfaces.
   Carousel arrows are 44px controls. Keep visible keyboard focus and disabled
   states, and implement links as links and state changes as buttons.
 
+### Arrows and back-links
+
+- Never type arrow characters (↗ → ←) in UI text. Some phones, such as
+  iPhones, show them as emoji, and their size and weight don't match the type.
+  Use Lucide icons (`ArrowUpRight`, `ArrowRight`, `ChevronRight`) with
+  `strokeWidth={1.5}` and `aria-hidden`.
+- `ArrowUpRight` means "go to this page" (CTAs, cards, jump links).
+  `ArrowRight` means "next" (the next-practice row).
+- A secondary page shows where it sits with the shared `Breadcrumb`
+  (`components/ui/breadcrumb.tsx`), not a lone "Home ↗" link. Examples:
+  "Home › Terms of Use" on the Legal pages, and "Home › Practice areas ›
+  SME retainer".
+
 ### Arrow buttons
 
 `components/ui/button.tsx` owns the CVA/Slot primitive for ordinary buttons and
@@ -391,3 +404,12 @@ under reduced motion. Static catalogue cards change border/shadow without transl
 Practice service accordions reuse the shared primitive, and practice FAQs reuse
 FaqSection with independent data. The experience carousel reuses Embla without
 autoplay and switches instantly under reduced motion.
+
+## Client alignment surfaces — 2026-10-31
+
+Legal and SME pages retain existing tokens, Newsreader headings, Manrope reading
+copy and ArrowButton. Legal navigation is real links, not tabs; article/track content
+is server-rendered. Pending legal/SME copy is explicitly marked in previews. No
+new dependencies, Motion scope, theme reset or provider integration were added.
+Consent affects section presence and control count, not card styling. Testimonials
+are removed by page composition; historical carousel primitives remain dormant.

@@ -1,4 +1,4 @@
-import { practiceCatalogue } from "@/content/practice-catalogue";
+import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
 
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
@@ -18,6 +18,7 @@ export const routes = {
   insight: (id: string) => `/insights/${id}`,
   careers: "/careers",
   contact: "/contact",
+  smeRetainer: "/sme-retainer",
   privacy: "/privacy-policy",
   terms: "/terms-of-use",
 } as const;
@@ -32,10 +33,18 @@ export const launchedRoutes: readonly string[] = [
   routes.home,
   routes.firm,
   routes.practiceAreas,
+  routes.smeRetainer,
+  routes.privacy,
+  routes.terms,
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
 ];
 
 export function isRouteAvailable(href: string) {
   if (href.startsWith("#") || href.startsWith("?")) return true;
   return launchedRoutes.includes(href.split(/[?#]/, 1)[0]);
+}
+
+/** Enquiries go to the Contact page once it launches; until then, email. */
+export function enquiryHref(email: string) {
+  return isRouteAvailable(routes.contact) ? routes.contact : `mailto:${email}`;
 }

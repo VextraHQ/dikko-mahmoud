@@ -1,0 +1,170 @@
+# Client feedback alignment
+
+Implementation status: implemented for local review. Verification is recorded in
+[implementation-log.md](implementation-log.md); content and consent gates remain.
+
+## Practice experience visual-review exception
+
+**Status: hidden again (31 October 2026).** The user asked to hide the carousel
+pending client consent. In `components/practices/detail-page.tsx` the
+`<ExperienceSection>` block, its imports and `experienceOptions` are commented
+out (not deleted), and `getPracticeSections` gets no options, so only approved
+experience counts and no "Selected experience" link appears. Uncomment that
+block to restore the review preview described below.
+
+On 31 October 2026 the user explicitly requested restoration of the practice
+experience carousel for design review. While `siteConfig.indexable` is false,
+practice detail pages may show complete pending experience records with a visual
+preview note. Sidebar links and slides use that same list. Records remain pending;
+withheld records stay hidden. When indexing is enabled, only approved experience
+renders. Home clients/matters and testimonials are unaffected by this exception.
+This supersedes the practice-experience hiding rule below for the current preview.
+
+## Authority and checkpoint
+
+The user approved this implementation on 31 October 2026. This specification
+supersedes conflicting current Home review-hold requirements only for the changes
+below. Existing header/mobile navigation, hero autoplay, Firm Journey, identity
+and imagery remain within their current review boundaries. All routes stay
+no-index. CMS, providers and deployment are separate milestones.
+
+Sources reviewed: `Website Feedback.docx` in the user's Downloads; the 16 September
+2026 `Vextra_Proposal_Dikko_Mahmoud.pdf` and `Dikko  Mahmoud Profile.pdf` in
+`~/Documents/Dikko & Mahmoud Docs/`; the supplied Practice areas screenshots.
+The brochure is content evidence, not publication consent or a current roster.
+The latest client feedback controls requested corrections; the user's approved
+scope additions are recorded in [scope-addendum.md](scope-addendum.md).
+
+## Before and after
+
+- Home's six practice labels and footer abbreviations become projections of the
+  same nine-record catalogue used by the hub and menu. Detail URLs remain stable.
+  Home retains its selector/mobile accordion. Hero labels resolve from the same
+  index; the transaction slide uses "Our expertise" while Capital Markets placement
+  is pending. Its headline, photo and autoplay remain unchanged. Future enquiry choices derive from
+  the same records, plus a separate "Not sure yet" choice. Capital Markets'
+  placement remains for firm confirmation; no tenth practice is invented.
+- Testimonials and their placeholders are removed. Client/logo and matter records
+  gain `pending`, `approved` and `withheld` publication status. Only approved,
+  complete records render. Existing named records start pending. Empty sections
+  omit all chrome and spacing; one item has no carousel controls. Selection and
+  counts derive from the visible collection, including practice experience.
+- Consultation/chat copy becomes "Contact the firm". Enquiry wording remains.
+  Office presentation uses "Abuja & Kano offices · Lagos liaison office", without
+  numerical office counts. Use "full-service" consistently. Keep the X icon;
+  social URLs and the Lagos phone remain unconnected until confirmed.
+- The existing People nav item becomes "Our People". Reading copy describes the
+  four available partners. Brochure biographies are prepared as isolated review drafts keyed to canonical
+  people records; no new role, date, qualification or roster is assumed.
+- Insights becomes "Dikko & Mahmoud Legal Insights Series". Article records may
+  reference a canonical person as author; resolved bylines appear on cards and
+  future detail pages. Unknown authors remain explicit preview gaps.
+
+## New page presentations
+
+`/sme-retainer` is an editorial page, linked from the practice hub and footer.
+It has an introduction, Advisory and Secretarial tracks and existing enquiry
+controls. Tracks sit side by side on desktop and stack on mobile. Missing service
+copy is clearly marked; pricing, service promises and retainer terms are omitted
+until supplied. This is an offering alongside the nine practices.
+
+Privacy and Terms use one shared server-rendered layout: readable article on the
+left, sticky document links on the right, simple Privacy/Terms link row on mobile.
+Links navigate between actual routes, not tab panels. Sections are structured
+content; each document owns its approved update date. No date is fabricated and
+no policy text is copied from reference apps. Missing firm-approved text is a
+visible local preview notice. Print hides navigation/chrome and uses the full
+reading width. No oversized enquiry marketing card is placed on legal pages.
+
+Reference patterns: iProduce Africa's legal reading column/right document nav and
+Wardwise's compact document links/structured sections, adapted to this site's
+serif typography, navy palette and shared chrome. No runtime, CMS or policy data
+is copied from those repositories.
+
+## Implementation batches and gates
+
+1. Create this spec and the draft addendum before runtime changes; update current
+   docs without rewriting historical logs.
+2. Apply catalogue consistency, removals, consent filtering and copy corrections.
+3. Add SME and legal route previews, metadata and registry entries.
+4. Keep People directory/profiles, Insights listing/detail, Careers and Contact
+   as separately checked route milestones. Author presentation is prepared now;
+   no dummy article route is activated.
+
+The firm must confirm Capital Markets' placement/final naming, current biographies
+and qualifications, item-by-item client/matter permissions, SME content, approved
+legal text/update dates, social URLs and missing contact details. The full gas
+company name is sourced from brochure PDF page 20: Nigerian Gas Production &
+Transportation Company Ltd; its matter remains hidden pending consent.
+
+## Acceptance and verification
+
+- All nine practice titles, ordering and destinations match across the enabled
+  surfaces. No old label list or testimonial placeholder remains rendered.
+- Pending/withheld identities never leak through cards, sidebar links, no-JS
+  fallbacks or serialized interactive props. Approved empty/single/multiple
+  collections render with correct controls and selection.
+- Biographies remain review drafts; authors are never invented. Legal pages have
+  distinct metadata/current-document links and no invented policy or update date.
+- SME is discoverable without being counted as a tenth practice. All new pages
+  preserve the site's no-index switch, canonical metadata and single site shell.
+- Unit tests cover content projections, approval filtering, fallback selection,
+  author resolution and legal date/section rules. Browser checks cover 320, 390,
+  768, 1024, 1280 and 1440px; keyboard navigation, reduced motion, no-JS reading,
+  legal printing, header regressions and empty/single-item layouts.
+- Documentation: formatting, path and consistency review. Code: format:check,
+  lint, typecheck and tests. Production build at the completed route checkpoint.
+  Record actual results in the implementation log; local checks are not launch
+  approval.
+
+## Requirements for pages not yet built
+
+Recorded from `Website Feedback.docx` so whoever builds these routes (people,
+Claude or Codex) applies the client's corrections from the start. Each page
+still needs its own design approval and should keep the no-index switch,
+`createPageMetadata`, `SiteLink`/`routes.*` and the `launchedRoutes` step.
+
+### People (`/people`, `/people/[slug]`)
+
+- The menu item is "Our People"; keep that label.
+- Show only the four partners until the firm supplies counsel and associate
+  profiles. Do not reintroduce "senior counsel and a wider team" copy.
+- A profile page and its pop-up/card must use the same, fuller content. The
+  feedback found Sefiullahi Oseni's page almost empty while his pop-up was
+  complete. Render both from one record; drafts live in `content/people-review.ts`.
+- Bios, qualifications, memberships and dates await firm confirmation. Bello
+  Aminu Abdullahi's membership is written two ways ("Member, Chartered Institute
+  of Arbitrators" and "ACIArb (UK)"); use one confirmed form everywhere.
+
+### Insights (`/insights`, `/insights/[id]`)
+
+- Section name: "Dikko & Mahmoud Legal Insights Series".
+- Every listing card and article shows its author (`authorId` →
+  `getInsightAuthor`, rendered with `InsightByline`). Counsel will contribute,
+  so authors may be people outside the four partners once supplied. Never
+  invent an author.
+- The sample "Patent Registration in Nigeria" article had a body, contents
+  list and category from a different article. Treat it as placeholder: title,
+  body, "In this article" list and category must come from the same record.
+
+### Careers (`/careers`)
+
+- Already in the main menu but has no design. It shows the "coming soon"
+  notice until a design is approved and the route is launched.
+
+### Contact (`/contact`)
+
+- The top-right header button reads "Make an enquiry", as on other pages,
+  not "Back to homepage".
+- No chat wording ("chat to our friendly team"); the site has no chat. Use
+  neutral wording such as "Contact the firm".
+- Offices: "Abuja & Kano offices · Lagos liaison office" (`contact.officeSummary`).
+  The Lagos phone stays off until the firm supplies one.
+- When this route launches, add it to `launchedRoutes`; every practice-page
+  `EnquiryButton` then switches from email to this page via `enquiryHref`.
+
+### Site-wide, still open
+
+- Social icons use the X logo; profile URLs stay unconnected until confirmed.
+- Use "full-service" (hyphenated) in all new copy.
+- Capital Markets placement is unconfirmed; do not add a tenth practice.

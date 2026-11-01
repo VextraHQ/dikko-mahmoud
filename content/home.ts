@@ -1,9 +1,11 @@
-// Verbatim copy from the supplied Figma hero component's five slide records.
+import { practiceIndex } from "@/content/practice-index";
+
+// Source hero headlines/media are retained; practice labels use the shared index.
 // Original image fills were recovered from the native Figma local-copy export.
 const sourceHeroSlides = [
   {
     id: "dispute-resolution",
-    practice: "Dispute resolution",
+    practiceSlug: "litigation-dispute-resolution",
     title: ["Clarity in", "complexity."],
     description:
       "Clear advice and determined representation when a dispute puts your business, reputation or interests at stake.",
@@ -12,7 +14,7 @@ const sourceHeroSlides = [
   },
   {
     id: "corporate-secretarial",
-    practice: "Corporate & secretarial",
+    practiceSlug: "corporate-governance-compliance-secretarial",
     title: ["Counsel for", "business."],
     description:
       "Practical legal support for the decisions, structures and obligations that keep your organisation moving forward.",
@@ -21,7 +23,7 @@ const sourceHeroSlides = [
   },
   {
     id: "capital-markets-commercial",
-    practice: "Capital markets & commercial",
+    practiceSlug: null,
     title: ["Confidence in", "transactions."],
     description:
       "Commercially informed advice to help you assess risk, structure agreements and pursue opportunities with confidence.",
@@ -30,7 +32,7 @@ const sourceHeroSlides = [
   },
   {
     id: "energy-natural-resources",
-    practice: "Energy & natural resources",
+    practiceSlug: "energy-oil-gas",
     title: ["Supporting", "our power"],
     description:
       "Legal guidance for projects, investment and regulatory questions across the energy and natural resources sectors.",
@@ -39,7 +41,7 @@ const sourceHeroSlides = [
   },
   {
     id: "policy-government-advisory",
-    practice: "Policy & government advisory",
+    practiceSlug: "government-policy-advisory",
     title: ["Insight that", "shapes policy."],
     description:
       "Grounded legal analysis for public institutions and organisations navigating policy, regulation and government.",
@@ -47,9 +49,15 @@ const sourceHeroSlides = [
     darkenImage: true,
   },
 ] as const;
-export const heroSlides = sourceHeroSlides.filter(
-  (slide) => slide.practice.trim() && slide.title.some((line) => line.trim()),
-);
+// The transaction slide keeps a generic label until Capital Markets placement is confirmed.
+export const heroSlides = sourceHeroSlides
+  .map((slide) => ({
+    ...slide,
+    practice:
+      practiceIndex.find((practice) => practice.slug === slide.practiceSlug)
+        ?.title ?? "Our expertise",
+  }))
+  .filter((slide) => slide.title.some((line) => line.trim()));
 export const heroAction = "Explore our expertise";
 /** Time each hero slide stays before autoplay advances, in ms. */
 export const heroAutoplayDelay = 7000;

@@ -1097,3 +1097,185 @@
   tone (`default` on light, `inverse` on dark), so hover/active come from the
   variant. The tone rule moved to `headerTone()` in `lib/navigation.ts`, shared
   with `StickyHeader`, and is covered by `tests/navigation.test.ts`.
+
+## Full-screen root error pages
+
+- `app/error.tsx` and `app/global-error.tsx` render without the site shell, so
+  the padded status band left white page background below it. `StatusPage` now
+  takes `fill` (min-h-svh, vertically centred); `ErrorView` passes it through
+  and only those two root boundaries set it. The (site) error and 404 keep
+  their shell and padding (404 checked unchanged in the browser).
+- Checked: prettier and eslint on the touched files; typecheck shows no errors
+  in them. The full run currently reports two errors in
+  `tests/practice-catalogue.test.ts` from in-progress catalogue edits.
+
+## Practice sidebar fit and catalogue card alignment
+
+- Detail sidebar: the sticky card's square contact placeholder pushed it past
+  the viewport cap, so it scrolled internally. On `lg` the portrait is 16:10,
+  padding/link rows/gaps are slightly tighter; mobile keeps square and 44px
+  targets. Measured: fits without inner scroll at 1440×900 and 1366×768
+  (620px vs 640px available). The max-height cap stays as a short-window
+  fallback.
+- Hub cards: opening one card's services stretched the row and pushed every
+  neighbour's `mt-auto` footer down. Cards now use `grid-rows-subgrid` across
+  four shared tracks (number, title, summary, footer): closed cards align and
+  neighbours keep their footers in place (verified by measuring positions with
+  card 1 open). Phone width checked: single column, no overflow.
+- Hub SME retainer: replaced the tinted sky callout box with an editorial
+  aside after the cards (hairline, the section's 1fr/1.2fr columns, eyebrow,
+  serif title, numbered Advisory/Secretarial tracks, ArrowButton). Title and
+  tracks come from `content/sme.ts`; the hub labels stay in practice copy. Keeps
+  SME discoverable without reading as a tenth practice. Checked at 1440 and
+  375px (tracks stack, no overflow).
+
+## 2026-10-31 — Client feedback alignment and SME/legal previews
+
+- Created client-alignment.md and scope-addendum.md before runtime edits. The
+  addendum remains a draft awaiting client acknowledgement: nine practice areas,
+  SME retainer and Terms at the existing ₦1,400,000 fee. Original proposal PDF
+  untouched. Updated current guide/index/roadmap, source ownership and layout
+  rules; preserved historical entries and concurrent user refinements.
+- Public practice-index.ts now drives Home, hero labels, menu, hub metadata,
+  footer and future enquiry choices. Full detail/experience stays server-owned.
+  The transaction hero retains its source copy/photo with generic "Our expertise"
+  while Capital Markets placement awaits confirmation. Detail slugs, hero autoplay
+  timing/pause rules and Firm Journey remain unchanged.
+- Removed testimonials from Home composition. Added fail-closed publication
+  status/selection rules for clients and matters, including practice experience.
+  Existing records are pending; no sample substitutes or empty section spacing.
+  Single approved matters/cases omit selection controls. Public JS chunk inspection
+  found no pending named-matter bodies or biography review text.
+- Neutralised consultation/chat wording, standardised office presence copy and
+  full-service spelling, renamed Our People and Legal Insights Series, and added
+  canonical author resolution/shared bylines. Source biography drafts are isolated
+  in people-review.ts, keyed to canonical IDs and not imported by public UI.
+- Added SME retainer and separate Privacy/Terms route previews with metadata,
+  registry/sitemap entries and light header. SME has two editorial tracks and
+  explicit missing-content notices; legal pages share reading/right-document-nav
+  layout and simple mobile links. Approved legal text/dates have not been supplied.
+  No policy/retainer terms, prices or author attributions were invented.
+- Legal print hides chrome, document navigation and the mobile header background.
+  Fixed that background obscuring printed headings. Captured and visually reviewed
+  desktop/mobile SME/legal layouts and the final one-page policy print preview.
+- Passed format:check, lint, typecheck, 51 Vitest tests across nine files and
+  production build (22 generated pages). Final isolated production browser suite
+  passed at 320, 390, 768, 1024, 1280 and 1440px: shared nine-practice selector,
+  menu behaviour, no pending sections/identities, SME links/tracks, legal nav/tone,
+  footer spacing, no horizontal overflow, metadata, sitemap, print and 404 shell.
+  Every hero slide was checked for containment at 390/1440px. No page runtime
+  errors were observed. No-JS Home/legal/SME checks passed at 320/390/1440px.
+- Unit fixtures cover approval pending/withheld/missing/approved, empty/single/
+  multiple selections, canonical projections, author references and legal text/date
+  gates. Approved real-world client records were not activated for visual testing;
+  production preview currently exercises the empty consent state. Full autoplay
+  timing, long approved legal bodies and unbuilt directory/article routes were not
+  re-audited. Providers, deployment and indexing remain unchanged.
+- Mobile sheet on short phones: at ~390×664 (phone minus browser bars) the
+  offices footer sat below the fold. Added a `short:` custom variant
+  (`max-height: 760px`, in `app/globals.css`) that compacts sheet rows to 48px /
+  24px type and trims header/CTA gaps; the footer is `shrink-0` and sticky to
+  the sheet bottom. Measured: 390×664 fits with no scroll; with Practice areas
+  open the list scrolls and offices stay pinned; 375×812 keeps 64px/28px rows.
+- Breadcrumb (`components/ui/breadcrumb.tsx`) stays on one line at every width:
+  links and separators don't shrink, the current page truncates with an
+  ellipsis (its full name is the H1 below and stays in the accessibility
+  tree). Checked at 320px with the longest practice title (one line, no
+  overflow) and 1440px (full title, no truncation).
+
+- Practice detail mobile order now follows the 390px Figma frame: "In this
+  practice" is a plain wrapped link list (no card) above Your needs, and the
+  contact card moves after Selected experience. Desktop keeps the sticky
+  sidebar card unchanged; one `PracticeContact` renders in both places, each
+  hidden at the other breakpoint.
+
+## 2026-10-31 — Restore practice experience for visual review
+
+- The user explicitly requested the designer's selected-experience carousel back
+  while building visuals. Restored pending practice experience only in the current
+  no-index preview, with a small visual-preview note and matching sidebar link.
+  Existing publication status stays pending; withheld records never render and
+  enabling indexing returns to approved-only experience. Home consent gates and
+  testimonial removal remain unchanged.
+- Added a selector test for preview inclusion, unchanged approval status,
+  withheld exclusion and approved-only defaults. Passed format:check, lint,
+  typecheck and all 57 tests. Development browser checks passed at 1440, 390 and
+  320px: both cases restored, next/previous controls work, sidebar target exists,
+  no horizontal overflow or runtime errors. Home gated sections remain absent.
+  No production build was run for this bounded preview-data change.
+
+## 2026-10-31 — Social image artwork and metadata
+
+- Generated the user-approved navy margin-column artwork using the existing
+  logo, local Newsreader/Manrope fonts and supplied Firm heading. Added static
+  root Open Graph (2400×1260, 210857 bytes) and Twitter (2400×1200, 207543 bytes)
+  PNGs plus matching alt files. Twitter is a central crop of the 2× master;
+  the logo and headline fit the central square stress test. No photograph or
+  public authoring route was added.
+- Retained the editable browser Canvas export master in
+  `scripts/export-social-images.mjs`; it embeds local assets and produces both
+  PNG downloads with no dependency or service installation.
+- Shared metadata now includes absolute default image URLs/dimensions on every
+  page and page-specific Twitter titles/descriptions. Custom page images replace
+  both defaults without forcing a PNG MIME type. PNG header/dimension/size/alt
+  checks and metadata replacement/override coverage were added to existing tests.
+- Passed `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test` (57 tests
+  across nine files) and `pnpm build` (24 generated pages). Visually inspected the
+  actual export. An isolated production server passed 60 HTML-head checks across
+  15 page routes and Facebook, Twitter, LinkedIn and WhatsApp user agents. Both
+  PNG endpoints returned HTTP 200, image/png, exact dimensions and byte-identical
+  assets for all four agents. These were local HTTP requests with crawler user
+  agents, not real external-platform fetches.
+- Preserved no-index and the current robots Disallow policy, existing providers,
+  domain fallback and all unrelated work. Public share recognition/cache checks
+  remain pending an accessible preview URL with approved crawler access. Export,
+  URL configuration and testing notes live in `docs/social-sharing.md`.
+
+- Practice detail UX pass (approved from wireframes): jump links use
+  `servicesLabel`/`needsEyebrow` (no heading punctuation); the people section
+  eyebrow is "The team"; practices without detail show only "About this
+  practice" plus the pending note instead of repeating the hero title and
+  summary; every practice-page enquiry renders `EnquiryButton` ("Make an
+  enquiry", `enquiryHref` → Contact once launched, email until then); a
+  "Next practice" row (`getNextPractice`, wraps last → first) closes the main
+  column before the FAQ. Tests: `tests/practice-index.test.ts`.
+
+- Practice detail H1 on phones is 36px with `text-balance` (was 40px), so the
+  longest title fits three even lines at 390px. Larger screens step down too:
+  48px from `sm` and 60px from `xl` (were 60px/72px). The longest title is
+  3 lines at 1024–1440px, and the text column matches the image height. Other
+  pages keep 72px; practice titles are much longer.
+
+- Removed the unused testimonial code (`content/testimonials.ts`,
+  `client-perspectives-section.tsx`, `testimonial-carousel.tsx`); nothing
+  rendered it after the alignment pass. Practice experience carousel is
+  commented out pending client consent (restore steps in client-alignment.md).
+  Added "Requirements for pages not yet built" to client-alignment.md so the
+  People, Insights, Careers and Contact builds carry the client feedback.
+
+- Footer: on mobile, Firm and Legal sit side by side and practice areas run
+  full width below them (`wide` flag in `content/footer.ts`, Figma mobile
+  footer); desktop is unchanged. Footer page links and the email are now
+  `sky-200` (white on hover) after the Figma's blue links. Headings, addresses,
+  phones and "Contact the firm" keep their colours.
+
+- Footer links fade to white over 300ms with `ease-editorial` (reduced motion:
+  instant).
+- Replaced the typed "↗" back-links on the Legal and SME pages with the shared
+  Breadcrumb ("Home › Terms of Use", "Home › Practice areas › SME retainer").
+  No typed arrow characters remain in the UI; the rule is in
+  design-system.md → "Arrows and back-links".
+
+## 2026-11-01 — Simplified social artwork
+
+- Removed the decorative right-hand globe from the editable social export master
+  and regenerated both static PNGs with uninterrupted deep navy on the right.
+  Logo, headline, left margin/rule, descriptor, year and crop positions are unchanged.
+  Open Graph remains 2400×1260 (174146 bytes); Twitter remains 2400×1200
+  (171516 bytes). Updated the current design decision in `docs/social-sharing.md`.
+- Visually inspected the finished PNG. Passed format:check, lint, typecheck,
+  61 Vitest tests across ten files, production build and git diff --check.
+  Both production image artifacts match the source PNG bytes/dimensions and
+  retain image/png. Built Home and Firm HTML retain the expected image URLs,
+  dimensions and large Twitter card metadata. No metadata or indexing change;
+  external share recognition remains at the previously recorded preview gate.

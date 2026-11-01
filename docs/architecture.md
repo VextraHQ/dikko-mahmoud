@@ -1,6 +1,32 @@
 # Architecture
 
-## Current boundary
+## Client alignment override
+
+[client-alignment.md](client-alignment.md) is the active checkpoint. Home uses the
+public nine-practice index; testimonials are no longer mounted. Stored clients and
+matters require approved publication status and have no sample fallback. Existing
+checkpoint descriptions below remain historical where superseded here.
+
+`content/practice-index.ts` owns public metadata, copy and future enquiry choices.
+The detail catalogue adds consent-sensitive records on the server; menus, routes,
+Home projections and footer consume the public index. A separate matter-copy module
+keeps pending matter bodies out of the interactive selector's imports. Filtering
+happens before interactive props are constructed. `lib/publication.ts` owns fail-
+closed approval and initial-selection rules. `useMatterSelection` keeps a selection
+only while its approved record remains in the current list.
+
+`content/legal.ts` owns separate policy records, approval status, approved update
+dates and ordered sections. One server legal layout uses right-hand document links
+and mobile link navigation, with no tab state or Motion. Pending bodies/dates are
+suppressed. SME uses its own content and server section, linked alongside practices.
+Print-only legal rules stay scoped in surfaces.css. Header tone includes SME/legal.
+
+People biography drafts in people-review.ts are source adaptations keyed to
+canonical IDs, isolated from public imports and rendered biography fields. Insights author IDs resolve through canonical people;
+the reusable byline handles missing authors without substituting someone else.
+Future directory/article routes and CMS normalization remain separate checkpoints.
+
+## Original presentation boundary
 
 A single-package Next.js 16 App Router application, React 19, TypeScript strict
 mode and Tailwind CSS 4. There is no `src/` directory or monorepo. The `@/*`
@@ -112,6 +138,12 @@ Carousel) keep their own internal state, as generated.
   rebuilds `openGraph` per page because Next.js replaces, not merges, a child's
   `openGraph` object. Site URL: `NEXT_PUBLIC_SITE_URL`, then Vercel URLs, then
   `siteConfig.url`.
+- Root `app/opengraph-image.png` and `app/twitter-image.png` are the approved
+  margin-column artwork at 2400×1260 and 2400×1200, with accompanying alt files.
+  Both metadata helpers explicitly include absolute image URLs and dimensions;
+  each page also gets its own Twitter title/description. A supplied page image
+  replaces both defaults. See [social-sharing.md](social-sharing.md) for the
+  export master, local checks and external-preview limits.
 - `siteConfig.indexable = false` keeps every page no-index and robots.txt
   disallowing all until launch.
 - System pages: `app/not-found.tsx` (404 status, inside `SiteShell`),
@@ -120,8 +152,8 @@ Carousel) keep their own internal state, as generated.
   globals.css). All render `StatusPage`: a centred message and actions on the
   navy band with a faint serif watermark ("404", or the firm initials); errors go through the client
   `ErrorView`, which calls Next 16's `retry()` and reports via `useReportError`.
-- Gaps: no Open Graph share image yet; `/experience` and `/insights/:id` paths
-  are provisional until those routes are specified.
+- Gaps: `/experience` and `/insights/:id` paths are provisional until those
+  routes are specified. External social-platform recognition remains unverified.
 
 ## Styling ownership
 

@@ -4,9 +4,9 @@ import { SiteLink } from "@/components/layout/site-link";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
-  practiceCatalogue,
+  practiceIndex as practiceCatalogue,
   practiceCopy as copy,
-} from "@/content/practice-catalogue";
+} from "@/content/practice-index";
 import { routes } from "@/lib/routes";
 import { formatIndex } from "@/lib/format";
 

@@ -15,6 +15,7 @@ export function StickyHeader({ children }: { children: ReactNode }) {
   return (
     <>
       <div
+        data-site-header-backing
         aria-hidden="true"
         className={cn(
           "pointer-events-none absolute inset-x-0 top-0 h-22 lg:hidden",

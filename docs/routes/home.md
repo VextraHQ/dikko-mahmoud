@@ -1,6 +1,20 @@
 # Homepage implementation brief
 
-## Visual review hold — 2026-10-29
+## Current alignment override — 2026-10-31
+
+The user authorized the corrections in [../client-alignment.md](../client-alignment.md).
+Home uses the nine-record public practice index, with its selector/mobile accordion
+preserved. Hero practice labels resolve from the same index; the transactions
+slide uses "Our expertise" until Capital Markets placement is confirmed. Headlines,
+images and autoplay are retained. Testimonials and placeholders are removed. Client/logo and named-matter
+records require explicit publication approval; pending records and empty sections
+are hidden. Selection falls back to an approved record; one item has no selector.
+Office copy is canonical across shared surfaces; Insights has the new series name
+and author support. Hero autoplay and unrelated visual geometry remain unchanged.
+The original design references and older checkpoint decisions below are historical
+where they conflict with this override. Publication approval is still outstanding.
+
+## Original visual review hold — 2026-10-29
 
 The user paused further homepage visual work pending client approval of visual
 identity and delivery of imagery/content. Retain the implemented presentation;
@@ -19,7 +33,7 @@ Reviewed on 2026-10-26:
 The supplied design is the implementation reference. Its provisional content
 does not become approved production content simply because it appears in Figma.
 
-## Current implementation rules — audited 2026-10-28
+## Original implementation rules — audited 2026-10-28
 
 - Use component Tailwind for ordinary states and responsive layout; custom
   keyframes/progressive fallbacks and glass surfaces live in the two focused

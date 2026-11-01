@@ -10,7 +10,12 @@ describe("headerTone", () => {
     ).toBe("light");
   });
 
-  it("keeps the navy header everywhere else", () => {
+  it("uses light chrome for SME and legal reading pages", () => {
+    for (const route of [routes.smeRetainer, routes.privacy, routes.terms])
+      expect(headerTone(route)).toBe("light");
+  });
+
+  it("keeps the navy header on Home, Firm and the hub", () => {
     expect(headerTone(routes.home)).toBe("dark");
     expect(headerTone(routes.firm)).toBe("dark");
     expect(headerTone(routes.practiceAreas)).toBe("dark");

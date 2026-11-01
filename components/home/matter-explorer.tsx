@@ -1,11 +1,10 @@
 "use client";
 
 import { SquareArrowUpRight } from "lucide-react";
-import { useState } from "react";
-import {
-  selectedMatters as content,
-  type SelectedMatter,
-} from "@/content/matters";
+
+import { selectedMatters as content } from "@/content/matter-copy";
+import type { SelectedMatter } from "@/content/matters";
+import { useMatterSelection } from "@/hooks/use-matter-selection";
 import { useBringIntoView } from "@/hooks/use-bring-into-view";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { mediaQueries } from "@/lib/media-queries";
@@ -14,23 +13,26 @@ import { SiteLink } from "@/components/layout/site-link";
 import { routes } from "@/lib/routes";
 
 export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
-  const [selected, setSelected] = useState(() =>
-    Math.max(
-      0,
-      matters.findIndex((matter) => matter.id === content.defaultId),
-    ),
-  );
+  const { selected, select } = useMatterSelection(matters, content.defaultId);
   const isDesktop = useMediaQuery(mediaQueries.desktop);
   const { ref: featureRef, bringIntoView } = useBringIntoView<HTMLElement>();
 
+  if (!matters.length) return null;
+
   function selectMatter(index: number) {
-    setSelected(index);
+    select(index);
     // On the stacked layout, bring the requested preview back into view.
     if (!isDesktop) bringIntoView();
   }
 
   return (
-    <div className="mt-8 grid gap-8 sm:mt-12 lg:grid-cols-[1fr_1.17fr] lg:gap-16">
+    <div
+      className={
+        matters.length > 1
+          ? "mt-8 grid gap-8 sm:mt-12 lg:grid-cols-[1fr_1.17fr] lg:gap-16"
+          : "mt-8 max-w-3xl sm:mt-12"
+      }
+    >
       <section
         ref={featureRef}
         tabIndex={-1}
@@ -89,31 +91,33 @@ export function MatterExplorer({ matters }: { matters: SelectedMatter[] }) {
           );
         })}
       </section>
-      <fieldset className="min-w-0">
-        <legend className="text-muted-foreground text-[10px]/4 font-semibold tracking-widest uppercase">
-          {content.selectorLabel}
-        </legend>
-        <ol className="mt-4 lg:mt-0">
-          {matters.map((matter, index) => (
-            <li key={matter.id} className="border-border border-b">
-              <button
-                type="button"
-                aria-pressed={selected === index}
-                aria-controls={`matter-card-${matter.id}`}
-                onClick={() => selectMatter(index)}
-                className="text-primary relative w-full border-l-2 border-transparent px-4 py-5 text-left transition-colors hover:bg-sky-50 aria-pressed:border-sky-700 aria-pressed:bg-sky-100 motion-reduce:transition-none lg:px-6 lg:py-9"
-              >
-                <span className="block text-[10px]/4 font-semibold tracking-widest uppercase">
-                  {formatIndex(index)} / {matter.category}
-                </span>
-                <span className="mt-2 block font-serif text-2xl/7">
-                  {matter.organisation}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ol>
-      </fieldset>
+      {matters.length > 1 && (
+        <fieldset className="min-w-0">
+          <legend className="text-muted-foreground text-[10px]/4 font-semibold tracking-widest uppercase">
+            {content.selectorLabel}
+          </legend>
+          <ol className="mt-4 lg:mt-0">
+            {matters.map((matter, index) => (
+              <li key={matter.id} className="border-border border-b">
+                <button
+                  type="button"
+                  aria-pressed={selected === index}
+                  aria-controls={`matter-card-${matter.id}`}
+                  onClick={() => selectMatter(index)}
+                  className="text-primary relative w-full border-l-2 border-transparent px-4 py-5 text-left transition-colors hover:bg-sky-50 aria-pressed:border-sky-700 aria-pressed:bg-sky-100 motion-reduce:transition-none lg:px-6 lg:py-9"
+                >
+                  <span className="block text-[10px]/4 font-semibold tracking-widest uppercase">
+                    {formatIndex(index)} / {matter.category}
+                  </span>
+                  <span className="mt-2 block font-serif text-2xl/7">
+                    {matter.organisation}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ol>
+        </fieldset>
+      )}
     </div>
   );
 }

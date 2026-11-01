@@ -1,3 +1,5 @@
+import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
+import { contact } from "@/content/contact";
 import { routes } from "@/lib/routes";
 
 export type SocialPlatform = "facebook" | "linkedin" | "instagram" | "x";
@@ -10,12 +12,12 @@ type SocialLink = {
 
 export const footer = {
   description:
-    "A full service Nigerian law firm advising clients from Abuja and Kano since 1993.",
+    "A full-service Nigerian law firm advising clients from Abuja and Kano since 1993.",
   officesHeading: "Offices",
   socialHeading: "Follow us",
   contactHeading: "Speak with our team",
-  consultationAction: "Book a consultation",
-  locations: "Abuja · Kano · Lagos liaison",
+  consultationAction: "Contact the firm",
+  locations: contact.officeSummary,
   linkGroups: [
     {
       title: "Firm",
@@ -23,29 +25,18 @@ export const footer = {
         { label: "About us", href: routes.firm },
         { label: "Our team", href: routes.people },
         { label: "Careers", href: routes.careers },
-        { label: "Resources", href: routes.insights },
+        { label: "Legal Insights Series", href: routes.insights },
+        { label: "SME retainer", href: routes.smeRetainer },
       ],
     },
     {
-      title: "Practice",
-      links: [
-        {
-          label: "Corporate",
-          href: routes.practiceArea("corporate-commercial-advisory"),
-        },
-        {
-          label: "Litigation",
-          href: routes.practiceArea("litigation-dispute-resolution"),
-        },
-        {
-          label: "Capital market",
-          href: routes.practiceAreas,
-        },
-        {
-          label: "Energy",
-          href: routes.practiceArea("energy-oil-gas"),
-        },
-      ],
+      title: "Practice areas",
+      // Long names: on mobile this group runs full width below Firm and Legal.
+      wide: true,
+      links: practiceCatalogue.map((practice) => ({
+        label: practice.title,
+        href: routes.practiceArea(practice.slug),
+      })),
     },
     {
       title: "Legal",

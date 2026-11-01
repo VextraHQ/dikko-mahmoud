@@ -6,6 +6,29 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  {
+    // Project additions on top of Next's rules. All passed when added.
+    rules: {
+      "react/no-array-index-key": "error",
+      "react/jsx-key": [
+        "error",
+        { checkFragmentShorthand: true, warnOnDuplicates: true },
+      ],
+      "no-console": ["error", { allow: ["error", "warn"] }],
+      eqeqeq: ["error", "always", { null: "ignore" }],
+      "@typescript-eslint/no-non-null-assertion": "error",
+    },
+  },
+  {
+    // Tests may assert that a lookup succeeded.
+    files: ["tests/**"],
+    rules: { "@typescript-eslint/no-non-null-assertion": "off" },
+  },
+  {
+    // Command-line scripts report progress to the terminal.
+    files: ["scripts/**"],
+    rules: { "no-console": "off" },
+  },
   eslintConfigPrettier,
   globalIgnores([
     ".next/**",
