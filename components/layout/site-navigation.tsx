@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useSitePathname } from "@/hooks/use-site-pathname";
 import { SiteLink } from "@/components/layout/site-link";
 import { PracticeMenuPanel } from "@/components/layout/practice-menu-panel";
 import {
@@ -36,7 +36,7 @@ export function SiteNavigation({
   mobile?: boolean;
   onNavigate?: () => void;
 }) {
-  const pathname = usePathname();
+  const pathname = useSitePathname();
   const menu = usePracticeMenu(onNavigate);
   const isActive = (href: string) =>
     isRouteAvailable(href) && isActivePath(pathname, href);

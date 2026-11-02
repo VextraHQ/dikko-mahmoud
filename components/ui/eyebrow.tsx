@@ -5,7 +5,7 @@ type EyebrowProps = Pick<
   ComponentProps<"p">,
   "children" | "className" | "id"
 > & {
-  as?: "p" | "h2";
+  as?: "p" | "h2" | "h3";
 };
 
 export function Eyebrow({ as: Tag = "p", className, ...props }: EyebrowProps) {

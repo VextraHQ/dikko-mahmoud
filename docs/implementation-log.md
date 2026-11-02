@@ -1279,3 +1279,124 @@
   retain image/png. Built Home and Firm HTML retain the expected image URLs,
   dimensions and large Twitter card metadata. No metadata or indexing change;
   external share recognition remains at the previously recorded preview gate.
+
+## 2026-11-01 — People/profile and Selected matters source briefs
+
+- Added draft route briefs from six supplied desktop screenshots. People/profile
+  behaviour and final main navigation remain explicit pending decisions; the
+  supplied Selected matters header conflicts with the written request to add Our
+  People. Testimonial/wider-team content in the crops does not supersede the
+  alignment corrections.
+- Recorded route-backed popup plus standalone profile as the recommendation, not
+  an implemented or approved choice. Selected matters listing is separately
+  documented; mobile/detail references and its named-content preview treatment
+  remain outstanding before an executable Claude handoff.
+- Added both briefs to the documentation index. Targeted Prettier checks and
+  git diff --check passed. No runtime files changed and no code tests/build run.
+
+## 2026-11-01 — Profile/navigation choices confirmed and Claude handoff
+
+- User confirmed popup plus shareable standalone profiles and both Our People
+  and Selected matters in main navigation. Finalised routes/people.md for a
+  bounded four-profile/navigation slice and added the paste-ready Claude handoff.
+- Spec separates the unprovided directory design and Selected matters routes
+  from this slice. Records the responsive profile adaptation, 1440px full-nav
+  threshold, shared content, preview/publication gates and modal/history/focus
+  acceptance checks. No runtime implementation is claimed.
+- Updated the Selected matters draft, client alignment, roadmap and documentation
+  index. Targeted formatting, source/path checks and git diff --check passed.
+  No runtime files changed and no code tests/build were needed for this handoff.
+
+## 2026-11-01 — People profiles (popup + page) and eight-item navigation
+
+- Implemented docs/routes/people.md for the four partners: route-backed Radix
+  popup over Home/Firm/practice pages via `@profile/(.)people/[slug]`, and a
+  standalone `/people/[slug]` page for direct/refresh/new-tab/no-JS visits. Both
+  render one server `ProfileBody` from `resolveProfile`. Null default/root/
+  catch-all slot pages plus a `(site)/[...catchAll]` 404 page.
+- Source-backed draft bodies from brochure pp. 27–30 and the Mahmoud screenshot;
+  uncertain items moved to internal notes in people-review.ts. One preview note
+  renders while no-index; at launch only approved, complete profiles resolve,
+  and withheld never do. PersonCard availability now comes from launchedRoutes.
+- Navigation: added Selected matters after Our People (both remain preparation
+  notices). Full navigation now starts at 90rem; header/sheet visibility and the
+  practice-menu reset use `min-[90rem]` and `mediaQueries.desktopNavigation`.
+  Overlays keep the origin page's header tone/active item via `useSitePathname`.
+- Browser-checked on the running dev server: card open on Home, Firm and a
+  practice page; heading focus; close button, Escape, Back, Forward; scroll kept
+  (2900px before/open/after); focus returns to the opening card; direct load,
+  canonical and noindex metadata; unknown slug 404 (one shell) and client-pushed
+  unknown slug dialog; 1366px Sheet with all eight items; 1440px full row fits
+  (nav 354–1143px inside the 80–1360px header); practice mega menu opens; mobile
+  390px stack, 4:3 portrait and single dialog scroll body.
+- Passed format:check, lint, typecheck, 73 Vitest tests across 11 files and a
+  production build (eight profile paths prerendered as SSG). Not committed.
+
+## 2026-11-02 — Profile review fixes and popup polish
+
+- Codex review: the intercepted popup now shares the standalone profile's
+  metadata (`lib/profile-metadata.ts`) and syncs title/description/canonical on
+  soft navigation, restoring the origin page's values on close. The general
+  contact fallback uses the shared `EnquiryButton` (moved to
+  `components/shared/`), so it switches to Contact when that page launches.
+- Added a validated per-person `links[]` model (`lib/profile-links.ts`) with
+  icon links for LinkedIn/email/phone/website, rendered only when supplied.
+  Popup bar gained a compact name on scroll and a copy-link button.
+- Browser-checked: popup title/canonical/description match the page and restore
+  on close; heading focus and focus return; compact name after scrolling; copy
+  link (clipboard stubbed, since the pane denies clipboard writes) announces and
+  resets; Bello's enquiry-only fallback with no icons; 375px popup bar and page
+  with no overflow.
+- Passed format:check, lint, typecheck, 77 Vitest tests across 12 files and a
+  production build (eight profile paths prerendered). Not committed.
+
+## 2026-11-02 — Profile page redesign to the Figma frames
+
+- After a user-approved wireframe, rebuilt `/people/[slug]` to the supplied
+  profile frames: pale intro band, sticky "On this page" list with the current
+  section marked, Overview/focus/qualifications/working-together sections, "Meet
+  more of our people" and the shared enquiry CTA. The popup reuses the intro and
+  sections in a single column and gained an "Open full profile page" button.
+- Browser-checked at 1440, 1024 and 375px: no horizontal overflow; contents list
+  sticks at 112px and tracks the section in view (last section at page end);
+  popup has no duplicate ids with its origin page; open-page and related-people
+  cards load the standalone page rather than the popup.
+- Passed format:check, lint, typecheck, 80 Vitest tests across 12 files and a
+  production build (all profile paths prerendered). Not committed.
+- Follow-up: the popup body is now two columns from `lg` (biography left;
+  focus and qualifications in a side column aligned with the portrait; enquiry
+  full width). Checked at 1440px (side column x/width equal to the portrait),
+  1024px (522/326px columns, no overflow) and 375px (stacked, dividers kept).
+- Codex follow-up: copy-link failures now show a visible, announced message in
+  the popup bar for 5s instead of failing silently. Checked the failure path
+  (the browser pane denies clipboard writes) at 1440px and 375px (two lines,
+  not clipped) and the success path with a stubbed clipboard.
+
+## 2026-11-02 — Sonner toasts
+
+- User-requested, following iproduce-africa: added `sonner` (2.0.8) and a
+  themed `components/ui/sonner.tsx` Toaster mounted once in `app/layout.tsx`
+  (white surface, slate border, navy text/icons, Manrope, 12px radius, soft navy
+  shadow, bottom-right with 24px offset, 16px on phones, no rich colours).
+- Copy link now uses toasts for success and failure (one reused toast id), and
+  the earlier in-bar failure text was removed. The popup keeps a screen-reader
+  status because modal dialogs hide the toast region from assistive technology.
+- Browser-checked in the popup: error toast (the pane denies clipboard writes)
+  and success toast (stubbed clipboard) above the dialog at 1440px, one toast on
+  repeat clicks, full-width toast 16px from the bottom at 375px, no overflow.
+- Passed format:check, lint, typecheck, 80 Vitest tests across 12 files and a
+  production build. Not committed.
+
+## 2026-11-02 — Dead-code pass
+
+- `tsc --noUnusedLocals --noUnusedParameters` reports nothing; every
+  dependency is imported (`react-dom` via Next).
+- Deleted the testimonial chain (`components/home/client-perspectives-section.tsx`,
+  `components/home/testimonial-carousel.tsx`, `content/testimonials.ts`). An
+  earlier entry recorded its removal, but the files were still in the tree and
+  nothing imported them. The hero still uses `embla-carousel-fade`.
+- `CopyLinkStatus` is no longer exported (used only inside the hook).
+- Kept on purpose: unimported form primitives (prepared foundation, see
+  forms.md), `profileLinkPlatforms` (future Sanity schema list), and test-only
+  content rules for unbuilt pages (`practiceEnquiryOptions`,
+  `publishableClients`, `publishableMatters`, `matterRecords`).

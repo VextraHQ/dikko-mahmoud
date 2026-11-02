@@ -17,3 +17,16 @@ export function initialRecordIndex(
     items.findIndex((item) => item.id === preferredId),
   );
 }
+
+export type PreviewOptions = { allowPreview: boolean };
+
+/**
+ * Approved records always publish. Pending records render only when the server
+ * boundary explicitly allows a no-index preview. Withheld or missing never do.
+ */
+export function isPublishable(
+  status: PublicationStatus | undefined,
+  { allowPreview }: PreviewOptions,
+) {
+  return status === "approved" || (allowPreview && status === "pending");
+}

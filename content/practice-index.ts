@@ -1,5 +1,5 @@
 // Public catalogue: safe for navigation, Home and future form client bundles.
-export type PracticeCategory = "Contentious" | "Transactional" | "Advisory";
+type PracticeCategory = "Contentious" | "Transactional" | "Advisory";
 export type PracticeSummary = {
   slug: string;
   title: string;

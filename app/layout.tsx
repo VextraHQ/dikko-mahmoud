@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 
 import { fontVariables } from "./fonts";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 import { createSiteMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createSiteMetadata();
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     >
       <body className="bg-background text-foreground font-sans">
         {children}
+        <Toaster />
         <Analytics />
       </body>
     </html>

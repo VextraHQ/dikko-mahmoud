@@ -26,6 +26,19 @@ permissions, SME/legal text and missing contact details remain firm review gates
 Sanity, other providers, deployment and the later Claude workflow remain outside
 this checkpoint. User-added Analytics, hero autoplay and Firm Journey are preserved.
 
+## Next delegated implementation slice
+
+On 1 November the user confirmed profile popups plus shareable standalone pages,
+and both Our People and Selected matters in main navigation. The approved bounded
+spec is [routes/people.md](routes/people.md), with the paste-ready Claude prompt
+in [handoffs/people-profiles-next-chat.md](handoffs/people-profiles-next-chat.md).
+This slice covers the four existing profiles and necessary shared navigation;
+Codex prepares the handoff and reviews Claude's eventual implementation. It does
+not build the People directory or Selected matters listing/detail pages yet.
+Those need their separate references/content decisions. Claude implemented the
+profile/navigation slice on 1 November for local review (see the implementation
+notes in routes/people.md); Codex review and firm content approval remain open.
+
 ## Status
 
 | Milestone                                   | Status   | Outcome                                                                            |

@@ -21,8 +21,15 @@ and mobile link navigation, with no tab state or Motion. Pending bodies/dates ar
 suppressed. SME uses its own content and server section, linked alongside practices.
 Print-only legal rules stay scoped in surfaces.css. Header tone includes SME/legal.
 
-People biography drafts in people-review.ts are source adaptations keyed to
-canonical IDs, isolated from public imports and rendered biography fields. Insights author IDs resolve through canonical people;
+Person profiles: `content/profile-manifest.ts` is the public ID/status list used
+by `launchedRoutes`; `content/profiles.ts` holds server-only bodies and the one
+`resolveProfile(slug, previewOptions)` selection shared by the intercepted
+`@profile` popup and the standalone `/people/[slug]` page. `lib/preview.ts` owns
+the `allowPreview` switch (no-index only). `lib/profile-links.ts` owns the
+validated per-person `links[]` model and `lib/profile-metadata.ts` the metadata
+shared by popup and page; `components/shared/enquiry-button.tsx` is the one
+enquiry action (mailto until `/contact` launches). people-review.ts keeps internal
+source notes, never rendered. Insights author IDs resolve through canonical people;
 the reusable byline handles missing authors without substituting someone else.
 Future directory/article routes and CMS normalization remain separate checkpoints.
 
@@ -64,7 +71,7 @@ remain outside this presentation checkpoint.
 | `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation              |
 | `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections              |
 | `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback and EnquiryCta |
-| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel and Marquee                |
+| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel, Marquee and Sonner toasts |
 | `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts        |
 | `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                |
 | `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                              |
@@ -130,7 +137,7 @@ Carousel) keep their own internal state, as generated.
 - `SiteLink` is server-compatible: live routes render `next/link`; others render
   a button that opens the `PreviewDestination` notice with a "(coming soon)"
   screen-reader suffix. Style it through `asChild` buttons. `available`
-  overrides the registry per record (e.g. `person.profileAvailable`).
+  overrides the registry; `scroll` passes through to real links only.
 - Launching a page = build it, export `createPageMetadata`, add its path to
   `launchedRoutes`. Links and the sitemap update automatically.
 - `createSiteMetadata()` (root layout) sets `metadataBase`, the title template,
@@ -242,10 +249,10 @@ slots; approved names without testimonial images use derived initials.
 
 `content/people.ts` owns canonical IDs, slugs, names, roles, optional portraits,
 founder biography/milestones and ID-based Home/advisory selections. Neutral group
-slots stay separate from real records. PersonCard shows a preparation notice
-until `profileAvailable` enables the real `/people/[slug]` link. Firm uses a small
-crop/role override for its founder composition. `testimonials.ts` and `insights.ts`
-own their editorial preview records. Insights excludes the feature ID and duplicate support IDs, capped at
+slots stay separate from real records. PersonCard links resolve through
+`launchedRoutes` (profile manifest + preview rule) with `scroll={false}`. Firm uses a small
+crop/role override for its founder composition. `insights.ts` owns its
+editorial preview records. Insights excludes the feature ID and duplicate support IDs, capped at
 three. Future Sanity selection/publication filtering belongs in a normalization
 adapter rather than presentation components; no CMS client or speculative fetch
 layer has been introduced.
@@ -325,6 +332,12 @@ CVA/Radix Slot support the shared Button; Radix Dialog supports Sheet/notices;
 Embla and its Fade plugin support the hero; Radix Accordion/Avatar support shared
 disclosures and identity circles. Lucide supplies ordinary UI icons; React Icons
 Font Awesome 6 supplies social brands through the server-rendered SocialIcon map.
+Sonner supplies toasts (user-requested, matching iproduce-africa): one themed
+`Toaster` from `components/ui/sonner.tsx` is mounted in `app/layout.tsx`; client
+code calls `toast.success`/`toast.error` from "sonner". Its injected CSS is
+unlayered, so theming uses its CSS variables and inline styles, not utilities.
+Toasts sit outside modal Radix dialogs, which hide them from assistive
+technology, so dialogs keep their own `role="status"` text alongside a toast.
 The user authorized preparation of Input, Textarea, Label, Field, Checkbox,
 NativeSelect, Separator and the React Hook Form adapter before secondary pages.
 These are local primitives, not an active enquiry form or submission service.

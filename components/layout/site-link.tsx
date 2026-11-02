@@ -6,8 +6,15 @@ import { isRouteAvailable } from "@/lib/routes";
 type SiteLinkProps = Omit<HTMLAttributes<HTMLElement>, "children"> & {
   href: string;
   children: ReactNode;
-  /** Overrides the route registry, e.g. a person whose profile is ready. */
+  /** Overrides the route registry; prefer adding the page to `launchedRoutes`. */
   available?: boolean;
+  /** Next.js scroll behaviour for real links only (e.g. profile overlays). */
+  scroll?: boolean;
+  /**
+   * Load the page as a full document instead of a client navigation, so an
+   * intercepting route (the profile popup) is skipped. Use sparingly.
+   */
+  fullPageLoad?: boolean;
   /** Runs only when a real page link is followed (e.g. close a menu). */
   onNavigate?: () => void;
   "aria-current"?: "page";
@@ -23,12 +30,21 @@ export function SiteLink({
   href,
   available = isRouteAvailable(href),
   onNavigate,
+  scroll,
+  fullPageLoad = false,
   children,
   ...props
 }: SiteLinkProps) {
+  if (available && fullPageLoad) {
+    return (
+      <a href={href} {...props}>
+        {children}
+      </a>
+    );
+  }
   if (available) {
     return (
-      <Link href={href} onNavigate={onNavigate} {...props}>
+      <Link href={href} onNavigate={onNavigate} scroll={scroll} {...props}>
         {children}
       </Link>
     );

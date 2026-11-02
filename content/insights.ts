@@ -22,7 +22,7 @@ export const insightsHome = {
 
 // Design-supplied preview titles, not published articles. Future Sanity selection
 // resolves one feature and up to three distinct supporting records into this shape.
-export const featuredInsight: InsightPreview = {
+const featuredInsight: InsightPreview = {
   id: "corporate-decisions",
   title: "Navigating corporate decisions in a changing market",
   excerpt:
@@ -31,7 +31,7 @@ export const featuredInsight: InsightPreview = {
   image: null,
 };
 
-export const supportingInsights: InsightPreview[] = [
+const supportingInsights: InsightPreview[] = [
   {
     id: "dispute-strategy",
     title: "Resolving disputes with a clear strategy",

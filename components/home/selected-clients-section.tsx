@@ -2,7 +2,6 @@ import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { Marquee } from "@/components/ui/marquee";
 import { ClientLogoMarquee } from "@/components/home/client-logo-marquee";
 import {
-  namedClients,
   selectedClients as content,
   visibleClients as clients,
 } from "@/content/clients";
@@ -62,7 +61,7 @@ export function SelectedClientsSection() {
           {content.description}
         </p>
         <ClientLogoMarquee
-          note={namedClients.length ? undefined : content.reviewNote}
+          note={clients.length ? undefined : content.reviewNote}
           animate={clients.length > 1}
         >
           <Marquee

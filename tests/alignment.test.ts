@@ -18,7 +18,7 @@ import {
 import { practiceAreas } from "@/content/practice-areas";
 import { footer } from "@/content/footer";
 import { getInsightAuthor } from "@/content/insights";
-import { biographyDrafts } from "@/content/people-review";
+import { profileSourceNotes } from "@/content/people-review";
 import { heroSlides } from "@/content/home";
 import { people, getPerson } from "@/content/people";
 import {
@@ -129,11 +129,11 @@ describe("publication approval", () => {
   });
 });
 describe("shared content", () => {
-  it("keeps source biography drafts keyed to real people and outside public records", () => {
-    expect(biographyDrafts).toHaveLength(4);
-    for (const draft of biographyDrafts) {
-      expect(getPerson(draft.personId)).toBeDefined();
-      expect(draft.publicationStatus).toBe("pending");
+  it("keeps internal source notes keyed to real people and outside public records", () => {
+    expect(profileSourceNotes).toHaveLength(4);
+    for (const entry of profileSourceNotes) {
+      expect(getPerson(entry.personId)).toBeDefined();
+      expect(entry.notes.length).toBeGreaterThan(0);
     }
     expect(people.some((person) => "biographyDraft" in person)).toBe(false);
   });

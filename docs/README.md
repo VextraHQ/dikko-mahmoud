@@ -17,23 +17,26 @@ small so a developer or agent can resume work without relying on chat history.
 
 ## Ownership
 
-| Document                         | Owns                                                                     |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| `client-alignment.md`            | Current client-feedback implementation, source boundaries and acceptance |
-| `scope-addendum.md`              | Draft nine-practice, SME and Terms inclusions at unchanged fee           |
-| `roadmap.md`                     | Current milestone and future work gates                                  |
-| `architecture.md`                | Folder ownership and technical boundaries                                |
-| `workflow.md`                    | Change and verification process                                          |
-| `design-system.md`               | Brand roles, Tailwind/shadcn rules, and primitives                       |
-| `layout-system.md`               | Width, spacing, and responsive composition                               |
-| `routes/home.md`                 | Figma references, section map, content gaps, and build order             |
-| `routes/the-firm.md`             | Firm implementation, interactions, reuse, source gaps and acceptance     |
-| `routes/practice-areas.md`       | Practice hub/menu/detail implementation, sources and remaining content   |
-| `handoffs/the-firm-next-chat.md` | Historical scoped Firm kickoff prompt                                    |
-| `forms.md`                       | Form primitives, accessible composition and validation ownership         |
-| `testing.md`                     | Vitest setup, what is and isn't tested, test conventions                 |
-| `social-sharing.md`              | Social artwork exports, metadata wiring and share-preview verification   |
-| `implementation-log.md`          | Append-only factual implementation history                               |
+| Document                                | Owns                                                                      |
+| --------------------------------------- | ------------------------------------------------------------------------- |
+| `client-alignment.md`                   | Current client-feedback implementation, source boundaries and acceptance  |
+| `scope-addendum.md`                     | Draft nine-practice, SME and Terms inclusions at unchanged fee            |
+| `roadmap.md`                            | Current milestone and future work gates                                   |
+| `architecture.md`                       | Folder ownership and technical boundaries                                 |
+| `workflow.md`                           | Change and verification process                                           |
+| `design-system.md`                      | Brand roles, Tailwind/shadcn rules, and primitives                        |
+| `layout-system.md`                      | Width, spacing, and responsive composition                                |
+| `routes/home.md`                        | Figma references, section map, content gaps, and build order              |
+| `routes/the-firm.md`                    | Firm implementation, interactions, reuse, source gaps and acceptance      |
+| `routes/people.md`                      | Approved profile-popup/page and eight-item navigation implementation spec |
+| `routes/selected-matters.md`            | Draft listing reference; mobile/detail/consent decisions outstanding      |
+| `routes/practice-areas.md`              | Practice hub/menu/detail implementation, sources and remaining content    |
+| `handoffs/people-profiles-next-chat.md` | Executable Claude prompt for the bounded profile/navigation slice         |
+| `handoffs/the-firm-next-chat.md`        | Historical scoped Firm kickoff prompt                                     |
+| `forms.md`                              | Form primitives, accessible composition and validation ownership          |
+| `testing.md`                            | Vitest setup, what is and isn't tested, test conventions                  |
+| `social-sharing.md`                     | Social artwork exports, metadata wiring and share-preview verification    |
+| `implementation-log.md`                 | Append-only factual implementation history                                |
 
 Code is the source of truth for implemented behavior. Documentation owns
 approved intent and current status. Do not document planned work as complete,

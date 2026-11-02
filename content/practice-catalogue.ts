@@ -4,7 +4,6 @@ import {
   type PracticeSummary,
 } from "@/content/practice-index";
 export { practiceCopy } from "@/content/practice-index";
-export type { PracticeCategory } from "@/content/practice-index";
 import { hasText } from "@/lib/content";
 import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import type { Faq } from "@/content/faqs";

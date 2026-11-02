@@ -126,7 +126,11 @@ still needs its own design approval and should keep the no-index switch,
 
 ### People (`/people`, `/people/[slug]`)
 
-- The menu item is "Our People"; keep that label.
+- The menu item is "Our People"; keep that label. On 1 November the user also
+  confirmed Selected matters as a separate main-menu entry, not a replacement.
+  The approved profile popup/shareable-page slice and Claude handoff are in
+  `routes/people.md` and `handoffs/people-profiles-next-chat.md`; the directory
+  remains a later slice pending its own reference/composition.
 - Show only the four partners until the firm supplies counsel and associate
   profiles. Do not reintroduce "senior counsel and a wider team" copy.
 - A profile page and its pop-up/card must use the same, fuller content. The

@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { useSitePathname } from "@/hooks/use-site-pathname";
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
 import { routes } from "@/lib/routes";
@@ -8,7 +8,7 @@ import { headerTone } from "@/lib/navigation";
 import { useScrolledPast } from "@/hooks/use-scrolled-past";
 
 export function StickyHeader({ children }: { children: ReactNode }) {
-  const pathname = usePathname();
+  const pathname = useSitePathname();
   const light = headerTone(pathname) === "light";
   // `null` keeps the readable no-JS shell until scroll tracking is ready.
   const { markerRef, scrolled } = useScrolledPast<HTMLDivElement>();

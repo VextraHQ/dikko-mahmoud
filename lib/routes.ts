@@ -1,4 +1,6 @@
 import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
+import { availableProfileSlugs } from "@/content/profile-manifest";
+import { previewOptions } from "@/lib/preview";
 
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
@@ -26,8 +28,8 @@ export const routes = {
 /**
  * Pages that are built and live. Launching a page = adding its path here;
  * every `SiteLink` pointing at it switches from the "being prepared" notice
- * to a real link. Detail pages (a person, an insight) can instead be enabled
- * per record with SiteLink's `available` prop.
+ * to a real link. Person profiles join from the public profile manifest (IDs
+ * and review status only) under the same preview rule as their pages.
  */
 export const launchedRoutes: readonly string[] = [
   routes.home,
@@ -37,6 +39,7 @@ export const launchedRoutes: readonly string[] = [
   routes.privacy,
   routes.terms,
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
+  ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),
 ];
 
 export function isRouteAvailable(href: string) {

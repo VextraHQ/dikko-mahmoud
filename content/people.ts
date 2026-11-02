@@ -2,7 +2,6 @@ import { hasText } from "@/lib/content";
 
 export type Person = {
   slug: string;
-  profileAvailable?: boolean;
   id: string;
   name: string;
   role: string;
@@ -69,7 +68,7 @@ export const people: Person[] = [
 ];
 
 // Curated page selections reference canonical IDs; this is not a directory.
-export const featuredPersonIds = [
+const featuredPersonIds = [
   "ab-mahmoud",
   "bello-aminu-abdullahi",
   "aminu-sadauki",
@@ -84,7 +83,7 @@ export function requirePerson(id: string) {
   if (!person) throw new Error(`Missing person record: ${id}`);
   return person;
 }
-export const featuredPeople = featuredPersonIds.flatMap((id) => {
+const featuredPeople = featuredPersonIds.flatMap((id) => {
   const person = getPerson(id);
   return person ? [person] : [];
 });

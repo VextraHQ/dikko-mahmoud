@@ -6,13 +6,15 @@ export function isActivePath(pathname: string, href: string) {
 
 export type HeaderTone = "light" | "dark";
 
-/** Editorial detail, SME and legal pages use the light header. */
+/** Editorial detail, profile, SME and legal pages use the light header. */
 export function headerTone(pathname: string): HeaderTone {
-  return [routes.smeRetainer, routes.privacy, routes.terms].some(
-    (route) => route === pathname,
-  ) ||
-    (pathname.startsWith(`${routes.practiceAreas}/`) &&
-      isRouteAvailable(pathname))
+  const lightDetail = [routes.practiceAreas, routes.people].some(
+    (parent) => pathname.startsWith(`${parent}/`) && isRouteAvailable(pathname),
+  );
+  return lightDetail ||
+    [routes.smeRetainer, routes.privacy, routes.terms].some(
+      (route) => route === pathname,
+    )
     ? "light"
     : "dark";
 }

@@ -10,9 +10,9 @@ export function SiteHeader() {
   return (
     <>
       <StickyHeader>
-        <div className="flex h-18 items-center justify-between gap-3 xl:gap-6">
-          <BrandLogo className="h-15 w-45 xl:h-18 xl:w-48" />
-          <div className="hidden items-center gap-4 xl:flex 2xl:gap-6">
+        <div className="flex h-18 items-center justify-between gap-3 min-[90rem]:gap-6">
+          <BrandLogo className="h-15 w-45 min-[90rem]:h-18 min-[90rem]:w-48" />
+          <div className="hidden items-center gap-4 min-[90rem]:flex 2xl:gap-6">
             <SiteNavigation />
             <HeaderEnquiryButton />
           </div>
@@ -22,7 +22,7 @@ export function SiteHeader() {
       <noscript>
         <nav
           aria-label="Basic navigation"
-          className="bg-secondary flex flex-wrap gap-5 px-4 py-4 text-sm text-white xl:hidden"
+          className="bg-secondary flex flex-wrap gap-5 px-4 py-4 text-sm text-white min-[90rem]:hidden"
         >
           <SiteLink href={routes.home}>Home</SiteLink>
           <SiteLink href={routes.firm}>The firm</SiteLink>

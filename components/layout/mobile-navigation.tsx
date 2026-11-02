@@ -29,7 +29,7 @@ export function MobileNavigation() {
     if (isDesktop) setOpen(false);
   });
   return (
-    <div className="xl:hidden">
+    <div className="min-[90rem]:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button
@@ -47,7 +47,11 @@ export function MobileNavigation() {
             Explore Dikko &amp; Mahmoud. Secondary pages are coming soon.
           </SheetDescription>
           <div className="short:mb-3 mb-6 flex h-15 items-center justify-between">
-            <BrandLogo onClick={() => setOpen(false)} />
+            {/* The sheet now also shows at 80–90rem; keep its compact logo there. */}
+            <BrandLogo
+              className="xl:h-15 xl:w-45"
+              onClick={() => setOpen(false)}
+            />
             <SheetClose asChild>
               <Button
                 variant="ghost"

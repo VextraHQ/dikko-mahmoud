@@ -1,10 +1,5 @@
-import { selectedMatters } from "@/content/matter-copy";
 export { selectedMatters } from "@/content/matter-copy";
-import {
-  approvedRecords,
-  initialRecordIndex,
-  type PublicationStatus,
-} from "@/lib/publication";
+import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import { hasText } from "@/lib/content";
 
 export type SelectedMatter = {
@@ -75,7 +70,3 @@ export function publishableMatters(items: readonly SelectedMatter[]) {
   );
 }
 export const visibleMatters = publishableMatters(matterRecords);
-export const openingMatterIndex = initialRecordIndex(
-  visibleMatters,
-  selectedMatters.defaultId,
-);

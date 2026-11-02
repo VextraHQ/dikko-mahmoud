@@ -11,6 +11,7 @@ export function PersonCard({
   className,
   portraitClassName,
   imageHoverOnly = false,
+  fullPageLoad = false,
   sizes = "(min-width: 1440px) 302px, (min-width: 1024px) 23vw, 46vw",
 }: {
   person: Person;
@@ -18,6 +19,8 @@ export function PersonCard({
   className?: string;
   portraitClassName?: string;
   imageHoverOnly?: boolean;
+  /** Open the standalone profile page instead of the popup. */
+  fullPageLoad?: boolean;
   sizes?: string;
 }) {
   const cardClassName = cn(
@@ -87,10 +90,14 @@ export function PersonCard({
       )}
     </>
   );
+  // Availability comes from launchedRoutes (profile manifest + preview rule),
+  // the same rule the profile routes use. `scroll={false}` keeps the origin
+  // page in place beneath the profile overlay.
   return (
     <SiteLink
       href={routes.person(person.slug)}
-      available={person.profileAvailable ?? false}
+      scroll={false}
+      fullPageLoad={fullPageLoad}
       className={cardClassName}
     >
       {content}

@@ -16,7 +16,7 @@ import { FaqSection } from "@/components/shared/faq-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { ServicesSection } from "@/components/practices/services-section";
 // import { ExperienceSection } from "@/components/practices/experience-section";
-import { EnquiryButton } from "@/components/practices/enquiry-button";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import {
   practiceCopy as copy,
   getPracticeSections,
@@ -80,7 +80,7 @@ export function PracticeDetailPage({ practice }: { practice: Practice }) {
             <p className="text-muted-foreground mt-8 max-w-2xl text-base/7 lg:text-lg/8">
               {detail?.introduction ?? practice.summary}
             </p>
-            <EnquiryButton className="mt-7" />
+            <EnquiryButton className="mt-7">{copy.enquiryAction}</EnquiryButton>
           </div>
           <div className="relative isolate aspect-4/3 overflow-hidden rounded-xl">
             <ImageWithFallback
@@ -247,7 +247,9 @@ export function PracticeDetailPage({ practice }: { practice: Practice }) {
                   </li>
                 ))}
               </ol>
-              <EnquiryButton className="mt-8" />
+              <EnquiryButton className="mt-8">
+                {copy.enquiryAction}
+              </EnquiryButton>
             </section>
             {next && (
               <nav
@@ -307,7 +309,9 @@ function PracticeContact({ person }: { person: Person }) {
       <p className="text-muted-foreground mt-4 text-sm/6 lg:mt-3">
         {copy.contactDescription}
       </p>
-      <EnquiryButton size="sm" className="mt-4 lg:mt-3" />
+      <EnquiryButton size="sm" className="mt-4 lg:mt-3">
+        {copy.enquiryAction}
+      </EnquiryButton>
     </>
   );
 }

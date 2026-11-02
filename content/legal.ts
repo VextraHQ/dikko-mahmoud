@@ -2,7 +2,7 @@ import { routes } from "@/lib/routes";
 import { hasText } from "@/lib/content";
 import type { PublicationStatus } from "@/lib/publication";
 
-export type LegalSection = {
+type LegalSection = {
   id: string;
   title: string;
   paragraphs: string[];

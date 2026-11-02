@@ -1,8 +1,9 @@
-// Shared media queries. Keep in step with Tailwind's `lg` (64rem) and `xl`
-// (80rem) breakpoints used in component classes.
+// Shared media queries. `desktop` matches Tailwind's `lg` (64rem). The full
+// eight-item navigation needs 90rem; component classes use the matching
+// `min-[90rem]:` variant (no global breakpoint) for header visibility/resets.
 export const mediaQueries = {
   desktop: "(min-width: 64rem)",
-  desktopNavigation: "(min-width: 80rem)",
+  desktopNavigation: "(min-width: 90rem)",
   reducedMotion: "(prefers-reduced-motion: reduce)",
 } as const;
 
