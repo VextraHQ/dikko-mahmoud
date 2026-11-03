@@ -1,4 +1,5 @@
-import { getPerson } from "@/content/people";
+import { getPerson, people } from "@/content/people";
+import { hasText } from "@/lib/content";
 import {
   isPublishable,
   type PreviewOptions,
@@ -39,4 +40,19 @@ export function availableProfileSlugs(
       ? [person.slug]
       : [];
   });
+}
+
+/**
+ * Who the /people directory lists: every named person whose profile may be
+ * linked under the preview rule, in roster order. The same list decides
+ * whether /people launches, so the directory is never an empty page.
+ */
+export function directoryPeople(
+  options: PreviewOptions,
+  manifest: readonly ProfileManifestEntry[] = profileManifest,
+) {
+  const linkable = new Set(availableProfileSlugs(options, manifest));
+  return people.filter(
+    (person) => hasText(person.name) && linkable.has(person.slug),
+  );
 }

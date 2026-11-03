@@ -130,7 +130,8 @@ still needs its own design approval and should keep the no-index switch,
   confirmed Selected matters as a separate main-menu entry, not a replacement.
   The approved profile popup/shareable-page slice and Claude handoff are in
   `routes/people.md` and `handoffs/people-profiles-next-chat.md`; the directory
-  remains a later slice pending its own reference/composition.
+  was authorized on 2 November and is implemented for review (see the
+  "People directory" section of `routes/people.md`).
 - Show only the four partners until the firm supplies counsel and associate
   profiles. Do not reintroduce "senior counsel and a wider team" copy.
 - A profile page and its pop-up/card must use the same, fuller content. The

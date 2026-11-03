@@ -277,3 +277,23 @@ on the right from lg. Smaller screens show a wrapping two-link row above the
 article. Footer spacing is ordinary page-to-footer spacing; no enquiry card is
 inserted. Print hides site chrome and document links, expands the reading column
 and keeps text visible without colour-dependent meaning.
+
+## People directory editorial update — 2026-11-03
+
+The compact navy introduction has two editorial title lines and supporting copy
+beside them from lg, stacked below it. The shared header uses dark chrome over
+this introduction; the profile pages retain light chrome. No boardroom image or
+extra hero height is added. Mobile title size is 36px and desktop scales with the
+available two-column width.
+
+The leadership section pairs a 4:3 portrait/name column and biography/milestones
+from lg. Below lg the compact portrait and identity sit side by side above the
+editorial copy. It inherits directory gutters, preserves stationary frames and
+uses the existing CSS-only picture zoom/focus rules. A small review note labels
+pending profile details in the no-index preview.
+
+The remaining three partners fill three desktop columns. Other group/result sizes
+retain the scalable four-column grid; phones keep one column below 28rem and two
+above, with the existing 4:3/square media. Active filters hide the feature and
+search the entire eligible roster, including the featured person, exactly once.
+No filter hides the featured person's card unless their separate feature renders.

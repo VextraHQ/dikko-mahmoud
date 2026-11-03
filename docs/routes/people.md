@@ -1,5 +1,29 @@
 # People profiles and shared navigation
 
+## Approved editorial directory update (3 November 2026)
+
+The user approved Codex's desktop/mobile wireframe after reviewing the designer's
+new People screens. Implemented for local review: a compact navy introduction (without the large
+boardroom image), a featured managing partner and the existing searchable
+directory. The featured person appears once in the unfiltered layout; an active
+search, role or practice filter hides that feature and searches the full eligible
+roster. Clearing restores the opening layout. Current portraits remain intentional
+fallbacks until approved assets arrive.
+
+Keep shared header geometry, route-backed popups/standalone pages, URL filters,
+separate search/global resets, mobile practice sheet and publication gates.
+The directory gets dark header chrome; standalone profile pages stay light.
+The four current partners are the only live roster: the user removed the sample
+roster in the later review changes, which must be preserved. Pending featured
+biography/milestones render only under the existing no-index preview rule; they
+do not become approved by appearing in this design.
+
+New source references: CleanShot screenshots supplied on 3 November at 1:05:46,
+1:05:51 and 1:06:00 (hero, leadership/partners, repeated practice groups/CTA).
+The approved combination keeps the leadership feature and directory filtering;
+it does not repeat the same partners in separate practice groups. No office
+photograph was approved for this compact hero.
+
 ## Approved checkpoint
 
 Approved by the user on 1 November 2026: keep both **Our People** and **Selected
@@ -12,10 +36,12 @@ navigation below are implemented for local no-index review, awaiting Codex
 review. See "Implementation notes" at the end for files, verification and gaps.
 
 The first implementation slice is the four existing partner profiles and shared
-navigation. The `/people` directory, its filters and the Selected matters listing
-and detail routes remain separate slices. No directory/mobile directory reference
-was supplied. Keep unavailable parent destinations as existing SiteLink preparation
-notices until their actual pages are built; do not launch empty index pages.
+navigation. On 2 November the user authorized the `/people` directory as the
+next slice (see "People directory" below); it is implemented for local review.
+Filters, search, pagination, office assignments and further team members stay
+out of scope until confirmed data exists. The Selected matters listing and
+detail routes remain a separate slice. Keep unavailable parent destinations as
+SiteLink preparation notices; do not launch empty index pages.
 
 ## Source reference and precedence
 
@@ -166,10 +192,10 @@ working diff, hero autoplay, Firm Journey, consent controls, legal/SME pages,
 metadata/share-image work and unrelated refinements. Do not uncomment practice
 experience or restore Home clients/matters as part of this profile task.
 
-Do not build the People directory, filters, Selected matters routes, CMS,
-providers, deployment, new contact form or a new general motion pass. The next
-People-directory slice needs its own composition/reference and confirmed office
-metadata; the Selected matters source brief has separate outstanding gates.
+Do not build directory filters, Selected matters routes, CMS, providers,
+deployment, a new contact form or a new general motion pass. The directory
+itself was authorized on 2 November (below); office metadata still awaits
+confirmation. The Selected matters source brief has separate outstanding gates.
 
 ## Acceptance
 
@@ -280,8 +306,8 @@ only the layout differs.
   removed the empty right-hand strip of the single 768px column and roughly
   halves the scroll. Phones stack in the page's order. The bar adds "Open full
   profile page".
-- "Back to our people" is a SiteLink to `/people`, so it shows the preparation
-  notice until the directory launches.
+- "Back to our people" is a SiteLink to `/people`; it became a real link when
+  the directory launched (2 November).
 - Related-people cards and the popup's open-page button use a full page load
   (`SiteLink fullPageLoad`), because a client navigation to `/people/*` is
   always intercepted into the popup.
@@ -300,3 +326,179 @@ context is insecure or permission is denied. Both reuse one toast id, so
 repeated clicks never stack. Because the modal hides the toast region from
 assistive technology, the dialog's `role="status"` text announces the same
 outcome.
+
+## People directory (Claude, 2 November 2026)
+
+Authorized by the user on 2 November. No separate directory screenshot exists,
+so the page adapts the supplied People-card references and the profile styling.
+
+- **Composition (updated 3 November)**: compact navy introduction (Eyebrow
+  "Our People", two-line serif h1, one short paragraph), a server-rendered
+  managing-partner feature and a portrait grid of the canonical `PersonCard`s,
+  then the shared `EnquiryCta` and footer. Grouped and filterable since the
+  scalable pass below; no pagination or infinite scroll.
+- **Responsive adaptation**: one column below 28rem (448px) with 4:3 portraits
+  so a phone shows a name without a full-screen image; two columns from 28rem
+  with square portraits; four columns from `lg` (1024px), or three when the
+  remaining/current result group has three people. Names wrap rather than
+  truncate. Checked at 320, 390, 480, 768, 1024 and 1440px with no horizontal
+  overflow.
+- **Hover**: `PersonCard imageHoverOnly` zooms only the portrait (scale 1.02,
+  550ms `ease-editorial`) on portrait hover or card keyboard focus, under
+  `motion-safe` only. Hovering the name underlines it and never moves the image.
+- **Who is listed**: `directoryPeople(previewOptions)` in
+  `content/profile-manifest.ts`: named people whose profile is linkable under
+  the preview rule, in roster order. At launch only approved profiles show and
+  withheld ones never do. `/people` joins `launchedRoutes` only when that list
+  is non-empty, so the page is never empty; the page also 404s if it is.
+  `relatedProfiles` reuses the same rule ("directory minus the current person").
+- **Behaviour**: cards are soft links, so the `@profile` interceptor opens the
+  existing popup over the directory (Back/Forward, focus return to the card,
+  scroll position, copy-link toasts and "Open full profile page" all
+  unchanged). Direct visits keep the standalone page. The header uses dark
+  chrome on `/people` and light chrome on standalone profiles. "Our People",
+  Home's "Meet our lawyers", the footer
+  link and "Back to our people" are now real links.
+- **Draft copy for firm confirmation**: heading "Experienced minds. A personal
+  commitment." and the introduction paragraph in `peopleDirectory`
+  (`content/people.ts`).
+- **Open**: office assignments, counsel/associate profiles, approved portraits
+  (initials fallback until then). The footer label is "Our People", matching the main navigation.
+
+### Scalable directory: groups, search and filters (Claude, 2 November 2026)
+
+Approved by the user, with Codex's conditions, for a roster of 25–60+ people
+once Sanity supplies it. The designer's screenshot was the starting point; the
+duplicate role dropdown/links, the Search button and "View profile" lines were
+dropped (results update as you type, and the whole card is the link).
+
+- **Data**: `Person.seniority` is explicit (`seniorityGroups` in
+  `content/people.ts`: Partners, Counsel, Senior associates, Associates; names
+  beyond Partners await the firm's roster). `Person.practiceIds` holds
+  confirmed practice slugs only; none are confirmed yet, so no card shows a
+  practice and the practice filter is omitted.
+  `content/people-directory.ts` builds the page data on the server: slim
+  `DirectoryPerson` records (card fields plus practice titles, never
+  biographies) and only the role/practice options someone actually holds.
+- **Rules** (`lib/people-directory.ts`, tested in
+  `tests/people-directory.test.ts`): accent/case/punctuation-insensitive search
+  where every word must match name, role or practice; role and practice
+  filters; seniority grouping in group then roster order; URL read/write with
+  unknown values ignored; and the toolbar rule.
+- **Toolbar threshold**: `peopleDirectory.toolbarMinPeople` (9) applies at
+  launch. It counts the full eligible list, never filtered results, and the
+  toolbar also shows whenever a URL filter is active so it can be cleared.
+  During the no-index preview the toolbar always shows (user decision, 2
+  November) so the firm can review it with four partners: today that is the
+  search box alone, full width, because role pills need two or more roles and
+  the practice dropdown needs confirmed practices. The search box only shares
+  its row when the dropdown exists.
+- **Views (updated 3 November)**: no filters → one eligible leadership feature
+  plus remaining people under seniority headings; the total includes the feature.
+  Filters → hide the feature and search the full roster in one flat grid with a
+  `role="status"` count ("3 of 27 people"), or the shared `EmptyState` with reset
+  and Contact the firm actions.
+  Clearing returns focus to the search box. Role pills are native radios
+  (arrow keys work) and scroll sideways on phones.
+- **URL and popup**: `usePeopleFilters` reads `?q=&practice=&role=` once on
+  load, then owns the filters, so opening a profile (URL `/people/slug`) never
+  resets or reflows the list. It writes with `history.replaceState` 300ms
+  after typing pauses: no history entry per keystroke, and it never writes
+  while a popup is open.
+- **Static page**: `/people` stays prerendered (○). The live directory sits in
+  Suspense because it reads the URL; the fallback is the same `DirectoryView`
+  with no filters, so the static HTML lists everyone in groups. A
+  `<noscript>` style hides the toolbar when JavaScript is off, since it can't
+  filter there.
+- **Reusable empty state**: `components/shared/empty-state.tsx` (icon badge,
+  serif title, description, actions; pale sky panel), modelled on
+  iproduce-africa's `CatalogueEmptyState`. Insights search should reuse it.
+
+**Measured with 60 people** (4 real partners plus 56 obviously fake records
+from `tests/fixtures/directory-people.ts`, temporarily wired into the page and
+given one sample portrait, then reverted; production build on localhost):
+
+| Measure                    | 4 people (real)       | 60 people (test)         |
+| -------------------------- | --------------------- | ------------------------ |
+| `/people` HTML, raw / gzip | 130 KB / 17.8 KB      | 475 KB / 26.5 KB         |
+| Rendering                  | Static (○), cache HIT | Static (○), cache HIT    |
+| Biography text in HTML     | none                  | none                     |
+| Portrait `<img>` tags      | 0 (initials)          | 56, all `loading="lazy"` |
+
+- Page JS was 18 files, 222 KB transferred, the same shared site bundles as
+  other pages (the directory adds no dependency).
+- One optimised portrait at the grid's 2x size (w=640, WebP) was 19 KB
+  (8.6 KB at w=384). That is for the sample image; real photos will differ.
+- At 1440×900, 8 portraits sit within 1,250px of the first screen and 16
+  within 2,500px (Chrome's lazy-load distances), out of 56. Actual loading
+  wasn't observed: the in-app browser pane was hidden, which defers lazy
+  images.
+- Search to updated count took 1–66 ms per keystroke in that hidden
+  (throttled) pane. The slowest cases switch between grouped and flat views,
+  which re-renders every card. Filtering itself is a few string checks per
+  person.
+- In dev only, the Next overlay showed one React profiling error ("cannot have
+  a negative time stamp" in `performance.measure`). It is inside React's
+  dev-only timing code; the production build and server logged no errors.
+
+Verified: 4-person static HTML (all four profile links, "Partners" heading, no
+toolbar); 60-person toolbar, search, role pills, empty state, Clear (focus to
+search), a shared filtered link (unknown `role` value dropped and the URL
+tidied), popup over a filtered and scrolled list (heading focused, scroll and
+filter kept, Escape returns to `/people?role=partner` with focus on the card),
+375px with no horizontal overflow. Home and Firm cards are unchanged
+(`PersonCard` only gained an optional `detail` line).
+
+### Directory UX refinement (Codex, 2 November 2026)
+
+The user rejected the initial floating search panel and decorative shadow treatment.
+The revised direction is for visual review: the supplied pale editorial introduction
+with "Our People" eyebrow, "People you can move forward with." headline and
+its original supporting copy; a plain full-width search field with a bottom rule; a quiet live
+count and unboxed seniority groups. Keep portrait shadows and decorative group
+rules off this directory. Portraits remain square from 448px and 4:3 below it;
+shared PersonCard hover/focus defaults are retained.
+
+The visible search label and count share a row. The hint mentions practice only
+when confirmed practice options exist. A labelled 44px clear control resets all
+filters through the existing handler; matching results retain their heading space.
+Home/Firm/profile-card defaults, preview/launch visibility, filter/history rules and
+no-JS reading remain intact. This supersedes the rejected overlapping-panel proposal.
+
+### Empty-state refinement (2 November 2026)
+
+The directory's zero-result state uses the compact shared pale panel: smaller
+icon, reduced padding and "No matching profiles" as its h2. The redundant
+"Matching people" heading is hidden for zero results. "Clear search" is the
+primary recovery action for text-only searches; combined role/practice filters
+use "Clear filters" and filter-aware guidance. "Contact the firm" is a secondary
+text link using the shared enquiry destination rule. Clear restores focus to
+search. Other grouped and matching-result states are unchanged.
+
+### Practice select and temporary scale preview verification
+
+The practice filter uses a responsive presentation, with the same navy underline
+as search while focused/open. From 64rem, a themed Radix/shadcn-style Select opens
+below the field with a maximum height of 18rem, further constrained by the remaining
+viewport space. Options scroll instead of expanding over the introduction. Long
+selected titles truncate within the field; option labels wrap.
+
+Below 64rem, the existing Radix Dialog presents a bottom sheet titled "Practice
+area", with a 44px close button, selected checkmark and safe-area padding. Its list
+scrolls within a maximum 85svh panel while the background stays locked. Choosing an
+option applies immediately, closes the sheet and returns focus to the trigger.
+There is no Apply step or drag handle. Escape/backdrop/close dismiss without changing
+the selection. Switching across the breakpoint closes an open picker.
+
+`PracticeFilter` owns presentation and `usePracticeFilter` owns responsive/open
+state. Both presentations use the same value callback and hidden form field, so
+practice selection combines with search/roles and resets through Clear filters.
+The search field's × appears only for entered text and clears that text alone,
+preserving practice and role. When either of those filters is selected, a visible
+"Clear filters" action beside the result count resets the entire form and URL.
+Both reset actions return focus to search; the picker still offers All practice
+areas for clearing only that selection.
+Role pill labels are positioned containers for their hidden radios, fixing the
+mobile overflow exposed by the sample roster. The sample roster was removed on 3
+November at the user's request; synthetic people now exist only in
+`tests/fixtures/directory-people.ts`.

@@ -1,10 +1,28 @@
 import { hasText } from "@/lib/content";
 
+/**
+ * Directory groups, in display order. A person's group is set explicitly
+ * rather than guessed from their role title ("Managing Partner" and "Partner"
+ * are both partners). Empty groups are never shown. Group names beyond
+ * Partners await the firm's roster.
+ */
+export const seniorityGroups = [
+  { id: "partner", label: "Partners" },
+  { id: "counsel", label: "Counsel" },
+  { id: "senior-associate", label: "Senior associates" },
+  { id: "associate", label: "Associates" },
+] as const;
+
+export type SeniorityId = (typeof seniorityGroups)[number]["id"];
+
 export type Person = {
   slug: string;
   id: string;
   name: string;
   role: string;
+  seniority: SeniorityId;
+  /** Practice slugs from content/practice-index.ts, only once confirmed. */
+  practiceIds?: readonly string[];
   initials: string;
   founderRole?: string;
   biography?: string;
@@ -18,6 +36,48 @@ export const peopleHome = {
   description:
     "Meet the four partners featured in this preview. Further team profiles will follow once confirmed by the firm.",
   action: "Meet our lawyers",
+};
+
+// The /people directory. The heading comes from the designer's frame; the
+// description is a draft for firm confirmation and names only the partners
+// (no wider-team claims, per client feedback) until the full roster is
+// supplied.
+export const peopleDirectory = {
+  eyebrow: "Our People",
+  heading: ["Experienced minds.", "A personal commitment."],
+  description:
+    "Meet the partners behind our advice. Explore their experience, areas of focus and qualifications.",
+  leadership: {
+    personId: "ab-mahmoud",
+    eyebrow: "The people behind the practice",
+    heading: ["Founded on experience.", "Led with purpose."],
+    action: "View profile",
+    reviewNote: "Profile details awaiting confirmation by the firm.",
+  },
+  /** Search and filters appear once the directory lists this many people. */
+  toolbarMinPeople: 9,
+  toolbarLabel: "Find a person",
+  searchLabel: "Search our people",
+  searchHint: "Search by name or role",
+  searchPlaceholder: "Search by name, role or practice",
+  practiceLabel: "Practice area",
+  closePractices: "Close practice areas",
+  allPractices: "All practice areas",
+  roleLabel: "Role",
+  allRoles: "All",
+  clearFilters: "Clear filters",
+  resultsLabel: "Matching people",
+  count: (shown: number, total: number) =>
+    shown === total
+      ? `${total} ${total === 1 ? "person" : "people"}`
+      : `${shown} of ${total} people`,
+  empty: {
+    title: "No matching profiles",
+    description: "Try another name or clear your search.",
+    filteredDescription: "Try another name or adjust your filters.",
+    clearSearch: "Clear search",
+    contactAction: "Contact the firm",
+  },
 };
 
 // Names and roles supplied in the user's design references. Final portraits
@@ -38,6 +98,7 @@ export const people: Person[] = [
     slug: "ab-mahmoud",
     name: "A.B. Mahmoud, SAN",
     role: "Managing Partner",
+    seniority: "partner",
     initials: "ABM",
     portrait: null,
   },
@@ -46,6 +107,7 @@ export const people: Person[] = [
     slug: "bello-aminu-abdullahi",
     name: "Bello Aminu Abdullahi",
     role: "Senior Partner",
+    seniority: "partner",
     initials: "BAA",
     portrait: null,
   },
@@ -54,6 +116,7 @@ export const people: Person[] = [
     slug: "aminu-sadauki",
     name: "Aminu Sadauki",
     role: "Partner",
+    seniority: "partner",
     initials: "AS",
     portrait: null,
   },
@@ -62,6 +125,7 @@ export const people: Person[] = [
     slug: "sefiullahi-oseni",
     name: "Sefiullahi Oseni",
     role: "Partner",
+    seniority: "partner",
     initials: "SO",
     portrait: null,
   },

@@ -21,7 +21,9 @@ export function StickyHeader({ children }: { children: ReactNode }) {
           "pointer-events-none absolute inset-x-0 top-0 h-22 lg:hidden",
           light
             ? "bg-white"
-            : pathname === routes.firm || pathname === routes.practiceAreas
+            : pathname === routes.firm ||
+                pathname === routes.practiceAreas ||
+                pathname === routes.people
               ? "bg-navy-deep"
               : "bg-primary",
         )}

@@ -22,16 +22,26 @@ suppressed. SME uses its own content and server section, linked alongside practi
 Print-only legal rules stay scoped in surfaces.css. Header tone includes SME/legal.
 
 Person profiles: `content/profile-manifest.ts` is the public ID/status list used
-by `launchedRoutes`; `content/profiles.ts` holds server-only bodies and the one
+by `launchedRoutes`, and its `directoryPeople(options)` decides who `/people`
+lists (and whether it launches); `content/people-directory.ts` turns that into
+slim browser records and filter options, `lib/people-directory.ts` owns the
+search/group/URL rules and `hooks/use-people-filters.ts` the URL syncing; `content/profiles.ts` holds server-only bodies and the one
 `resolveProfile(slug, previewOptions)` selection shared by the intercepted
 `@profile` popup and the standalone `/people/[slug]` page. `lib/preview.ts` owns
 the `allowPreview` switch (no-index only). `lib/profile-links.ts` owns the
 validated per-person `links[]` model and `lib/profile-metadata.ts` the metadata
-shared by popup and page; `components/shared/enquiry-button.tsx` is the one
-enquiry action (mailto until `/contact` launches). people-review.ts keeps internal
+shared by popup and page; `components/shared/enquiry-button.tsx` owns the one
+enquiry destination (mailto until `/contact` launches): `EnquiryLink` for text
+links and `EnquiryButton` for the arrow button. people-review.ts keeps internal
 source notes, never rendered. Insights author IDs resolve through canonical people;
 the reusable byline handles missing authors without substituting someone else.
-Future directory/article routes and CMS normalization remain separate checkpoints.
+The directory's editorial feature is selected by `peopleDirectoryLeadership`
+on the server using the same eligible roster and `resolveProfile` approval rule.
+`DirectoryLeadershipSection` passes through the client directory as a React node;
+profile bodies never join the slim card-data collection. `directoryPresentation`
+features a person once at rest, then searches the full eligible roster for active
+filters. Directory chrome is navy; standalone profile chrome remains light.
+Future article routes and CMS normalization remain separate checkpoints.
 
 ## Original presentation boundary
 
@@ -56,37 +66,37 @@ remain outside this presentation checkpoint.
 
 ## Ownership
 
-| Location                       | Responsibility                                                                          |
-| ------------------------------ | --------------------------------------------------------------------------------------- |
-| `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                     |
-| `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                          |
-| `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                            |
-| `app/(site)/practice-areas/`   | Hub query handling, static detail parameters and practice metadata                      |
-| `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                       |
-| `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                      |
-| `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                     |
-| `app/styles/surfaces.css`      | Header material pseudo-elements and browser/preference fallbacks                        |
-| `components/layout/`           | Shared chrome and unavailable-destination notice                                        |
-| `components/home/`             | Homepage section entries and their local interactive presentation                       |
-| `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation              |
-| `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections              |
-| `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback and EnquiryCta |
-| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel, Marquee and Sonner toasts |
-| `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts        |
-| `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                |
-| `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                              |
-| `content/site.ts`              | Site name, description, fallback URL, locale and the `indexable` launch switch          |
-| `content/system-pages.ts`      | Copy for the 404 and error pages                                                        |
-| `app/robots.ts`, `sitemap.ts`  | Robots rules from `indexable`; sitemap from `launchedRoutes`                            |
-| `app/not-found.tsx`            | Branded 404 inside `SiteShell`, no-index                                                |
-| `app/**/error.tsx`, global     | Error boundaries rendering the shared `ErrorView`                                       |
-| `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state          |
-| `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries   |
-| `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                          |
-| `types/`                       | Shared contracts only when multiple domains need them                                   |
-| `public/`, `app/fonts/`        | Local approved assets; variable fonts and their licences                                |
-| `sanity/`                      | Reserved boundary; no active CMS integration                                            |
-| `docs/`                        | Durable decisions, status, source references and dated implementation history           |
+| Location                       | Responsibility                                                                                      |
+| ------------------------------ | --------------------------------------------------------------------------------------------------- |
+| `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                                 |
+| `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                                      |
+| `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                                        |
+| `app/(site)/practice-areas/`   | Hub query handling, static detail parameters and practice metadata                                  |
+| `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                                   |
+| `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                                  |
+| `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                                 |
+| `app/styles/surfaces.css`      | Header material pseudo-elements and browser/preference fallbacks                                    |
+| `components/layout/`           | Shared chrome and unavailable-destination notice                                                    |
+| `components/home/`             | Homepage section entries and their local interactive presentation                                   |
+| `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation                          |
+| `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections                          |
+| `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback, EmptyState and EnquiryCta |
+| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel, Marquee and Sonner toasts             |
+| `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts                    |
+| `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                            |
+| `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                                          |
+| `content/site.ts`              | Site name, description, fallback URL, locale and the `indexable` launch switch                      |
+| `content/system-pages.ts`      | Copy for the 404 and error pages                                                                    |
+| `app/robots.ts`, `sitemap.ts`  | Robots rules from `indexable`; sitemap from `launchedRoutes`                                        |
+| `app/not-found.tsx`            | Branded 404 inside `SiteShell`, no-index                                                            |
+| `app/**/error.tsx`, global     | Error boundaries rendering the shared `ErrorView`                                                   |
+| `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state                      |
+| `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries               |
+| `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                                      |
+| `types/`                       | Shared contracts only when multiple domains need them                                               |
+| `public/`, `app/fonts/`        | Local approved assets; variable fonts and their licences                                            |
+| `sanity/`                      | Reserved boundary; no active CMS integration                                                        |
+| `docs/`                        | Durable decisions, status, source references and dated implementation history                       |
 
 Keep full section entry files named `*-section.tsx`; supporting components keep
 descriptive names. Contracts used by one content module stay in that module.
@@ -408,3 +418,16 @@ independent `onClick` handlers supplied by Radix/Slot. Availability ignores quer
 and fragment suffixes while still checking exact built paths. Fragment/query-only
 links are local navigation; unknown detail paths remain unavailable. The global
 no-index switch and user-added integrations remain unchanged.
+
+### Themed Select (2 November 2026)
+
+`components/ui/select.tsx` is a small shadcn-style Radix Select composition using
+`@radix-ui/react-select`. It owns the portal, constrained scrollable menu, wrapping
+options and check indicator. Directory usage owns the underlined navy focus/open
+state. The select has an explicit value callback; a hidden form field retains the
+selected practice when search or role changes. `PracticeFilter` uses this menu
+from the shared desktop breakpoint (64rem) and the existing Radix Dialog as a
+bottom sheet below it. `usePracticeFilter` owns media/open state and closes on
+breakpoint changes; no additional drawer dependency is needed. NativeSelect
+remains available for other forms; no theme reset or new styling framework was
+added.

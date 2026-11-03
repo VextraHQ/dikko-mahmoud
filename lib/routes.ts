@@ -1,5 +1,8 @@
 import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
-import { availableProfileSlugs } from "@/content/profile-manifest";
+import {
+  availableProfileSlugs,
+  directoryPeople,
+} from "@/content/profile-manifest";
 import { previewOptions } from "@/lib/preview";
 
 // Every internal page address lives here. Components link with `routes.*`,
@@ -29,7 +32,8 @@ export const routes = {
  * Pages that are built and live. Launching a page = adding its path here;
  * every `SiteLink` pointing at it switches from the "being prepared" notice
  * to a real link. Person profiles join from the public profile manifest (IDs
- * and review status only) under the same preview rule as their pages.
+ * and review status only) under the same preview rule as their pages, and the
+ * /people directory joins once it has someone to list.
  */
 export const launchedRoutes: readonly string[] = [
   routes.home,
@@ -39,6 +43,7 @@ export const launchedRoutes: readonly string[] = [
   routes.privacy,
   routes.terms,
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
+  ...(directoryPeople(previewOptions).length ? [routes.people] : []),
   ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),
 ];
 

@@ -1400,3 +1400,199 @@
   forms.md), `profileLinkPlatforms` (future Sanity schema list), and test-only
   content rules for unbuilt pages (`practiceEnquiryOptions`,
   `publishableClients`, `publishableMatters`, `matterRecords`).
+
+## 2026-11-02 — People directory
+
+- Added `/people` (`app/(site)/people/page.tsx`, `components/people/directory-section.tsx`):
+  pale introduction, 1/2/4-column PersonCard grid with portrait-only hover, shared
+  enquiry CTA and footer. Draft heading/intro copy lives in `peopleDirectory`.
+- Added `directoryPeople` to the profile manifest; `relatedProfiles` now reuses
+  it, and `/people` joins `launchedRoutes` only when the list is non-empty.
+  Header tone treats `/people` as a light page.
+- Tests cover roster order, launch approval/withholding, the empty-at-launch
+  case, directory launch gating and the related-profiles rule.
+- Verified in the browser: 320–1440px without overflow, long-name wrapping,
+  keyboard focus/zoom, motion-safe-only transitions, no-JS server HTML,
+  popup open/scroll/Escape/Back/Forward/focus return, real directory links,
+  sitemap and no-index metadata.
+
+## 2026-11-02 — Scalable People directory
+
+- Added explicit seniority groups and confirmed-only practice IDs to people,
+  slim server-built directory records, and pure search/filter/group/URL rules
+  with 12 tests (`tests/people-directory.test.ts`, synthetic 60-person fixture).
+- Directory now groups by seniority, and from 9 people (configurable) shows
+  search, practice and role filters with a live count, Clear and the new
+  reusable `EmptyState`. Filters sync to the URL with debounced
+  `replaceState`; the page remains statically prerendered via a Suspense
+  fallback of the same view.
+- Fixed a build-only failure found by `pnpm build`: the toolbar form's event
+  handlers needed a client boundary in the server-rendered fallback.
+- Measured a temporary 60-person production build (results in
+  `docs/routes/people.md`), then restored the real page and rebuilt.
+
+## 2026-11-02 — Directory search visible in preview
+
+- `showDirectoryToolbar` now also shows the toolbar during the no-index
+  preview (`allowPreview`), keeping the nine-person launch threshold and the
+  active-filter rule. Role/practice controls still need supporting data, and
+  search spans the full width when there is no practice dropdown.
+- Tests cover launch threshold, active filters, the preview rule and the page
+  data's preview flag. Browser-checked at 1440px (search 1280px wide, full
+  row) and 375px: search, URL sync, empty state and Clear on four partners.
+
+## 2026-11-02 — Codex directory UI refinement
+
+- User requested direct UI/UX polish. Shortened the directory introduction and
+  brought search/count into a white panel overlapping the intro boundary. Added
+  a visible input label, data-aware search hint and in-field clear control using
+  the existing filter reset. The count is concise enough for narrow screens.
+- Consolidated group rules and removed the repeated count for a single group.
+  Matching results retain the same heading space. Directory-only portraits are
+  square from 448px, with restrained media-only shadow and keyboard ring; the
+  shared Home/Firm/profile cards and filter/history rules are untouched.
+- Browser checked at 320, 390, 768, 1024, 1366 and 1440px: no horizontal overflow;
+  search match, zero-result state, clear/focus, and profile popup return with
+  the filtered URL and opening-card focus retained. Saved desktop/mobile captures
+  in /tmp/dm-people-polish. No Safari or JavaScript-disabled browser run.
+- Formatting, lint, typecheck and all 100 tests passed. Standard Turbopack build
+  hit the environment's local-port permission restriction, including a retry;
+  the production build with `pnpm exec next build --webpack` passed and /people
+  remains static. No dependency or deployment change and no commit.
+
+## 2026-11-02 — Directory revision after user feedback
+
+- User rejected Codex's floating search panel as too generic. Removed the raised
+  panel, pale intro band, picture shadows and decorative group rules. Revised
+  to a white editorial page, simple "Our people." title, underlined search and
+  plain groups. Kept the in-field clear action, concise count, stable result
+  heading and square directory portraits.
+- This supersedes the visual treatment in the preceding entry; the filtering
+  model, existing profile behaviour and shared card defaults are unchanged.
+
+## 2026-11-02 — Directory search focus
+
+- Replaced the search field's large rectangular focus outline with a navy inset
+  underline and matching search icon. Kept an outline in forced-colours mode
+  and the clear button's own keyboard focus. Browser verified the field focus;
+  this is a local styling change with no filter/history changes.
+
+## 2026-11-02 — Compact People empty state
+
+- Applied the user-approved quieter empty state: reduced padding/icon, shorter
+  copy, primary Clear search and secondary Contact the firm text link. Combined
+  filters retain Clear filters wording. Zero results omit the duplicate heading.
+- Browser checked at 1440px and 320px: no horizontal overflow; clearing restores
+  all four cards and focuses search. The enquiry link uses enquiryHref so Contact
+  activation still applies. Lint, typecheck and 100 tests passed. No new build
+  needed for this small presentation change; no commit or deployment.
+
+## 2026-11-02 — Restore supplied directory introduction
+
+- Restored the user's supplied Our People eyebrow, "People you can move forward
+  with." headline and supporting paragraph on the pale introduction. These were
+  inadvertently replaced during Codex's simplification pass. Retained the revised
+  search, focus and empty-state treatments with spacing below the introduction.
+- Footer now says Our People, matching the main navigation. No other destinations
+  or content records changed.
+
+## 2026-11-02 — Temporary multi-group roster preview
+
+- User requested sample cards to see the directory at scale before asking for
+  deletion. Added an isolated no-index-only preview module: 28 sample cards plus
+  four real partners, four seniority groups, and sample coverage of nine practice
+  filters. Each synthetic name starts with Sample; a page note labels the mock
+  assignments. Actual people, biographies and practice assignments are unchanged.
+- Temporary switch: peopleDesignPreviewEnabled in content/people-design-preview.ts.
+  Samples do not create profile routes or sitemap entries. Added tests for preview
+  gating, switch-off, record isolation, categories and unavailable sample routes.
+
+## 2026-11-02 — Themed directory Select
+
+- User requested the application-themed shadcn dropdown instead of the browser
+  native menu, matching the search focus. Added @radix-ui/react-select 2.4.1 and
+  the small local Select wrapper; viewport-constrained options wrap, selected
+  rows show a checkmark and sky tint, and the trigger uses the navy underline.
+- Practice selection has an explicit callback and stays in FormData while
+  changing search/role. Fixed horizontal overflow from the role pills' hidden
+  radio inputs by giving each label its own positioned containing block.
+- Browser checked option selection, combined search, Clear, keyboard End/Enter,
+  Escape/focus return and the wrapping menu at 320px. Temporary sample roster
+  remains enabled; actual partner assignments and profile routes are unchanged.
+
+## 2026-11-02 — Responsive practice filter presentation
+
+- Replaced the oversized directory menu on phones with a bottom sheet using the
+  existing Radix Dialog: Practice area title, 44px close button, wrapping options,
+  selected checkmark, internal scrolling and safe-area padding. Selection applies
+  immediately and closes; Escape restores focus without changing the selection.
+- Desktop retains Radix Select, anchored below the field and capped at 18rem or
+  the available viewport space. Both use the same value callback and navy field
+  underline. Responsive/open rules live in usePracticeFilter; changing across
+  64rem closes the picker. No additional dependency or canonical data changes.
+- Browser checked 1440×1000 and 1440×600 desktop placement, keyboard End/Enter,
+  390×844 and 320×568 sheets, the last option on the short screen, body scroll
+  locking, Escape/focus return, combined search/role/practice values, Clear, and
+  breakpoint dismissal. No horizontal overflow or browser warnings/errors seen.
+- Lint, typecheck, all 104 tests and the Webpack production build passed; /people
+  remains static. The Webpack fallback follows the earlier sandbox restriction
+  on Turbopack's local port binding. Sample roster remains active for the user's
+  visual review. No commit or deployment.
+
+## 2026-11-02 — Separate search and directory reset actions
+
+- Search × now appears only when text is entered and clears only that text,
+  preserving the selected practice and role. A visible Clear filters action by
+  the result count appears for practice/role selections and resets all fields.
+  Reset actions return focus to search. The count row reserves touch-target
+  height so showing the action does not move the fields.
+- Toolbar form changes now read only search/radio inputs. Practice already has
+  its own callback; Radix's hidden native select must not feed stale form values
+  back into the directory state.
+- Browser checked combined text/practice/role filtering, clearing only text,
+  practice-only reset with empty search, keyboard global reset, retained URL
+  parameters and focus return at 320px and desktop. Temporary roster retained.
+- Formatting, lint, typecheck and all 104 tests passed. No production build
+  repeated for this focused interaction fix; no commit or deployment.
+
+## 2026-11-03 — People directory review fixes
+
+- Removed the temporary sample roster at the user's request
+  (`content/people-design-preview.ts`, its test and the page's preview note).
+  `/people` lists only the four partners again; synthetic people remain only
+  in `tests/fixtures/directory-people.ts`.
+- Intro description is partner-only again ("Meet the partners behind our
+  advice…"), keeping the designer's heading; draft for firm confirmation.
+- Added `EnquiryLink` beside `EnquiryButton` so the empty state's "Contact the
+  firm" text link shares the one mailto/contact rule instead of repeating it.
+
+## 2026-11-03 — Approved editorial People directory
+
+- Implemented the approved wireframe: compact navy title/copy introduction,
+  managing-partner feature and three-column row for the remaining partners.
+  Mobile pairs a small portrait/identity above the feature text; desktop pairs
+  media with biography and milestone rules. Existing initials remain until
+  approved photographs arrive. The sample-roster removal is preserved.
+- Feature selection stays on the server, checks the eligible directory and
+  resolveProfile, and passes rendered content through the browser directory as
+  a React-node slot. Pending source details retain a small preview label and
+  stay excluded at launch. Full biography bodies do not join card data.
+- directoryPresentation keeps the featured person out of the unfiltered grid
+  only while their feature renders. Any active search/role/practice filter
+  searches the full eligible roster; Clear restores the feature. Added seven
+  tests for selection/publication gates, deduplication, full-roster search,
+  combined filtering, unavailable/lone features and whitespace/clear states.
+- Directory header tone is dark with matching mobile backing; direct profile
+  pages remain light and intercepted profiles preserve origin tone. Search URL
+  syncing resumes after popup return, including a popup opened before the
+  typing debounce completed. Separate text/global reset actions are retained.
+- Browser checked 320, 390, 768, 1024 and 1440px layouts with no horizontal
+  overflow; three-column desktop and one/two-column mobile/tablet grids; search
+  for Mahmoud, clearing, identity/CTA popup links, keyboard activation/Escape,
+  focus return, retained query URL and direct light profile page. No warnings
+  or errors were reported. New hover motion uses motion-safe CSS utilities.
+- Format, lint, typecheck, all 107 tests and the Webpack production build passed.
+  /people remains static. Static HTML inspection confirmed all four names and
+  the feature outside scripts, with no-index metadata; a browser with JavaScript
+  disabled was not tested. Existing form/filter rules cover the larger roster;
+  no synthetic roster was reintroduced for this pass. No commit or deployment.

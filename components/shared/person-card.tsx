@@ -5,17 +5,26 @@ import type { Person } from "@/content/people";
 import { SiteLink } from "@/components/layout/site-link";
 import { routes } from "@/lib/routes";
 
+/** The card's fields only, so slim directory records fit as well as people. */
+type PersonCardData = Pick<
+  Person,
+  "slug" | "name" | "role" | "initials" | "portrait"
+>;
+
 export function PersonCard({
   person,
   role = person.role,
+  detail,
   className,
   portraitClassName,
   imageHoverOnly = false,
   fullPageLoad = false,
   sizes = "(min-width: 1440px) 302px, (min-width: 1024px) 23vw, 46vw",
 }: {
-  person: Person;
+  person: PersonCardData;
   role?: string;
+  /** A quiet line under the role, such as the person's main practice. */
+  detail?: string;
   className?: string;
   portraitClassName?: string;
   imageHoverOnly?: boolean;
@@ -86,6 +95,11 @@ export function PersonCard({
       {role.trim() && (
         <span className="text-muted-foreground mt-auto pt-2 text-xs/5 sm:pt-3 sm:text-sm/6">
           {role}
+        </span>
+      )}
+      {detail && (
+        <span className="mt-1 text-xs/5 text-slate-500 sm:text-sm/6">
+          {detail}
         </span>
       )}
     </>

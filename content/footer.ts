@@ -23,7 +23,7 @@ export const footer = {
       title: "Firm",
       links: [
         { label: "About us", href: routes.firm },
-        { label: "Our team", href: routes.people },
+        { label: "Our People", href: routes.people },
         { label: "Careers", href: routes.careers },
         { label: "Legal Insights Series", href: routes.insights },
         { label: "SME retainer", href: routes.smeRetainer },

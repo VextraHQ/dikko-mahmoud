@@ -38,6 +38,11 @@ not build the People directory or Selected matters listing/detail pages yet.
 Those need their separate references/content decisions. Claude implemented the
 profile/navigation slice on 1 November for local review (see the implementation
 notes in routes/people.md); Codex review and firm content approval remain open.
+On 2 November the user authorized the `/people` directory, now implemented for
+local review; the Selected matters listing/detail pages remain separate.
+On 3 November the user approved the editorial directory wireframe: compact navy
+introduction, one managing-partner feature and the searchable roster. The sample
+roster removal is preserved; the four current partners remain the only records.
 
 ## Status
 
@@ -63,6 +68,7 @@ notes in routes/people.md); Codex review and firm content approval remain open.
 | 5a. The Firm                                | Review   | Route, shared reuse and interactions implemented; content/media gates remain       |
 | 5b. Practice areas                          | Review   | Hub/menu and nine detail previews; full detail content supplied only for Corporate |
 | 5c. Client alignment and SME/legal previews | Review   | Shared catalogue, consent controls, copy corrections and three route previews      |
+| 5d. People directory and profiles           | Review   | Editorial directory, four profiles, shared popup/page and data-driven filters      |
 | 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                              |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                     |
 

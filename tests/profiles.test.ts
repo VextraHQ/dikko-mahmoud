@@ -4,6 +4,7 @@ import { navigation } from "@/content/navigation";
 import { getPerson, people } from "@/content/people";
 import {
   availableProfileSlugs,
+  directoryPeople,
   profileManifest,
 } from "@/content/profile-manifest";
 import {
@@ -135,20 +136,27 @@ describe("resolveProfile", () => {
 });
 
 describe("profile routes and navigation", () => {
-  it("launches only profiles the preview rule allows, never the parent indexes", () => {
+  it("launches only profiles the preview rule allows", () => {
     const allowed = availableProfileSlugs(previewOptions);
     for (const person of people) {
       expect(isRouteAvailable(routes.person(person.slug))).toBe(
         allowed.includes(person.slug),
       );
     }
-    expect(launchedRoutes).not.toContain(routes.people);
     expect(launchedRoutes).not.toContain(routes.experience);
   });
 
-  it("uses light chrome only for available profile pages", () => {
+  it("launches the directory exactly when it has someone to list", () => {
+    expect(isRouteAvailable(routes.people)).toBe(
+      directoryPeople(previewOptions).length > 0,
+    );
+  });
+
+  it("uses light profile chrome and a dark directory introduction", () => {
     const [slug] = availableProfileSlugs(previewOptions);
     if (slug) expect(headerTone(routes.person(slug))).toBe("light");
+    if (isRouteAvailable(routes.people))
+      expect(headerTone(routes.people)).toBe("dark");
     expect(headerTone(routes.person("not-a-person"))).toBe("dark");
   });
 
@@ -191,5 +199,48 @@ describe("profile page sections", () => {
       relatedProfiles("bello-aminu-abdullahi", preview).map((p) => p.slug),
     ).toEqual(["ab-mahmoud", "aminu-sadauki", "sefiullahi-oseni"]);
     expect(relatedProfiles("ab-mahmoud", launch)).toEqual([]);
+  });
+});
+
+describe("people directory", () => {
+  const manifestWith = (
+    statuses: Record<string, "approved" | "pending" | "withheld">,
+  ) =>
+    Object.entries(statuses).map(([personId, publicationStatus]) => ({
+      personId,
+      publicationStatus,
+    }));
+
+  it("lists every previewable partner in roster order", () => {
+    expect(directoryPeople(preview).map((person) => person.slug)).toEqual(
+      people.map((person) => person.slug),
+    );
+  });
+
+  it("lists only approved people at launch and never withheld ones", () => {
+    const manifest = manifestWith({
+      "sefiullahi-oseni": "approved",
+      "ab-mahmoud": "approved",
+      "aminu-sadauki": "withheld",
+      "bello-aminu-abdullahi": "pending",
+    });
+    // Roster order, not manifest order.
+    expect(
+      directoryPeople(launch, manifest).map((person) => person.slug),
+    ).toEqual(["ab-mahmoud", "sefiullahi-oseni"]);
+    expect(
+      directoryPeople(preview, manifest).map((person) => person.slug),
+    ).not.toContain("aminu-sadauki");
+  });
+
+  it("is empty at launch while every profile is still pending", () => {
+    expect(directoryPeople(launch)).toEqual([]);
+  });
+
+  it("feeds 'Meet more of our people' without the current person", () => {
+    const listed = directoryPeople(preview).map((person) => person.slug);
+    expect(
+      relatedProfiles("aminu-sadauki", preview).map((person) => person.slug),
+    ).toEqual(listed.filter((slug) => slug !== "aminu-sadauki"));
   });
 });

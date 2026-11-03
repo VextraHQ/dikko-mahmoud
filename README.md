@@ -1,7 +1,7 @@
 # Dikko & Mahmoud Website
 
 The site is a no-index local presentation preview. Home, The Firm, the nine
-Practice area routes, SME retainer, Privacy Policy and Terms of Use are implemented
+Practice area routes, People directory/profiles, SME retainer, Privacy Policy and Terms of Use are implemented
 for review. The client-feedback corrections are specified in
 [client alignment](docs/client-alignment.md); the proposed scope inclusions are in
 [the draft addendum](docs/scope-addendum.md). The original proposal is unchanged.
@@ -22,7 +22,7 @@ and article-author support are prepared without publishing unconfirmed claims.
 
 Visual identity, approved media, final practice naming/Capital Markets placement,
 biographies, article copy, publication permissions and legal/SME text remain review
-gates. People directory/profiles, Insights routes, Careers and Contact remain
+gates. People directory/profiles are available for local review. Insights routes, Careers and Contact remain
 separate implementation checkpoints. Providers and deployment are not connected.
 The user-added Analytics and existing hero autoplay remain intact.
 

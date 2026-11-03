@@ -1,5 +1,9 @@
 import { people, type Person } from "@/content/people";
-import { profileManifest, profileStatus } from "@/content/profile-manifest";
+import {
+  directoryPeople,
+  profileManifest,
+  profileStatus,
+} from "@/content/profile-manifest";
 import { hasText } from "@/lib/content";
 import { normalizeProfileLinks, type ProfileLink } from "@/lib/profile-links";
 import { isPublishable, type PreviewOptions } from "@/lib/publication";
@@ -244,12 +248,9 @@ export function profileSectionLinks({ profile, shortName }: ResolvedProfile) {
   ];
 }
 
-/** "Meet more of our people": every other available profile, in roster order. */
+/** "Meet more of our people": the directory without the current person. */
 export function relatedProfiles(slug: string, options: PreviewOptions) {
-  const available = new Set(profileSlugs(options));
-  return people.filter(
-    (person) => person.slug !== slug && available.has(person.slug),
-  );
+  return directoryPeople(options).filter((person) => person.slug !== slug);
 }
 
 /** Raw bodies for integrity tests only; render through resolveProfile. */
