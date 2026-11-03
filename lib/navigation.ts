@@ -16,9 +16,11 @@ const lightPages = [routes.smeRetainer, routes.privacy, routes.terms] as const;
  */
 export function headerTone(pathname: string): HeaderTone {
   if (!isRouteAvailable(pathname)) return "dark";
-  const lightDetail = [routes.practiceAreas, routes.people].some((parent) =>
-    pathname.startsWith(`${parent}/`),
-  );
+  const lightDetail = [
+    routes.practiceAreas,
+    routes.people,
+    routes.experience,
+  ].some((parent) => pathname.startsWith(`${parent}/`));
   return lightDetail || lightPages.some((page) => page === pathname)
     ? "light"
     : "dark";

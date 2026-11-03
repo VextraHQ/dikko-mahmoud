@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { PracticeFilter } from "@/components/people/practice-filter";
 import { peopleDirectory as copy } from "@/content/people";
-import type { PeopleDirectoryData } from "@/content/people-directory";
-import { filterParams, type DirectoryFilters } from "@/lib/people-directory";
+import type { PeopleDirectoryData } from "@/lib/people/directory-data";
+import { filterParams, type DirectoryFilters } from "@/lib/people/directory";
 import { cn } from "@/lib/utils";
 
 export const peopleSearchInputId = "people-search";

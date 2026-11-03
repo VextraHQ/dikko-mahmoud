@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { peopleDirectory as copy } from "@/content/people";
-import type { PeopleDirectoryData } from "@/content/people-directory";
+import type { PeopleDirectoryData } from "@/lib/people/directory-data";
 import { usePracticeFilter } from "@/hooks/use-practice-filter";
 import { cn } from "@/lib/utils";
 

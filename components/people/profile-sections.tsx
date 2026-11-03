@@ -1,10 +1,10 @@
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { profileCopy as copy } from "@/content/profiles";
 import {
-  profileCopy as copy,
   profileSectionIds as ids,
   type ResolvedProfile,
-} from "@/content/profiles";
+} from "@/lib/people/profiles";
 import { cn } from "@/lib/utils";
 
 /**

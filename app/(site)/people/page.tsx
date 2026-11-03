@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { DirectorySection } from "@/components/people/directory-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { peopleDirectory } from "@/content/people";
-import { peopleDirectoryData } from "@/content/people-directory";
+import { peopleDirectoryData } from "@/lib/people/directory-data";
 import { createPageMetadata } from "@/lib/metadata";
 import { previewOptions } from "@/lib/preview";
 import { routes } from "@/lib/routes";

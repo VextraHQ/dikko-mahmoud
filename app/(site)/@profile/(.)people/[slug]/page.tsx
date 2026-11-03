@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProfileBody } from "@/components/people/profile-body";
 import { ProfileDialog } from "@/components/people/profile-dialog";
-import { profileCopy, profileSlugs, resolveProfile } from "@/content/profiles";
+import { profileCopy } from "@/content/profiles";
+import {
+  profileDocumentMeta,
+  profileMetadata,
+} from "@/lib/people/profile-metadata";
+import { profileSlugs, resolveProfile } from "@/lib/people/profiles";
 import { previewOptions } from "@/lib/preview";
-import { profileDocumentMeta, profileMetadata } from "@/lib/profile-metadata";
 import { routes } from "@/lib/routes";
 
 type Props = { params: Promise<{ slug: string }> };

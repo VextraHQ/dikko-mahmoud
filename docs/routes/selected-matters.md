@@ -1,57 +1,60 @@
 # Selected matters
 
-## Draft source checkpoint
+## Approved implementation checkpoint · 3 November 2026
 
-Planning only — 1 November 2026. The user supplied desktop CleanShot references
-at 2.39.44, 2.39.48 and 2.39.53 while discussing the People navigation change.
-These establish a Selected matters listing page, not a People directory and not
-the individual matter detail pages. Claude implementation is not started.
+The user approved the listing/detail wireframe and asked Codex to implement it.
+This supersedes the earlier planning-only Claude handoff boundary for this route.
+The desktop/mobile references supplied on 3 November establish the listing; the
+approved wireframe resolves the detail pages using the existing editorial system.
 
-## Supplied listing composition
+## Presentation and routes
 
-- Shared dark/glass header over a wide office-image hero with navy overlay.
-- Eyebrow "Selected matters", headline "Experience where the stakes are high."
-  and the supplied introduction about disputes/advisory instructions and the
-  firm's role. Approved original imagery remains required; use the existing
-  intentional cover if none is supplied rather than cropping the screenshot.
-- White listing section headed "A closer look at our work." with four cards,
-  two columns on desktop: BPE, CBN, Kano State Government and NNPC/NPDC. Each
-  uses category, organisation, supplied summary/topic and "Read matter" action.
-- The CBN card is navy in the screenshot. Confirm whether this is hover/focus
-  or a fixed design variant before assigning meaning or hard-coding card two.
-  Any approved dark state must maintain readable colours and keyboard parity.
-- Below the cards, retain the source's representative-experience qualification,
-  then reuse the shared enquiry CTA and single layout-owned footer. Do not copy
-  the screenshot's large blank gaps or duplicate site chrome.
-- The "four selected matters" eyebrow must be derived from the displayed records
-  or use a count-neutral label if consent/filtering changes their number.
+- `/experience`: dark shared header, office-image hero on desktop and solid navy
+  on mobile. Heading: “Experience where the stakes are high.” The existing Firm
+  hero image is deliberately reused for this temporary preview, not approved as
+  final media. See [the media replacement gate](../media-review.md).
+- White listing: “A closer look at our work.” Four organisation-led cards, two
+  columns on desktop and one on mobile. Pale resting surfaces become navy on
+  hover and keyboard focus. No permanently selected card, search or pagination.
+- “Explore experience” opens `/experience/[id]`, preserving existing canonical
+  matter IDs. These are short experience pages, not invented case studies.
+- Detail: light header, wrapping breadcrumb, category/title/summary, separate
+  numbered instructions, and a compact desktop sidebar with role and suggested
+  practice links. Mobile stacks the sidebar after the instructions.
+- Reuse enquiry CTA and layout-owned footer. Keep representative-experience
+  qualification; avoid the reference's unnecessary blank space.
 
-## Existing implementation boundaries
+## Content and approval
 
-`routes.experience` currently points to `/experience`; `routes.matter(id)` points
-to `/experience/[id]`. These are registered addresses, but the routes are not yet
-launched. A nav label can read "Selected matters" without changing People routes.
-Reuse canonical matter IDs and sourced copy; a new slug or route rename needs a
-single registry decision rather than independent paths in cards and navigation.
+Source: supplied `Dikko  Mahmoud Profile.pdf`, PDF pages 18–21 (printed 17–20),
+cross-checked when drafting the approved wireframe. BPE opens the listing.
 
-The current alignment keeps Home named matters hidden pending consent. The
-practice-carousel preview exception does not automatically apply to this listing
-or to individual matter pages. Clarify the authorised visual-review treatment and
-retain pending/approved/withheld status; screenshots are not publication consent.
-Do not invent legal outcomes, awards/recoveries, additional clients or approval.
+- BPE: Managing Partner as lead counsel in the $1.37bn UNCITRAL claim, and the
+  firm's separate Enron Power Project advisory/document review instruction.
+- CBN: legal advice on Federal Government revenue under Production Sharing Contracts.
+- Kano State Government: separate Pfizer Trovan negotiation/mediation and Kano
+  Electricity Distribution Company privatisation instructions.
+- NNPC / NPDC: separate OML 12 representation and gas-sector contract novation.
 
-## Missing references and decisions
+Keep role attribution precise. $1.37bn is a **claim value**, never an award,
+recovery or result. No outcomes, dates, team assignments or client logos are added.
+Practice mappings are suggested for review and use canonical practice records.
 
-- Main navigation is resolved: on 1 November the user selected both Our People
-  and Selected matters. The profile/navigation handoff handles that addition;
-  this listing remains a separate checkpoint.
-- No mobile listing or individual matter detail screens were supplied. A "Read
-  matter" button alone is not enough to define a detail template or final copy.
-- No live publication consent is recorded for these four matters. An explicit
-  preview decision is needed before showing pending named cards on this route.
-- Confirm the dark-card interaction/variant and the intended route naming before
-  a decision-complete Claude implementation handoff.
+The user authorised named pending records for this no-index listing/detail visual
+preview. Show a pending-publication note. Withheld/missing approval always stays
+hidden; indexable output remains approved-only. This exception does not restore
+pending matters on Home or change the practice-carousel visibility decision.
 
-Keep this source brief separate from the People/profile specification. The agreed
-workflow is Codex drafts the bounded spec, the user gives it to Claude, then Codex
-reviews the actual implementation against the spec and supplied designs.
+Publication status and linkable IDs belong to a body-free matter manifest. Home
+still consumes its approved-only projection. Detail copy is resolved on the server;
+unknown, hidden or incomplete records return 404, including metadata requests.
+Register listing/details with the shared route/metadata system and sitemap.
+
+## Acceptance
+
+- All four supplied experiences have working detail/back/breadcrumb/practice links.
+- Separate instructions stay distinct; claim qualifier and role attribution remain visible.
+- Consent, manifest/body integrity, unknown/incomplete records and route tones are tested.
+- Review 320–1440px, keyboard focus, reduced-motion CSS and server HTML reading.
+- Format, lint, typecheck, tests and a production build at this route checkpoint.
+- No CMS, providers, deployment, indexing or WebP source conversion in this pass.

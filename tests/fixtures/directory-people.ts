@@ -2,7 +2,7 @@
 // names are obviously fake and must never be rendered on the real site.
 import { seniorityGroups } from "@/content/people";
 import { practiceIndex } from "@/content/practice-index";
-import type { DirectoryPerson } from "@/lib/people-directory";
+import type { DirectoryPerson } from "@/lib/people/directory";
 
 // Roughly a mid-sized firm's shape: few partners, more associates.
 const seniorityMix = [

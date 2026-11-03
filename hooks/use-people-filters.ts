@@ -7,7 +7,7 @@ import {
   filtersToSearch,
   readFilters,
   type DirectoryFilters,
-} from "@/lib/people-directory";
+} from "@/lib/people/directory";
 import { routes } from "@/lib/routes";
 
 // Long enough to skip most keystrokes; Safari also rejects more than about

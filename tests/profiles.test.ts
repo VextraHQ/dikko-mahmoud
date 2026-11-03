@@ -2,24 +2,21 @@ import { describe, expect, it } from "vitest";
 
 import { navigation } from "@/content/navigation";
 import { getPerson, people } from "@/content/people";
-import {
-  availableProfileSlugs,
-  directoryPeople,
-  profileManifest,
-} from "@/content/profile-manifest";
+import { profileManifest } from "@/content/profile-manifest";
+import { profiles as profileBodies } from "@/content/profiles";
 import {
   isCompleteProfile,
-  profileBodies,
   profileSectionIds,
   profileSectionLinks,
   profileSlugs,
   relatedProfiles,
   resolveProfile,
-} from "@/content/profiles";
+} from "@/lib/people/profiles";
+import { availableProfileSlugs, directoryPeople } from "@/lib/people/roster";
 import { headerTone } from "@/lib/navigation";
 import { previewOptions } from "@/lib/preview";
 import { isPublishable } from "@/lib/publication";
-import { isRouteAvailable, launchedRoutes, routes } from "@/lib/routes";
+import { isRouteAvailable, routes } from "@/lib/routes";
 
 const preview = { allowPreview: true };
 const launch = { allowPreview: false };
@@ -143,7 +140,6 @@ describe("profile routes and navigation", () => {
         allowed.includes(person.slug),
       );
     }
-    expect(launchedRoutes).not.toContain(routes.experience);
   });
 
   it("launches the directory exactly when it has someone to list", () => {

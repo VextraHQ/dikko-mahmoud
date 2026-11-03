@@ -4,9 +4,9 @@ import type { ReactNode } from "react";
 
 import { DirectoryView } from "@/components/people/directory-view";
 import { peopleSearchInputId } from "@/components/people/directory-toolbar";
-import type { PeopleDirectoryData } from "@/content/people-directory";
+import type { PeopleDirectoryData } from "@/lib/people/directory-data";
 import { usePeopleFilters } from "@/hooks/use-people-filters";
-import { readFilters } from "@/lib/people-directory";
+import { readFilters } from "@/lib/people/directory";
 
 /** The live directory: the same view, with filters from the URL and toolbar. */
 export function DirectoryBrowser({

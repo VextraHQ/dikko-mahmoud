@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import { ProfileContents } from "@/components/people/profile-contents";
 import { ProfileIntro } from "@/components/people/profile-intro";
 import { ProfileSections } from "@/components/people/profile-sections";
+import { profileCopy as copy } from "@/content/profiles";
 import {
-  profileCopy as copy,
   profileSectionLinks,
   type ResolvedProfile,
-} from "@/content/profiles";
+} from "@/lib/people/profiles";
 
 /**
  * The one profile body shared by the popup and the standalone page, so both

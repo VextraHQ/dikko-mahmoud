@@ -1,6 +1,7 @@
 export { selectedMatters } from "@/content/matter-copy";
 import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import { hasText } from "@/lib/content";
+import { matterStatus } from "@/content/matter-manifest";
 
 export type SelectedMatter = {
   id: string;
@@ -20,7 +21,7 @@ export type SelectedMatter = {
 export const matterRecords: SelectedMatter[] = [
   {
     id: "bureau-public-enterprises",
-    publicationStatus: "pending",
+    publicationStatus: matterStatus("bureau-public-enterprises") ?? "withheld",
     category: "International arbitration",
     headline: "$1.37bn",
     organisation: "Bureau of Public Enterprises",
@@ -30,7 +31,7 @@ export const matterRecords: SelectedMatter[] = [
   },
   {
     id: "central-bank-nigeria",
-    publicationStatus: "pending",
+    publicationStatus: matterStatus("central-bank-nigeria") ?? "withheld",
     category: "Public-sector advisory",
     headline: "Public-sector advisory",
     organisation: "Central Bank of Nigeria",
@@ -41,7 +42,7 @@ export const matterRecords: SelectedMatter[] = [
   },
   {
     id: "kano-state-government",
-    publicationStatus: "pending",
+    publicationStatus: matterStatus("kano-state-government") ?? "withheld",
     category: "Settlement & government advisory",
     headline: "Complex settlements",
     organisation: "Kano State Government",
@@ -52,7 +53,7 @@ export const matterRecords: SelectedMatter[] = [
   },
   {
     id: "nnpc-npdc",
-    publicationStatus: "pending",
+    publicationStatus: matterStatus("nnpc-npdc") ?? "withheld",
     category: "Energy & commercial contracts",
     headline: "Energy & commercial",
     organisation: "NNPC / NPDC",

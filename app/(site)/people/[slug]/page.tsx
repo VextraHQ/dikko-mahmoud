@@ -5,13 +5,13 @@ import { SiteLink } from "@/components/layout/site-link";
 import { ProfileBody } from "@/components/people/profile-body";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { PersonCard } from "@/components/shared/person-card";
+import { profileCopy } from "@/content/profiles";
+import { profileMetadata } from "@/lib/people/profile-metadata";
 import {
-  profileCopy,
   profileSlugs,
   relatedProfiles,
   resolveProfile,
-} from "@/content/profiles";
-import { profileMetadata } from "@/lib/profile-metadata";
+} from "@/lib/people/profiles";
 import { previewOptions } from "@/lib/preview";
 import { routes } from "@/lib/routes";
 

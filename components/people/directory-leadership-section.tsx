@@ -3,7 +3,7 @@ import { SiteLink } from "@/components/layout/site-link";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { peopleDirectory as copy } from "@/content/people";
-import type { peopleDirectoryLeadership } from "@/content/people-directory";
+import type { peopleDirectoryLeadership } from "@/lib/people/directory-data";
 import { routes } from "@/lib/routes";
 
 /** Server-rendered feature, passed through the browser directory as a slot. */

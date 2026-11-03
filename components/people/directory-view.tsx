@@ -5,14 +5,14 @@ import { EnquiryLink } from "@/components/shared/enquiry-button";
 import { PersonCard } from "@/components/shared/person-card";
 import { Button } from "@/components/ui/button";
 import { peopleDirectory as copy } from "@/content/people";
-import type { PeopleDirectoryData } from "@/content/people-directory";
+import type { PeopleDirectoryData } from "@/lib/people/directory-data";
 import {
   directoryPresentation,
   groupPeople,
   showDirectoryToolbar,
   type DirectoryFilters,
   type DirectoryPerson,
-} from "@/lib/people-directory";
+} from "@/lib/people/directory";
 import { cn } from "@/lib/utils";
 
 /**

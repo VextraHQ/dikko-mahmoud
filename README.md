@@ -1,7 +1,7 @@
 # Dikko & Mahmoud Website
 
 The site is a no-index local presentation preview. Home, The Firm, the nine
-Practice area routes, People directory/profiles, SME retainer, Privacy Policy and Terms of Use are implemented
+Practice area routes, People directory/profiles, Selected matters listing/details, SME retainer, Privacy Policy and Terms of Use are implemented
 for review. The client-feedback corrections are specified in
 [client alignment](docs/client-alignment.md); the proposed scope inclusions are in
 [the draft addendum](docs/scope-addendum.md). The original proposal is unchanged.
@@ -13,6 +13,11 @@ only approved records; all currently stored client/matter records await consent,
 so those Home sections and their spacing are omitted. The user restored pending
 practice-detail experience for no-index design review with a preview note; its
 publication status remains pending and it is excluded when indexing is enabled.
+
+Selected matters now has four sourced organisation-led experience previews. Its
+explicit no-index exception shows pending instructions with an approval note;
+Home remains approved-only. Replace temporary images before WebP conversion
+(see `docs/media-review.md`).
 
 The Firm retains Journey and the agreed preview presentation. SME has Advisory
 and Secretarial tracks with explicit missing-copy notices. Legal pages share an
@@ -73,24 +78,35 @@ pnpm typecheck  # Generate Next.js types and run TypeScript checks
 pnpm test       # Run Vitest unit tests (pnpm test:watch while working)
 ```
 
-## Project structure
+## Where things live
 
 ```text
-app/          Routes, layouts, metadata, theme entry and focused styles/ files
-components/   Shared and route-specific React presentation
-content/      Navigation and homepage presentation copy
-hooks/        Reusable client hooks (use-*.ts): browser APIs and stateful rules
-lib/          Helpers, route registry, metadata builders, service boundaries
-tests/        Vitest unit tests for lib/ and content/ (see docs/testing.md)
-types/        Shared TypeScript contracts
-public/       Static assets
-sanity/       Reserved CMS boundary; Sanity is not configured
-docs/         Architecture, workflow, roadmap, and implementation history
+app/                    Routes, layouts, metadata, global styles
+  (site)/               Every public page; @profile is the profile popup
+components/
+  <page>/               Sections for one page (home, firm, people, practices…)
+  shared/               Pieces used by several pages (PersonCard, EmptyState…)
+  layout/               Header, footer, SiteLink
+  ui/                   shadcn-style primitives (Button, Select, Sheet…)
+content/                Copy, records and ready-to-render lists, by domain
+hooks/                  Browser behaviour, one use-*.ts per file
+lib/                    Pure rules and helpers
+  people/               People rules: roster, profiles, directory, links
+  routes.ts, metadata.ts, publication.ts, preview.ts …
+tests/                  Vitest tests for lib/ and content/ (fixtures/ for fake data)
+public/                 Static assets
+sanity/                 Reserved CMS boundary; Sanity is not configured
+docs/                   Specs, roadmap and the implementation log
+  routes/               One spec per page
+  archive/              Older log months and superseded guides
+.claude/rules/          Short coding rules by area (read before editing)
 ```
 
-The `@/*` alias resolves from the repository root. Keep routes thin, prefer
-Server Components by default, and add folders only when an approved feature
-needs a clear owner.
+A request flows one way: a page in `app/` asks `lib/` or `content/` for
+ready data, then hands it to `components/`. Components draw; hooks handle
+browser behaviour; `lib/` decides; `content/` stores. The `@/*` alias resolves
+from the repository root. See `.claude/rules/structure.md` for the import
+rules and how to add a page, section, hook or rule.
 
 ## Current boundary
 

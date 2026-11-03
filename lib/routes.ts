@@ -1,9 +1,7 @@
 import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
-import {
-  availableProfileSlugs,
-  directoryPeople,
-} from "@/content/profile-manifest";
+import { availableProfileSlugs, directoryPeople } from "@/lib/people/roster";
 import { previewOptions } from "@/lib/preview";
+import { availableMatterIds } from "@/content/matter-manifest";
 
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
@@ -45,6 +43,8 @@ export const launchedRoutes: readonly string[] = [
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
   ...(directoryPeople(previewOptions).length ? [routes.people] : []),
   ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),
+  ...(availableMatterIds(previewOptions).length ? [routes.experience] : []),
+  ...availableMatterIds(previewOptions).map((id) => routes.matter(id)),
 ];
 
 export function isRouteAvailable(href: string) {

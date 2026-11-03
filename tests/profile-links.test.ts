@@ -6,7 +6,7 @@ import {
   normalizeProfileLinks,
   profileLinkHref,
   profileLinkLabel,
-} from "@/lib/profile-links";
+} from "@/lib/people/profile-links";
 import { enquiryHref, isRouteAvailable, routes } from "@/lib/routes";
 
 describe("profile links", () => {

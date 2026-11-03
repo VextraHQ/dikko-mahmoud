@@ -7,8 +7,8 @@ import { peopleDirectory as copy } from "@/content/people";
 import {
   peopleDirectoryLeadership,
   type PeopleDirectoryData,
-} from "@/content/people-directory";
-import { emptyFilters } from "@/lib/people-directory";
+} from "@/lib/people/directory-data";
+import { emptyFilters } from "@/lib/people/directory";
 
 /**
  * Compact navy introduction followed by an editorial feature and directory.

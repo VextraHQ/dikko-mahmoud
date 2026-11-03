@@ -5,10 +5,10 @@ import {
   type Person,
 } from "@/content/people";
 import { practiceIndex } from "@/content/practice-index";
-import { directoryPeople } from "@/content/profile-manifest";
-import { resolveProfile } from "@/content/profiles";
 import { hasText } from "@/lib/content";
-import type { DirectoryPerson } from "@/lib/people-directory";
+import type { DirectoryPerson } from "@/lib/people/directory";
+import { resolveProfile } from "@/lib/people/profiles";
+import { directoryPeople } from "@/lib/people/roster";
 import type { PreviewOptions } from "@/lib/publication";
 
 /** Card fields plus confirmed practice titles; unknown practice IDs drop. */

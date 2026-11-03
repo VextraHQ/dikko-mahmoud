@@ -1,5 +1,14 @@
 # Architecture
 
+## Selected matters route checkpoint · 3 November
+
+`content/matter-manifest.ts` owns body-free canonical IDs and publication status
+for route registration. Home matter metadata derives its status from this manifest
+and remains approved-only. `content/experience.ts` resolves sourced detail bodies
+on the server under the explicit no-index preview rule, shared by listing, detail
+and metadata. Hidden/unknown/incomplete records return 404. No pending bodies are
+imported into shared navigation. See `routes/selected-matters.md`.
+
 ## Client alignment override
 
 [client-alignment.md](client-alignment.md) is the active checkpoint. Home uses the
@@ -21,16 +30,18 @@ and mobile link navigation, with no tab state or Motion. Pending bodies/dates ar
 suppressed. SME uses its own content and server section, linked alongside practices.
 Print-only legal rules stay scoped in surfaces.css. Header tone includes SME/legal.
 
-Person profiles: `content/profile-manifest.ts` is the public ID/status list used
-by `launchedRoutes`, and its `directoryPeople(options)` decides who `/people`
-lists (and whether it launches); `content/people-directory.ts` turns that into
-slim browser records and filter options, `lib/people-directory.ts` owns the
-search/group/URL rules and `hooks/use-people-filters.ts` the URL syncing; `content/profiles.ts` holds server-only bodies and the one
-`resolveProfile(slug, previewOptions)` selection shared by the intercepted
-`@profile` popup and the standalone `/people/[slug]` page. `lib/preview.ts` owns
-the `allowPreview` switch (no-index only). `lib/profile-links.ts` owns the
-validated per-person `links[]` model and `lib/profile-metadata.ts` the metadata
-shared by popup and page; `components/shared/enquiry-button.tsx` owns the one
+Person profiles: `content/` holds the People records and copy
+(`people.ts`), the public ID/status list (`profile-manifest.ts`) and the
+server-only biography bodies (`profiles.ts`). The rules live in `lib/people/`:
+`roster.ts` decides who may be listed and linked (client-safe; used by
+`launchedRoutes`), `profiles.ts` is the server-only `resolveProfile(slug,
+previewOptions)` selection shared by the intercepted `@profile` popup and the
+standalone `/people/[slug]` page, `directory-data.ts` builds the slim `/people`
+records and filter options on the server, `directory.ts` owns the client-safe
+search/group/URL rules, `profile-links.ts` the validated per-person `links[]`
+model and `profile-metadata.ts` the metadata shared by popup and page.
+`hooks/use-people-filters.ts` owns the URL syncing and `lib/preview.ts` the
+`allowPreview` switch (no-index only). `components/shared/enquiry-button.tsx` owns the one
 enquiry destination (mailto until `/contact` launches): `EnquiryLink` for text
 links and `EnquiryButton` for the arrow button. people-review.ts keeps internal
 source notes, never rendered. Insights author IDs resolve through canonical people;
@@ -169,7 +180,7 @@ Carousel) keep their own internal state, as generated.
   globals.css). All render `StatusPage`: a centred message and actions on the
   navy band with a faint serif watermark ("404", or the firm initials); errors go through the client
   `ErrorView`, which calls Next 16's `retry()` and reports via `useReportError`.
-- Gaps: `/experience` and `/insights/:id` paths are provisional until those
+- Gaps: `/insights/:id` paths are provisional until those
   routes are specified. External social-platform recognition remains unverified.
 
 ## Styling ownership

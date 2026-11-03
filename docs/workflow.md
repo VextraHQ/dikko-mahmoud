@@ -80,3 +80,6 @@ After meaningful completed work, append a dated entry to
 `implementation-log.md` containing the outcome, files or area changed,
 verification actually performed, and remaining gates. Do not log exploration
 or describe unverified work as complete.
+
+The log keeps the current month only. At the start of a new month, move the
+previous month's entries to `archive/implementation-log-YYYY-MM.md`.

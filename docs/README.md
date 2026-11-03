@@ -5,7 +5,7 @@ small so a developer or agent can resume work without relying on chat history.
 
 ## Reading order
 
-1. `../AGENTS.md`
+1. `../AGENTS.md` and the matching `../.claude/rules/` file
 2. `roadmap.md`
 3. `client-alignment.md`, then `architecture.md`
 4. `workflow.md`
@@ -13,7 +13,7 @@ small so a developer or agent can resume work without relying on chat history.
    (`routes/practice-areas.md` for the active Practice areas checkpoint)
 6. `forms.md` when composing inputs, validation and field messages
 7. `testing.md` when adding helpers, content rules or tests
-8. the latest `implementation-log.md` entry
+8. the latest `implementation-log.md` entry (older months are in `archive/`)
 
 ## Ownership
 
@@ -29,14 +29,16 @@ small so a developer or agent can resume work without relying on chat history.
 | `routes/home.md`                        | Figma references, section map, content gaps, and build order             |
 | `routes/the-firm.md`                    | Firm implementation, interactions, reuse, source gaps and acceptance     |
 | `routes/people.md`                      | Editorial directory, profile-popup/page and eight-item navigation spec   |
-| `routes/selected-matters.md`            | Draft listing reference; mobile/detail/consent decisions outstanding     |
+| `routes/selected-matters.md`            | Approved listing/details, source copy, preview consent and media gate    |
 | `routes/practice-areas.md`              | Practice hub/menu/detail implementation, sources and remaining content   |
 | `handoffs/people-profiles-next-chat.md` | Executable Claude prompt for the bounded profile/navigation slice        |
 | `handoffs/the-firm-next-chat.md`        | Historical scoped Firm kickoff prompt                                    |
 | `forms.md`                              | Form primitives, accessible composition and validation ownership         |
 | `testing.md`                            | Vitest setup, what is and isn't tested, test conventions                 |
+| `media-review.md`                       | Replace temporary images before WebP conversion                          |
 | `social-sharing.md`                     | Social artwork exports, metadata wiring and share-preview verification   |
-| `implementation-log.md`                 | Append-only factual implementation history                               |
+| `implementation-log.md`                 | Append-only factual implementation history (current month)               |
+| `archive/`                              | Older log months and the previous long agent guide                       |
 
 Code is the source of truth for implemented behavior. Documentation owns
 approved intent and current status. Do not document planned work as complete,

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { firmBrand } from "@/content/firm";
-import { resolveProfile, type ResolvedProfile } from "@/content/profiles";
+import { resolveProfile, type ResolvedProfile } from "@/lib/people/profiles";
 import { createPageMetadata, getSiteUrl, pageTitle } from "@/lib/metadata";
 import { previewOptions } from "@/lib/preview";
 import { routes } from "@/lib/routes";

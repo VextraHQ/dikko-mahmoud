@@ -261,7 +261,7 @@ popup (cards are plain links, so no-JS visits load the standalone page).
 ### Review fixes and popup polish (Claude, 2 November 2026)
 
 - **Popup metadata.** Both profile routes export `generateMetadata` through
-  `profileMetadata` in `lib/profile-metadata.ts`. Next 16 sends intercepted-route
+  `profileMetadata` in `lib/people/profile-metadata.ts`. Next 16 sends intercepted-route
   metadata in the response but does not apply it on soft navigation (it is
   attached to the unchanged `children` segment), so the dialog also syncs the
   same title, description and canonical (`profileDocumentMeta`) with
@@ -271,7 +271,7 @@ popup (cards are plain links, so no-JS visits load the standalone page).
   a mailto to the firm until `/contact` joins `launchedRoutes`, then a SiteLink.
   Profiles show it in the header row and as the contact panel fallback when no
   personal email is supplied.
-- **Per-person links (Sanity-ready).** `lib/profile-links.ts` defines
+- **Per-person links (Sanity-ready).** `lib/people/profile-links.ts` defines
   `links: { platform, value, label? }[]` with one platform list (`linkedin`,
   `email`, `phone`, `website`) for the future schema `options.list` and for
   defensive filtering of fetched data. Values are validated (http(s) URLs only,
@@ -377,10 +377,10 @@ dropped (results update as you type, and the whole card is the link).
   beyond Partners await the firm's roster). `Person.practiceIds` holds
   confirmed practice slugs only; none are confirmed yet, so no card shows a
   practice and the practice filter is omitted.
-  `content/people-directory.ts` builds the page data on the server: slim
+  `lib/people/directory-data.ts` builds the page data on the server: slim
   `DirectoryPerson` records (card fields plus practice titles, never
   biographies) and only the role/practice options someone actually holds.
-- **Rules** (`lib/people-directory.ts`, tested in
+- **Rules** (`lib/people/directory.ts`, tested in
   `tests/people-directory.test.ts`): accent/case/punctuation-insensitive search
   where every word must match name, role or practice; role and practice
   filters; seniority grouping in group then roster order; URL read/write with

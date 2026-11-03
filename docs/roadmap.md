@@ -16,7 +16,7 @@ SME retainer, Privacy Policy and Terms of Use previews are implemented. SME trac
 await supplied copy; legal bodies and approved dates are absent and explicitly
 marked. These are working route presentations, not publication approval.
 Article-author references and brochure biography drafts are prepared; no author or
-unconfirmed profile copy is invented. People, Insights, Careers and Contact routes
+unconfirmed profile copy is invented. Insights, Careers and Contact routes
 remain separate milestones; their client requirements are listed in
 `client-alignment.md` → "Requirements for pages not yet built". The scope addendum includes nine practices, SME and
 Terms at the existing fee, but remains a draft awaiting client acknowledgement.
@@ -26,7 +26,7 @@ permissions, SME/legal text and missing contact details remain firm review gates
 Sanity, other providers, deployment and the later Claude workflow remain outside
 this checkpoint. User-added Analytics, hero autoplay and Firm Journey are preserved.
 
-## Next delegated implementation slice
+## People checkpoint history
 
 On 1 November the user confirmed profile popups plus shareable standalone pages,
 and both Our People and Selected matters in main navigation. The approved bounded
@@ -43,6 +43,16 @@ local review; the Selected matters listing/detail pages remain separate.
 On 3 November the user approved the editorial directory wireframe: compact navy
 introduction, one managing-partner feature and the searchable roster. The sample
 roster removal is preserved; the four current partners remain the only records.
+
+## Selected matters checkpoint · 3 November
+
+The user approved the organisation-led listing/detail wireframe and authorised
+implementation at `/experience` and `/experience/[id]`. See
+[routes/selected-matters.md](routes/selected-matters.md). Pending named experience
+may render with a review note only while no-index; Home remains approved-only.
+The Firm hero is temporarily reused. **Replace temporary images before WebP
+conversion** using [media-review.md](media-review.md). No conversion or deployment
+is part of this checkpoint.
 
 ## Status
 
@@ -69,6 +79,7 @@ roster removal is preserved; the four current partners remain the only records.
 | 5b. Practice areas                          | Review   | Hub/menu and nine detail previews; full detail content supplied only for Corporate |
 | 5c. Client alignment and SME/legal previews | Review   | Shared catalogue, consent controls, copy corrections and three route previews      |
 | 5d. People directory and profiles           | Review   | Editorial directory, four profiles, shared popup/page and data-driven filters      |
+| 5e. Selected matters listing and details    | Review   | Four sourced experiences, separate instructions, consent-gated static routes       |
 | 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                              |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                     |
 

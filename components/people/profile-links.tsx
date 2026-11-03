@@ -7,7 +7,7 @@ import {
   profileLinkLabel,
   type ProfileLink,
   type ProfileLinkPlatform,
-} from "@/lib/profile-links";
+} from "@/lib/people/profile-links";
 import { cn } from "@/lib/utils";
 
 const icons = {

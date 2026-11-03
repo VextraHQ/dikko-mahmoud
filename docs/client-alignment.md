@@ -1,7 +1,17 @@
 # Client feedback alignment
 
 Implementation status: implemented for local review. Verification is recorded in
-[implementation-log.md](implementation-log.md); content and consent gates remain.
+[the October log archive](archive/implementation-log-2026-10.md); content and consent gates remain.
+
+## Selected matters visual preview · 3 November 2026
+
+The user approved and requested implementation of the listing/detail wireframe.
+`/experience` and its four organisation-led detail pages may show sourced pending
+records while no-index, with a publication-approval note. Withheld records remain
+hidden and indexable output is approved-only. This does not restore pending Home
+matters or change the later practice-carousel hiding decision. See
+[routes/selected-matters.md](routes/selected-matters.md) for source and scope.
+Replace temporary images before WebP conversion: [media-review.md](media-review.md).
 
 ## Practice experience visual-review exception
 

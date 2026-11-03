@@ -4,7 +4,8 @@ import { ProfileLinks } from "@/components/people/profile-links";
 import { ProfilePortrait } from "@/components/people/profile-portrait";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { profileCopy as copy, type ResolvedProfile } from "@/content/profiles";
+import { profileCopy as copy } from "@/content/profiles";
+import type { ResolvedProfile } from "@/lib/people/profiles";
 import { cn } from "@/lib/utils";
 
 /**

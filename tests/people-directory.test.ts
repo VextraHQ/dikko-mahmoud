@@ -5,7 +5,7 @@ import {
   peopleDirectoryData,
   peopleDirectoryLeadership,
   toDirectoryPerson,
-} from "@/content/people-directory";
+} from "@/lib/people/directory-data";
 import {
   emptyFilters,
   directoryPresentation,
@@ -16,7 +16,7 @@ import {
   normalizeText,
   readFilters,
   showDirectoryToolbar,
-} from "@/lib/people-directory";
+} from "@/lib/people/directory";
 import { makeDirectoryPeople } from "./fixtures/directory-people";
 
 const preview = { allowPreview: true };
