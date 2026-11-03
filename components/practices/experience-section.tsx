@@ -7,6 +7,7 @@ import {
 } from "@/content/practice-catalogue";
 import { formatIndex } from "@/lib/format";
 type Case = NonNullable<PracticeDetail["experience"]>[number];
+
 function CaseCard({ item, index }: { item: Case; index: number }) {
   return (
     <article className="border-border flex h-full flex-col rounded-xl border bg-slate-50 p-6 sm:p-8">
@@ -43,6 +44,7 @@ function CaseCard({ item, index }: { item: Case; index: number }) {
     </article>
   );
 }
+
 export function ExperienceSection({
   items,
   preview = false,

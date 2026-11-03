@@ -1,13 +1,4 @@
-import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { practiceCopy } from "@/content/practice-index";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
@@ -15,6 +6,7 @@ import { smeRetainer as copy } from "@/content/sme";
 import { contact } from "@/content/contact";
 import { routes } from "@/lib/routes";
 import { formatIndex } from "@/lib/format";
+import { PageTrail } from "@/components/shared/page-trail";
 
 export function RetainerSection() {
   return (
@@ -23,27 +15,14 @@ export function RetainerSection() {
         aria-labelledby="sme-heading"
         className="mx-auto max-w-360 px-4 pt-8 pb-12 sm:px-8 lg:pt-36 lg:pb-20 xl:px-20"
       >
-        <Breadcrumb className="mb-8">
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.home}>{practiceCopy.homeLabel}</SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.practiceAreas}>
-                  {practiceCopy.hubLabel}
-                </SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{copy.eyebrow}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+        <PageTrail
+          items={[
+            { label: practiceCopy.homeLabel, href: routes.home },
+            { label: practiceCopy.hubLabel, href: routes.practiceAreas },
+            { label: copy.eyebrow },
+          ]}
+          className="mb-8"
+        />
         <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end lg:gap-20">
           <div>
             <Eyebrow>{copy.eyebrow}</Eyebrow>

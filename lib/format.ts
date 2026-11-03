@@ -17,3 +17,9 @@ export function initialsFrom(name: string) {
     .map((part) => part[0])
     .join("");
 }
+
+/** A readable list of names: "A", "A & B", "A, B & C". */
+export function formatNames(names: readonly string[]) {
+  if (names.length <= 2) return names.join(" & ");
+  return `${names.slice(0, -1).join(", ")} & ${names[names.length - 1]}`;
+}

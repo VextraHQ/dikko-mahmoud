@@ -2,6 +2,7 @@
 // browser, how search and filters match, and how filters map to the URL.
 // No React here, so every rule is unit-tested in tests/people-directory.test.ts.
 import type { Person, SeniorityId } from "@/content/people";
+import { matchesSearch } from "@/lib/search";
 
 /** The slim record sent to the browser: card fields only, no biographies. */
 export type DirectoryPerson = Pick<
@@ -35,20 +36,6 @@ export function hasActiveFilters(filters: DirectoryFilters) {
 }
 
 /**
- * Text ready for matching: lower case, accents removed, "A.B." read as "ab",
- * other punctuation (such as "&") read as a space.
- */
-export function normalizeText(text: string) {
-  return text
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .toLowerCase()
-    .replace(/[.'’]/g, "")
-    .replace(/[^\p{L}\p{N}]+/gu, " ")
-    .trim();
-}
-
-/**
  * People matching every active filter. Each search word must appear somewhere
  * in the person's name, role or practice titles, in any order.
  */
@@ -56,7 +43,6 @@ export function filterPeople(
   people: readonly DirectoryPerson[],
   filters: DirectoryFilters,
 ) {
-  const words = normalizeText(filters.query).split(" ").filter(Boolean);
   return people.filter((person) => {
     if (filters.role && person.seniority !== filters.role) return false;
     if (
@@ -65,12 +51,12 @@ export function filterPeople(
     ) {
       return false;
     }
-    const text = normalizeText(
+    return matchesSearch(
       [person.name, person.role, ...person.practices.map((p) => p.title)].join(
         " ",
       ),
+      filters.query,
     );
-    return words.every((word) => text.includes(word));
   });
 }
 

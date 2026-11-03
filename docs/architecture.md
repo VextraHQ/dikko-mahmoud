@@ -53,7 +53,7 @@ on the server using the same eligible roster and `resolveProfile` approval rule.
 profile bodies never join the slim card-data collection. `directoryPresentation`
 features a person once at rest, then searches the full eligible roster for active
 filters. Directory chrome is navy; standalone profile chrome remains light.
-Future article routes and CMS normalization remain separate checkpoints.
+Insights routes are implemented below; live CMS normalization remains a separate checkpoint.
 
 ## Original presentation boundary
 
@@ -181,8 +181,10 @@ Carousel) keep their own internal state, as generated.
   globals.css). All render `StatusPage`: a centred message and actions on the
   navy band with a faint serif watermark ("404", or the firm initials); errors go through the client
   `ErrorView`, which calls Next 16's `retry()` and reports via `useReportError`.
-- Gaps: `/insights/:id` paths are provisional until those
-  routes are specified. External social-platform recognition remains unverified.
+- Insights registers its strict slug route family without putting all article
+  bodies/IDs in client navigation. Its server resolver owns eligibility and 404;
+  the sitemap uses a narrow server article projection with authored dates.
+  External social-platform recognition remains unverified.
 
 ## Styling ownership
 
@@ -258,26 +260,35 @@ necessarily the advisory client. Feature cards reserve one stable grid cell;
 inactive content is inert and hidden from accessibility. Stacked-layout
 activation focuses the named preview and scrolls it clear of the sticky header.
 
-People and Insights are Server Component sections with small preparation-notice
-triggers for unavailable destinations. People caps the ordered preview at four;
-it is not the full directory. Testimonial body/identity markup is server-rendered
-through the existing carousel items; the local client wrapper owns only Embla
-options and persistent controls/status. Inactive slides are inert/hidden, slide
-heights stretch to the tallest record, and fewer than two items hide controls.
-Slides establish their own positioning context so offscreen sr-only legends
-remain inside the clipped viewport before hydration and without JavaScript.
-An empty testimonial collection omits the section. Missing media uses explicit
-slots; approved names without testimonial images use derived initials.
+People and Insights are Server Component Home sections. People caps the ordered
+Home preview at four. Testimonials are removed under client alignment; publication
+consent for client/matter records remains independent of article demo visibility.
 
 `content/people.ts` owns canonical IDs, slugs, names, roles, optional portraits,
 founder biography/milestones and ID-based Home/advisory selections. Neutral group
 slots stay separate from real records. PersonCard links resolve through
 `launchedRoutes` (profile manifest + preview rule) with `scroll={false}`. Firm uses a small
-crop/role override for its founder composition. `insights.ts` owns its
-editorial preview records. Insights excludes the feature ID and duplicate support IDs, capped at
-three. Future Sanity selection/publication filtering belongs in a normalization
-adapter rather than presentation components; no CMS client or speculative fetch
-layer has been introduced.
+crop/role override for its founder composition.
+
+Insights data lives in `content/insight-articles.ts`: metadata/body fixtures,
+generic demo contributors, the feature pointer and four Home IDs. `insights.ts`
+keeps Home section copy and legacy canonical-author lookup; `insight-copy.ts`
+owns listing/reader/FAQ copy. `lib/insights/repository.ts` resolves canonical
+practices and real People authors, validates eligibility, and provides paged slim
+cards/full detail responses. Invalid records are excluded with diagnostics;
+unknown blocks cannot silently discard prose. Demo contributors resolve only for
+explicit demo records, which disappear when indexing is enabled.
+
+`types/insights.ts` defines the portable contract. Portable Text React renders
+keyed standard blocks and explicit takeaway/table/image blocks; links/citations
+are validated. `lib/insights/article.ts` derives plaintext, reading time, headings,
+image position and safe links. Search/filter/pagination runs server-side;
+`use-insight-filters` owns only URL/draft navigation. `ReadingExperience` receives
+server-rendered prose as children and slim contents/practice data. One hook owns
+body-scoped progress and active contents; sharing reuses Sonner and `useCopyLink`.
+Home selects its four cards through this same repository, preserving its layout
+and existing destinations. Sanity must later replace the data adapter, not the
+presentation or article body format. See `routes/insights.md`.
 
 ## FAQ, enquiry CTA and footer
 
@@ -366,6 +377,8 @@ These are local primitives, not an active enquiry form or submission service.
 `docs/forms.md` owns composition, ARIA wiring and validation ownership. Native
 controls/Field remain server-compatible; Radix and React Hook Form own narrow
 client boundaries. No schema/resolver package was added.
+`@portabletext/react` and `@portabletext/types` own rich article rendering and
+typed portable blocks; there is no active Sanity SDK or schema deployment.
 Portrait cards retain Next Image rather than adopting Avatar.
 The responsive practice explorer remains a dedicated master/detail composition,
 with its approved desktop/mobile selection contract.

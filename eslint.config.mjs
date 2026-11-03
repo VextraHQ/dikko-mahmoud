@@ -30,6 +30,17 @@ const eslintConfig = defineConfig([
     rules: { "no-console": "off" },
   },
   eslintConfigPrettier,
+  {
+    // A blank line around every function and export keeps files easy to scan.
+    // Prettier leaves blank lines alone, so ESLint adds them (`eslint --fix`).
+    rules: {
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "*", next: ["function", "export"] },
+        { blankLine: "always", prev: ["function", "export"], next: "*" },
+      ],
+    },
+  },
   globalIgnores([
     ".next/**",
     "out/**",

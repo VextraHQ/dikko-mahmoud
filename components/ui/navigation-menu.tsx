@@ -8,21 +8,25 @@ import { cn } from "@/lib/utils";
 export function NavigationMenu(props: ComponentProps<typeof Primitive.Root>) {
   return <Primitive.Root data-slot="navigation-menu" {...props} />;
 }
+
 export function NavigationMenuList(
   props: ComponentProps<typeof Primitive.List>,
 ) {
   return <Primitive.List data-slot="navigation-menu-list" {...props} />;
 }
+
 export function NavigationMenuItem(
   props: ComponentProps<typeof Primitive.Item>,
 ) {
   return <Primitive.Item data-slot="navigation-menu-item" {...props} />;
 }
+
 export function NavigationMenuTrigger(
   props: ComponentProps<typeof Primitive.Trigger>,
 ) {
   return <Primitive.Trigger data-slot="navigation-menu-trigger" {...props} />;
 }
+
 export function NavigationMenuContent({
   className,
   ...props
@@ -38,6 +42,7 @@ export function NavigationMenuContent({
     />
   );
 }
+
 export function NavigationMenuLink(
   props: ComponentProps<typeof Primitive.Link>,
 ) {

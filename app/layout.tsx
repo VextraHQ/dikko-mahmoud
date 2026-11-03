@@ -12,11 +12,7 @@ export const metadata: Metadata = createSiteMetadata();
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${fontVariables} antialiased motion-safe:scroll-smooth motion-reduce:scroll-auto`}
-    >
+    <html lang="en" className={`${fontVariables} antialiased`}>
       <body className="bg-background text-foreground font-sans">
         {children}
         <Toaster />

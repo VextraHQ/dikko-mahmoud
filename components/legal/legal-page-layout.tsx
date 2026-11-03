@@ -1,14 +1,6 @@
 import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import {
   legalDocuments,
   legalCopy as copy,
   legalPresentation,
@@ -16,6 +8,7 @@ import {
 } from "@/content/legal";
 import { routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
+import { PageTrail } from "@/components/shared/page-trail";
 
 function DocumentLinks({
   current,
@@ -47,6 +40,7 @@ function DocumentLinks({
     </nav>
   );
 }
+
 export function LegalPageLayout({ document }: { document: LegalDocument }) {
   const { sections, updatedAt } = legalPresentation(document);
   return (
@@ -56,19 +50,13 @@ export function LegalPageLayout({ document }: { document: LegalDocument }) {
       </div>
       <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-16 print:block">
         <article className="max-w-3xl min-w-0 print:max-w-none">
-          <Breadcrumb className="mb-8 print:hidden">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <SiteLink href={routes.home}>{copy.homeLabel}</SiteLink>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{document.title}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <PageTrail
+            items={[
+              { label: copy.homeLabel, href: routes.home },
+              { label: document.title },
+            ]}
+            className="mb-8 print:hidden"
+          />
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h1 className="mt-6 font-serif text-4xl/11 sm:text-6xl/[1.08] print:text-3xl">
             {document.title}

@@ -40,9 +40,19 @@ export function useRevealOnScroll<T extends HTMLElement>() {
       for (const item of items) item.dataset.revealState = "complete";
     };
     motion.addEventListener("change", finish);
+    // Once an item has faded in, mark it done. Otherwise React moving it
+    // (for example when a filter reorders a list) would replay the fade.
+    const root = rootRef.current;
+    const settle = (event: AnimationEvent) => {
+      const item = event.target as HTMLElement;
+      if (item.dataset.revealState === "visible")
+        item.dataset.revealState = "complete";
+    };
+    root?.addEventListener("animationend", settle);
     return () => {
       observer.disconnect();
       motion.removeEventListener("change", finish);
+      root?.removeEventListener("animationend", settle);
       for (const item of items) delete item.dataset.revealState;
     };
   }, []);

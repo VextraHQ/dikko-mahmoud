@@ -3,6 +3,85 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-03 — Shared back link and contents list
+
+- New `BackLink` (`components/shared/back-link.tsx`) replaces the visible
+  breadcrumb on Insights articles, practice areas ("All practice areas /
+  category", category links to the filtered catalogue), selected matters, SME
+  and the legal pages. The duplicate category eyebrow above practice and
+  matter titles moved into that line. `components/ui/breadcrumb.tsx` is now
+  unused but kept as a primitive.
+- New `ContentsList` and `PageContents` (`components/shared/`): the article
+  contents and the practice "In this practice" card share one list with a
+  left rule and an active-section marker that follows scrolling.
+- Passed format:check, lint, typecheck, 153 Vitest tests and production build.
+
+## 2026-11-03 — Insights: practice strip, compact cards, home heading
+
+- Practice area pages show "Latest on <practice>" (`components/practices/insights-section.tsx`)
+  with up to three newest tagged articles from `getPracticeInsights`
+  (`lib/insights/repository.ts`) and a link to the filtered archive. Hidden
+  when a practice has no articles.
+- New `CompactArticleCard`; `ArchiveCard` shows it on phones in the archive
+  and related list (nine items: ~1,200px instead of ~4,700px), full cards from
+  `sm` up.
+- Article pages replace the visible breadcrumb with "← All insights / category"
+  (category links to the filtered archive). BreadcrumbList structured data is
+  unchanged.
+- Home insights heading (user-approved change to the held Home): eyebrow
+  "Legal Insights Series", heading reuses the Insights hero lines.
+- Phone article prose spacing tightened; temporary preview types removed.
+- Passed format:check, lint, typecheck, 153 Vitest tests and production build.
+
+## 2026-11-03 — Insights follow-up: featured once, calmer filters
+
+- The featured article now always sits in the Insights hero and is left out of
+  the unfiltered archive, so it never shows twice (26 archive items, 3 pages);
+  search, type or practice filters can still find it. Removed
+  `defaultInsightView`; filters no longer jump the page when the hero changed.
+- Finished reveals are marked complete on `animationend`
+  (`useRevealOnScroll`), so cards no longer replay their fade-in when a filter
+  reorders the list.
+- Cards lost the hover shadow and lift (border and image zoom remain). Type
+  badges are solid white with a hairline ring for any photo.
+- More than five publication types switch the pill row to a dropdown/sheet.
+- Fixed `useArticleShare` edits: copy/share buttons pass the URL explicitly,
+  and a failed native share falls back to copying again (an always-false
+  condition had disabled that).
+- ESLint now requires a blank line around functions and exports
+  (`padding-line-between-statements`); `eslint --fix` applied 115 fixes.
+- Passed format:check, lint, typecheck, 152 Vitest tests and production build.
+
+## 2026-11-03 — Insights UX polish and content model
+
+- Fixed Back losing scroll position site-wide: removed the global smooth
+  scroll from `app/layout.tsx`. In-page contents links now use `SectionLink`
+  (`lib/scroll.ts`), which scrolls smoothly per click, respects reduced
+  motion and replaces rather than pushes the hash. Used on article, practice
+  and profile contents. `useActiveSection` now holds a clicked entry until the
+  scroll settles; the article hook reuses it. Back to top goes to the page top.
+- Added a light, noindex article 404 (`app/(site)/insights/[id]/not-found.tsx`)
+  with latest insights, so the light header logo stays legible.
+- Toolbar now matches People: underlined search, practice menu/sheet, type
+  pills, compact sort, aligned count and Clear filters. New shared
+  `FilterSelect` (also used by People) renders menu and sheet together and
+  lets CSS choose, removing the refresh flash from the native-first swap.
+- Pagination uses a shadcn-style `components/ui/pagination.tsx` via SiteLink.
+- Cards: type badge with icon, clamped excerpt, byline/date/read-time row,
+  arrow that fills on hover, subtle lift and image zoom, `RevealGroup` entrance.
+  Featured badge, author row and share hover states on hero/article.
+- Article bodies: `@tailwindcss/typography` prose wrapper; Portable Text
+  builders in `lib/insights/blocks.ts`; bodies moved to
+  `content/insight-bodies.ts` with hand-written samples for the featured and
+  homepage items. Tall body images crop to landscape.
+- Practices are optional (0..n). Added a `firm-news` type; cards fall back to
+  the type label as category. 18 credited Unsplash images, no repeats per page
+  (see `docs/insights-media.md`).
+- Passed format:check, lint, typecheck, 152 Vitest tests and production build.
+  Production server: 404 for a missing article (noindex), 307 for `?page=99`.
+  Back restored 1500px in the dev browser. Smooth-scroll animation could not
+  be observed in the background browser pane (animation frames paused).
+
 ## 2026-11-01 — Simplified social artwork
 
 - Removed the decorative right-hand globe from the editable social export master
@@ -416,3 +495,101 @@ No deployment, external readiness or client publication approval is implied.
   `availableMatterIds`, `visibleMatters`) stay in `content/`; the rule is now
   written in `.claude/rules/structure.md`. Practice lookups also stay.
 - No behaviour change.
+
+## 2026-11-03 — Insights review fixes (Claude)
+
+- Search now matches every word in any order and ignores accents
+  ("patent nigeria" finds "Patent registration in Nigeria"). People and
+  Insights share `normalizeText`/`matchesSearch` in `lib/search.ts`.
+- Removed `app/(site)/insights/loading.tsx`. It streamed both Insights pages
+  before `notFound()`/`redirect()` ran, so a missing article returned 200 and
+  an out-of-range page a 200 script redirect. Production now returns 404 and 307. Filter changes keep the toolbar's "Updating insights…" feedback.
+- `getInsight` is wrapped in React `cache`, so metadata and page share one read.
+- Citations read "Reference [1]" instead of announcing the record key.
+- Related-article items are rounded to match their cards (no white corners).
+- The live region announces only the settled count, not "Updating…" on each
+  typing pause. Count, "Showing x–y of z" and updating text moved to
+  `content/insight-copy.ts`.
+- Bylines with three or more authors read "A, B & C" (`formatNames`).
+- Fallback excerpts end at a word boundary with an ellipsis (`shortenText`).
+- `isRouteAvailable` uses `routes.insights` rather than a hand-typed path.
+- Checks: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test`
+  (151 passed) and `pnpm build` passed. `next start` checked 404/307 statuses
+  and that article body text is absent from `.next/static`.
+
+## 2026-11-03 — Responsive page trail (breadcrumb on desktop, back link on phone)
+
+- Outcome: added `components/shared/page-trail.tsx`. From `md` up it shows a
+  breadcrumb: a home icon, light chevrons, and the current page muted and
+  truncated. On phones it shows a back link to the section plus the group in
+  between. It is used on practice area, Insights article, selected matter,
+  SME and legal pages. The `components/ui/breadcrumb.tsx` styling is lighter.
+  Removed unused copy keys `backLabel`, `backShort`, `allInsightsShort` and
+  `articleNav`.
+- Files: `components/shared/page-trail.tsx`, `components/ui/breadcrumb.tsx`,
+  `components/{practices,experience,insights}/detail-page.tsx`,
+  `components/sme/retainer-section.tsx`,
+  `components/legal/legal-page-layout.tsx`, `content/insight-copy.ts`,
+  `content/practice-index.ts`, `content/experience.ts`.
+- Checks: format:check, lint, typecheck, test (153) and build passed. The
+  browser was checked at an 800px pane width and at 375px. The selected-matter
+  detail page was not opened, because no matter is linked from the hub.
+
+## 2026-11-03 — Tidier "Latest on {practice}" strip
+
+- Outcome: `CompactArticleCard` takes a `brief` option that drops the category
+  label and reading time (`ArticleMeta` gained `showReadTime`). The practice
+  strip uses it, so the category no longer repeats the heading, the meta never
+  wraps and the three cards line up.
+- Files: `components/insights/article-card.tsx`,
+  `components/practices/insights-section.tsx`.
+- Checks: lint, typecheck, format:check and test passed. Checked at 1440px in the browser.
+
+## 2026-11-03 — Practice hero spacing and scrolling tabs on phones
+
+- Outcome: the practice detail hero has less padding and smaller gaps below
+  `sm`, so the title, intro and enquiry button sit closer under the page
+  trail. Tablet and desktop spacing is unchanged. The category tabs on the
+  Practice areas hub scroll sideways on phones instead of wrapping, using the
+  same pattern as the Insights type pills.
+- Files: `components/practices/detail-page.tsx`,
+  `components/practices/catalogue-section.tsx`.
+- Checks: lint, typecheck, format:check and test passed. Checked at 375px in the
+  browser; no page overflow.
+
+## 2026-11-03 — Folded practice contents and tighter detail heroes on phones
+
+- Outcome: `PageContents` now takes a `label` and renders its own navigation.
+  On desktop it shows the list under a heading. Below `lg` it folds into a
+  tap-to-open row, matching the Insights article contents. The practice
+  sidebar is a slate card at every size. The heroes on selected-matter and
+  Insights article pages now use the same tighter phone spacing as practice
+  pages; `sm` and up is unchanged.
+- Files: `components/shared/page-contents.tsx`,
+  `components/practices/detail-page.tsx`,
+  `components/experience/detail-page.tsx`,
+  `components/insights/detail-page.tsx`.
+- Checks: lint, typecheck, format:check and test passed. Checked at 375px in the browser.
+
+## 2026-11-03 — Larger founder portrait on phones (People page)
+
+- Outcome: the People leadership feature no longer shrinks the portrait to a
+  112–144px thumbnail beside the name below `lg`. It now shows full width
+  (4:3) with the name and role underneath. It is capped at `max-w-sm` from
+  `sm` to `lg`, and desktop is unchanged.
+- Files: `components/people/directory-leadership-section.tsx`.
+- Checks: lint, typecheck, format:check and test passed. Checked at 375px in the browser.
+
+## 2026-11-03 — Phone white-space review before Careers and Contact
+
+- Outcome: measured the vertical gaps on every launched page at 375px (Home,
+  The Firm, Practice areas and a practice, People and a profile, Selected
+  matters and a matter, Insights and an article, SME, Privacy, Terms). The
+  remaining gaps are the standard 48px + 48px rhythm between sections, padding
+  inside coloured bands, or initials portraits standing in for photos. No new
+  outliers after today's hero, contents and portrait fixes. Visual spot checks
+  covered The Firm, profile, SME and legal on phones, and the matter and SME
+  trail at 1440px.
+- Checks: format:check, lint, typecheck, test (153) and build (66 static
+  pages) passed.
+- Gate: Home stays on visual hold and was measured but not changed.

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { formatCount, formatIndex, initialsFrom } from "@/lib/format";
+import {
+  formatCount,
+  formatIndex,
+  formatNames,
+  initialsFrom,
+} from "@/lib/format";
 
 describe("formatCount", () => {
   it("pads single digits to two", () => {
@@ -32,5 +37,14 @@ describe("initialsFrom", () => {
 
   it("handles a single name", () => {
     expect(initialsFrom("Plato")).toBe("P");
+  });
+});
+
+describe("formatNames", () => {
+  it("joins one, two or more names readably", () => {
+    expect(formatNames([])).toBe("");
+    expect(formatNames(["Ada"])).toBe("Ada");
+    expect(formatNames(["Ada", "Bola"])).toBe("Ada & Bola");
+    expect(formatNames(["Ada", "Bola", "Chidi"])).toBe("Ada, Bola & Chidi");
   });
 });

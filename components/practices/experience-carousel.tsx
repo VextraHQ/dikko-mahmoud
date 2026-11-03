@@ -11,6 +11,7 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { mediaQueries } from "@/lib/media-queries";
 import { formatIndex, formatCount } from "@/lib/format";
 import { cn } from "@/lib/utils";
+
 // One line per case (manual only, no autoplay), arrows on the right.
 function Controls({ count }: { count: number }) {
   const { selectedIndex, scrollTo } = useCarousel();
@@ -49,6 +50,7 @@ function Controls({ count }: { count: number }) {
     </div>
   );
 }
+
 export function ExperienceCarousel({
   count,
   children,

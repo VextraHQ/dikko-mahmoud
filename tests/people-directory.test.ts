@@ -13,10 +13,10 @@ import {
   filtersToSearch,
   groupPeople,
   hasActiveFilters,
-  normalizeText,
   readFilters,
   showDirectoryToolbar,
 } from "@/lib/people/directory";
+import { normalizeText } from "@/lib/search";
 import { makeDirectoryPeople } from "./fixtures/directory-people";
 
 const preview = { allowPreview: true };

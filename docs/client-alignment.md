@@ -153,9 +153,15 @@ still needs its own design approval and should keep the no-index switch,
 
 ### Insights (`/insights`, `/insights/[id]`)
 
+On 3 November the user authorised isolated demo articles and stock images for the
+layout checkpoint, with no repeated pending-approval UI. The live CMS is deferred.
+The implemented layout/content contract is `routes/insights.md`; demo contributor labels do not
+attribute fabricated articles to real partners, and demo records cannot publish
+when indexing is enabled. The existing firm/client/matter approval rules stand.
+
 - Section name: "Dikko & Mahmoud Legal Insights Series".
-- Every listing card and article shows its author (`authorId` →
-  `getInsightAuthor`, rendered with `InsightByline`). Counsel will contribute,
+- Every listing card and article shows its resolved authors (`authorIds` →
+  the server repository, rendered with `InsightByline`). Home uses the same records. Counsel will contribute,
   so authors may be people outside the four partners once supplied. Never
   invent an author.
 - The sample "Patent Registration in Nigeria" article had a body, contents

@@ -1,13 +1,5 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
@@ -15,6 +7,7 @@ import { PersonCard } from "@/components/shared/person-card";
 import { FaqSection } from "@/components/shared/faq-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { ServicesSection } from "@/components/practices/services-section";
+import { PracticeInsightsSection } from "@/components/practices/insights-section";
 // import { ExperienceSection } from "@/components/practices/experience-section";
 import { EnquiryButton } from "@/components/shared/enquiry-button";
 import {
@@ -30,8 +23,17 @@ import { getPerson, type Person } from "@/content/people";
 // import { siteConfig } from "@/content/site";
 import { routes } from "@/lib/routes";
 import { formatIndex } from "@/lib/format";
+import type { InsightCard } from "@/types/insights";
+import { PageTrail } from "@/components/shared/page-trail";
+import { PageContents } from "@/components/shared/page-contents";
 
-export function PracticeDetailPage({ practice }: { practice: Practice }) {
+export function PracticeDetailPage({
+  practice,
+  insights,
+}: {
+  practice: Practice;
+  insights: InsightCard[];
+}) {
   const detail = practice.detail;
   const person = detail?.contactId ? getPerson(detail.contactId) : undefined;
   // Experience carousel is hidden until clients consent to named matters.
@@ -45,42 +47,35 @@ export function PracticeDetailPage({ practice }: { practice: Practice }) {
   const next = getNextPractice(practice.slug);
   return (
     <>
-      <div className="mx-auto w-full max-w-360 px-4 pt-10 sm:px-8 lg:pt-36 xl:px-20">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.home}>{copy.homeLabel}</SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.practiceAreas}>{copy.hubLabel}</SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>{practice.title}</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="mx-auto w-full max-w-360 px-4 pt-6 sm:px-8 sm:pt-10 lg:pt-36 xl:px-20">
+        <PageTrail
+          items={[
+            { label: copy.homeLabel, href: routes.home },
+            { label: copy.hubLabel, href: routes.practiceAreas },
+            {
+              label: practice.category,
+              href: `${routes.practiceAreas}?category=${encodeURIComponent(practice.category)}`,
+            },
+            { label: practice.title },
+          ]}
+        />
         <section
           aria-labelledby="practice-heading"
-          className="grid items-center gap-8 pt-10 pb-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pt-12 lg:pb-20"
+          className="grid items-center gap-6 pt-4 pb-10 sm:gap-8 sm:pt-10 sm:pb-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pt-12 lg:pb-20"
         >
           <div>
-            <Eyebrow>{practice.category}</Eyebrow>
             <h1
               id="practice-heading"
-              className="mt-6 max-w-3xl font-serif text-[36px]/[1.1] text-balance sm:text-5xl/[1.08] xl:text-6xl/[1.06]"
+              className="max-w-3xl font-serif text-[36px]/[1.1] text-balance sm:text-5xl/[1.08] xl:text-6xl/[1.06]"
             >
               {practice.title}
             </h1>
-            <p className="text-muted-foreground mt-8 max-w-2xl text-base/7 lg:text-lg/8">
+            <p className="text-muted-foreground mt-5 max-w-2xl text-base/7 sm:mt-8 lg:text-lg/8">
               {detail?.introduction ?? practice.summary}
             </p>
-            <EnquiryButton className="mt-7">{copy.enquiryAction}</EnquiryButton>
+            <EnquiryButton className="mt-6 sm:mt-7">
+              {copy.enquiryAction}
+            </EnquiryButton>
           </div>
           <div className="relative isolate aspect-4/3 overflow-hidden rounded-xl">
             <ImageWithFallback
@@ -96,27 +91,14 @@ export function PracticeDetailPage({ practice }: { practice: Practice }) {
           </div>
         </section>
         <div className="grid items-start gap-10 pb-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[18rem_minmax(0,1fr)] xl:gap-16">
-          <aside className="lg:border-border lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:rounded-xl lg:border lg:bg-slate-50 lg:p-4">
-            <nav aria-label="In this practice">
-              <Eyebrow>{copy.sidebarHeading}</Eyebrow>
-              <ul className="mt-4 flex flex-wrap gap-x-6 lg:grid lg:gap-y-1">
-                {sections.map((section) => (
-                  <li key={section.id}>
-                    <a
-                      href={`#${section.id}`}
-                      className="text-primary inline-flex min-h-11 items-center gap-2 rounded-sm py-2 text-sm/6 underline-offset-4 hover:underline lg:min-h-9 lg:py-1.5"
-                    >
-                      {section.label}
-                      <ArrowUpRight
-                        aria-hidden="true"
-                        className="size-4 shrink-0"
-                        strokeWidth={1.5}
-                      />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+          <aside className="border-border rounded-xl border bg-slate-50 p-5 lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6">
+            <PageContents
+              label={copy.sidebarHeading}
+              items={sections.map((section) => ({
+                id: section.id,
+                text: section.label,
+              }))}
+            />
             {/* Desktop keeps the contact in the sticky sidebar; mobile shows
                 it after the experience instead (see below). */}
             {person && (
@@ -251,6 +233,7 @@ export function PracticeDetailPage({ practice }: { practice: Practice }) {
                 {copy.enquiryAction}
               </EnquiryButton>
             </section>
+            <PracticeInsightsSection practice={practice} insights={insights} />
             {next && (
               <nav
                 aria-label={copy.nextPracticeLabel}

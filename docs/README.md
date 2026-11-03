@@ -30,8 +30,11 @@ small so a developer or agent can resume work without relying on chat history.
 | `routes/the-firm.md`                    | Firm implementation, interactions, reuse, source gaps and acceptance     |
 | `routes/people.md`                      | Editorial directory, profile-popup/page and eight-item navigation spec   |
 | `routes/selected-matters.md`            | Approved listing/details, source copy, preview consent and media gate    |
+| `routes/insights.md`                    | Implemented listing/articles, CMS contract, reading UX and edge cases    |
+| `insights-media.md`                     | Stock-photo sources, delivery dimensions and image crop review           |
 | `routes/practice-areas.md`              | Practice hub/menu/detail implementation, sources and remaining content   |
 | `handoffs/people-profiles-next-chat.md` | Executable Claude prompt for the bounded profile/navigation slice        |
+| `handoffs/insights-next-chat.md`        | Original Insights implementation brief, retained as a review checklist   |
 | `handoffs/the-firm-next-chat.md`        | Historical scoped Firm kickoff prompt                                    |
 | `forms.md`                              | Form primitives, accessible composition and validation ownership         |
 | `testing.md`                            | Vitest setup, what is and isn't tested, test conventions                 |

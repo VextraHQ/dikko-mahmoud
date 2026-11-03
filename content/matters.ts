@@ -1,4 +1,5 @@
 export { selectedMatters } from "@/content/matter-copy";
+
 import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import { hasText } from "@/lib/content";
 import { matterStatus } from "@/content/matter-manifest";
@@ -70,4 +71,5 @@ export function publishableMatters(items: readonly SelectedMatter[]) {
     (matter) => hasText(matter.organisation) && hasText(matter.summary),
   );
 }
+
 export const visibleMatters = publishableMatters(matterRecords);

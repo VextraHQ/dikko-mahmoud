@@ -24,7 +24,8 @@ export function StickyHeader({ children }: { children: ReactNode }) {
             : pathname === routes.firm ||
                 pathname === routes.practiceAreas ||
                 pathname === routes.people ||
-                pathname === routes.experience
+                pathname === routes.experience ||
+                pathname === routes.insights
               ? "bg-navy-deep"
               : "bg-primary",
         )}

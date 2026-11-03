@@ -1,5 +1,6 @@
 // Public catalogue: safe for navigation, Home and future form client bundles.
 type PracticeCategory = "Contentious" | "Transactional" | "Advisory";
+
 export type PracticeSummary = {
   slug: string;
   title: string;
@@ -7,6 +8,7 @@ export type PracticeSummary = {
   summary: string;
   image?: { src: string; alt: string };
 };
+
 export const practiceIndex: PracticeSummary[] = [
   {
     slug: "corporate-commercial-advisory",
@@ -72,6 +74,7 @@ export const practiceIndex: PracticeSummary[] = [
       "Advising organisations on government policy, regulatory developments and public-sector engagement.",
   },
 ];
+
 export const practiceCopy = {
   heroEyebrow: "Our expertise",
   heroHeading: ["Legal expertise.", "Built around your needs."],

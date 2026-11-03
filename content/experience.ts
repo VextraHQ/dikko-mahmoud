@@ -23,6 +23,7 @@ export const experienceCopy = {
 } as const;
 
 type Instruction = { title: string; description: string; role: string };
+
 export type ExperienceRecord = {
   matterId: string;
   category: string;

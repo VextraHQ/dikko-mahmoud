@@ -3,7 +3,9 @@ import {
   practiceCopy,
   type PracticeSummary,
 } from "@/content/practice-index";
+
 export { practiceCopy } from "@/content/practice-index";
+
 import { hasText } from "@/lib/content";
 import { approvedRecords, type PublicationStatus } from "@/lib/publication";
 import type { Faq } from "@/content/faqs";
@@ -27,6 +29,7 @@ export type PracticeDetail = {
   }[];
   faqs?: { heading: string[]; description: string; items: Faq[] };
 };
+
 export type Practice = PracticeSummary & { detail?: PracticeDetail };
 
 // Nine titles/categories/summaries supplied in the 30 Oct design screenshots.
@@ -80,6 +83,7 @@ const corporateDetail: PracticeDetail = {
     },
   ],
 };
+
 export const practiceCatalogue: Practice[] = practiceIndex.map((practice) => ({
   ...practice,
   detail:
@@ -94,12 +98,15 @@ export const practiceFilters = [
   "Transactional",
   "Advisory",
 ] as const;
+
 export type PracticeFilter = (typeof practiceFilters)[number];
+
 export function filterPractices(filter: string) {
   return practiceCatalogue.filter(
     (practice) => filter === "All areas" || practice.category === filter,
   );
 }
+
 export function getPractice(slug: string) {
   return practiceCatalogue.find((practice) => practice.slug === slug);
 }

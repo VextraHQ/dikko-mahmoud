@@ -4,6 +4,7 @@ import { NotFoundView } from "@/components/shared/not-found-view";
 import { systemPages } from "@/content/system-pages";
 
 const content = systemPages.notFound;
+
 export const metadata: Metadata = {
   title: content.metaTitle,
   description: content.description,

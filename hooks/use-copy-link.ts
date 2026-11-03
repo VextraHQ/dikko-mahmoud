@@ -16,7 +16,10 @@ type CopyLinkStatus = "idle" | "copied" | "failed";
 export function useCopyLink(
   messages: { copied: string; failed: string; failedHint?: string },
   { copiedFor = 2500, failedFor = 5000 } = {},
-) {
+): {
+  status: CopyLinkStatus;
+  copy: (url?: string) => Promise<boolean>;
+} {
   const [status, setStatus] = useState<CopyLinkStatus>("idle");
 
   useEffect(() => {
@@ -30,14 +33,15 @@ export function useCopyLink(
 
   return {
     status,
-    async copy() {
+    async copy(url?: string): Promise<boolean> {
       try {
-        await navigator.clipboard.writeText(window.location.href);
+        await navigator.clipboard.writeText(url ?? window.location.href);
         setStatus("copied");
         toast.success(messages.copied, {
           id: "copy-link",
           duration: copiedFor,
         });
+        return true;
       } catch {
         setStatus("failed");
         toast.error(messages.failed, {
@@ -45,6 +49,7 @@ export function useCopyLink(
           description: messages.failedHint,
           duration: failedFor,
         });
+        return false;
       }
     },
   };

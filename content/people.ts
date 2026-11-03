@@ -138,15 +138,18 @@ const featuredPersonIds = [
   "aminu-sadauki",
   "sefiullahi-oseni",
 ] as const;
+
 export function getPerson(id: string) {
   return people.find((person) => person.id === id);
 }
+
 // For records the site cannot render without; fails the build if removed.
 export function requirePerson(id: string) {
   const person = getPerson(id);
   if (!person) throw new Error(`Missing person record: ${id}`);
   return person;
 }
+
 const featuredPeople = featuredPersonIds.flatMap((id) => {
   const person = getPerson(id);
   return person ? [person] : [];

@@ -7,11 +7,13 @@ import { getPracticeFilter, practiceCopy } from "@/content/practice-catalogue";
 import { faqIntro } from "@/content/faqs";
 import { createPageMetadata } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
+
 export const metadata = createPageMetadata({
   title: "Practice areas",
   description: practiceCopy.heroDescription,
   path: routes.practiceAreas,
 });
+
 export default async function PracticesPage({
   searchParams,
 }: {

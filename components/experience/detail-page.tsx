@@ -1,19 +1,12 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { experienceCopy as copy } from "@/content/experience";
 import type { Experience } from "@/lib/experience";
 import { formatIndex } from "@/lib/format";
 import { routes } from "@/lib/routes";
+import { PageTrail } from "@/components/shared/page-trail";
 
 export function ExperienceDetailPage({
   experience,
@@ -22,49 +15,35 @@ export function ExperienceDetailPage({
 }) {
   return (
     <>
-      <div className="mx-auto w-full max-w-360 px-4 pt-10 sm:px-8 lg:pt-36 xl:px-20">
-        <Breadcrumb>
-          <BreadcrumbList className="flex-wrap gap-y-1 [&>li]:shrink-0 [&>li:last-child]:shrink">
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.home}>{copy.home}</SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbLink asChild>
-                <SiteLink href={routes.experience}>{copy.title}</SiteLink>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="whitespace-normal">
-                {experience.organisation}
-              </BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="mx-auto w-full max-w-360 px-4 pt-6 sm:px-8 sm:pt-10 lg:pt-36 xl:px-20">
+        <PageTrail
+          items={[
+            { label: copy.home, href: routes.home },
+            { label: copy.title, href: routes.experience },
+            { label: experience.category },
+            { label: experience.organisation },
+          ]}
+        />
         <section
           aria-labelledby="matter-heading"
-          className="border-border border-b pt-10 pb-10 lg:pt-14 lg:pb-14"
+          className="border-border border-b pt-4 pb-8 sm:pt-10 sm:pb-10 lg:pt-14 lg:pb-14"
         >
-          <Eyebrow>{experience.category}</Eyebrow>
           <h1
             id="matter-heading"
-            className="mt-6 max-w-5xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
+            className="max-w-5xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
           >
             {experience.organisation}
           </h1>
-          <p className="text-muted-foreground mt-7 max-w-3xl text-base/7 lg:text-lg/8">
+          <p className="text-muted-foreground mt-5 max-w-3xl text-base/7 sm:mt-7 lg:text-lg/8">
             {experience.summary}
           </p>
           {experience.preview && (
-            <p className="text-muted-foreground mt-6 border-l-2 border-sky-200 pl-4 text-xs/6">
+            <p className="text-muted-foreground mt-5 border-l-2 border-sky-200 pl-4 text-xs/6 sm:mt-6">
               {copy.previewNote}
             </p>
           )}
         </section>
-        <div className="grid items-start gap-10 pt-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16 lg:pt-14">
+        <div className="grid items-start gap-10 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16 lg:pt-14">
           <section aria-labelledby="instructions-heading" className="min-w-0">
             <Eyebrow>{copy.instructionsEyebrow}</Eyebrow>
             <h2

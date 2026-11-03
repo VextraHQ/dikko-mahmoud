@@ -27,7 +27,9 @@ export type JourneyItem = FirmMilestone & {
   description: string;
   caption: { title: string; description: string };
 };
+
 const ease = [0.22, 1, 0.36, 1] as const;
+
 function JourneyMedia({ item }: { item: JourneyItem }) {
   return (
     <figure>
@@ -62,6 +64,7 @@ const panelVariants = {
     transition: { duration: 0.25, ease },
   }),
 };
+
 function JourneyPanel({
   item,
   direction,

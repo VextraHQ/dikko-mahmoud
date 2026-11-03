@@ -1,7 +1,7 @@
 # Dikko & Mahmoud Website
 
 The site is a no-index local presentation preview. Home, The Firm, the nine
-Practice area routes, People directory/profiles, Selected matters listing/details, SME retainer, Privacy Policy and Terms of Use are implemented
+Practice area routes, People directory/profiles, Selected matters listing/details, Insights listing/articles, SME retainer, Privacy Policy and Terms of Use are implemented
 for review. The client-feedback corrections are specified in
 [client alignment](docs/client-alignment.md); the proposed scope inclusions are in
 [the draft addendum](docs/scope-addendum.md). The original proposal is unchanged.
@@ -27,8 +27,8 @@ and article-author support are prepared without publishing unconfirmed claims.
 
 Visual identity, approved media, final practice naming/Capital Markets placement,
 biographies, article copy, publication permissions and legal/SME text remain review
-gates. People directory/profiles are available for local review. Insights routes, Careers and Contact remain
-separate implementation checkpoints. Providers and deployment are not connected.
+gates. People directory/profiles are available for local review. Insights now shares a 27-article demo catalogue with Home, with server pagination
+and rich article reading tools. Careers and Contact remain separate implementation checkpoints. Providers and deployment are not connected.
 The user-added Analytics and existing hero autoplay remain intact.
 
 ## Stack
@@ -40,7 +40,8 @@ The user-added Analytics and existing hero autoplay remain intact.
 - Shadcn-style Button/Sheet/Accordion/Avatar/NavigationMenu/Breadcrumb, Embla Carousel, Lucide UI icons
   and React Icons for social brands; shared form controls and React Hook Form
   adapter prepared for the later enquiry page; Motion is scoped to Firm Journey
-  content transitions
+  content transitions, hero autoplay and article reading progress
+- Portable Text React renderer and typed blocks; Sonner for copy/share feedback
 - ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
 - Prettier with Tailwind class sorting
 - pnpm
@@ -92,6 +93,7 @@ content/                Copy, records and ready-to-render lists, by domain
 hooks/                  Browser behaviour, one use-*.ts per file
 lib/                    Pure rules and helpers
   people/               People rules: roster, profiles, directory, links
+  insights/             Article repository, paging/query, rich-text and metadata rules
   routes.ts, metadata.ts, publication.ts, preview.ts …
 tests/                  Vitest tests for lib/ and content/ (fixtures/ for fake data)
 public/                 Static assets

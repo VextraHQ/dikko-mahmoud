@@ -8,6 +8,7 @@ type LegalSection = {
   paragraphs: string[];
   bullets?: string[];
 };
+
 export type LegalDocument = {
   key: "privacy" | "terms";
   title: string;
@@ -17,6 +18,7 @@ export type LegalDocument = {
   approvedUpdatedAt: string | null;
   sections: LegalSection[];
 };
+
 export const legalDocuments: LegalDocument[] = [
   {
     key: "privacy",
@@ -37,12 +39,14 @@ export const legalDocuments: LegalDocument[] = [
     sections: [],
   },
 ];
+
 /** Throws a clear error, rather than crashing later, if a key goes missing. */
 export function getLegalDocument(key: LegalDocument["key"]) {
   const document = legalDocuments.find((item) => item.key === key);
   if (!document) throw new Error(`Legal document "${key}" is not defined.`);
   return document;
 }
+
 export const legalCopy = {
   eyebrow: "Legal information",
   navHeading: "Legal documents",
@@ -53,6 +57,7 @@ export const legalCopy = {
   updatedLabel: "Last updated",
   homeLabel: "Home",
 };
+
 /** Draft text and dates never appear merely because they were entered. */
 export function legalPresentation(document: LegalDocument) {
   const approved = document.publicationStatus === "approved";

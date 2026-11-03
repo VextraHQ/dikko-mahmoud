@@ -6,6 +6,7 @@ import { availableMatterIds } from "@/content/matter-manifest";
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
 const practiceAreasPath = "/practice-areas";
+
 export const routes = {
   home: "/",
   firm: "/the-firm",
@@ -40,6 +41,7 @@ export const launchedRoutes: readonly string[] = [
   routes.smeRetainer,
   routes.privacy,
   routes.terms,
+  routes.insights,
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
   ...(directoryPeople(previewOptions).length ? [routes.people] : []),
   ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),
@@ -49,7 +51,14 @@ export const launchedRoutes: readonly string[] = [
 
 export function isRouteAvailable(href: string) {
   if (href.startsWith("#") || href.startsWith("?")) return true;
-  return launchedRoutes.includes(href.split(/[?#]/, 1)[0]);
+  const path = href.split(/[?#]/, 1)[0];
+  // Article URLs are a registered route family; record eligibility and 404s are
+  // server-owned. Never bundle an ever-growing CMS slug inventory into nav.
+  return (
+    launchedRoutes.includes(path) ||
+    (path.startsWith(`${routes.insights}/`) &&
+      /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path.slice(routes.insights.length + 1)))
+  );
 }
 
 /** Enquiries go to the Contact page once it launches; until then, email. */

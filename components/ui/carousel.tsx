@@ -201,6 +201,7 @@ export function CarouselPrevious(props: ComponentProps<typeof Button>) {
     </Button>
   );
 }
+
 export function CarouselNext(props: ComponentProps<typeof Button>) {
   const { api, scrollTo, canScrollNext } = useCarousel();
   return (

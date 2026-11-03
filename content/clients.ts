@@ -23,4 +23,5 @@ export function publishableClients(
 ) {
   return approvedRecords(items).filter((client) => hasText(client.name));
 }
+
 export const visibleClients = publishableClients(selectedClients.slots);

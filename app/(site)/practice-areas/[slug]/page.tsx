@@ -1,11 +1,14 @@
 import { notFound } from "next/navigation";
 import { PracticeDetailPage } from "@/components/practices/detail-page";
 import { practiceCatalogue, getPractice } from "@/content/practice-catalogue";
+import { getPracticeInsights } from "@/lib/insights/repository";
 import { createPageMetadata } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
+
 export function generateStaticParams() {
   return practiceCatalogue.map((practice) => ({ slug: practice.slug }));
 }
+
 export async function generateMetadata({
   params,
 }: {
@@ -20,6 +23,7 @@ export async function generateMetadata({
     path: routes.practiceArea(practice.slug),
   });
 }
+
 export default async function PracticePage({
   params,
 }: {
@@ -28,5 +32,10 @@ export default async function PracticePage({
   const { slug } = await params;
   const practice = getPractice(slug);
   if (!practice) notFound();
-  return <PracticeDetailPage practice={practice} />;
+  return (
+    <PracticeDetailPage
+      practice={practice}
+      insights={getPracticeInsights(practice.slug)}
+    />
+  );
 }

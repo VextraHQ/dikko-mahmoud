@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionLink } from "@/components/shared/section-link";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { cn } from "@/lib/utils";
 
@@ -14,7 +15,9 @@ export function ProfileContents({
   label: string;
   sections: readonly { id: string; label: string }[];
 }) {
-  const active = useActiveSection(sections.map((section) => section.id));
+  const { active, select } = useActiveSection(
+    sections.map((section) => section.id),
+  );
   return (
     <nav
       aria-labelledby="profile-contents-heading"
@@ -31,8 +34,9 @@ export function ProfileContents({
           const current = section.id === active;
           return (
             <li key={section.id}>
-              <a
-                href={`#${section.id}`}
+              <SectionLink
+                sectionId={section.id}
+                onNavigate={select}
                 aria-current={current ? "true" : undefined}
                 className={cn(
                   "text-primary -ml-3 flex min-h-9 items-center border-l-2 py-1.5 pl-3 text-sm/6 underline-offset-4 transition-colors hover:underline motion-reduce:transition-none",
@@ -42,7 +46,7 @@ export function ProfileContents({
                 )}
               >
                 {section.label}
-              </a>
+              </SectionLink>
             </li>
           );
         })}

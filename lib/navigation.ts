@@ -20,6 +20,7 @@ export function headerTone(pathname: string): HeaderTone {
     routes.practiceAreas,
     routes.people,
     routes.experience,
+    routes.insights,
   ].some((parent) => pathname.startsWith(`${parent}/`));
   return lightDetail || lightPages.some((page) => page === pathname)
     ? "light"

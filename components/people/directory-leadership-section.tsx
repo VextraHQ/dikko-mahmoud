@@ -23,19 +23,19 @@ export function DirectoryLeadershipSection({
         aria-label={`${person.name}, ${person.founderRole ?? person.role}`}
         className="group block self-start rounded-xl"
       >
-        <figure className="flex items-center gap-5 lg:block">
-          <div className="group/portrait relative isolate aspect-4/5 w-28 shrink-0 overflow-hidden rounded-xl bg-slate-100 min-[28rem]:w-36 lg:aspect-4/3 lg:w-full">
+        <figure>
+          <div className="group/portrait relative isolate aspect-4/3 w-full overflow-hidden rounded-xl bg-slate-100 sm:max-w-sm lg:max-w-none">
             <ImageWithFallback
               src={person.portrait?.src}
               alt={person.portrait?.alt ?? ""}
               fill
-              sizes="(min-width: 1440px) 360px, (min-width: 1024px) 28vw, (min-width: 448px) 144px, 112px"
+              sizes="(min-width: 1440px) 360px, (min-width: 1024px) 28vw, (min-width: 640px) 384px, 92vw"
               style={{ objectPosition: person.portrait?.position }}
               className="motion-safe:ease-editorial object-cover motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]"
               fallback={
                 <span
                   aria-hidden="true"
-                  className="text-primary/65 absolute inset-0 flex items-center justify-center bg-slate-100 font-serif text-4xl lg:text-6xl"
+                  className="text-primary/65 absolute inset-0 flex items-center justify-center bg-slate-100 font-serif text-6xl"
                 >
                   {person.initials}
                 </span>
@@ -47,7 +47,7 @@ export function DirectoryLeadershipSection({
               className="text-primary absolute top-3 right-3 size-4"
             />
           </div>
-          <figcaption className="min-w-0 lg:mt-4">
+          <figcaption className="mt-4">
             <p className="decoration-primary/40 font-serif text-lg/6 underline-offset-4 group-hover:underline sm:text-xl/7">
               {person.name}
             </p>

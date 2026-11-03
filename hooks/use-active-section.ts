@@ -1,15 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * The id of the section currently being read, for an "On this page" list.
  * A section counts as current once its top passes a line about a third of the
  * way down the viewport; before any does, the first one is current, and at the
  * very bottom the last one is (a short final section may never reach the line).
+ *
+ * `select(id)` marks a clicked link active at once and holds it until the
+ * smooth scroll settles, so the highlight does not flicker through every
+ * section on the way.
  */
-export function useActiveSection(ids: readonly string[]) {
-  const [active, setActive] = useState(ids[0]);
+export function useActiveSection(ids: readonly string[]): {
+  active: string;
+  select: (id: string) => void;
+} {
+  const [active, setActive] = useState(ids[0] ?? "");
+  const held = useRef(false);
+  const release = useRef<ReturnType<typeof setTimeout>>(undefined);
   const key = ids.join(" ");
 
   useEffect(() => {
@@ -19,7 +28,7 @@ export function useActiveSection(ids: readonly string[]) {
       .filter((element): element is HTMLElement => element !== null);
     if (!sections.length) return;
 
-    const update = () => {
+    const update = (): void => {
       const line = window.innerHeight * 0.35;
       const atBottom =
         window.innerHeight + window.scrollY >=
@@ -30,15 +39,34 @@ export function useActiveSection(ids: readonly string[]) {
       }
       setActive((atBottom ? sections[sections.length - 1] : current).id);
     };
+    const onScroll = (): void => {
+      if (!held.current) return update();
+      // Still scrolling towards a clicked section: wait until it stops.
+      clearTimeout(release.current);
+      release.current = setTimeout(() => {
+        held.current = false;
+      }, 150);
+    };
 
     update();
-    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update);
+    return (): void => {
+      clearTimeout(release.current);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", update);
     };
   }, [key]);
 
-  return active;
+  function select(id: string): void {
+    held.current = true;
+    clearTimeout(release.current);
+    // Released by the scroll handler; this covers a click that needs no scroll.
+    release.current = setTimeout(() => {
+      held.current = false;
+    }, 1000);
+    setActive(id);
+  }
+
+  return { active, select };
 }

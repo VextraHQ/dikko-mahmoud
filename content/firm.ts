@@ -106,6 +106,7 @@ export type FirmMilestone = {
   media?: { src: string; alt: string };
   caption?: { title: string; description: string };
 };
+
 export const firmJourney: FirmMilestone[] = [
   {
     id: "founding",
@@ -231,6 +232,7 @@ export const firmPeople = {
   pendingPerson: "Selection pending",
   pendingRole: "Advisory team preview",
 };
+
 export const firmPresence = {
   eyebrow: "Our presence",
   heading: ["Rooted in Nigeria.", "A wider outlook."],

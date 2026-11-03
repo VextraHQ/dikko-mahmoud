@@ -9,7 +9,8 @@ import {
   requirePerson,
 } from "@/content/people";
 import { visiblePracticeAreas } from "@/content/practice-areas";
-import { homeInsights } from "@/content/insights";
+import { getHomeInsights } from "@/lib/insights/repository";
+const homeInsights = getHomeInsights();
 
 // Guards against content edits that would silently break a section.
 describe("content integrity", () => {

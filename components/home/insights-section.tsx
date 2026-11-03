@@ -5,19 +5,18 @@ import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import {
-  homeInsights,
-  insightsHome as content,
-  type InsightPreview,
-} from "@/content/insights";
+import { insightsHome as content } from "@/content/insights";
 import { SiteLink } from "@/components/layout/site-link";
 import { routes } from "@/lib/routes";
+import { getHomeInsights } from "@/lib/insights/repository";
+import { imagePosition } from "@/lib/insights/article";
+import type { InsightCard } from "@/types/insights";
 
 function InsightImage({
   article,
   featured = false,
 }: {
-  article: InsightPreview;
+  article: InsightCard;
   featured?: boolean;
 }) {
   return (
@@ -31,7 +30,7 @@ function InsightImage({
           : "96px"
       }
       className="object-cover motion-safe:transition-transform motion-safe:duration-500 motion-safe:group-hover:scale-[1.03]"
-      style={{ objectPosition: article.image?.position }}
+      style={{ objectPosition: imagePosition(article.image) }}
       fallback={
         featured ? (
           <EditorialCover />
@@ -49,6 +48,7 @@ function InsightImage({
 }
 
 export function InsightsSection() {
+  const homeInsights = getHomeInsights();
   if (!homeInsights) return null;
   const { feature, supporting } = homeInsights;
   return (
@@ -67,7 +67,11 @@ export function InsightsSection() {
             id="insights-heading"
             className="mt-4 max-w-xl font-serif text-4xl/[1.08] sm:text-5xl/[1.08] xl:text-6xl/[1.04]"
           >
-            {content.heading}
+            {content.heading.map((line) => (
+              <span key={line} className="block">
+                {line}
+              </span>
+            ))}
           </h2>
           <p className="text-muted-foreground mt-6 max-w-lg text-sm/6 sm:text-base/7">
             {content.description}
@@ -75,9 +79,6 @@ export function InsightsSection() {
           <ArrowButton asChild size="sm" className="mt-6">
             <SiteLink href={routes.insights}>{content.action}</SiteLink>
           </ArrowButton>
-          <p className="text-muted-foreground mt-4 text-xs/5">
-            {content.reviewNote}
-          </p>
         </div>
         <article data-reveal className="min-w-0 xl:col-start-1 xl:row-start-1">
           <SiteLink

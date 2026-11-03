@@ -49,6 +49,7 @@ const sourceHeroSlides = [
     darkenImage: true,
   },
 ] as const;
+
 // The transaction slide keeps a generic label until Capital Markets placement is confirmed.
 export const heroSlides = sourceHeroSlides
   .map((slide) => ({
@@ -58,6 +59,8 @@ export const heroSlides = sourceHeroSlides
         ?.title ?? "Our expertise",
   }))
   .filter((slide) => slide.title.some((line) => line.trim()));
+
 export const heroAction = "Explore our expertise";
+
 /** Time each hero slide stays before autoplay advances, in ms. */
 export const heroAutoplayDelay = 7000;

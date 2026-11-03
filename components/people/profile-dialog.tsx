@@ -96,7 +96,7 @@ export function ProfileDialog({
             <Button
               variant="ghost"
               size="icon"
-              onClick={copy}
+              onClick={() => copy()}
               aria-label={labels.copyLink}
               className="text-primary hover:bg-slate-100 active:bg-slate-200"
             >

@@ -44,9 +44,10 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
           </div>
         </div>
         <nav aria-label="Filter practice areas" className="mt-10">
-          <ul className="flex flex-wrap gap-3">
+          {/* Phones scroll the tabs sideways instead of wrapping. */}
+          <ul className="-mx-4 flex scrollbar-none gap-3 overflow-x-auto px-4 py-1 sm:mx-0 sm:flex-wrap sm:px-0">
             {practiceFilters.map((item) => (
-              <li key={item}>
+              <li key={item} className="shrink-0">
                 <SiteLink
                   href={
                     item === "All areas"
@@ -55,7 +56,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
                   }
                   aria-current={filter === item ? "page" : undefined}
                   className={cn(
-                    "ease-editorial inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold transition-colors duration-300",
+                    "ease-editorial inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold whitespace-nowrap transition-colors duration-300",
                     item === filter
                       ? "bg-primary border-primary text-white"
                       : "text-primary border-border hover:bg-sky-50",

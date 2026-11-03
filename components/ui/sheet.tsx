@@ -4,9 +4,13 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 export const Sheet = SheetPrimitive.Root;
+
 export const SheetTrigger = SheetPrimitive.Trigger;
+
 export const SheetClose = SheetPrimitive.Close;
+
 export const SheetTitle = SheetPrimitive.Title;
+
 export const SheetDescription = SheetPrimitive.Description;
 
 export function SheetContent({

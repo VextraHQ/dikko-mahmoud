@@ -16,7 +16,7 @@ SME retainer, Privacy Policy and Terms of Use previews are implemented. SME trac
 await supplied copy; legal bodies and approved dates are absent and explicitly
 marked. These are working route presentations, not publication approval.
 Article-author references and brochure biography drafts are prepared; no author or
-unconfirmed profile copy is invented. Insights, Careers and Contact routes
+unconfirmed profile copy is invented. Insights listing/articles are now implemented for no-index review. Careers and Contact
 remain separate milestones; their client requirements are listed in
 `client-alignment.md` → "Requirements for pages not yet built". The scope addendum includes nine practices, SME and
 Terms at the existing fee, but remains a draft awaiting client acknowledgement.
@@ -54,6 +54,18 @@ The Firm hero is temporarily reused. **Replace temporary images before WebP
 conversion** using [media-review.md](media-review.md). No conversion or deployment
 is part of this checkpoint.
 
+## Insights checkpoint · 3 November
+
+The user approved layouts plus the content/schema contract and authorised
+implementation. `/insights` has server search/filter/sort and nine-card numbered
+pages; `/insights/[id]` renders 27 coherent demo articles with Portable Text,
+authors, references, contents, sharing and article-scoped reading progress.
+Home uses the same records, photos, dates, bylines and detail destinations.
+See [the route contract](routes/insights.md) and [stock-photo register](insights-media.md).
+Demo records are excluded when indexing is enabled. Live Sanity, final authored
+content and final media selection remain later; no WebP conversion was performed.
+Careers and Contact are the remaining unbuilt primary route checkpoints.
+
 ## Status
 
 | Milestone                                   | Status   | Outcome                                                                            |
@@ -80,6 +92,7 @@ is part of this checkpoint.
 | 5c. Client alignment and SME/legal previews | Review   | Shared catalogue, consent controls, copy corrections and three route previews      |
 | 5d. People directory and profiles           | Review   | Editorial directory, four profiles, shared popup/page and data-driven filters      |
 | 5e. Selected matters listing and details    | Review   | Four sourced experiences, separate instructions, consent-gated static routes       |
+| 5f. Insights listing and articles           | Review   | Shared Home catalogue, server pagination, rich reading/share UX and demo-only data |
 | 6. CMS and service integrations             | Later    | Providers connected only when their scope is approved                              |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                     |
 
