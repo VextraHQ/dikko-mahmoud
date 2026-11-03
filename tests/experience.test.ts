@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { availableMatterIds, matterManifest } from "@/content/matter-manifest";
+import { experienceRecords } from "@/content/experience";
 import {
-  experienceRecords,
   getExperiences,
   isCompleteExperience,
   resolveExperience,
-} from "@/content/experience";
+} from "@/lib/experience";
 import { matterRecords, visibleMatters } from "@/content/matters";
 import { practiceIndex } from "@/content/practice-index";
 import { headerTone } from "@/lib/navigation";

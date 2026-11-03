@@ -1,7 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { experienceCopy as copy, type Experience } from "@/content/experience";
+import { experienceCopy as copy } from "@/content/experience";
+import type { Experience } from "@/lib/experience";
 import { routes } from "@/lib/routes";
 
 export function ExperienceListingSection({

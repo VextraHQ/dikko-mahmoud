@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ExperienceDetailPage } from "@/components/experience/detail-page";
-import { getExperiences, resolveExperience } from "@/content/experience";
+import { getExperiences, resolveExperience } from "@/lib/experience";
 import { previewOptions } from "@/lib/preview";
 import { createPageMetadata } from "@/lib/metadata";
 import { routes } from "@/lib/routes";

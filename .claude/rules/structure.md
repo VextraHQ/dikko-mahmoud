@@ -28,11 +28,14 @@
 People is grouped in `lib/people/`: `roster.ts` (who may be listed),
 `profiles.ts` (server-only `resolveProfile`), `directory.ts` (search, groups,
 URL), `directory-data.ts` (server page data), `profile-links.ts`,
-`profile-metadata.ts`. Practices and matters still use single files; give them
-a folder only when they reach the same size.
+`profile-metadata.ts`. Matters has one combining rule, `lib/experience.ts`
+(server-only `resolveExperience`). Give a domain a folder only when it has
+three or more rule files.
 
-Content modules export ready-to-render lists (`visibleMatters`, `homePeople`);
-sections never filter records themselves.
+What stays in `content/`: lookups and filters that read only their own file
+(`getPerson`, `getPractice`, `matterStatus`, `availableMatterIds`,
+`visibleMatters`). Content modules export ready-to-render lists
+(`visibleMatters`, `homePeople`); sections never filter records themselves.
 
 ## Adding something
 

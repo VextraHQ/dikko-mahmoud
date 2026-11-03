@@ -406,3 +406,13 @@ No deployment, external readiness or client publication approval is implied.
 - Checks: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test`
   (115 passed) and `pnpm build` passed. A biography sentence appears in
   `.next/server` output only, not in `.next/static`.
+
+## 2026-11-03 — Experience rules in lib/experience.ts
+
+- Moved `isCompleteExperience`, `resolveExperience`, `getExperiences` and the
+  `Experience` type from `content/experience.ts` to `lib/experience.ts`.
+  `content/experience.ts` keeps the copy and server-only instruction records.
+- Matter lookups that read only their own file (`matterStatus`,
+  `availableMatterIds`, `visibleMatters`) stay in `content/`; the rule is now
+  written in `.claude/rules/structure.md`. Practice lookups also stay.
+- No behaviour change.

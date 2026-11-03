@@ -4,7 +4,8 @@
 
 `content/matter-manifest.ts` owns body-free canonical IDs and publication status
 for route registration. Home matter metadata derives its status from this manifest
-and remains approved-only. `content/experience.ts` resolves sourced detail bodies
+and remains approved-only. `content/experience.ts` holds the sourced detail
+bodies and copy; `lib/experience.ts` (`resolveExperience`) resolves them
 on the server under the explicit no-index preview rule, shared by listing, detail
 and metadata. Hidden/unknown/incomplete records return 404. No pending bodies are
 imported into shared navigation. See `routes/selected-matters.md`.

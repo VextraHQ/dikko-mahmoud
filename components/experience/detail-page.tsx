@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
-import { experienceCopy as copy, type Experience } from "@/content/experience";
+import { experienceCopy as copy } from "@/content/experience";
+import type { Experience } from "@/lib/experience";
 import { formatIndex } from "@/lib/format";
 import { routes } from "@/lib/routes";
 
