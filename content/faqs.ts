@@ -27,8 +27,7 @@ export const faqSupportAvatars = [
   { id: "stock-03", src: "/images/stock/team-03.jpg" },
 ] as const;
 
-// The first answer follows the screenshot; the user authorized practical starter
-// copy for the others. Sanity can later supply this same ordered record shape.
+// Sanity can later supply this same ordered record shape.
 // Avoid unconfirmed fees, turnaround times and engagement promises.
 export const faqs: Faq[] = [
   {

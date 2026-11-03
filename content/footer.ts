@@ -22,9 +22,11 @@ export const footer = {
     {
       title: "Firm",
       links: [
-        { label: "About us", href: routes.firm },
+        { label: "The firm", href: routes.firm },
         { label: "Our People", href: routes.people },
+        { label: "Selected matters", href: routes.experience },
         { label: "Careers", href: routes.careers },
+        // The client's full series name; the header shortens it to "Insights".
         { label: "Legal Insights Series", href: routes.insights },
         { label: "SME retainer", href: routes.smeRetainer },
       ],
@@ -46,7 +48,6 @@ export const footer = {
       ],
     },
   ],
-  // The screenshots establish platforms, but provide no approved profile URLs.
   socialLinks: [
     { label: "Facebook", platform: "facebook", href: null },
     { label: "LinkedIn", platform: "linkedin", href: null },

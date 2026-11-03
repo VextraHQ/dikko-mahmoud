@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 
+import { footer } from "@/content/footer";
+import { navigation } from "@/content/navigation";
 import { headerTone, isActivePath } from "@/lib/navigation";
 import { routes } from "@/lib/routes";
 
@@ -29,5 +31,22 @@ describe("isActivePath", () => {
       true,
     );
     expect(isActivePath(routes.firm, routes.home)).toBe(false);
+  });
+});
+
+describe("footer links", () => {
+  it("use the main navigation's label for the same page", () => {
+    // The footer spells out the client's full series name for Insights.
+    const exceptions = new Set<string>([routes.insights]);
+    const navLabels = new Map(
+      navigation.map((item) => [item.href, item.label]),
+    );
+    for (const group of footer.linkGroups) {
+      for (const link of group.links) {
+        const navLabel = navLabels.get(link.href);
+        if (navLabel && !exceptions.has(link.href))
+          expect(link.label, link.href).toBe(navLabel);
+      }
+    }
   });
 });

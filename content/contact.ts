@@ -13,6 +13,7 @@ export const contact = {
     {
       city: "Kano",
       address: "No. 3 Dorawa Road, Nasarawa",
+      // Confirm phone number before launch.
       phone: "+234 64 891143",
       telephone: "+23464891143",
     },

@@ -36,7 +36,12 @@ export function ServicesSection({
       <div className="mt-6" data-practice-services>
         <Accordion type="multiple" defaultValue={["0", "1"]}>
           {services.map((service, index) => (
-            <AccordionItem key={service.title} value={String(index)}>
+            // No line under the last item: the next section starts with its own.
+            <AccordionItem
+              key={service.title}
+              value={String(index)}
+              className="last:border-b-0"
+            >
               <AccordionTrigger>
                 <span className="text-primary flex-1 font-serif text-xl/7 sm:text-2xl/8">
                   {service.title}
@@ -57,7 +62,7 @@ export function ServicesSection({
           <details
             key={service.title}
             open={index < 2}
-            className="border-border border-b"
+            className="border-border border-b last:border-b-0"
           >
             <summary className="text-primary cursor-pointer py-5 font-serif text-xl/7">
               {formatIndex(index)} · {service.title}

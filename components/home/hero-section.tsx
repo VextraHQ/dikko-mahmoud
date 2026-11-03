@@ -84,7 +84,9 @@ export function Hero() {
       </CarouselContent>
       <div
         aria-hidden="true"
-        className="bg-navy-deep/25 pointer-events-none absolute inset-y-0 left-0 z-1 hidden w-[47%] blur-xl lg:block"
+        // Soft shadow off the copy panel's edge. A gradient, not a blur
+        // filter, so tablets don't redraw a large blurred layer while scrolling.
+        className="from-navy-deep/25 pointer-events-none absolute inset-y-0 left-[43%] z-1 hidden w-[calc(4%+1.5rem)] bg-linear-to-r to-transparent lg:block"
       />
       <div
         aria-hidden="true"

@@ -1596,3 +1596,20 @@
   the feature outside scripts, with no-index metadata; a browser with JavaScript
   disabled was not tested. Existing form/filter rules cover the larger roster;
   no synthetic roster was reintroduced for this pass. No commit or deployment.
+
+## 2026-11-03 — Tablet touch, practice divider and footer labels
+
+- Hero: swipe is off from `lg` (64rem), where the photograph fills the whole
+  hero and caught diagonal page scrolls on iPad, fading the photo instead of
+  scrolling. Arrows, progress and autoplay are unchanged; phones keep swipe on
+  the short photo band. The edge shadow is now a gradient instead of a
+  `blur-xl` filter layer (same look, cheaper to repaint on tablets).
+- Practice detail: the last service item no longer draws a bottom border, so
+  the hidden experience carousel no longer leaves an empty band between two
+  lines before Our people.
+- Footer: "About us" became "The firm" and "Selected matters" was added, to
+  match the main navigation. "Legal Insights Series" stays as the client's full
+  series name. A test keeps footer and header labels aligned.
+- Not verified on a real iPad: the in-app browser can't emulate touch. The
+  practice-explorer lag was not reproduced; the fixed glass header's
+  backdrop blur is the remaining suspect if it persists on a production build.
