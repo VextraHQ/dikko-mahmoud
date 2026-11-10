@@ -33,7 +33,7 @@ export function PageTrail({
   const group = items.length > 3 ? items[items.length - 2] : undefined;
 
   return (
-    <div className={className}>
+    <div className={cn("print:hidden", className)}>
       <Breadcrumb className="max-md:hidden">
         <BreadcrumbList>
           <BreadcrumbItem>

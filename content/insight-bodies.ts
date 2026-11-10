@@ -161,7 +161,7 @@ const written: Record<string, ArticleContent> = {
         [
           ["Documented", "Signed agreement, invoices", "Index and preserve"],
           ["Disputed", "What was agreed on a call", "Gather notes and emails"],
-          ["Unknown", "The other side's records", "Note as an open question"],
+          ["Unknown", "The other side’s records", "Note as an open question"],
         ],
       ),
       heading("preserve", "Preserve the record"),
@@ -195,7 +195,7 @@ const written: Record<string, ArticleContent> = {
       heading("parties", "Map the parties first"),
       paragraph(
         "parties-text",
-        "Record each party's role, the agreements that connect them and the person responsible for each relationship.",
+        "Record each party’s role, the agreements that connect them and the person responsible for each relationship.",
       ),
       heading("stages", "Follow the project by stage"),
       ...numberedList("stages-list", [
@@ -243,7 +243,7 @@ const written: Record<string, ArticleContent> = {
     body: [
       paragraph(
         "intro",
-        "This page will introduce the firm's Insights series once the firm approves its own announcement. Until then it shows how a news item without a practice area sits in the archive.",
+        "This page will introduce the firm’s Insights series once the firm approves its own announcement. Until then it shows how a news item without a practice area sits in the archive.",
       ),
       paragraph(
         "detail",

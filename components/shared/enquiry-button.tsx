@@ -1,4 +1,5 @@
 import type { ComponentProps, HTMLAttributes, ReactNode } from "react";
+import { cn } from "@/lib/utils";
 import { SiteLink } from "@/components/layout/site-link";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { contact } from "@/content/contact";
@@ -32,10 +33,12 @@ export function EnquiryLink({
 /** The enquiry action as the site's arrow button. */
 export function EnquiryButton({
   children = enquiry.action,
+  className,
   ...props
 }: Omit<ComponentProps<typeof ArrowButton>, "asChild">) {
+  // Actions mean nothing on paper.
   return (
-    <ArrowButton asChild {...props}>
+    <ArrowButton asChild className={cn("print:hidden", className)} {...props}>
       <EnquiryLink>{children}</EnquiryLink>
     </ArrowButton>
   );

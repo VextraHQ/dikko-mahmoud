@@ -79,22 +79,41 @@
   box-shadow: 0 8px 28px rgb(6 26 46 / 5%);
 }
 
+/*
+ * Printing: keep the page's own content and drop site chrome. Articles,
+ * practice pages and legal pages print as clean documents; external links
+ * show their address, since paper can't be clicked.
+ */
 @media print {
-  body:has(.legal-page) header,
-  body:has(.legal-page) [data-site-header-backing],
-  body:has(.legal-page) #site-footer,
-  body:has(.legal-page) a[href="#main-content"] {
-    display: none !important;
+  @page {
+    margin: 16mm 14mm;
   }
-  body:has(.legal-page) {
+  html {
+    font-size: 10pt;
+  }
+  body {
     background: white;
     color: black;
   }
-  .legal-page {
-    color: black;
+  [data-site-header],
+  [data-site-header-backing],
+  #site-footer,
+  #enquiry,
+  a[href="#main-content"] {
+    display: none !important;
   }
+  main a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #475569;
+    overflow-wrap: anywhere;
+  }
+  main img {
+    break-inside: avoid;
+  }
+  .legal-page,
   .legal-page p,
   .legal-page li {
-    color: inherit;
+    color: black;
   }
 }

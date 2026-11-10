@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { PracticeDetailPage } from "@/components/practices/detail-page";
 import { practiceCatalogue, getPractice } from "@/content/practice-catalogue";
 import { getPracticeInsights } from "@/lib/insights/repository";
-import { createPageMetadata } from "@/lib/metadata";
+import { createPageMetadata, shareCardImage } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
 
 export function generateStaticParams() {
@@ -21,6 +21,7 @@ export async function generateMetadata({
     title: practice.title,
     description: practice.detail?.introduction ?? practice.summary,
     path: routes.practiceArea(practice.slug),
+    image: shareCardImage(routes.practiceArea(practice.slug), practice.title),
   });
 }
 

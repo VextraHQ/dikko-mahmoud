@@ -1,4 +1,5 @@
 import { MapPin } from "lucide-react";
+import { keepTogether } from "@/lib/typography";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
@@ -27,7 +28,7 @@ export function PresenceSection() {
             </p>
             <p className="text-primary mt-6 text-sm/6">{contact.hours}</p>
           </div>
-          <div className="hover:ring-primary/25 ease-editorial relative isolate aspect-2/1 overflow-hidden rounded-xl ring-1 ring-transparent transition-shadow duration-550 motion-reduce:transition-none">
+          <div className="hover:ring-primary/25 ease-editorial relative isolate aspect-2/1 overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-550 motion-reduce:transition-none">
             <ImageWithFallback
               src={content.media.src}
               alt={content.media.alt}
@@ -42,7 +43,7 @@ export function PresenceSection() {
           {contact.offices.map((office) => (
             <li
               key={office.city}
-              className="group/office border-border hover:border-primary/30 focus-within:border-primary/30 ease-editorial flex min-w-0 flex-col rounded-xl border bg-slate-50 p-6 transition-[border-color,background-color,box-shadow] duration-500 focus-within:bg-sky-50/70 hover:bg-sky-50/70 hover:shadow-sm motion-reduce:transition-none"
+              className="group/office border-border hover:border-primary/30 focus-within:border-primary/30 ease-editorial flex min-w-0 flex-col rounded-xl border bg-slate-50 p-6 transition-colors duration-500 focus-within:bg-sky-50/70 hover:bg-sky-50/70 motion-reduce:transition-none"
             >
               <MapPin
                 aria-hidden="true"
@@ -54,7 +55,7 @@ export function PresenceSection() {
                 {office.note && ` · ${office.note}`}
               </h3>
               <address className="text-muted-foreground mt-5 text-sm/6 not-italic">
-                {office.address}
+                {keepTogether(office.address)}
               </address>
               <a
                 className="text-primary mt-auto inline-flex min-h-11 items-center pt-4 text-sm/6 font-semibold underline underline-offset-4"

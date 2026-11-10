@@ -1,8 +1,10 @@
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { keepTogether } from "@/lib/typography";
 import { BrandLogo } from "@/components/layout/brand-logo";
 import { SocialIcon } from "@/components/layout/social-icon";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { SiteLink } from "@/components/layout/site-link";
+import { directionsUrl } from "@/lib/maps";
 import { routes } from "@/lib/routes";
 import { contact } from "@/content/contact";
 import { firmBrand } from "@/content/firm";
@@ -10,6 +12,9 @@ import { footer } from "@/content/footer";
 
 const footerLinkClass =
   "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 ease-editorial motion-reduce:transition-none hover:text-white hover:underline focus-visible:text-white sm:min-h-9";
+
+const officeActionClass =
+  "inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sky-200 underline-offset-4 hover:text-white hover:underline sm:min-h-9";
 
 function FooterLink({ label, href }: { label: string; href: string }) {
   return (
@@ -39,19 +44,43 @@ export function SiteFooter() {
                     <span className="font-medium text-white">
                       {office.city}:
                     </span>{" "}
-                    {office.address}
+                    {keepTogether(office.address)}
                   </p>
                   {office.note && (
                     <p className="text-white/65">{office.note}</p>
                   )}
-                  {office.telephone && (
+                  <div className="flex flex-wrap gap-x-5">
+                    {office.telephone && (
+                      <a
+                        href={`tel:${office.telephone}`}
+                        className={officeActionClass}
+                      >
+                        <Phone
+                          aria-hidden="true"
+                          strokeWidth={1.5}
+                          className="size-3.5"
+                        />
+                        {office.phone}
+                      </a>
+                    )}
                     <a
-                      href={`tel:${office.telephone}`}
-                      className="inline-flex min-h-9 items-center rounded-sm underline-offset-4 hover:text-white hover:underline"
+                      href={directionsUrl(office)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={officeActionClass}
                     >
-                      {office.phone}
+                      <MapPin
+                        aria-hidden="true"
+                        strokeWidth={1.5}
+                        className="size-3.5"
+                      />
+                      {footer.directions}
+                      <span className="sr-only">
+                        {" "}
+                        {footer.directionsTo(office.city)}
+                      </span>
                     </a>
-                  )}
+                  </div>
                 </div>
               ))}
             </address>

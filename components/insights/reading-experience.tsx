@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
 import { motion, useTransform } from "motion/react";
 import { useSonner } from "sonner";
-import { ArticleShareControls } from "@/components/insights/share-controls";
 import { SiteLink } from "@/components/layout/site-link";
 import { ContentsList } from "@/components/shared/contents-list";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -17,16 +16,10 @@ export function ReadingExperience({
   children,
   contents,
   practices,
-  path,
-  title,
-  canonical,
 }: {
   children: ReactNode;
   contents: ArticleContentsItem[];
   practices: { slug: string; title: string }[];
-  path: string;
-  title: string;
-  canonical: string;
 }) {
   const { bodyRef, progress, visible, active, select, returnToTop } =
     useArticleReading(contents.map((item) => item.id));
@@ -43,7 +36,7 @@ export function ReadingExperience({
   return (
     <>
       <div className="grid items-start gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[20rem_minmax(0,1fr)] xl:gap-14">
-        <aside className="min-w-0 lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto">
+        <aside className="min-w-0 lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto print:hidden">
           <div className="border-border rounded-xl border bg-slate-50 p-5 lg:p-6">
             {contents.length > 0 && (
               <>
@@ -86,13 +79,6 @@ export function ReadingExperience({
                 </ul>
               </nav>
             )}
-            <div className="border-border mt-5 hidden border-t pt-5 lg:block">
-              <ArticleShareControls
-                path={path}
-                title={title}
-                canonical={canonical}
-              />
-            </div>
           </div>
         </aside>
         <article
@@ -109,7 +95,7 @@ export function ReadingExperience({
           onClick={returnToTop}
           aria-label={copy.articleTop}
           title={copy.articleTop}
-          className="text-primary border-border fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex size-12 items-center justify-center rounded-full border bg-white shadow-sm hover:bg-sky-50 sm:right-6 sm:bottom-6"
+          className="text-primary border-border fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-30 flex size-12 items-center justify-center rounded-full border bg-white shadow-sm hover:bg-sky-50 sm:right-6 sm:bottom-6 print:hidden"
         >
           <svg
             aria-hidden="true"

@@ -49,8 +49,10 @@ export const peopleDirectory = {
     "Meet the partners behind our advice. Explore their experience, areas of focus and qualifications.",
   leadership: {
     personId: "ab-mahmoud",
-    eyebrow: "The people behind the practice",
-    heading: ["Founded on experience.", "Led with purpose."],
+    // Distinct from The Firm's founder section, which uses
+    // "Founded on experience. Led with purpose." Draft for firm confirmation.
+    eyebrow: "Leadership",
+    heading: ["Meet our co-founder", "and managing partner."],
     action: "View profile",
     reviewNote: "Profile details awaiting confirmation by the firm.",
   },

@@ -30,7 +30,9 @@ export function PracticeAreaExplorer({
   return (
     <div className="practice-explorer relative isolate">
       <div className="lg:w-[46%]">{children}</div>
-      <ol className="mt-10 border-t border-white/20 lg:mt-12 lg:w-[46%]">
+      {/* Desktop rows are slimmer so the heading, all nine rows and the
+          preview card fit on one laptop screen; short screens tighten more. */}
+      <ol className="lg:short:mt-5 mt-10 border-t border-white/20 lg:mt-6 lg:w-[46%]">
         {areas.map((area, index) => {
           const active = expanded === index;
           const number = formatIndex(index);
@@ -52,9 +54,9 @@ export function PracticeAreaExplorer({
                     setSelected(active ? null : index);
                   }}
                   className={cn(
-                    "relative grid min-h-18 w-full grid-cols-[1.5rem_1fr_2rem] items-center gap-3 py-5 text-left text-white/70 hover:text-white sm:gap-4",
+                    "lg:short:min-h-12 lg:short:py-2 relative grid min-h-18 w-full grid-cols-[1.5rem_1fr_2rem] items-center gap-3 py-5 text-left text-white/70 hover:text-white sm:gap-4 lg:min-h-13 lg:py-2.5",
                     "transition-[color,transform] duration-[200ms,160ms] ease-[ease] motion-reduce:transition-none",
-                    "before:ease-editorial before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-300 motion-reduce:before:transition-none",
+                    "before:ease-editorial lg:short:before:inset-y-2 before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-300 motion-reduce:before:transition-none lg:before:inset-y-2.5",
                     active && "text-white before:scale-y-100",
                     !(isDesktop && active) &&
                       "motion-safe:active:scale-[0.985]",

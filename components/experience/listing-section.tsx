@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { ReviewNote } from "@/components/shared/review-note";
 import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { experienceCopy as copy } from "@/content/experience";
@@ -23,9 +24,7 @@ export function ExperienceListingSection({
         {copy.listingHeading}
       </h2>
       {items.some((item) => item.preview) && (
-        <p className="text-muted-foreground mt-6 border-l-2 border-sky-200 pl-4 text-xs/6">
-          {copy.previewNote}
-        </p>
+        <ReviewNote className="mt-6">{copy.previewNote}</ReviewNote>
       )}
       <ul className="mt-8 grid gap-6 md:grid-cols-2 lg:mt-10 lg:gap-8">
         {items.map((item) => (

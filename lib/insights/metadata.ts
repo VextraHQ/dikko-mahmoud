@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { createPageMetadata, getSiteUrl } from "@/lib/metadata";
+import { createPageMetadata, getSiteUrl, shareCardImage } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
 import { siteConfig } from "@/content/site";
 import type { InsightArticle, InsightQuery } from "@/types/insights";
@@ -33,7 +33,7 @@ export function insightArticleMetadata(article: InsightArticle): Metadata {
           width: image.width,
           height: image.height,
         }
-      : undefined;
+      : shareCardImage(routes.insight(article.id), article.title);
   const metadata = createPageMetadata({
     title: article.seo?.title ?? article.title,
     description: article.seo?.description ?? article.excerpt,

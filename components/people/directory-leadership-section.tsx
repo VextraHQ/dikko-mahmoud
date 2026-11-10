@@ -1,4 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
+import { keepTogether } from "@/lib/typography";
+import { ReviewNote } from "@/components/shared/review-note";
+import { PortraitFallback } from "@/components/shared/portrait-fallback";
 import { SiteLink } from "@/components/layout/site-link";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -33,12 +36,10 @@ export function DirectoryLeadershipSection({
               style={{ objectPosition: person.portrait?.position }}
               className="motion-safe:ease-editorial object-cover motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]"
               fallback={
-                <span
-                  aria-hidden="true"
-                  className="text-primary/65 absolute inset-0 flex items-center justify-center bg-slate-100 font-serif text-6xl"
-                >
-                  {person.initials}
-                </span>
+                <PortraitFallback
+                  initials={person.initials}
+                  initialsClassName="text-6xl"
+                />
               }
             />
             <ArrowUpRight
@@ -49,7 +50,7 @@ export function DirectoryLeadershipSection({
           </div>
           <figcaption className="mt-4">
             <p className="decoration-primary/40 font-serif text-lg/6 underline-offset-4 group-hover:underline sm:text-xl/7">
-              {person.name}
+              {keepTogether(person.name)}
             </p>
             <p className="text-muted-foreground mt-2 text-xs/5 sm:text-sm/6">
               {person.founderRole ?? person.role}
@@ -70,7 +71,7 @@ export function DirectoryLeadershipSection({
           ))}
         </h2>
         <p className="text-muted-foreground mt-5 max-w-2xl text-sm/7 sm:text-base/7">
-          {person.biography}
+          {person.biography && keepTogether(person.biography)}
         </p>
         {!!person.milestones?.length && (
           <dl className="mt-6 grid grid-cols-[1fr_1.5fr] gap-5 border-y border-slate-200 py-4 sm:gap-8">
@@ -99,11 +100,7 @@ export function DirectoryLeadershipSection({
               className="size-4"
             />
           </SiteLink>
-          {preview && (
-            <p className="text-muted-foreground text-xs/5">
-              {copy.leadership.reviewNote}
-            </p>
-          )}
+          {preview && <ReviewNote>{copy.leadership.reviewNote}</ReviewNote>}
         </div>
       </div>
     </section>

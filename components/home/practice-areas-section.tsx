@@ -21,14 +21,19 @@ export function PracticeAreasSection() {
           <Eyebrow className="text-white/75">{intro.eyebrow}</Eyebrow>
           <h2
             id="practice-areas-heading"
-            className="mt-4 max-w-lg font-serif text-4xl/[1.08] sm:text-5xl/[1.08] xl:text-6xl/[1.04]"
+            className="lg:short:text-5xl/[1.04] mt-4 max-w-lg font-serif text-4xl/[1.08] sm:text-5xl/[1.08] xl:text-6xl/[1.04]"
           >
             {intro.title}
           </h2>
-          <p className="mt-5 max-w-md text-sm/6 text-white/75 sm:text-base/7">
+          <p className="mt-5 max-w-md text-sm/6 text-white/75 sm:text-base/7 lg:mt-4">
             {intro.description}
           </p>
-          <ArrowButton asChild variant="inverse" className="mt-6" size="sm">
+          <ArrowButton
+            asChild
+            variant="inverse"
+            className="mt-6 lg:mt-5"
+            size="sm"
+          >
             <SiteLink href={routes.practiceAreas}>{intro.action}</SiteLink>
           </ArrowButton>
         </PracticeAreaExplorer>

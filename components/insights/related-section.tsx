@@ -16,7 +16,7 @@ export function RelatedInsightsSection({
   return (
     <section
       aria-labelledby="related-insights-heading"
-      className="mt-12 bg-slate-50 py-12 lg:mt-20 lg:py-20"
+      className="mt-12 bg-slate-50 py-12 lg:mt-20 lg:py-20 print:hidden"
     >
       <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
         <div className="flex flex-wrap items-end justify-between gap-6">

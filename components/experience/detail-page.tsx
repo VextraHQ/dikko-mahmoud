@@ -1,4 +1,5 @@
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { ReviewNote } from "@/components/shared/review-note";
 import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
@@ -28,9 +29,10 @@ export function ExperienceDetailPage({
           aria-labelledby="matter-heading"
           className="border-border border-b pt-4 pb-8 sm:pt-10 sm:pb-10 lg:pt-14 lg:pb-14"
         >
+          <Eyebrow>{experience.category}</Eyebrow>
           <h1
             id="matter-heading"
-            className="max-w-5xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
+            className="mt-4 max-w-5xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
           >
             {experience.organisation}
           </h1>
@@ -38,9 +40,7 @@ export function ExperienceDetailPage({
             {experience.summary}
           </p>
           {experience.preview && (
-            <p className="text-muted-foreground mt-5 border-l-2 border-sky-200 pl-4 text-xs/6 sm:mt-6">
-              {copy.previewNote}
-            </p>
+            <ReviewNote className="mt-5 sm:mt-6">{copy.previewNote}</ReviewNote>
           )}
         </section>
         <div className="grid items-start gap-10 pt-8 sm:pt-10 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-16 lg:pt-14">

@@ -14,6 +14,8 @@ export const footer = {
   description:
     "A full-service Nigerian law firm advising clients from Abuja and Kano since 1993.",
   officesHeading: "Offices",
+  directions: "Directions",
+  directionsTo: (city: string) => `to the ${city} office (opens Google Maps)`,
   socialHeading: "Follow us",
   contactHeading: "Speak with our team",
   consultationAction: "Contact the firm",

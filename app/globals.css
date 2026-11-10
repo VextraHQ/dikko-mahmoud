@@ -89,6 +89,28 @@ html {
   scroll-padding-top: 7rem;
 }
 
+/*
+ * Typesetting defaults: headings balance their lines, running text avoids a
+ * single word on its last line, and figures (years, amounts) line up.
+ */
+@layer base {
+  body {
+    font-variant-numeric: lining-nums;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  dd,
+  figcaption,
+  blockquote {
+    text-wrap: pretty;
+  }
+}
+
 /* Sideways-scrolling pill rows keep scrolling but hide the bar. */
 @utility scrollbar-none {
   scrollbar-width: none;

@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { keepTogether } from "@/lib/typography";
+import { ReviewNote } from "@/components/shared/review-note";
 import { ProfileDialogTitle } from "@/components/people/profile-dialog";
 import { ProfileLinks } from "@/components/people/profile-links";
 import { ProfilePortrait } from "@/components/people/profile-portrait";
@@ -33,7 +35,7 @@ export function ProfileIntro({
         ? "text-[2.5rem]/[1.1] sm:text-5xl/[1.08] xl:text-[4rem]/[1.04]"
         : "text-[2.25rem]/[1.1] sm:text-5xl/[1.08]",
     ),
-    children: profile.fullName,
+    children: keepTogether(profile.fullName),
   };
   const heading =
     variant === "dialog" ? (
@@ -59,13 +61,31 @@ export function ProfileIntro({
           <Eyebrow>{title}</Eyebrow>
           {heading}
           {profile.postnominals?.length ? (
-            <p className="text-primary mt-4 text-sm/6 font-medium">
+            <p className="text-primary mt-4 text-base/6 font-medium tracking-wide [font-variant-caps:all-small-caps]">
               {profile.postnominals.join(" · ")}
             </p>
           ) : null}
+          {person.milestones?.length ? (
+            <ul
+              aria-label={copy.milestonesLabel}
+              className="mt-4 flex flex-wrap gap-2"
+            >
+              {person.milestones.map((milestone) => (
+                <li
+                  key={milestone.year}
+                  className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs/5 text-slate-700"
+                >
+                  <span className="text-primary font-semibold">
+                    {milestone.year}
+                  </span>{" "}
+                  · {milestone.description}
+                </li>
+              ))}
+            </ul>
+          ) : null}
           {profile.summary && (
             <p className="mt-5 max-w-xl text-base/7 text-slate-700 lg:text-lg/8">
-              {profile.summary}
+              {keepTogether(profile.summary)}
             </p>
           )}
           <EnquiryButton className="mt-7">
@@ -78,9 +98,7 @@ export function ProfileIntro({
             className="mt-4"
           />
           {preview && (
-            <p className="text-muted-foreground mt-8 max-w-xl text-xs/5">
-              {copy.reviewNote}
-            </p>
+            <ReviewNote className="mt-8 max-w-xl">{copy.reviewNote}</ReviewNote>
           )}
         </div>
         <ProfilePortrait

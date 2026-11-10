@@ -24,6 +24,14 @@ const twitterImage = {
   alt: shareImageAlt,
 };
 
+/**
+ * A page's generated branded card (see components/shared/share-card.tsx),
+ * served by the `share-card.png` route beside the page.
+ */
+export function shareCardImage(path: string, alt: string): ShareImage {
+  return { url: `${path}/share-card.png`, width: 1200, height: 630, alt };
+}
+
 function absoluteImage(image: ShareImage) {
   return { ...image, url: new URL(image.url, getSiteUrl()).toString() };
 }

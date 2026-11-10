@@ -26,6 +26,7 @@ import { formatIndex } from "@/lib/format";
 import type { InsightCard } from "@/types/insights";
 import { PageTrail } from "@/components/shared/page-trail";
 import { PageContents } from "@/components/shared/page-contents";
+import { DetailHero } from "@/components/shared/detail-hero";
 
 export function PracticeDetailPage({
   practice,
@@ -59,37 +60,25 @@ export function PracticeDetailPage({
             { label: practice.title },
           ]}
         />
-        <section
-          aria-labelledby="practice-heading"
-          className="grid items-center gap-6 pt-4 pb-10 sm:gap-8 sm:pt-10 sm:pb-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pt-12 lg:pb-20"
-        >
-          <div>
-            <h1
-              id="practice-heading"
-              className="max-w-3xl font-serif text-[36px]/[1.1] text-balance sm:text-5xl/[1.08] xl:text-6xl/[1.06]"
-            >
-              {practice.title}
-            </h1>
-            <p className="text-muted-foreground mt-5 max-w-2xl text-base/7 sm:mt-8 lg:text-lg/8">
-              {detail?.introduction ?? practice.summary}
-            </p>
-            <EnquiryButton className="mt-6 sm:mt-7">
-              {copy.enquiryAction}
-            </EnquiryButton>
-          </div>
-          <div className="relative isolate aspect-4/3 overflow-hidden rounded-xl">
+        <DetailHero
+          headingId="practice-heading"
+          eyebrow={practice.category}
+          title={practice.title}
+          lead={detail?.introduction ?? practice.summary}
+          media={
             <ImageWithFallback
               src={practice.image?.src}
               alt={practice.image?.alt ?? ""}
               fill
-              sizes="(min-width: 1440px) 540px, (min-width: 1024px) 43vw, 100vw"
+              sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw"
               className="object-cover"
               fallback={
                 <EditorialCover label={practice.title} markClassName="pb-0" />
               }
             />
-          </div>
-        </section>
+          }
+          footer={<EnquiryButton>{copy.enquiryAction}</EnquiryButton>}
+        />
         <div className="grid items-start gap-10 pb-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[18rem_minmax(0,1fr)] xl:gap-16">
           <aside className="border-border rounded-xl border bg-slate-50 p-5 lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6">
             <PageContents
@@ -184,7 +173,6 @@ export function PracticeDetailPage({
                       <li key={id}>
                         <PersonCard
                           person={member}
-                          portraitClassName="aspect-square"
                           imageHoverOnly
                           sizes="(min-width: 1024px) 240px, 40vw"
                         />

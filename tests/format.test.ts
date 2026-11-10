@@ -38,6 +38,10 @@ describe("initialsFrom", () => {
   it("handles a single name", () => {
     expect(initialsFrom("Plato")).toBe("P");
   });
+
+  it("always returns capitals", () => {
+    expect(initialsFrom("sample contributor")).toBe("SC");
+  });
 });
 
 describe("formatNames", () => {

@@ -1,9 +1,9 @@
-import { ArrowLeft, ArrowUpRight, PenLine } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ArticleBody } from "@/components/insights/article-body";
 import { ArticleImage } from "@/components/insights/article-image";
-import { ArticleMeta } from "@/components/insights/article-card";
+import { typeLabel } from "@/components/insights/article-card";
 import { ArticleShareControls } from "@/components/insights/share-controls";
 import { ReadingExperience } from "@/components/insights/reading-experience";
 import { RelatedInsightsSection } from "@/components/insights/related-section";
@@ -11,7 +11,7 @@ import { InsightByline } from "@/components/shared/insight-byline";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { insightsCopy as copy } from "@/content/insight-copy";
 import { articleContents, formatInsightDate } from "@/lib/insights/article";
-import { formatIndex } from "@/lib/format";
+import { formatIndex, initialsFrom } from "@/lib/format";
 import {
   insightQueryString,
   normalizeInsightQuery,
@@ -19,6 +19,7 @@ import {
 import { routes } from "@/lib/routes";
 import type { InsightArticle, InsightCard } from "@/types/insights";
 import { PageTrail } from "@/components/shared/page-trail";
+import { DetailHero } from "@/components/shared/detail-hero";
 
 export function InsightDetailPage({
   article,
@@ -30,6 +31,7 @@ export function InsightDetailPage({
   canonical: string;
 }) {
   const contents = articleContents(article.body);
+  const heroImage = article.heroImage ?? article.image;
   const primaryPractice = article.practices.find(
     (practice) => practice.slug === article.practiceIds[0],
   );
@@ -55,76 +57,68 @@ export function InsightDetailPage({
             { label: article.title },
           ]}
         />
-        <section
-          aria-labelledby="article-heading"
-          className="grid items-center gap-6 pt-4 pb-10 sm:gap-8 sm:pt-10 sm:pb-12 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:pt-12 lg:pb-20"
-        >
-          <div>
-            <ArticleMeta article={article} />
-            <h1
-              id="article-heading"
-              tabIndex={-1}
-              className="mt-5 scroll-mt-32 font-serif text-[40px]/[1.08] text-balance sm:text-5xl/[1.08] xl:text-6xl/[1.06]"
-            >
-              {article.title}
-            </h1>
-            <p className="text-muted-foreground mt-7 max-w-2xl text-base/7 lg:text-lg/8">
-              {article.excerpt}
-            </p>
-            <div className="mt-7 flex items-center gap-3 border-t border-slate-200 pt-5">
-              <span className="text-primary flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-50">
-                <PenLine
-                  aria-hidden="true"
-                  className="size-4"
-                  strokeWidth={1.5}
-                />
-              </span>
-              <div className="min-w-0">
-                <InsightByline
-                  article={article}
-                  className="text-foreground mt-0 text-sm/6 font-medium"
-                />
-                {article.revisedAt && (
-                  <p className="text-muted-foreground text-xs/5">
-                    {copy.revised}{" "}
-                    <time dateTime={article.revisedAt}>
-                      {formatInsightDate(article.revisedAt)}
-                    </time>
-                  </p>
+        <DetailHero
+          headingId="article-heading"
+          eyebrow={[typeLabel(article.type), article.category]
+            .filter(Boolean)
+            .join(" · ")}
+          title={article.title}
+          lead={article.excerpt}
+          credit={heroImage?.credit}
+          media={
+            <ArticleImage
+              image={heroImage}
+              title={article.title}
+              eager
+              sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw"
+            />
+          }
+          footer={
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex min-w-0 items-center gap-3">
+                {article.authors[0] && (
+                  <span
+                    aria-hidden="true"
+                    className="text-primary flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-50 font-serif text-sm"
+                  >
+                    {initialsFrom(article.authors[0].name)}
+                  </span>
                 )}
+                <div className="min-w-0">
+                  <InsightByline
+                    article={article}
+                    showRole
+                    className="text-foreground mt-0 text-sm/6 font-medium"
+                  />
+                  <p className="text-muted-foreground text-xs/5">
+                    <time dateTime={article.publishedAt}>
+                      {formatInsightDate(article.publishedAt)}
+                    </time>
+                    {" · "}
+                    {article.readTimeMinutes} {copy.minRead}
+                    {article.revisedAt && (
+                      <>
+                        {" · "}
+                        {copy.revised}{" "}
+                        <time dateTime={article.revisedAt}>
+                          {formatInsightDate(article.revisedAt)}
+                        </time>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+              <div className="-mr-2 shrink-0 print:hidden">
+                <ArticleShareControls
+                  path={routes.insight(article.id)}
+                  title={article.title}
+                  canonical={canonical}
+                />
               </div>
             </div>
-            <div className="mt-6 lg:hidden">
-              <ArticleShareControls
-                path={routes.insight(article.id)}
-                title={article.title}
-                canonical={canonical}
-              />
-            </div>
-          </div>
-          <figure>
-            <div className="relative isolate aspect-4/3 overflow-hidden rounded-xl">
-              <ArticleImage
-                image={article.heroImage ?? article.image}
-                title={article.title}
-                eager
-                sizes="(min-width: 1440px) 580px, (min-width: 1024px) 44vw, 92vw"
-              />
-            </div>
-            {(article.heroImage ?? article.image)?.credit && (
-              <figcaption className="text-muted-foreground mt-2 text-[10px]/5">
-                Photo: {(article.heroImage ?? article.image)?.credit}
-              </figcaption>
-            )}
-          </figure>
-        </section>
-        <ReadingExperience
-          contents={contents}
-          practices={article.practices}
-          path={routes.insight(article.id)}
-          title={article.title}
-          canonical={canonical}
-        >
+          }
+        />
+        <ReadingExperience contents={contents} practices={article.practices}>
           <ArticleBody blocks={article.body} />
           {article.references.length > 0 && (
             <section
@@ -183,7 +177,7 @@ export function InsightDetailPage({
           </p>
           <SiteLink
             href={routes.insights}
-            className="text-primary mt-5 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm/6 underline-offset-4 hover:underline"
+            className="text-primary mt-5 inline-flex min-h-11 items-center gap-2 rounded-sm text-sm/6 underline-offset-4 hover:underline print:hidden"
           >
             <ArrowLeft
               aria-hidden="true"

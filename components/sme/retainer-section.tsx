@@ -1,4 +1,5 @@
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { ReviewNote } from "@/components/shared/review-note";
 import { practiceCopy } from "@/content/practice-index";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
@@ -42,9 +43,7 @@ export function RetainerSection() {
             </ArrowButton>
           </div>
         </div>
-        <p className="text-muted-foreground mt-8 text-xs/5">
-          {copy.reviewNote}
-        </p>
+        <ReviewNote className="mt-8">{copy.reviewNote}</ReviewNote>
       </section>
       <section
         aria-labelledby="sme-tracks-heading"

@@ -50,7 +50,7 @@ function authorsFor(source: InsightSource): InsightAuthor[] {
     const demo =
       source.demoOnly && demoInsightAuthors.find((entry) => entry.id === id);
     return person
-      ? [{ id, name: person.name, profileSlug: person.slug }]
+      ? [{ id, name: person.name, role: person.role, profileSlug: person.slug }]
       : demo
         ? [{ ...demo }]
         : [];

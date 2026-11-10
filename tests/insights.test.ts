@@ -502,7 +502,7 @@ describe("media, shares, metadata and routes", () => {
     expect(metadata.alternates?.canonical).toBe(routes.insight(article.id));
     expect(metadata.description).toBe(article.excerpt);
     expect(JSON.stringify(metadata.openGraph?.images)).toContain(
-      "opengraph-image.png",
+      `${routes.insight(article.id)}/share-card.png`,
     );
     expect(metadata.robots).toEqual({ index: false, follow: true });
     expect(insightStructuredData(article)).toBeNull();

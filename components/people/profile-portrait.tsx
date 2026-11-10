@@ -1,4 +1,5 @@
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
+import { PortraitFallback } from "@/components/shared/portrait-fallback";
 import type { Person } from "@/content/people";
 import { cn } from "@/lib/utils";
 
@@ -27,14 +28,10 @@ export function ProfilePortrait({
         className="object-cover"
         style={{ objectPosition: person.portrait?.position ?? "top" }}
         fallback={
-          <span
-            aria-hidden="true"
-            className="absolute inset-0 flex items-center justify-center bg-linear-to-br from-white to-slate-100"
-          >
-            <span className="text-primary/65 font-serif text-6xl">
-              {person.initials}
-            </span>
-          </span>
+          <PortraitFallback
+            initials={person.initials}
+            initialsClassName="text-6xl"
+          />
         }
       />
     </div>

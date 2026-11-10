@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import { keepTogether } from "@/lib/typography";
+import { PortraitFallback } from "@/components/shared/portrait-fallback";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { cn } from "@/lib/utils";
 import type { Person } from "@/content/people";
@@ -57,21 +59,13 @@ export function PersonCard({
           )}
           style={{ objectPosition: person.portrait?.position }}
           fallback={
-            <span
-              aria-hidden="true"
+            <PortraitFallback
+              initials={person.initials}
               className={cn(
-                "absolute inset-0 flex items-center justify-center bg-linear-to-br from-slate-100 to-slate-200 px-2 text-center",
                 imageHoverOnly &&
                   "motion-safe:ease-editorial motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]",
               )}
-            >
-              <span
-                aria-hidden="true"
-                className="text-primary/65 font-serif text-4xl sm:text-5xl"
-              >
-                {person.initials}
-              </span>
-            </span>
+            />
           }
         />
         <span
@@ -90,7 +84,7 @@ export function PersonCard({
         </span>
       </span>
       <span className="decoration-primary/40 mt-4 font-serif text-lg/6 underline-offset-4 group-hover:underline sm:text-xl/7">
-        {person.name}
+        {keepTogether(person.name)}
       </span>
       {role.trim() && (
         <span className="text-muted-foreground mt-auto pt-2 text-xs/5 sm:pt-3 sm:text-sm/6">

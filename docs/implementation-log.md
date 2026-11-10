@@ -628,3 +628,117 @@ No deployment, external readiness or client publication approval is implied.
   the built `/the-firm` HTML.
 - Formatting, lint, type checking, all 157 tests and the webpack production
   build passed.
+
+## 2026-11-10 — Practice detail hero spacing on tablet and desktop
+
+- Tablet: the breadcrumb sits 24px under the header (was 40px), and the title
+  24px under the breadcrumb (was 40px).
+- Desktop: the hero text is top-aligned with the image instead of centred, so
+  the title and image both start 32px under the breadcrumb (the title was
+  103px down). Phones unchanged.
+- File: `components/practices/detail-page.tsx`.
+- Checks: browser measurements at 768px and 1440px; format check, lint,
+  typecheck.
+
+## 2026-11-10 — Firm-grade polish round (no new client content)
+
+- Outcome:
+  - **One preview banner:** a floating, dismissible notice
+    (`components/layout/preview-banner.tsx`, `hooks/use-session-dismiss.ts`)
+    shows while the site is not indexable. Per-section "awaiting confirmation"
+    notes now go through `ReviewNote` and stay hidden unless
+    `siteConfig.reviewNotes` is on. Content placeholders such as FAQ answers
+    and legal text are unchanged.
+  - **Portraits:** a shared `PortraitFallback` for cards, profiles and the
+    People feature. The practice people grid uses the standard 4:5 crop.
+  - **Typesetting:** `keepTogether` (`lib/typography.ts`) handles initials,
+    post-nominals, "No. 10", "s. 1(1)" and year ranges. Headings balance,
+    paragraphs wrap without orphans, figures use lining numerals.
+    Post-nominals on profiles are in small caps. Three straight apostrophes
+    in article bodies are now curly.
+  - **Credentials:** the existing career milestones show as chips on
+    profiles. Firm and People already show them.
+  - **Insights:** the byline adds the author's firm role for real authors.
+    The disclaimer and revised date already existed. Articles gain a Print
+    button.
+  - **Footer:** each office has a Directions link (Google Maps search, new
+    tab) beside call. No RC number.
+  - **People copy:** the leadership block is now "Leadership / Meet our
+    co-founder and managing partner." so it no longer repeats The Firm. This
+    is a draft for firm confirmation.
+  - **Printing:** site chrome, actions, trail, contents, related and the
+    enquiry card are hidden. External links print their address.
+  - **Share cards:** branded 1200×630 cards for articles (used only when no
+    wide editor image exists) and practice areas, through `share-card.png`
+    routes and `shareCardImage`. Profiles deliberately keep the generic firm
+    card; there is no profile card, vCard or profile print control.
+  - **Hover:** shadows removed from Firm and Practice cards. The link, arrow
+    and hover rule is recorded in `docs/design-system.md`.
+- Gates:
+  - Share cards: static TTFs of Newsreader 400 and Manrope 600 were
+    downloaded from Google Fonts (SIL Open Font License) into
+    `app/fonts/share/`, with the user's approval, so the cards use the brand
+    fonts.
+  - Home: the banner overlays it, and the global wrap and numeral rules
+    apply. Home layout and markup are unchanged.
+- Checks: format:check, lint, typecheck, test (162) and build passed. Both
+  share cards were fetched from a production build. The profile, People and
+  footer were checked at 1440px.
+
+## 2026-11-10 — Home practice areas fit one desktop screen (user-approved)
+
+- Approved from a wireframe as a change to the held homepage section.
+  Desktop only; phones and tablets unchanged.
+- Rows are 53px (were 73px), the list sits closer to the button, and the intro
+  gaps are 4px tighter. On short screens (`short:`, under 760px tall) rows are
+  49px and the heading is 48px (was 60px).
+- Measured: the explorer is 815px at 1440×900 (was 1,027px), so with the
+  floating header the heading, all nine rows and the full card fit on screen.
+  At 1440×740 it is 700px; the heading's top edge sits just under the header.
+- Files: `components/home/practice-area-explorer.tsx`,
+  `components/home/practice-areas-section.tsx`.
+- Checks: browser measurements and a screenshot at 1440×900; format check (own
+  files), lint, typecheck, tests.
+
+## 2026-11-10 — Print preview label and real directions
+
+- Outcome:
+  - **Print label:** while the site is not indexable, a print-only line
+    ("Presentation preview · content pending firm approval") heads every
+    printed page or PDF, because the floating banner is hidden on paper
+    (`components/layout/site-shell.tsx`). It shows even after a visitor
+    closes the on-screen notice.
+  - **Directions:** footer Directions links now open Google Maps
+    turn-by-turn directions (`/maps/dir/?api=1&destination=`) instead of an
+    address search. Offices take an optional `pin` (latitude/longitude) in
+    `content/contact.ts`; when set, directions use it.
+- Gate: the office pins are to be confirmed with the firm during the Contact
+  page work. Until then directions route to the address, and coordinates are
+  never guessed.
+- Checks: format:check, lint, test and build passed. The label is present
+  and hidden on screen, with its print rule in the CSS. Footer links were
+  checked in the browser. Print output was not opened in a print dialog.
+- Follow-up: Print moved out of the article share icons to a text action
+  ("Print article") under them. The circles are now 40px with no wrapping,
+  so up to five share icons fit on one line in the 18rem sidebar. Checked at
+  1024px. Lint, typecheck, format and test passed.
+
+## 2026-11-10 — A+ detail hero (user-approved)
+
+- Outcome: the article and practice heroes now use one split hero
+  (`DetailHero`). The title starts level with the photo top and the byline
+  or enquiry rule sits on its bottom edge. The photo runs to the page edge
+  on desktop and comes first, full width, on phones. The eyebrow shows the
+  type and category, and the meta line is plain text. Article share moved
+  from the sidebar into the byline as copy link, LinkedIn and a "More"
+  popover (X, WhatsApp, other apps, print). Matter pages gained the
+  category eyebrow. `initialsFrom` now always returns capitals.
+- Files: `components/shared/detail-hero.tsx` (new),
+  `components/insights/detail-page.tsx`, `share-controls.tsx`,
+  `reading-experience.tsx`, `article-card.tsx` (exports `typeLabel`),
+  `components/practices/detail-page.tsx`,
+  `components/experience/detail-page.tsx`, `content/insight-copy.ts`,
+  `lib/format.ts`, `tests/format.test.ts`, `docs/design-system.md`.
+- Checks: format:check, lint, typecheck, test (164) and build. Checked in
+  the browser at 1440px and on a 375px phone (article, practice, matter).
+  The More menu opened under its button at 1440px.

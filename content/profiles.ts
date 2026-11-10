@@ -32,6 +32,7 @@ export const profileCopy = {
   backToPeople: "Back to our people",
   contentsLabel: "On this page",
   overviewLabel: "Overview",
+  milestonesLabel: "Career milestones",
   overviewHeading: ["Experience. Perspective.", "Personal commitment."],
   focusLabel: "Areas of focus",
   qualificationsLabel: "Qualifications & memberships",

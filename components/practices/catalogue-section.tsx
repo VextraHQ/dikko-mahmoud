@@ -77,7 +77,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
               key={practice.slug}
               className="row-span-4 grid min-w-0 grid-rows-subgrid pb-6"
             >
-              <article className="border-border hover:border-primary/50 ease-editorial row-span-4 grid grid-rows-subgrid rounded-xl border p-6 transition-[border-color,box-shadow] duration-500 hover:shadow-sm">
+              <article className="border-border hover:border-primary/50 ease-editorial row-span-4 grid grid-rows-subgrid rounded-xl border p-6 transition-colors duration-500">
                 <div className="flex items-center justify-between gap-4">
                   <span className="font-serif text-3xl/9">
                     {formatIndex(

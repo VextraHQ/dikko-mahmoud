@@ -28,7 +28,7 @@ const typeIcons: Record<InsightType, LucideIcon> = {
   "firm-news": Megaphone,
 };
 
-function typeLabel(type: InsightType) {
+export function typeLabel(type: InsightType) {
   return insightTypes.find((item) => item.value === type)?.label;
 }
 

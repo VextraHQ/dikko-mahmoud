@@ -1,4 +1,5 @@
 import { PersonCard } from "@/components/shared/person-card";
+import { keepTogether } from "@/lib/typography";
 import { EditorialCover } from "@/components/shared/editorial-cover";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmPeople as content } from "@/content/firm";
@@ -30,7 +31,7 @@ export function FirmPeopleSection() {
                 role={founder.founderRole}
                 sizes="(min-width: 1440px) 440px, (min-width: 1024px) 35vw, (min-width: 640px) 448px, calc(100vw - 32px)"
                 imageHoverOnly
-                portraitClassName="aspect-square shadow-primary/5 transition-shadow duration-550 ease-editorial hover:shadow-lg group-focus-visible:shadow-lg motion-reduce:transition-none"
+                portraitClassName="aspect-square transition-colors duration-550 ease-editorial motion-reduce:transition-none"
               />
             </div>
           )}
@@ -48,7 +49,7 @@ export function FirmPeopleSection() {
             </h2>
             {founder?.biography && (
               <p className="text-muted-foreground mt-8 text-base/7">
-                {founder.biography}
+                {keepTogether(founder.biography)}
               </p>
             )}
             {founder?.milestones && (
@@ -88,7 +89,7 @@ export function FirmPeopleSection() {
                           <PersonCard
                             person={person}
                             imageHoverOnly
-                            portraitClassName="aspect-square shadow-primary/5 transition-shadow duration-550 ease-editorial hover:shadow-lg group-focus-visible:shadow-lg motion-reduce:transition-none"
+                            portraitClassName="aspect-square transition-colors duration-550 ease-editorial motion-reduce:transition-none"
                             sizes="(min-width: 1440px) 400px, (min-width: 1024px) 30vw, 46vw"
                           />
                         </li>,
@@ -97,7 +98,7 @@ export function FirmPeopleSection() {
                 })}
                 {pendingSlots(group.id, group.pendingSlots).map((slot) => (
                   <li key={slot.id} className="min-w-0">
-                    <div className="group/portrait shadow-primary/5 hover:ring-primary/20 ease-editorial relative isolate aspect-square overflow-hidden rounded-xl ring-1 ring-transparent transition-shadow duration-550 hover:shadow-lg motion-reduce:transition-none">
+                    <div className="group/portrait hover:ring-primary/20 ease-editorial relative isolate aspect-square overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-550 motion-reduce:transition-none">
                       <div className="motion-safe:ease-editorial absolute inset-0 motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02]">
                         <EditorialCover
                           mark={slot.mark}

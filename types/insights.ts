@@ -78,7 +78,13 @@ export type InsightSource = {
   seo?: { title?: string; description?: string; image?: InsightImage };
 };
 
-export type InsightAuthor = { id: string; name: string; profileSlug?: string };
+export type InsightAuthor = {
+  id: string;
+  name: string;
+  /** The author's role at the firm, from their People record. */
+  role?: string;
+  profileSlug?: string;
+};
 
 export type InsightCard = Omit<
   InsightSource,

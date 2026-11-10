@@ -181,6 +181,44 @@ do not show permanent loading skeletons for assets that do not exist. Approved
 media replaces the fallback without redesigning the card. See architecture for
 the narrow client boundary and missing-content selection rules.
 
+### Links, arrows and hover (2026-11-10)
+
+- `ArrowUpRight` opens something: a card, a profile, a detail page or an
+  external site. `ArrowRight` moves along a sequence or into a list
+  ("Next practice", "All insights in this area"). `ArrowLeft` goes back.
+- Links inside running text are always underlined. Standalone text links
+  underline on hover.
+- Hover feedback is colour and border only: no lift, no shadow. Image zoom
+  inside a card stays (a 2–4% scale).
+- Portrait placeholders use the shared `PortraitFallback`, so every card,
+  profile and feature shows the same initials treatment until photographs
+  arrive. Card grids use the 4:5 portrait crop.
+
+### Detail page hero (2026-11-10)
+
+- Articles and practice areas share `DetailHero`
+  (`components/shared/detail-hero.tsx`), a split hero. The eyebrow starts
+  level with the photo's top edge, and the footer rule (byline or enquiry
+  button) sits on its bottom edge. On desktop the photo runs to the page
+  edge. On phones it comes first, full width, then the text.
+- The eyebrow carries the type and category ("Article · Intellectual
+  Property & Technology"). The meta line is plain text with mid-dots.
+  Icons appear only on things you can press.
+- Article share is one quiet row in the byline: copy link, LinkedIn and a
+  "More" menu (X, WhatsApp, other apps on supported devices, print). Line
+  icons at 18px have no circles. The menu is a native popover anchored
+  under its button. Browsers without anchor positioning show it centred.
+- Matter pages have no photo, so they keep a text hero with the same
+  category eyebrow.
+
+### Typesetting
+
+Global rules in `app/globals.css`: headings balance their lines, running text
+avoids a single word on its last line, and figures use lining numerals.
+Render names, addresses and citations through `keepTogether`
+(`lib/typography.ts`) so initials, post-nominals and "No. 10" never split.
+Post-nominals on profiles use small caps.
+
 ## Interaction boundaries
 
 Button and the mobile Sheet are implemented with the minimal shadcn pattern:
