@@ -18,7 +18,7 @@ import {
   validInsightImage,
 } from "@/lib/insights/article";
 import { matchesSearch } from "@/lib/search";
-import { hasInsightFilters, insightPageSize } from "@/lib/insights/query";
+import { defaultInsightView, insightPageSize } from "@/lib/insights/query";
 import {
   insightTypes,
   type InsightArticle,
@@ -254,15 +254,10 @@ export function selectInsightPage(
     ordered.find((source) => source.id === insightSelection.featuredId) ??
     ordered[0];
 
-  // The featured article always sits in the hero. The unfiltered archive
-  // leaves it out so it never appears twice; a search or filter can still
-  // find it. A one-article catalogue keeps it in both places.
-  const hideFeatured =
-    !!featured && !hasInsightFilters(query) && ordered.length > 1;
-
+  // Archive membership stays stable when the editor changes the feature.
+  // The hero highlights it only on the default first page.
   const matched = ordered.filter(
     (source) =>
-      !(hideFeatured && source === featured) &&
       (!query.type || source.type === query.type) &&
       (!query.practice || source.practiceIds.includes(query.practice)) &&
       matchesSearch(
@@ -298,7 +293,8 @@ export function selectInsightPage(
         .filter((type) => eligible.some((source) => source.type === type.value))
         .map((type) => ({ ...type })),
     },
-    featured: featured ? toCard(featured, data) : null,
+    featured:
+      featured && defaultInsightView(query) ? toCard(featured, data) : null,
   };
 }
 

@@ -3,6 +3,7 @@
 import type { ReactNode } from "react";
 import { Check, ChevronDown, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { NativeSelect } from "@/components/ui/native-select";
 import {
   Dialog,
   DialogClose,
@@ -18,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useFilterSelect } from "@/hooks/use-filter-select";
+import { useHydrated } from "@/hooks/use-hydrated";
 import { cn } from "@/lib/utils";
 
 export type FilterOption = { value: string; label: string };
@@ -36,11 +38,13 @@ const triggerClass = cn(
 
 /**
  * One filter dropdown: a themed menu on desktop and, with `sheet`, a bottom
- * sheet with large touch targets on phones. Both are server-rendered and CSS
- * shows one, so refreshing never flashes a different control.
+ * sheet with large touch targets on phones. A named form field starts as a
+ * native select, so GET forms work without JavaScript; hydration enhances it.
+ * The two enhanced controls use CSS breakpoints without swapping on resize.
  */
 export function FilterSelect({
   id,
+  name,
   label,
   value,
   options,
@@ -51,6 +55,7 @@ export function FilterSelect({
   className,
 }: {
   id: string;
+  name?: string;
   label: string;
   value: string;
   options: readonly FilterOption[];
@@ -63,9 +68,30 @@ export function FilterSelect({
   const { menuOpen, setMenuOpen, sheetOpen, setSheetOpen, select } =
     useFilterSelect(onChange);
   const current = options.find((option) => option.value === value);
+  const hydrated = useHydrated();
+
+  if (name && !hydrated)
+    return (
+      <div className={cn("min-w-0", className)}>
+        <NativeSelect
+          id={id}
+          name={name}
+          aria-label={label}
+          defaultValue={value}
+          className={cn(underlineFieldClass, "px-0 pr-9")}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </NativeSelect>
+      </div>
+    );
 
   return (
     <div className={cn("min-w-0", className)}>
+      {name && <input type="hidden" name={name} value={value} />}
       <div className={cn(sheet && "hidden lg:block")}>
         <Select
           value={value || allValue}

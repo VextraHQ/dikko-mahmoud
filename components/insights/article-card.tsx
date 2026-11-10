@@ -189,6 +189,10 @@ export function CompactArticleCard({
           <h3 className="group-hover/compact:text-primary line-clamp-2 font-serif text-lg/6 transition-colors duration-300 motion-reduce:transition-none">
             {article.title}
           </h3>
+          <InsightByline
+            article={article}
+            className="text-muted-foreground mt-1"
+          />
           <ArticleMeta
             article={article}
             showType={false}

@@ -593,3 +593,38 @@ No deployment, external readiness or client publication approval is implied.
 - Checks: format:check, lint, typecheck, test (153) and build (66 static
   pages) passed.
 - Gate: Home stays on visual hold and was measured but not changed.
+
+## 2026-11-04 — Insights review follow-up
+
+- Added the shared author byline to `CompactArticleCard`, including phone
+  archive rows and brief practice-page strips. Names can wrap naturally.
+- Named `FilterSelect` fields now server-render labelled native selects with
+  real option values. Hydration enhances them to the existing shadcn desktop
+  menu/mobile sheet. The component owns its single named hidden value after
+  hydration; removed duplicate field ownership from the Insights toolbar.
+  People keeps its existing unnamed control and separately owned form field.
+- Featured content appears only in the default newest-first, unfiltered first
+  page. The archive always includes every eligible article (27 demo records,
+  three pages of nine), so changing the feature cannot change membership/counts.
+  Feature visibility changes keep the toolbar in view and retain input focus;
+  pagination still focuses the archive heading.
+- Updated the route contract and shared-control architecture. Added regression
+  checks for the native server field, brief/full compact bylines and feature /
+  pagination rules.
+- Verification: format:check, lint, typecheck, test (157 tests across 17 files),
+  `git diff --check` and `pnpm exec next build --webpack` passed (66 static
+  pages). Browser checks covered 320/390/1440px, compact attribution, practice
+  strip attribution, themed practice selection and sorting, feature hide/restore,
+  retained search focus and page-two heading focus. Checked narrow views had no
+  horizontal page overflow. Raw server HTML and the SSR regression test confirm
+  selected native practice/sort values and one named field each; a browser with
+  JavaScript disabled was not separately exercised. No CMS/provider/deployment
+  changes; previews remain no-index.
+
+## 2026-11-09 — Firm hero image loading
+
+- Set The Firm hero poster to `loading="eager"` through the shared
+  `VideoPoster` component. Confirmed the attribute on the poster image in
+  the built `/the-firm` HTML.
+- Formatting, lint, type checking, all 157 tests and the webpack production
+  build passed.

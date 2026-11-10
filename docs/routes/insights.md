@@ -78,6 +78,9 @@ measured production performance problems. Do not edit that repository.
    long practice choices. Touch targets >=44px; visible focus matches People.
    On mobile: full-width search, then Type and Practice controls as space permits;
    result count/sort/clear wrap naturally. Controls work with a keyboard.
+   Named dropdowns server-render as labelled native selects, then enhance after
+   hydration. Each owns its form name exactly once; the fallback submits actual
+   values through the GET form, including the empty “All” value.
 10. Type is Article, Case note or Regulatory update. Practice options reference the
     existing nine-practice catalogue, never a second hardcoded practice list.
     Only practices used by eligible articles appear. Keep selected valid filters
@@ -90,6 +93,13 @@ measured production performance problems. Do not edit that repository.
     is added from the iProduce reference.
 
 ### Pagination scale decision
+
+Compact phone archive cards and practice-page strips retain the author byline.
+On 4 November the user authorised the review fixes: bylines on compact cards,
+native dropdown fallback, and a feature only in the default first-page view.
+The full archive includes all 27 demo articles (9 per page); selection of the
+feature never removes an article from pagination. Hiding/restoring the feature
+keeps the search toolbar visible without taking input focus.
 
 Use the same asynchronous `getInsightPage(query)` interface with local data now
 and a Sanity adapter later: items, total, page, pageSize and available facets.

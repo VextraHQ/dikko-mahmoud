@@ -23,6 +23,7 @@ import {
 } from "@/lib/insights/metadata";
 import {
   hasInsightFilters,
+  defaultInsightView,
   insightPageNumbers,
   insightQueryString,
   normalizeInsightQuery,
@@ -119,7 +120,6 @@ describe("CMS-compatible records and homepage synchronization", () => {
       { ...demoInsightIndex[0], publishedAt: "2026-09-15T12:00:00+05:00" },
       { ...demoInsightIndex[1], publishedAt: "2026-09-15T08:00:00Z" },
     ];
-    // A type filter keeps the featured article in the list being checked.
     expect(
       selectInsightPage({ ...defaults, type: index[0].type }, preview, {
         ...data,
@@ -273,19 +273,39 @@ describe("server archive selection", () => {
     const pages = [1, 2, 3].map((page) =>
       selectInsightPage({ ...defaults, page }, preview),
     );
-    // The featured article lives in the hero, so the archive lists the other 26.
-    expect(pages.map((page) => page.items.length)).toEqual([9, 9, 8]);
+    expect(pages.map((page) => page.items.length)).toEqual([9, 9, 9]);
     const ids = pages.flatMap((page) => page.items.map((item) => item.id));
-    expect(new Set(ids).size).toBe(26);
-    expect(ids).not.toContain("patent-registration-nigeria");
+    expect(new Set(ids).size).toBe(27);
+    expect(ids).toContain("patent-registration-nigeria");
+    expect(pages.map((page) => page.featured?.id ?? null)).toEqual([
+      "patent-registration-nigeria",
+      null,
+      null,
+    ]);
     expect(
-      pages.every(
-        (page) =>
-          page.featured?.id === "patent-registration-nigeria" &&
-          page.total === 26 &&
-          page.totalPages === 3,
-      ),
+      pages.every((page) => page.total === 27 && page.totalPages === 3),
     ).toBe(true);
+  });
+  it("puts results first for search, filters and alternate sorting without changing archive membership", () => {
+    expect(defaultInsightView(defaults)).toBe(true);
+    for (const patch of [
+      { q: "patent" },
+      { type: "article" },
+      { practice: "intellectual-property-technology" },
+      { sort: "oldest" as const },
+      { page: 2 },
+    ]) {
+      const query = { ...defaults, ...patch };
+      expect(defaultInsightView(query)).toBe(false);
+      expect(selectInsightPage(query, preview).featured).toBeNull();
+    }
+    const newest = selectInsightPage(defaults, preview);
+    const oldest = selectInsightPage({ ...defaults, sort: "oldest" }, preview);
+    expect(oldest.total).toBe(newest.total);
+    expect(
+      selectInsightPage({ ...defaults, q: "patent nigeria" }, preview).items[0]
+        .id,
+    ).toBe(newest.featured?.id);
   });
   it("filters title/body/type/practice before slicing and keeps facets on no matches", () => {
     const page = selectInsightPage(
@@ -345,10 +365,7 @@ describe("server archive selection", () => {
         .map((source) => ({ ...source, publishedAt: first.publishedAt })),
     };
     const page = selectInsightPage(defaults, preview, tied);
-    const expected = tied.index
-      .map((source) => source.id)
-      .filter((id) => id !== page.featured?.id)
-      .sort();
+    const expected = tied.index.map((source) => source.id).sort();
     expect(page.items.map((item) => item.id)).toEqual(expected);
   });
   it("excludes the current article and ranks same-practice related articles first", () => {

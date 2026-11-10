@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { insightQueryString } from "@/lib/insights/query";
+import { defaultInsightView, insightQueryString } from "@/lib/insights/query";
 import { routes } from "@/lib/routes";
 import type { InsightQuery } from "@/types/insights";
 
@@ -32,11 +32,13 @@ export function useInsightFilters(query: InsightQuery): {
       previous.practice === query.practice &&
       previous.sort === query.sort;
     previousQuery.current = query;
-    // Filters keep the reader where they are. A new page moves them to the
-    // top of the archive, with focus there for keyboard users.
-    if (changedPage) {
+    // Removing/restoring the feature changes the archive's vertical position.
+    // Keep the toolbar in view, preserving input focus while typing.
+    const changedFeature =
+      defaultInsightView(previous) !== defaultInsightView(query);
+    if (changedPage || changedFeature) {
       const heading = document.getElementById("insight-archive-heading");
-      heading?.focus({ preventScroll: true });
+      if (changedPage) heading?.focus({ preventScroll: true });
       heading?.scrollIntoView({ block: "start", behavior: "instant" });
     }
     const own = sent.current.indexOf(serverKey);

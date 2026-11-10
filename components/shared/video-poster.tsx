@@ -13,12 +13,14 @@ export function VideoPoster({
   poster,
   video,
   title,
+  loading,
   className,
   sizes = "100vw",
 }: {
   poster: { src: string | null; alt: string };
   video?: PosterVideo;
   title: string;
+  loading?: "eager" | "lazy";
   className?: string;
   sizes?: string;
 }) {
@@ -88,6 +90,7 @@ export function VideoPoster({
           <ImageWithFallback
             src={poster.src}
             alt={poster.alt}
+            loading={loading}
             fill
             sizes={sizes}
             className="object-cover"

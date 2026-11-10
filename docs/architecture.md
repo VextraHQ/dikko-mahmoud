@@ -452,7 +452,11 @@ options and check indicator. Directory usage owns the underlined navy focus/open
 state. The select has an explicit value callback; a hidden form field retains the
 selected practice when search or role changes. `PracticeFilter` uses this menu
 from the shared desktop breakpoint (64rem) and the existing Radix Dialog as a
-bottom sheet below it. `usePracticeFilter` owns media/open state and closes on
-breakpoint changes; no additional drawer dependency is needed. NativeSelect
-remains available for other forms; no theme reset or new styling framework was
-added.
+bottom sheet below it. `components/shared/filter-select.tsx` composes the control;
+`useFilterSelect` owns separate menu/sheet state and closes both on breakpoint
+changes. A supplied `name` enables a labelled NativeSelect on the server and
+before hydration. After hydration, shadcn controls replace it and the component
+owns one hidden field for the named value. Insights supplies practice/type/sort
+names directly; its toolbar must not duplicate these hidden fields. People
+retains its existing unnamed control and separately owned practice form field.
+No additional drawer dependency or styling framework is needed.

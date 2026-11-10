@@ -91,9 +91,9 @@ export function InsightsToolbar({
         </div>
         {facets.practices.length > 0 && (
           <>
-            <input type="hidden" name="practice" value={draft.practice} />
             <FilterSelect
               id="insights-practice"
+              name="practice"
               label={copy.practiceLabel}
               closeLabel={copy.closeOptions}
               value={draft.practice}
@@ -137,9 +137,9 @@ export function InsightsToolbar({
         )}
         {facets.types.length > maxTypePills && (
           <>
-            <input type="hidden" name="type" value={draft.type} />
             <FilterSelect
               id="insights-type"
+              name="type"
               label={copy.typeLabel}
               closeLabel={copy.closeOptions}
               value={draft.type}
@@ -152,6 +152,7 @@ export function InsightsToolbar({
         )}
         <FilterSelect
           id="insights-sort"
+          name="sort"
           label={copy.sortLabel}
           value={draft.sort}
           options={[
@@ -170,7 +171,6 @@ export function InsightsToolbar({
           }
           className="ml-auto w-44"
         />
-        <input type="hidden" name="sort" value={draft.sort} />
       </div>
 
       <div className="border-border mt-5 flex min-h-12 flex-wrap items-center justify-between gap-x-6 gap-y-2 border-t pt-4 text-sm/6">

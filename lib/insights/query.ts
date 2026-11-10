@@ -41,6 +41,12 @@ export function hasInsightFilters(query: InsightQuery) {
   return !!(query.q || query.type || query.practice);
 }
 
+export function defaultInsightView(query: InsightQuery) {
+  return (
+    !hasInsightFilters(query) && query.sort === "newest" && query.page === 1
+  );
+}
+
 export function insightPageNumbers(
   current: number,
   total: number,
