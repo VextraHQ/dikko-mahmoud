@@ -15,7 +15,7 @@ describe("filter form progressive enhancement", () => {
         value: "energy",
         options: [
           { value: "", label: "All practice areas" },
-          { value: "energy", label: "Energy & Oil & Gas" },
+          { value: "energy", label: "Energy, Oil & Gas" },
         ],
         sheet: true,
       }),

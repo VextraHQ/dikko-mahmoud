@@ -93,7 +93,7 @@ remain outside this presentation checkpoint.
 | `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation                          |
 | `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections                          |
 | `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback, EmptyState and EnquiryCta |
-| `components/ui/`               | Shared controls, form primitives, Accordion/Avatar, Carousel, Marquee and Sonner toasts             |
+| `components/ui/`               | Shared controls, form primitives, Accordion, Carousel, Marquee and Sonner toasts                    |
 | `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts                    |
 | `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                            |
 | `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                                          |
@@ -297,8 +297,8 @@ Accordion. Its first item opens initially, at most one stays open, and every ite
 can close. Radix owns state, ARIA relationships and arrow/Home/End keyboard
 navigation; there is no section-level accordion state or height measurement.
 A `noscript` native disclosure list reuses the same server-rendered answers.
-The office thumbnail keeps ImageWithFallback; small identity circles in FAQ and
-client perspectives use the shared Radix Avatar/Image/Fallback primitives.
+The office thumbnail keeps ImageWithFallback. The FAQ support panel has no
+identity circles (removed at the client's request, 11 November 2026).
 Starter copy and the `Faq` record shape live
 in `content/faqs.ts`. The shared section accepts explicit `intro` and ordered `items`; its narrow
 heading class override matches the Firm mobile reference. Home retains a thin
@@ -330,7 +330,7 @@ A changed URL gets another attempt. Its only state is a failed source URL;
 there are no effects, timers or retry loops. The decorative EditorialCover
 shares brand typography/rules; it is not a section/card configuration engine.
 BrandLogo, hero, story, practice, client logos, People and Insights reuse this
-boundary. Small identity circles use the shared Avatar boundary described above. No service, new package or global stylesheet is involved.
+boundary. No service, new package or global stylesheet is involved.
 
 Hero image decode rejection is allowed to complete selection into that slide's
 own fallback. The existing carousel request counter still rejects stale results.
@@ -362,8 +362,8 @@ replacing an image after a network error requires the client error callback.
 ## Dependencies and deferred work
 
 CVA/Radix Slot support the shared Button; Radix Dialog supports Sheet/notices;
-Embla and its Fade plugin support the hero; Radix Accordion/Avatar support shared
-disclosures and identity circles. Lucide supplies ordinary UI icons; React Icons
+Embla and its Fade plugin support the hero; Radix Accordion supports shared
+disclosures. Lucide supplies ordinary UI icons; React Icons
 Font Awesome 6 supplies social brands through the server-rendered SocialIcon map.
 Sonner supplies toasts (user-requested, matching iproduce-africa): one themed
 `Toaster` from `components/ui/sonner.tsx` is mounted in `app/layout.tsx`; client
@@ -379,7 +379,7 @@ controls/Field remain server-compatible; Radix and React Hook Form own narrow
 client boundaries. No schema/resolver package was added.
 `@portabletext/react` and `@portabletext/types` own rich article rendering and
 typed portable blocks; there is no active Sanity SDK or schema deployment.
-Portrait cards retain Next Image rather than adopting Avatar.
+Portrait cards use Next Image.
 The responsive practice explorer remains a dedicated master/detail composition,
 with its approved desktop/mobile selection contract.
 ESLint owns linting and Prettier owns formatting/class ordering. Biome is an

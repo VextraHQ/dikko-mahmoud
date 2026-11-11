@@ -161,6 +161,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "coverage/**",
     "next-env.d.ts",
+    // Other sessions' git worktrees live here; they are not this checkout.
+    ".claude/worktrees/**",
   ]),
 ]);
 

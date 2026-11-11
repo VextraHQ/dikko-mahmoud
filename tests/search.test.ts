@@ -19,6 +19,6 @@ describe("matchesSearch", () => {
 
   it("reads punctuation the same way as the normalised text", () => {
     expect(normalizeText("Oil & Gas")).toBe("oil gas");
-    expect(matchesSearch("Energy & Oil & Gas", "oil-gas")).toBe(true);
+    expect(matchesSearch("Energy, Oil & Gas", "oil-gas")).toBe(true);
   });
 });

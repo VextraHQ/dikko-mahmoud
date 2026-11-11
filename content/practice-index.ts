@@ -47,7 +47,7 @@ export const practiceIndex: PracticeSummary[] = [
   },
   {
     slug: "energy-oil-gas",
-    title: "Energy & Oil & Gas",
+    title: "Energy, Oil & Gas",
     category: "Transactional",
     summary:
       "Legal advisory for businesses operating within energy, petroleum and related industries.",

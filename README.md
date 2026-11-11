@@ -37,7 +37,7 @@ The user-added Analytics and existing hero autoplay remain intact.
 - React 19
 - TypeScript in strict mode
 - Tailwind CSS 4
-- Shadcn-style Button/Sheet/Accordion/Avatar/NavigationMenu/Breadcrumb, Embla Carousel, Lucide UI icons
+- Shadcn-style Button/Sheet/Accordion/NavigationMenu/Breadcrumb, Embla Carousel, Lucide UI icons
   and React Icons for social brands; shared form controls and React Hook Form
   adapter prepared for the later enquiry page; Motion is scoped to Firm Journey
   content transitions, hero autoplay and article reading progress

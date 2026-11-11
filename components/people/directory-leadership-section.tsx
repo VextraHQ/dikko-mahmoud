@@ -23,7 +23,7 @@ export function DirectoryLeadershipSection({
       <SiteLink
         href={routes.person(person.slug)}
         scroll={false}
-        aria-label={`${person.name}, ${person.founderRole ?? person.role}`}
+        aria-label={`${person.name}, ${person.role}`}
         className="group block self-start rounded-xl"
       >
         <figure>
@@ -54,7 +54,7 @@ export function DirectoryLeadershipSection({
               {keepTogether(person.name)}
             </p>
             <p className="text-muted-foreground mt-2 text-xs/5 sm:text-sm/6">
-              {person.founderRole ?? person.role}
+              {person.role}
             </p>
           </figcaption>
         </figure>

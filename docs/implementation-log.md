@@ -3,6 +3,39 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-11 — Client correction batch
+
+- Outcome: the client's review corrections are in for local review. See
+  `docs/client-alignment.md` (11 November) for the full list and open questions.
+- Files: `content/practice-index.ts`, `content/people.ts`, `content/firm.ts`,
+  `content/navigation.ts`, `content/footer.ts`, `content/faqs.ts`,
+  `components/home/firm-story-section.tsx`, `components/shared/faq-section.tsx`,
+  `components/firm/people-section.tsx`, `components/firm/journey-section.tsx`,
+  `components/people/directory-leadership-section.tsx`, `lib/people/profiles.ts`,
+  tests (`people-directory`, `search`, `insights-presentation`, `profiles`),
+  `docs/routes/the-firm.md`, `docs/routes/home.md`.
+- Removed the unused `founderRole` and `shortLabel` fields; `role` and `label`
+  now carry those values.
+- Checks run: format:check, lint, typecheck, test (19 files, 164 tests) pass.
+  knip then reported `components/ui/avatar.tsx` and `@radix-ui/react-avatar` as
+  unused; the user chose to remove both. Architecture, design-system and README
+  no longer list Avatar. The three stock FAQ photos in `public/images/stock/`
+  (`team-01..03.jpg`) are unreferenced and kept pending the user's decision.
+- Remaining gates: client consent for Selected matters, Careers readiness,
+  social URLs, photoshoot images, awards content.
+
+## 2026-11-11 — Install no longer depends on a .git folder
+
+- `prepare` is now `git config core.hooksPath .githooks || true`. Without
+  `|| true`, an install with no `.git` folder (as on Vercel) failed with
+  `fatal: not in a git directory`; the same fix was made in wardwise.
+- Verified: outside a git repo the script exits 0; inside the repo it still
+  sets `core.hooksPath` to `.githooks`.
+- `.gitignore` now ignores `/.claude/worktrees/`. A Claude Code session's
+  worktree (a full copy of the repo) was untracked there, so `git add .` would
+  have committed it, and knip reported its 261 files as unused. ESLint already
+  ignores the folder in `eslint.config.mjs`. knip, format:check and lint pass.
+
 ## 2026-11-11 — Import rules, pre-commit check, knip report, log archive
 
 - Before: the import direction in `.claude/rules/structure.md`, unused-code

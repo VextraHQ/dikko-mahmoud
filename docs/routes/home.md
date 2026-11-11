@@ -1,5 +1,12 @@
 # Homepage implementation brief
 
+## Client corrections — 2026-11-11
+
+At the client's request the firm-story card no longer repeats the firm figures
+(they stay in "The firm at a glance"), and the FAQ support panel has no avatar
+circles. The story card keeps the branded D&M cover until the office photograph
+arrives. Details: [client-alignment.md](../client-alignment.md).
+
 ## Current alignment override — 2026-10-31
 
 The user authorized the corrections in [../client-alignment.md](../client-alignment.md).

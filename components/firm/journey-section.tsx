@@ -25,7 +25,7 @@ export function JourneySection() {
         (person
           ? {
               title: person.name,
-              description: person.founderRole ?? person.role,
+              description: person.role,
             }
           : { title: item.year, description: content.pendingMedia }),
     };

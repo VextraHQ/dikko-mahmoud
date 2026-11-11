@@ -5,17 +5,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { contact } from "@/content/contact";
-import { UserRound } from "lucide-react";
-import {
-  type Faq,
-  type FaqIntro,
-  faqSupportAvatars,
-  visibleFaqs,
-} from "@/content/faqs";
+import { type Faq, type FaqIntro, visibleFaqs } from "@/content/faqs";
 import { firmBrand } from "@/content/firm";
 import { cn } from "@/lib/utils";
 
@@ -129,26 +122,7 @@ export function FaqSection({
           </noscript>
         </div>
         <div className="mt-8 rounded-2xl bg-white px-5 py-8 text-center sm:p-10 lg:mt-12">
-          <div aria-hidden="true" className="flex justify-center -space-x-3">
-            {faqSupportAvatars.map((avatar) => (
-              <Avatar
-                key={avatar.id}
-                className="text-primary size-12 border-3 border-white bg-slate-100 font-serif text-sm"
-              >
-                <AvatarImage
-                  src={avatar.src}
-                  alt=""
-                  width={48}
-                  height={48}
-                  loading="lazy"
-                />
-                <AvatarFallback>
-                  <UserRound strokeWidth={1.5} className="size-5" />
-                </AvatarFallback>
-              </Avatar>
-            ))}
-          </div>
-          <h3 className="mt-5 font-serif text-xl/7 font-semibold">
+          <h3 className="font-serif text-xl/7 font-semibold">
             {content.supportHeading}
           </h3>
           <p className="text-muted-foreground mx-auto mt-2 max-w-2xl text-sm/6 sm:text-base/7">

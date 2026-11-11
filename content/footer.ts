@@ -26,8 +26,7 @@ export const footer = {
       links: [
         { label: "The firm", href: routes.firm },
         { label: "Our People", href: routes.people },
-        { label: "Selected matters", href: routes.experience },
-        { label: "Careers", href: routes.careers },
+        // Selected matters and Careers are hidden until consent and launch.
         // The client's full series name; the header shortens it to "Insights".
         { label: "Legal Insights Series", href: routes.insights },
         { label: "SME retainer", href: routes.smeRetainer },

@@ -19,14 +19,6 @@ export const faqIntro = {
   supportAction: "Get in touch",
 };
 
-// Unsplash stock portraits (free licence) as decorative placeholders. They are
-// deliberately not tied to named team members; swap for approved photos later.
-export const faqSupportAvatars = [
-  { id: "stock-01", src: "/images/stock/team-01.jpg" },
-  { id: "stock-02", src: "/images/stock/team-02.jpg" },
-  { id: "stock-03", src: "/images/stock/team-03.jpg" },
-] as const;
-
 // Sanity can later supply this same ordered record shape.
 // Avoid unconfirmed fees, turnaround times and engagement promises.
 export const faqs: Faq[] = [

@@ -58,7 +58,7 @@ export function resolveProfile(
     person,
     profile,
     preview: status !== "approved",
-    title: person.founderRole ?? person.role,
+    title: person.role,
     shortName: profile.shortName?.trim() || profile.fullName,
     links,
     personalEmail: links.find((link) => link.platform === "email")?.value,

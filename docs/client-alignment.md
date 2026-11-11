@@ -3,6 +3,27 @@
 Implementation status: implemented for local review. Verification is recorded in
 [the October log archive](archive/implementation-log-2026-10.md); content and consent gates remain.
 
+## Client correction batch · 11 November 2026
+
+From the client's review email; implemented for local review.
+
+- Practice renamed to "Energy, Oil & Gas" in content, tests and docs.
+- A.B. Mahmoud, SAN is "Co-founder & Managing Partner" everywhere. The separate
+  `founderRole` field is gone; `role` holds the full title and wraps on cards.
+- Selected matters and Careers are hidden from the header, mobile menu and
+  footer until consent and launch readiness. Both pages stay built, and their
+  approval checks are unchanged. Careers stays in the delivery plan.
+- Home firm-story card: the 1993 / 30+ / presence figures are removed; they
+  stay in "The firm at a glance". The branded D&M cover stays until the
+  photoshoot supplies the office photograph.
+- FAQ "Still have questions?": the stock avatar circles are removed.
+- Social icons (Facebook, LinkedIn, Instagram, X) stay visible for design
+  review while their URLs await confirmation. Final links and media are checked
+  before launch.
+- Still open with the client: social URLs, preferred story media (the Legal
+  Insights video suggestion), Careers timing, content and photo dates, the
+  awards list and images, and the template line left in their email.
+
 ## Selected matters visual preview · 3 November 2026
 
 The user approved and requested implementation of the listing/detail wireframe.

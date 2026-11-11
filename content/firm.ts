@@ -15,26 +15,22 @@ export const firmFacts = [
     value: "1993",
     label: "Established",
     detail: "Founded in Nigeria",
-    shortLabel: "Established",
   },
   {
     value: "30+",
     label: "Years of practice",
     detail: "Businesses, institutions & individuals",
-    shortLabel: "Years of practice",
   },
   {
     value: contact.officeSummary,
     compact: true,
     label: "Our presence",
     detail: "",
-    shortLabel: "Our presence",
   },
   {
     value: "Public + Private",
     label: "Sector perspective",
     detail: "Experience across both sectors",
-    shortLabel: "Sector perspective",
   },
 ] as const;
 
@@ -51,7 +47,7 @@ export const firmHomePreview = {
     "Founded by A.B. Dikko and A.B. Mahmoud, our firm brings public-sector understanding and a commercial perspective to disputes, transactions and government advisory.",
   name: firmBrand.name,
   descriptor: "Solicitors and Advocates · Est. 1993",
-  person: { name: founder.name, role: founder.founderRole ?? founder.role },
+  person: { name: founder.name, role: founder.role },
   action: "Discover our story",
   media: {
     office: {

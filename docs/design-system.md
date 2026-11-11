@@ -223,9 +223,9 @@ Post-nominals on profiles use small caps.
 
 Button and the mobile Sheet are implemented with the minimal shadcn pattern:
 CVA/Slot, `cn()`, and Radix Dialog focus management. `components.json` records the
-registry aliases. The custom pill and arrow compose the Button. Shared Radix
-Accordion and Avatar wrappers follow the same shadcn composition, keeping the
-brand plus/minus cues and initials fallbacks. The user-authorized form foundation
+registry aliases. The custom pill and arrow compose the Button. The shared Radix
+Accordion wrapper follows the same shadcn composition, keeping the brand
+plus/minus cues. The user-authorized form foundation
 now includes Input/Textarea, Label/Field, Checkbox/NativeSelect, Separator and the
 React Hook Form adapter; `forms.md` owns their composition. The desktop Practice areas
 reference navigates to a page; no open dropdown variant was found, so no

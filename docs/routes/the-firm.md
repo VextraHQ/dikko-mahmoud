@@ -129,7 +129,7 @@ retain compatible exports for the homepage and FAQ avatars where useful.
 - The founder feature uses the same person's record with its own editorial
   composition; do not force its biography/milestones into the ordinary card.
 - Source group labels: Corporate & Commercial Advisory; Government & Policy
-  Advisory; Energy & Oil & Gas. Each group intends three distinct curated people.
+  Advisory; Energy, Oil & Gas. Each group intends three distinct curated people.
   The same three screenshot portraits are design placeholders, not assignments.
   Confirm actual membership; keep neutral missing-assignment slots separate from
   canonical person records. Do not invent nine lawyers or repeat the existing

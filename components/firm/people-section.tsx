@@ -28,7 +28,7 @@ export function FirmPeopleSection() {
             <div className="max-w-md">
               <PersonCard
                 person={founder}
-                role={founder.founderRole}
+                role={founder.role}
                 sizes="(min-width: 1440px) 440px, (min-width: 1024px) 35vw, (min-width: 640px) 448px, calc(100vw - 32px)"
                 imageHoverOnly
                 portraitClassName="aspect-square transition-colors duration-550 ease-editorial motion-reduce:transition-none"

@@ -49,7 +49,7 @@ describe("directory records", () => {
       practiceIds: ["energy-oil-gas", "not-a-practice"],
     });
     expect(record.practices).toEqual([
-      { id: "energy-oil-gas", title: "Energy & Oil & Gas" },
+      { id: "energy-oil-gas", title: "Energy, Oil & Gas" },
     ]);
   });
 
@@ -162,7 +162,7 @@ describe("normalizeText", () => {
   it("ignores case, accents and initials punctuation", () => {
     expect(normalizeText("A.B. Mahmoud, SAN")).toBe("ab mahmoud san");
     expect(normalizeText("Sèfiullahi  Ọseni")).toBe("sefiullahi oseni");
-    expect(normalizeText("Energy & Oil & Gas")).toBe("energy oil gas");
+    expect(normalizeText("Energy, Oil & Gas")).toBe("energy oil gas");
   });
 });
 

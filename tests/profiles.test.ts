@@ -156,15 +156,13 @@ describe("profile routes and navigation", () => {
     expect(headerTone(routes.person("not-a-person"))).toBe("dark");
   });
 
-  it("keeps Our People and Selected matters in the agreed order", () => {
+  it("hides Selected matters and Careers from the review menu", () => {
     expect(navigation.map((item) => item.label)).toEqual([
       "Home",
       "The firm",
       "Practice areas",
       "Our People",
-      "Selected matters",
       "Insights",
-      "Careers",
       "Contact",
     ]);
   });

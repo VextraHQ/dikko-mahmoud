@@ -24,7 +24,6 @@ export type Person = {
   /** Practice slugs from content/practice-index.ts, only once confirmed. */
   practiceIds?: readonly string[];
   initials: string;
-  founderRole?: string;
   biography?: string;
   milestones?: readonly { year: string; description: string }[];
   portrait: { src: string; alt: string; position?: string } | null;
@@ -87,7 +86,6 @@ export const peopleDirectory = {
 export const people: Person[] = [
   {
     id: "ab-mahmoud",
-    founderRole: "Co-founder & Managing Partner",
     biography:
       "Managing Partner and co-founder A.B. Mahmoud, SAN, brings a career spanning public service, legal practice and professional leadership.",
     milestones: [
@@ -99,7 +97,7 @@ export const people: Person[] = [
     ],
     slug: "ab-mahmoud",
     name: "A.B. Mahmoud, SAN",
-    role: "Managing Partner",
+    role: "Co-founder & Managing Partner",
     seniority: "partner",
     initials: "ABM",
     portrait: null,
@@ -181,5 +179,5 @@ export const advisoryGroups: {
     personIds: [],
     pendingSlots: 3,
   },
-  { id: "energy", name: "Energy & Oil & Gas", personIds: [], pendingSlots: 3 },
+  { id: "energy", name: "Energy, Oil & Gas", personIds: [], pendingSlots: 3 },
 ];

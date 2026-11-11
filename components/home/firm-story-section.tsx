@@ -2,7 +2,7 @@ import { FirmImage } from "@/components/home/firm-image";
 import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { firmFacts, firmHomePreview as story } from "@/content/firm";
+import { firmHomePreview as story } from "@/content/firm";
 import { SiteLink } from "@/components/layout/site-link";
 import { routes } from "@/lib/routes";
 
@@ -39,31 +39,6 @@ export function FirmStorySection() {
             className="relative isolate aspect-[1/1.1] overflow-hidden rounded-2xl md:col-span-2 md:aspect-video xl:col-span-1 xl:aspect-auto xl:min-h-120"
           >
             <FirmImage kind="office" media={story.media.office} />
-            <div
-              aria-hidden="true"
-              className="from-navy-deep/90 via-navy-deep/10 absolute inset-0 bg-linear-to-t to-transparent"
-            />
-            <dl className="absolute inset-x-3 bottom-4 grid grid-cols-3 gap-2 text-center text-white sm:inset-x-4 sm:gap-3">
-              {firmFacts.slice(0, 3).map((fact) => (
-                <div
-                  key={fact.label}
-                  className="flex min-w-0 flex-col rounded-xl border border-white/15 bg-white/12 px-1 py-3 backdrop-blur-sm sm:px-2"
-                >
-                  <dt className="mt-1.5 text-[10px]/[14px] font-medium text-white/80 sm:text-xs/4">
-                    {fact.shortLabel}
-                  </dt>
-                  <dd
-                    className={
-                      "compact" in fact
-                        ? "order-first text-xs/5 sm:text-sm/6"
-                        : "order-first font-serif text-3xl/9 font-bold sm:text-4xl/10"
-                    }
-                  >
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </div>
           <div
             data-reveal
