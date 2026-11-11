@@ -101,14 +101,18 @@ sanity/                 Reserved CMS boundary; Sanity is not configured
 docs/                   Specs, roadmap and the implementation log
   routes/               One spec per page
   archive/              Older log months and superseded guides
+scripts/                Command-line helpers (social images, log archive)
 .claude/rules/          Short coding rules by area (read before editing)
+.claude/hooks/          Claude Code hooks: format on edit, checks at end of turn
+.githooks/              Git pre-commit check (enabled by `pnpm install`)
 ```
 
 A request flows one way: a page in `app/` asks `lib/` or `content/` for
 ready data, then hands it to `components/`. Components draw; hooks handle
 browser behaviour; `lib/` decides; `content/` stores. The `@/*` alias resolves
 from the repository root. See `.claude/rules/structure.md` for the import
-rules and how to add a page, section, hook or rule.
+rules and how to add a page, section, hook or rule. ESLint enforces the
+import direction and keeps server-only modules out of client components.
 
 ## Current boundary
 

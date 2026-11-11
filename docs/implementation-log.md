@@ -3,6 +3,58 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-11 — Import rules, pre-commit check, knip report, log archive
+
+- Before: the import direction in `.claude/rules/structure.md`, unused-code
+  checks, commit checks and moving old log months were all manual. After:
+  each is automated, and unused code is reported but never removed without
+  the user's approval.
+- `eslint.config.mjs`: a small project rule fails lint when a `"use client"`
+  file imports a server-only module (`content/profiles`, `lib/people/profiles`,
+  `lib/people/directory-data`, `lib/experience`); type-only imports are
+  allowed. `no-restricted-imports` enforces app → components → hooks → lib →
+  content. Allowed exceptions that already existed: hooks may use
+  `components/ui/*` context hooks (`useCarousel`), and `content/` may use
+  `lib/content`, `lib/publication`, `lib/routes` and `lib/insights/blocks`.
+- `.githooks/pre-commit`: checks staged files with Prettier and ESLint, never
+  changes them. `pnpm install` registers it via the new `prepare` script
+  (`git config core.hooksPath .githooks`); no new dependency.
+- `scripts/archive-log.mjs` (`pnpm log:archive`): moves earlier months'
+  entries into `docs/archive/implementation-log-YYYY-MM.md`.
+- `.claude/hooks/run-checks.sh` now also runs the archive, reports new knip
+  findings once per session for the user to decide on, and reminds Claude
+  once per session when code changed without a log entry. The knip rule is in
+  `.claude/rules/workflow.md`.
+- Verified: lint passes on the codebase; test files breaking each import rule
+  were caught and deleted; the pre-commit hook rejected a badly formatted
+  staged file; the archive script moved fake September/October entries on a
+  scratch copy and does nothing on the real log; the checks hook passed and
+  reported knip once, then stayed quiet for the same findings.
+- knip findings, decided by the user: kept
+  `components/practices/experience-{carousel,section}.tsx` (the client asked
+  to remove the practice-page experience section for now; it is expected
+  back), added to `knip.json` ignore. Dropped the unused `export` on
+  `InsightTypeBadge`, `ArticleCard`, `shareCardSize`, `articleBlockText` and
+  `profileLinkPlatforms` (still used inside their own files). knip is clean.
+- Passed format:check, lint, typecheck, 164 Vitest tests and knip.
+
+## 2026-11-10 — Claude Code hooks run the project checks
+
+- Before: formatting, lint, typecheck and tests ran only when someone
+  remembered to run them. After: they run automatically in Claude Code
+  sessions on this repo.
+- `.claude/settings.json` adds two hooks. After every file Claude writes or
+  edits, `.claude/hooks/format-file.sh` runs Prettier on that file and
+  `eslint --fix` on JS/TS files, and sends any remaining lint errors back to
+  Claude. When Claude finishes a turn with uncommitted changes,
+  `.claude/hooks/run-checks.sh` runs `pnpm format:check`, `lint`, `typecheck`
+  and `test`, stopping at the first failure and sending Claude back once to
+  fix it. A turn with a clean working tree skips the checks.
+- `pnpm build` is not in the hooks; it stays a manual check at handoffs.
+- Verified: both scripts pass when run directly (the full check run took
+  about 8s), and an Edit with a formatting error in `lib/content.ts` was
+  reformatted automatically, leaving no diff. Disable or review with `/hooks`.
+
 ## 2026-11-03 — Shared back link and contents list
 
 - New `BackLink` (`components/shared/back-link.tsx`) replaces the visible
@@ -742,3 +794,16 @@ No deployment, external readiness or client publication approval is implied.
 - Checks: format:check, lint, typecheck, test (164) and build. Checked in
   the browser at 1440px and on a 375px phone (article, practice, matter).
   The More menu opened under its button at 1440px.
+
+## 2026-11-11 — Above-the-fold image loading audit
+
+- Added eager loading to practice-detail hero media, profile portraits and the
+  People directory leadership portrait. These slots currently use fallback
+  covers/initials, and will request supplied photographs immediately.
+- Confirmed existing eager/preload handling for Home, Firm, Selected matters,
+  Insights featured media, article heroes and brand logos. Browser checks at
+  the current desktop viewport covered those five page types and filtered
+  Insights. No LCP image-loading warnings appeared during those checks. Filtered
+  archive images were below the viewport and retained their lazy loading.
+- Passed format:check, lint, typecheck, 164 tests across 19 files, webpack
+  production build (66 generated pages) and git diff --check.

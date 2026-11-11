@@ -12,7 +12,9 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "knip": "knip"
+    "knip": "knip",
+    "log:archive": "node scripts/archive-log.mjs",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@portabletext/react": "^8.0.1",

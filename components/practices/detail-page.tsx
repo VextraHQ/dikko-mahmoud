@@ -69,6 +69,7 @@ export function PracticeDetailPage({
             <ImageWithFallback
               src={practice.image?.src}
               alt={practice.image?.alt ?? ""}
+              loading="eager"
               fill
               sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw"
               className="object-cover"

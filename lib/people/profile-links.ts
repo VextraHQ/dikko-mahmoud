@@ -2,7 +2,7 @@
 // (`options.list`) and for defensive filtering of fetched data, since Studio
 // validation can be bypassed by a direct API write. Professional channels only:
 // firm-wide social accounts belong in the footer, not on lawyer profiles.
-export const profileLinkPlatforms = [
+const profileLinkPlatforms = [
   { value: "linkedin", title: "LinkedIn" },
   { value: "email", title: "Email" },
   { value: "phone", title: "Phone" },

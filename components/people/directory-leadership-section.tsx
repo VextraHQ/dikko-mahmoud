@@ -31,6 +31,7 @@ export function DirectoryLeadershipSection({
             <ImageWithFallback
               src={person.portrait?.src}
               alt={person.portrait?.alt ?? ""}
+              loading="eager"
               fill
               sizes="(min-width: 1440px) 360px, (min-width: 1024px) 28vw, (min-width: 640px) 384px, 92vw"
               style={{ objectPosition: person.portrait?.position }}

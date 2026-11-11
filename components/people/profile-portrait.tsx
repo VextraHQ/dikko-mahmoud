@@ -23,6 +23,7 @@ export function ProfilePortrait({
       <ImageWithFallback
         src={person.portrait?.src}
         alt={person.portrait?.alt ?? ""}
+        loading="eager"
         fill
         sizes={sizes}
         className="object-cover"

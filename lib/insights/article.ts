@@ -26,7 +26,7 @@ export function safeArticleHref(value: unknown): string | null {
   }
 }
 
-export function articleBlockText(block: InsightBlock): string {
+function articleBlockText(block: InsightBlock): string {
   if (block._type === "block")
     return ((block.children ?? []) as { text?: string }[])
       .map((span) => span.text ?? "")

@@ -5,7 +5,7 @@ import { loadShareCardAssets } from "@/lib/share-card";
 // SERVER ONLY. The branded 1200 × 630 card shown when a page is shared on
 // LinkedIn, WhatsApp or X. Matches the site-wide card in app/opengraph-image.png.
 
-export const shareCardSize = { width: 1200, height: 630 };
+const shareCardSize = { width: 1200, height: 630 };
 
 const navy = "#061a2e";
 const band = "#0c2a48";

@@ -2,7 +2,8 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "entry": ["scripts/*.mjs"],
   "ignore": [
-    "components/ui/{checkbox,field,form,input,label,native-select,separator,textarea}.tsx"
+    "components/ui/{checkbox,field,form,input,label,native-select,separator,textarea}.tsx",
+    "components/practices/experience-{carousel,section}.tsx"
   ],
   "ignoreDependencies": [
     "@radix-ui/react-checkbox",

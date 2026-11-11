@@ -36,7 +36,7 @@ export function typeLabel(type: InsightType) {
  * Small pill naming the publication type. Solid white with a hairline ring,
  * so it stays readable on dark, busy or very light photos alike.
  */
-export function InsightTypeBadge({
+function InsightTypeBadge({
   type,
   className,
 }: {
@@ -101,7 +101,7 @@ export function ArticleMeta({
   );
 }
 
-export function ArticleCard({ article }: { article: InsightCard }) {
+function ArticleCard({ article }: { article: InsightCard }) {
   return (
     <article className="h-full min-w-0">
       <SiteLink
