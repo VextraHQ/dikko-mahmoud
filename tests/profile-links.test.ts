@@ -74,7 +74,7 @@ describe("enquiry destination", () => {
   it("emails the firm until Contact launches, then uses the page", () => {
     expect(enquiryHref(contact.email)).toBe(
       isRouteAvailable(routes.contact)
-        ? routes.contact
+        ? `${routes.contact}#enquiry`
         : `mailto:${contact.email}`,
     );
   });

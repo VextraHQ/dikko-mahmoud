@@ -10,6 +10,16 @@
 | `tests/`      | Vitest tests for `lib/` and `content/`                       | Real-looking sample people/clients |
 | `docs/`       | Approved intent, status and history                          | Planned work described as done     |
 
+## File types
+
+Don't mix `.ts` and `.tsx` in a folder. `components/` holds only `.tsx`;
+`hooks/`, `lib/`, `content/` and `tests/` hold only `.ts`. A class string or
+constant shared by components lives in the `.tsx` that owns it and is
+exported from there (example: `underlineFieldClass` in
+`components/shared/filter-select.tsx`), never in a new `.ts` beside them.
+`app/` follows Next's file conventions (`page.tsx`, `actions.ts`,
+`sitemap.ts`).
+
 ## Import direction
 
 `app` → `components` → `hooks` → `lib` → `content`.

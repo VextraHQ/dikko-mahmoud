@@ -1,4 +1,5 @@
 import { hasText } from "@/lib/content";
+import { contact } from "@/content/contact";
 import { firmHomePreview } from "@/content/firm";
 
 export type Faq = {
@@ -98,5 +99,46 @@ export const firmFaqs: Faq[] = [
     id: "firm-lawyers",
     question: "How can I learn more about your lawyers?",
     answer: "Answer awaiting editorial confirmation for this preview.",
+  },
+];
+
+export const contactFaqIntro: FaqIntro = {
+  ...faqIntro,
+  heading: ["Before you", "get in touch."],
+  description:
+    "A few practical details to help you prepare your enquiry or arrange a visit.",
+};
+
+// Drafts from the approved Contact wireframe; the firm still has to approve
+// the wording.
+export const contactFaqs: Faq[] = [
+  {
+    id: "contact-include",
+    question: "What should I include in my initial enquiry?",
+    answer:
+      "Share your contact details, a brief summary of your matter, the parties involved and any important dates. Keep confidential documents and sensitive information for a later conversation with our team.",
+    media: firmHomePreview.media.office,
+  },
+  {
+    id: "contact-documents",
+    question: "Should I send confidential documents through the form?",
+    answer:
+      "No. Keep documents and sensitive details for a later conversation with the team.",
+  },
+  {
+    id: "contact-meeting",
+    question: "How do I arrange an office meeting?",
+    answer: "Contact our team to arrange a meeting before your visit.",
+  },
+  {
+    id: "contact-email",
+    question: "Can I email the firm directly?",
+    answer: `Yes. Send general enquiries to ${contact.email}.`,
+  },
+  {
+    id: "contact-practice",
+    question: "Do I need to choose a practice area?",
+    answer:
+      "No. Choose “A legal matter” and leave the area of law blank if you are unsure. The team will match you with the right practice.",
   },
 ];

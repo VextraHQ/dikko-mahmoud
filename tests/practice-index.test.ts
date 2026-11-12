@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { getNextPractice, practiceIndex } from "@/content/practice-index";
 import { getPractice, getPracticeSections } from "@/content/practice-catalogue";
-import { enquiryHref, routes } from "@/lib/routes";
+import { enquiryHref } from "@/lib/routes";
 
 describe("practice index", () => {
   it("links each practice to the next and wraps at the end", () => {
@@ -22,8 +22,12 @@ describe("practice index", () => {
     }
   });
 
-  it("sends enquiries to email until the Contact page launches", () => {
-    expect(enquiryHref("info@example.com")).toBe("mailto:info@example.com");
-    expect(routes.contact).toBe("/contact");
+  it("sends enquiries to the Contact form, preselecting a practice", () => {
+    expect(enquiryHref("info@example.com")).toBe("/contact#enquiry");
+    expect(
+      enquiryHref("info@example.com", {
+        practice: "litigation-dispute-resolution",
+      }),
+    ).toBe("/contact?practice=litigation-dispute-resolution#enquiry");
   });
 });

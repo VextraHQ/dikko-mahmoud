@@ -7,8 +7,6 @@
   ],
   "ignoreDependencies": [
     "@radix-ui/react-checkbox",
-    "@radix-ui/react-label",
-    "@radix-ui/react-separator",
-    "react-hook-form"
+    "@radix-ui/react-separator"
   ]
 }

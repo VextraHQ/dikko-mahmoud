@@ -2,6 +2,8 @@
 
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import { useHeaderAction } from "@/hooks/use-header-action";
+import { useQuietFocusReturn } from "@/hooks/use-quiet-focus-return";
 import { useMediaQueryChange } from "@/hooks/use-media-query-change";
 import { mediaQueries } from "@/lib/media-queries";
 import { BrandLogo } from "@/components/layout/brand-logo";
@@ -17,13 +19,14 @@ import {
 } from "@/components/ui/sheet";
 import { SiteNavigation } from "@/components/layout/site-navigation";
 import { SiteLink } from "@/components/layout/site-link";
-import { routes } from "@/lib/routes";
 import { contact } from "@/content/contact";
 import { firmBrand } from "@/content/firm";
 import { mobileMenuFooter } from "@/content/navigation";
 
 export function MobileNavigation() {
   const [open, setOpen] = useState(false);
+  const action = useHeaderAction();
+  const { contentProps, triggerProps } = useQuietFocusReturn();
   // The sheet has no desktop layout; close it if the window grows past it.
   useMediaQueryChange(mediaQueries.desktopNavigation, (isDesktop) => {
     if (isDesktop) setOpen(false);
@@ -36,12 +39,13 @@ export function MobileNavigation() {
             variant="glass"
             size="icon"
             aria-label="Open navigation menu"
-            className="bg-secondary/80 hover:bg-secondary"
+            {...triggerProps}
+            className="bg-secondary/80 hover:bg-secondary data-quiet-focus:outline-hidden!"
           >
             <Menu className="size-6!" strokeWidth={1.5} />
           </Button>
         </SheetTrigger>
-        <SheetContent className="flex flex-col">
+        <SheetContent className="flex flex-col" {...contentProps}>
           <SheetTitle className="sr-only">Navigation menu</SheetTitle>
           <SheetDescription className="sr-only">
             Explore Dikko &amp; Mahmoud. Secondary pages are coming soon.
@@ -69,8 +73,8 @@ export function MobileNavigation() {
             size="lg"
             className="short:my-6 mt-8 mb-8 self-start"
           >
-            <SiteLink href={routes.contact} onNavigate={() => setOpen(false)}>
-              Make an enquiry
+            <SiteLink href={action.href} onNavigate={() => setOpen(false)}>
+              {action.label}
             </SiteLink>
           </ArrowButton>
           {/* Sticks to the bottom of the sheet so the offices stay visible on

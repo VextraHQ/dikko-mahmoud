@@ -1,112 +1,145 @@
 # Contact and enquiry form
 
-Status — proposed for layout review, 12 November 2026. The HTML wireframe is a
-standalone prototype. The application route and submission service are not built
-by this planning pass.
+Status: layout approved by the user on 12 November 2026 from the interactive
+wireframe (designer's look, Codex's behaviour, reason-first topic picker). The
+page and form are built for the no-index preview. Nothing is sent: email
+delivery, templates, spam protection and rate limiting are a later checkpoint
+(see "Later: delivery").
 
-## Basis
+Approved wireframe: https://claude.ai/artifact/7pDBPikTonXoHnRH4uBF3B
 
-- The supplied Contact screenshots establish the hero, direct-contact panel,
-  enquiry form, three office cards and FAQ section.
-- The 16 September proposal includes a general enquiry form with optional
-  practice area and preferred office selection. Preferred office is restored
-  here after being missed in the earlier five-field recommendation.
-- Latest client corrections apply to this preview. Use “Energy, Oil & Gas”,
-  keep Careers and Selected matters out of navigation, and omit FAQ avatars.
-- This proposal omits Organisation. Add it only if the firm needs it for the
-  first response. Six fields remain, with three required.
+## Sources
 
-## Page and layout
+- Designer's Contact frames: hero, contact panel, form with topic pills and
+  underlined fields, "Find us" map cards, FAQ with image.
+- Codex's v2 wireframe: six fields, preferred office, picker dialogs, preview
+  submission states and failure retry.
+- Client corrections: "Energy, Oil & Gas"; no Careers or Selected matters in
+  the menu; no FAQ avatars.
 
-1. Shared header with Contact active. “Make an enquiry” jumps to the form on
-   this page. Keep Home and the logo as the usual route back to Home.
-2. Short dark hero with “Contact the firm.” and an office shortcut. The
-   wireframe temporarily reuses The Firm image, pending the photoshoot.
-3. Desktop form beside a compact email and office-contact panel. Mobile
-   stacks a compact direct-contact block above the form. Mobile fields use
-   at least 16px text and all controls have at least 44px targets.
-4. Office cards for Abuja, Kano and Lagos liaison office. Use canonical
-   addresses and confirmed phone numbers from `content/contact.ts`. Lagos
-   has no phone until supplied. Directions use `lib/maps.ts` and verified
-   destinations. Office maps remain part of the proposal. Exact pins and the
-   map presentation need confirmation before implementation.
-5. Contact-specific FAQs and the shared footer. Social icons stay visible for
-   design review while destinations await confirmation. Keep the shared footer
-   in production rather than copying the prototype's abbreviated footer.
+## Page, top to bottom
 
-## Form fields
+1. **Header.** On `/contact` the header button reads "Back to homepage" and
+   links Home, on desktop and in the phone menu. "Make an enquiry" would link
+   to the page the visitor is on. This supersedes the earlier client
+   correction in `client-alignment.md`; confirm with the client. The menu
+   keeps today's items.
+2. **Hero.** Dark, short, with the temporary Firm photo until the photoshoot.
+   Eyebrow "Contact Dikko & Mahmoud", title "Let's make law work. / Start with
+   a conversation." (`type-title`), one lead line. No buttons: the form
+   starts directly below.
+3. **Contact panel and form.** Desktop: panel left (sticky), form right.
+   Phones: the form comes first, then the full panel.
+   - Panel: "Contact our team" (`type-subsection`); general enquiries email
+     with a Copy button; Abuja and Kano phone numbers as tap-to-call links;
+     office hours; our presence; social icons (pending notice until links are
+     confirmed); "Before you send" note. Presence, socials and the note are
+     desktop only.
+   - Form heading "Need legal expertise? Let's talk." (`type-section`).
+4. **Find us. Let's talk.** (`type-section`) Three office cards: an
+   embedded Google map (loads lazily, searched by address until pins are
+   confirmed), eyebrow Office or Liaison office, city (`type-card`),
+   address, phone link where one exists (Lagos has none yet) and "Get
+   directions" through `directionsUrl`.
+5. **FAQ.** The shared FAQ section with Contact questions ("Before you get in
+   touch."). Answers are drafts for the firm.
+6. **No closing enquiry band** (it would link back to this page), then the
+   shared footer.
 
-- Full name — required, one field.
-- Email address — required, with email validation and autocomplete.
-- Phone number — optional, accepts international formatting.
-- Enquiry topic — optional. General enquiry, Not sure yet, then the nine
-  canonical practices. General enquiry is for questions about the firm. Not
-  sure yet is for legal assistance where the relevant practice is unclear.
-- Preferred office — optional. No preference, Abuja, Kano or Lagos liaison
-  office. This expresses a preference and promises no particular assignment.
-- Your message — required, a short overview. Put the instruction about
-  confidential details and documents beside the message field.
+## The form
 
-Required fields are visibly and programmatically marked. Keep labels above
-fields, useful autocomplete, restrained navy focus styling and inline errors.
-The privacy link and relationship notice use firm-approved wording at launch.
-The wireframe's FAQ and notice copy remain drafts for review.
+Order and rules:
 
-## Selection and arrivals
+| Field                  | Required | Notes                                                                                              |
+| ---------------------- | -------- | -------------------------------------------------------------------------------------------------- |
+| What brings you to us? | Yes      | A legal matter · A partnership or referral · Media or speaking · Something else. One tap.          |
+| Which area of law?     | No       | Only after "A legal matter". The nine canonical practices. Blank means "let the team decide".      |
+| What is it about?      | Yes*     | *Only after "Something else". 2–120 characters; becomes the email subject at delivery.             |
+| Full name              | Yes      | 2–120 characters, `autocomplete="name"`.                                                           |
+| Email address          | Yes      | Valid email, `autocomplete="email"`.                                                               |
+| Phone number           | No       | Digits, spaces, `+`, `()` and `-`; at least 7 digits. Hint: include your country code.             |
+| Organisation           | No       | "Recommended" for partnerships and media. Kept because firms run conflict checks on organisations. |
+| Message                | Yes      | 20–2000 characters with a counter. Label and placeholder follow the reason.                        |
 
-- Use the app's themed controls. Prototype pickers open a bounded chooser,
-  with long practice names wrapping. Mobile uses a bottom sheet. Implementation
-  can reuse the existing shadcn Select and Sheet primitives with proper keyboard
-  and focus handling.
-- A generic enquiry starts without a chosen topic or preferred office.
-- A practice CTA can preselect its canonical practice ID. Office CTAs may
-  preselect a canonical office ID. Both choices remain editable.
-- Route this through the existing enquiry-link helper when Contact is built.
-  Validate URL values against the catalogue. Ignore invalid values, and keep
-  visitor names, email addresses and messages out of query parameters.
-- General enquiry and Not sure yet remain outside the practice catalogue.
-- Recruitment links follow Careers availability and the firm's confirmed
-  recruitment process. No new recruitment inbox is invented here.
+- Both pickers use the site's numbered editorial style (serif "01" like the
+  practice catalogue) and stay quiet: grey hairline rules, and the chosen
+  option gets a light tint, a navy number and a filled check (no navy fill,
+  no side bar). Reasons are a ruled band of four cells (2 × 2 on tablet);
+  practices are a two-column contents-style list in catalogue order, with a
+  "Clear choice" link.
+  Phones use a numbered dropdown for both (the site's Radix Select, as in the
+  Insights filters). Same field either way.
+- Removed on purpose: "General enquiry" and "Not sure yet" (covered by the
+  reason and a blank practice), Careers and "existing client" reasons.
+- Preferred office was in the proposal and was removed by agreement on
+  2026-11-12 (scope adjustment, recorded in `client-alignment.md`) to keep
+  the form short. A visitor can name an office in the message; that is a
+  preference, separate from the firm deciding who handles the enquiry.
+- Labels sit above underlined fields, 16px text, at least 44px targets, red
+  line and message for errors. Focus is a 2px navy rule under the field, not
+  the site-wide outline box; choices keep the light-blue ring inside the
+  cell or row.
+- Privacy and relationship notice above the send button: "By sending, you
+  acknowledge our privacy policy. Sending an enquiry does not create a
+  lawyer–client relationship." Wording to be approved by the firm.
 
-## Submission states
+### Arriving from a practice page
 
-- Initial form, validation errors, sending, confirmation and delivery failure.
-- Invalid submission focuses the first invalid field. Editing clears that
-  field's error. Preserve entries after failures and block duplicate sends.
-- Confirmation follows a successful delivery response in the eventual service.
-  An error offers retry and the existing direct email contact.
-- Provide persistent inline feedback, with appropriate status announcements.
-  Sonner may supplement it. A toast alone is insufficient for form outcomes.
-- No file-upload field, newsletter opt-in or response-time promise is proposed.
-- The wireframe simulates success and failure locally and sends no messages.
-  Live delivery, server validation, anti-spam and operational handling belong
-  to the later provider integration checkpoint.
+`enquiryHref(email, { practice })` links to `/contact?practice=<slug>#enquiry`.
+The page checks the slug against the practice catalogue and, when it is
+valid, preselects "A legal matter" and that practice, with a line saying it
+was picked and can be changed. Unknown values are ignored. Names, emails and
+messages never go in the URL.
 
-## Implementation sequence after layout agreement
+### States
 
-1. Build the page from shared header, footer, FAQ and form components. Keep
-   content separate from markup and reuse canonical practices and offices.
-2. Add form interaction, contextual preselection and clearly identified preview
-   states. Use the existing route and metadata system, keeping previews no-index.
-3. Confirm content, inbox ownership, office pins and live submission behaviour
-   with the firm before the integration checkpoint.
+- **Errors:** checked when a field is left, then as the visitor types. On
+  send, focus moves to the first problem.
+- **Sending:** the button shows "Sending…" and ignores further clicks.
+- **Received (preview):** the form is replaced by a confirmation that says
+  plainly nothing was sent, repeats what the visitor entered, explains what
+  happens next without promising a response time, and offers "Send another
+  enquiry". A toast backs it up; the result never lives only in the toast.
+- **Failed:** an inline alert keeps every entry and offers "Try again" or the
+  firm's email.
+
+### Preview submission
+
+A Server Action validates the enquiry with the same Zod schema the form uses
+and returns `{ status: "received", preview: true }` without sending anything.
+A hidden honeypot field rejects simple bots. Later the delivery code replaces
+the body of that action; the form does not change.
+
+## Code map
+
+- `content/contact-page.ts`: hero, panel, form copy, reasons, confirmation.
+- `content/contact.ts`: email, hours, offices (existing).
+- `content/faqs.ts`: `contactFaqIntro`, `contactFaqs`.
+- `lib/enquiry.ts`: Zod schema, default values, `practiceFromQuery`.
+- `lib/maps.ts`: `mapEmbedUrl` beside `directionsUrl`.
+- `app/(site)/contact/page.tsx` and `actions.ts`.
+- `components/contact/*`: hero, panel, form, offices sections.
+
+## Needs the firm
+
+- The four reasons (fold "Media or speaking" into "Something else" if nobody
+  handles media) and whether to keep the heading "Need legal expertise?".
+- Who reads enquiries and the delivery inbox.
+- Office pins, the Kano number and a Lagos number.
+- Privacy notice, FAQ answers and social links.
+- The hero photo.
+
+## Later: delivery
+
+After visual approval, following the iProduce Africa setup: Resend delivery
+from the Server Action, React Email templates (firm notification and visitor
+receipt) with preview routes, Turnstile and Upstash rate limiting, and
+server-side duplicate protection.
 
 ## Verification
 
-- Review at 320, 390, 768 and 1440px, including long selected labels.
-- Check keyboard selection, Escape, dismissal and returned focus. Ensure the
-  mobile chooser stays inside the viewport and respects available height.
-- Check generic and practice arrivals, editable preferences, invalid incoming
-  values, optional fields left blank, errors, preserved entries and retry.
-- Check no-JavaScript reading of office contacts and FAQs, direct email access,
-  reduced motion, labels and status announcements.
-- Check links, canonical office labels, nine practices, no-index metadata,
-  provider-disabled behaviour and the shared footer.
-- Run the repository's format, lint, typecheck and test checks for implementation,
-  plus a production build when adding the route or changing dependencies.
-
-## Decisions still needed
-
-Agree the layout and field order, then confirm who reads and assigns enquiries,
-the map presentation, exact office pins and approved privacy/FAQ copy. No
-automatic office routing or response turnaround is promised by this draft.
+- 320, 390, 768 and 1440px, long practice names, keyboard use of tiles and
+  pickers, focus on errors, reduced motion.
+- Generic and practice arrivals, invalid arrival values, each reason's label
+  changes, optional fields left blank, preview confirmation and send again.
+- Format, lint, typecheck, tests and a production build.

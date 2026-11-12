@@ -27,9 +27,13 @@ export type FilterOption = { value: string; label: string };
 // Radix Select cannot hold an empty value, so "All …" uses this stand-in.
 const allValue = "__all";
 
-/** Underlined field shared by search inputs and filter triggers. */
+/**
+ * Underlined field shared by search inputs, filter triggers and the Contact
+ * form. Focus is the navy rule under the field (not the site-wide outline
+ * box); `aria-invalid` turns the rule red for form errors.
+ */
 export const underlineFieldClass =
-  "hover:border-primary/60 focus:border-primary focus-visible:border-primary data-[state=open]:border-primary h-12 rounded-none border-0 border-b border-slate-300 bg-transparent shadow-none transition-[border-color,box-shadow] duration-200 focus:shadow-[inset_0_-2px_0_var(--primary)] focus-visible:ring-0 focus-visible:outline-none! data-[state=open]:shadow-[inset_0_-2px_0_var(--primary)] motion-reduce:transition-none forced-colors:focus-visible:outline-2!";
+  "aria-invalid:border-destructive aria-invalid:shadow-[inset_0_-2px_0_var(--destructive)] aria-invalid:ring-0 hover:border-primary/60 focus:border-primary focus-visible:border-primary data-[state=open]:border-primary h-12 rounded-none border-0 border-b border-slate-300 bg-transparent shadow-none transition-[border-color,box-shadow] duration-200 focus:shadow-[inset_0_-2px_0_var(--primary)] focus-visible:ring-0 focus-visible:outline-none! data-[state=open]:shadow-[inset_0_-2px_0_var(--primary)] motion-reduce:transition-none forced-colors:focus-visible:outline-2!";
 
 const triggerClass = cn(
   underlineFieldClass,

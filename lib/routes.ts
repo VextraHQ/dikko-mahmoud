@@ -42,6 +42,7 @@ export const launchedRoutes: readonly string[] = [
   routes.privacy,
   routes.terms,
   routes.insights,
+  routes.contact,
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
   ...(directoryPeople(previewOptions).length ? [routes.people] : []),
   ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),
@@ -61,7 +62,15 @@ export function isRouteAvailable(href: string) {
   );
 }
 
-/** Enquiries go to the Contact page once it launches; until then, email. */
-export function enquiryHref(email: string) {
-  return isRouteAvailable(routes.contact) ? routes.contact : `mailto:${email}`;
+/**
+ * Enquiries go to the Contact page's form once it launches; until then,
+ * email. `practice` (a catalogue slug) preselects that area of law.
+ */
+export function enquiryHref(
+  email: string,
+  { practice }: { practice?: string } = {},
+) {
+  if (!isRouteAvailable(routes.contact)) return `mailto:${email}`;
+  const query = practice ? `?practice=${encodeURIComponent(practice)}` : "";
+  return `${routes.contact}${query}#enquiry`;
 }

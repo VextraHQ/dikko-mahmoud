@@ -1,9 +1,8 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { keepTogether } from "@/lib/typography";
 import { BrandLogo } from "@/components/layout/brand-logo";
-import { SocialIcon } from "@/components/layout/social-icon";
-import { PreviewDestination } from "@/components/layout/preview-destination";
 import { SiteLink } from "@/components/layout/site-link";
+import { SocialLinks } from "@/components/layout/social-links";
 import { directionsUrl } from "@/lib/maps";
 import { routes } from "@/lib/routes";
 import { contact } from "@/content/contact";
@@ -122,31 +121,10 @@ export function SiteFooter() {
                 <h2 className="text-sm/6 text-white/65">
                   {footer.socialHeading}
                 </h2>
-                <ul className="mt-3 flex flex-wrap gap-3">
-                  {footer.socialLinks.map((social) => (
-                    <li key={social.label}>
-                      {social.href ? (
-                        <a
-                          href={social.href}
-                          aria-label={social.label}
-                          className="text-navy-deep flex size-11 items-center justify-center rounded-full bg-white text-sm font-bold transition-colors hover:bg-sky-100"
-                        >
-                          <SocialIcon platform={social.platform} />
-                        </a>
-                      ) : (
-                        <PreviewDestination>
-                          <button
-                            type="button"
-                            aria-label={`${social.label} — profile being prepared`}
-                            className="text-navy-deep flex size-11 items-center justify-center rounded-full bg-white text-sm font-bold transition-colors hover:bg-sky-100"
-                          >
-                            <SocialIcon platform={social.platform} />
-                          </button>
-                        </PreviewDestination>
-                      )}
-                    </li>
-                  ))}
-                </ul>
+                <SocialLinks
+                  className="mt-3"
+                  itemClassName="text-navy-deep bg-white hover:bg-sky-100"
+                />
               </div>
               <div className="min-w-0">
                 <h2 className="text-sm/6 text-white/65">

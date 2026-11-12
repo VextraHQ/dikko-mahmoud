@@ -196,14 +196,21 @@ when indexing is enabled. The existing firm/client/matter approval rules stand.
 
 ### Contact (`/contact`)
 
-- The top-right header button reads "Make an enquiry", as on other pages,
-  not "Back to homepage".
+- Header button: superseded on 2026-11-12. The earlier correction asked for
+  "Make an enquiry" here, as on other pages. The user approved the
+  designer's "Back to homepage" on `/contact` instead, because "Make an
+  enquiry" would link to the page the visitor is already on. Confirm with
+  the client at the next review, since this reverses their correction.
+- Preferred office: in the proposal, removed by agreement on 2026-11-12 (a
+  scope adjustment) to keep the form short. Visitors who prefer an office
+  can say so in their message. That preference is separate from routing:
+  the firm still decides who handles each enquiry.
 - No chat wording ("chat to our friendly team"); the site has no chat. Use
   neutral wording such as "Contact the firm".
 - Offices: "Abuja & Kano offices · Lagos liaison office" (`contact.officeSummary`).
   The Lagos phone stays off until the firm supplies one.
-- When this route launches, add it to `launchedRoutes`; every practice-page
-  `EnquiryButton` then switches from email to this page via `enquiryHref`.
+- Launched on 2026-11-12 for no-index review: practice-page enquiry buttons
+  now open `/contact?practice=<slug>#enquiry` via `enquiryHref`.
 
 ### Site-wide, still open
 

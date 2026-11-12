@@ -1,7 +1,9 @@
 # Form foundation
 
 The user authorized preparing these primitives before secondary-page work.
-They are ready to compose; no public enquiry form or submission service is active.
+The Contact enquiry form (`components/contact/enquiry-form.tsx`) is the first
+composition: React Hook Form with a Zod schema from `lib/enquiry.ts`. Its
+Server Action validates and sends nothing until delivery is approved.
 
 ## Available pieces
 

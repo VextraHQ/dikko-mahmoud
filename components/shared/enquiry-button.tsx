@@ -10,15 +10,18 @@ import { enquiryHref } from "@/lib/routes";
  * The firm's general enquiry destination as a plain link. Emails the firm
  * today and switches to the Contact page automatically once that route is in
  * `launchedRoutes`. Style it with `className` for a text link, or use
- * `EnquiryButton` for the arrow button.
+ * `EnquiryButton` for the arrow button. `practice` (a catalogue slug)
+ * preselects that area of law on the form.
  */
 export function EnquiryLink({
   children = enquiry.action,
+  practice,
   ...props
 }: Omit<HTMLAttributes<HTMLElement>, "children" | "aria-current"> & {
   children?: ReactNode;
+  practice?: string;
 }) {
-  const href = enquiryHref(contact.email);
+  const href = enquiryHref(contact.email, { practice });
   return href.startsWith("mailto:") ? (
     <a href={href} {...props}>
       {children}
@@ -34,12 +37,15 @@ export function EnquiryLink({
 export function EnquiryButton({
   children = enquiry.action,
   className,
+  practice,
   ...props
-}: Omit<ComponentProps<typeof ArrowButton>, "asChild">) {
+}: Omit<ComponentProps<typeof ArrowButton>, "asChild"> & {
+  practice?: string;
+}) {
   // Actions mean nothing on paper.
   return (
     <ArrowButton asChild className={cn("print:hidden", className)} {...props}>
-      <EnquiryLink>{children}</EnquiryLink>
+      <EnquiryLink practice={practice}>{children}</EnquiryLink>
     </ArrowButton>
   );
 }

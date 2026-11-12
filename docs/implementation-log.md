@@ -3,6 +3,153 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-12 — Removed `components/contact/field-line.ts`
+
+- Outcome: `components/` holds only `.tsx`. The Contact form's underline
+  style now uses the shared `underlineFieldClass` from
+  `components/shared/filter-select.tsx` directly, which gained the red
+  `aria-invalid` line (the Insights filters never set it, so they are
+  unchanged). The file-type rule is now written in
+  `.claude/rules/structure.md`.
+- Files: `components/shared/filter-select.tsx`,
+  `components/contact/{choice-tiles,enquiry-form}.tsx`, removed
+  `components/contact/field-line.ts`, `.claude/rules/structure.md`.
+
+## 2026-11-12 — Contact review fixes (Codex) and menu focus ring
+
+- Validation: malformed input (null, a missing or null topic) made
+  `enquirySchema.safeParse` throw, because the topic refinement runs on bad
+  data. It now reads its input defensively; the Server Action returns
+  `invalid`. Regression tests cover the schema and `submitEnquiry`.
+- Accessibility: the reason choices (`required` radios; `aria-required` on
+  the phone dropdown) and the message field (`aria-required`) now expose the
+  required state; their asterisks are visual only.
+- Copy: the confirmation no longer promises a reply to every enquiry
+  ("The team will review your enquiry and get in touch if we can help…"),
+  marked draft until the firm confirms its process.
+- Docs: `client-alignment.md` records that "Back to homepage" on `/contact`
+  supersedes the client's "Make an enquiry" correction (to confirm with the
+  client), that Contact is launched, and that preferred office was removed
+  by agreement as a scope adjustment (a visitor preference, separate from
+  the firm's routing). `routes/contact.md` matches.
+- Menu ring: after closing the phone menu by tap, Radix returns focus to the
+  menu button and iOS Safari showed the focus ring. New
+  `hooks/use-quiet-focus-return.ts` keeps focus there but hides the ring when
+  the last input was touch or mouse; a keyboard close keeps it.
+- Files: `lib/enquiry.ts`, `tests/enquiry.test.ts`,
+  `components/contact/{choice-tiles,enquiry-form}.tsx`,
+  `content/contact-page.ts`, `hooks/use-quiet-focus-return.ts`,
+  `components/layout/mobile-navigation.tsx`, `docs/client-alignment.md`,
+  `docs/routes/contact.md`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (178 passed),
+  `knip` (clean). Browser at 375px: tap close leaves focus on the menu button
+  without a ring; Enter then Escape shows the ring. Not tested on a real
+  iPhone. Build not rerun.
+
+## 2026-11-12 — Contact pickers toned down
+
+- Outcome: the reason band no longer fills navy and the practice list lost
+  its left bar. Both show the choice with a light tint, navy number and
+  filled check. Fixed the near-black band outline and navy row rule: Tailwind
+  4 draws a border without a colour in the text colour, so the borders now
+  use `border-border`.
+- Files: `components/contact/choice-tiles.tsx`, `docs/routes/contact.md`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (175 passed),
+  `knip` (clean). Browser at 1440px; computed border colours checked before
+  the fix. Tablet and phone not re-checked by eye.
+- Handoff build: `pnpm build` passed after all Contact changes today.
+
+## 2026-11-12 — Contact "Something else" topic, full panel on phones
+
+- Outcome: choosing "Something else" shows a required one-line "What is it
+  about?" field (2–120 characters). It is cleared for other reasons, listed in
+  the confirmation, and meant as the email subject once delivery is
+  connected. Its error shows together with the others. A failed send now
+  focuses the first problem in on-screen order (React Hook Form's own order
+  followed when fields appeared). The phone panel now shows everything,
+  including "Before you send".
+- Files: `lib/enquiry.ts`, `hooks/use-enquiry-form.ts`,
+  `content/contact-page.ts`, `components/contact/{enquiry-form,enquiry-received,contact-panel}.tsx`,
+  `tests/enquiry.test.ts`, `docs/routes/contact.md`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (175 passed),
+  `knip` (clean). Build not rerun. Browser at desktop width: topic field
+  appears, empty send shows four errors, focus lands on the reason, then on
+  the topic once "Something else" is chosen. Phone panel not re-checked by
+  eye.
+
+## 2026-11-12 — Contact phone layout: photo hero, form first, dropdowns
+
+- Outcome: on phones the Contact hero photo now runs up behind the header
+  (the hero slides under the 86px header, as on desktop), matching the
+  designer's 390px frame instead of sitting below a navy band. The form comes
+  before the contact panel on phones and in reading order; desktop keeps the
+  panel on the left via dense grid flow. The phone panel now shows presence
+  and social links too; only "Before you send" stays desktop-only because the
+  form shows the same note. Phone pickers are the site's Radix Select (as in
+  the Insights filters) with numbered options and notes, replacing native
+  selects. "Clear choice" shows on phones too.
+- Fixed: the desktop picker grid also showed on phones (its `grid` class
+  overrode `hidden`).
+- Files: `app/(site)/contact/page.tsx`, `components/contact/{hero-section,contact-panel,choice-tiles,field-line,enquiry-form}.tsx`,
+  `components/ui/select.tsx` (optional `description` under an option),
+  `docs/routes/contact.md`. `field-line.ts` now builds on the Insights
+  `underlineFieldClass` instead of repeating it.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (173 passed),
+  `knip` (clean). Build not rerun. Browser at 390px (hero, dropdown open and
+  select, practice dropdown appears, panel, no horizontal scroll) and 1440px
+  (panel left, form right, hero unchanged).
+
+## 2026-11-12 — Contact pickers restyled, field focus fixed
+
+- Outcome: the reason and area-of-law pickers no longer look like generic
+  radio cards. Reasons are a ruled, numbered band; the chosen cell fills navy.
+  Practices are a two-column, contents-style list numbered in catalogue
+  order. Underlined fields lost the boxy site-wide focus outline; focus is now
+  a 2px navy rule. One shared `fieldLine` class serves inputs, the textarea
+  and the phone pickers.
+- Files: `components/contact/choice-tiles.tsx`, new
+  `components/contact/field-line.ts`, `components/contact/enquiry-form.tsx`,
+  `docs/routes/contact.md`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (173 passed).
+  Build not rerun (no route or dependency change). Browser at 1440 and
+  768px; keyboard focus on fields and practice rows (arrow keys move the
+  choice, ring shows). Phone pickers not re-checked by eye.
+
+## 2026-11-12 — Contact page and enquiry form (preview submission)
+
+- Outcome: `/contact` is launched for no-index review, built from the approved
+  reason-first wireframe. Order: hero, contact panel beside the form
+  (`#enquiry`), offices with embedded maps, FAQ. The header button reads
+  "Back to homepage" on Contact (desktop and phone menu). The form asks for the
+  reason first (legal, partnership, media, other). The area of law appears only
+  for legal matters and is optional. Organisation is marked "(recommended)"
+  for partnership and media. Phones get native selects instead of tiles.
+  Sending validates on the server and shows a confirmation marked "Preview
+  only: nothing was sent", plus a toast. Practice pages link to
+  `/contact?practice=slug#enquiry`, which preselects that practice and shows
+  an arrival note.
+- Files: `app/(site)/contact/{page,actions}.ts(x)`, `components/contact/*`,
+  `components/layout/social-links.tsx` (shared with the footer),
+  `hooks/use-enquiry-form.ts`, `hooks/use-header-action.ts`, `lib/enquiry.ts`,
+  `content/contact-page.ts`, plus edits to `content/{faqs,navigation,practice-index}.ts`,
+  `lib/{maps,routes}.ts`, header/mobile navigation, footer, enquiry button,
+  practice detail page. Added `zod` and `@hookform/resolvers`. Docs:
+  `routes/contact.md` (approved spec), `architecture.md`, `forms.md`,
+  `roadmap.md`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (173 passed),
+  `knip` (no unused files or exports; two config hints, below), `build`
+  (passed; `/contact` is dynamic because it reads `?practice=`). Browser at
+  1024px and 375px: empty submit focuses the reason question and shows four
+  errors; partnership changes the message label; a full submit shows the
+  confirmation with focus and toast; practice arrival preselects Litigation;
+  no horizontal scroll on phone; three map iframes render.
+- Remaining gates: firm approval of the notice, confirmation and FAQ wording;
+  confirmed map pins; Contact photo. Delivery (Resend, React Email templates
+  and previews, Turnstile, rate limiting) waits for visual approval.
+- Follow-up (user approved): `react-hook-form` and `@radix-ui/react-label`
+  removed from knip's `ignoreDependencies` now that the form imports them;
+  both stay installed. `pnpm knip` is clean.
+
 ## 2026-11-12 — Site-wide type scale
 
 - Outcome: serif headings now come from seven role classes defined once in

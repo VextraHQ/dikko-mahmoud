@@ -134,11 +134,16 @@ export function getNextPractice(slug: string) {
   return { practice: practiceIndex[nextIndex], index: nextIndex };
 }
 
-/** Uncertainty is an enquiry choice, not a tenth practice. */
-export const practiceEnquiryOptions = [
-  ...practiceIndex.map((practice) => ({
-    value: practice.slug,
-    label: practice.title,
-  })),
-  { value: "not-sure", label: "Not sure yet" },
-];
+/**
+ * The Contact form's area-of-law choices. Uncertainty is not a tenth
+ * practice: visitors who are unsure leave the choice blank.
+ */
+export const practiceEnquiryOptions = practiceIndex.map((practice) => ({
+  value: practice.slug,
+  label: practice.title,
+}));
+
+/** A practice's title from its slug, or undefined when it is unknown. */
+export function practiceTitle(slug: string) {
+  return practiceIndex.find((practice) => practice.slug === slug)?.title;
+}

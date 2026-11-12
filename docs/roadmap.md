@@ -16,8 +16,9 @@ SME retainer, Privacy Policy and Terms of Use previews are implemented. SME trac
 await supplied copy; legal bodies and approved dates are absent and explicitly
 marked. These are working route presentations, not publication approval.
 Article-author references and brochure biography drafts are prepared; no author or
-unconfirmed profile copy is invented. Insights listing/articles are now implemented for no-index review. Careers and Contact
-remain separate milestones; their client requirements are listed in
+unconfirmed profile copy is invented. Insights listing/articles are now implemented for no-index review. Contact is
+implemented for visual review (preview submission, no delivery). Careers
+remains a separate milestone; their client requirements are listed in
 `client-alignment.md` → "Requirements for pages not yet built". The scope addendum includes nine practices, SME and
 Terms at the existing fee, but remains a draft awaiting client acknowledgement.
 
@@ -64,7 +65,8 @@ Home uses the same records, photos, dates, bylines and detail destinations.
 See [the route contract](routes/insights.md) and [stock-photo register](insights-media.md).
 Demo records are excluded when indexing is enabled. Live Sanity, final authored
 content and final media selection remain later; no WebP conversion was performed.
-Careers and Contact are the remaining unbuilt primary route checkpoints.
+Careers is the remaining unbuilt primary route checkpoint. Contact delivery
+(Resend, React Email, spam checks, rate limiting) waits for visual approval.
 
 ## Status
 

@@ -76,7 +76,11 @@ export function PracticeDetailPage({
               fallback={<EditorialCover markClassName="pb-0" />}
             />
           }
-          footer={<EnquiryButton>{copy.enquiryAction}</EnquiryButton>}
+          footer={
+            <EnquiryButton practice={practice.slug}>
+              {copy.enquiryAction}
+            </EnquiryButton>
+          }
         />
         <div className="grid items-start gap-10 pb-12 lg:grid-cols-[16rem_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[18rem_minmax(0,1fr)] xl:gap-16">
           <aside className="border-border rounded-xl border bg-slate-50 p-5 lg:sticky lg:top-28 lg:max-h-[calc(100svh-8rem)] lg:overflow-y-auto lg:p-6">
@@ -91,7 +95,7 @@ export function PracticeDetailPage({
                 it after the experience instead (see below). */}
             {person && (
               <div className="border-border mt-5 hidden border-t pt-5 lg:block">
-                <PracticeContact person={person} />
+                <PracticeContact person={person} practice={practice.slug} />
               </div>
             )}
           </aside>
@@ -149,7 +153,7 @@ export function PracticeDetailPage({
             )} */}
             {person && (
               <div className="border-border mb-12 rounded-xl border bg-slate-50 p-5 lg:hidden">
-                <PracticeContact person={person} />
+                <PracticeContact person={person} practice={practice.slug} />
               </div>
             )}
             {detail?.peopleIds?.length ? (
@@ -259,7 +263,13 @@ export function PracticeDetailPage({
   );
 }
 
-function PracticeContact({ person }: { person: Person }) {
+function PracticeContact({
+  person,
+  practice,
+}: {
+  person: Person;
+  practice: string;
+}) {
   return (
     <>
       <Eyebrow>{copy.contactHeading}</Eyebrow>
@@ -275,7 +285,7 @@ function PracticeContact({ person }: { person: Person }) {
       <p className="text-muted-foreground mt-4 text-sm/6 lg:mt-3">
         {copy.contactDescription}
       </p>
-      <EnquiryButton size="sm" className="mt-4 lg:mt-3">
+      <EnquiryButton practice={practice} size="sm" className="mt-4 lg:mt-3">
         {copy.enquiryAction}
       </EnquiryButton>
     </>

@@ -18,6 +18,15 @@ export const navigation: readonly NavigationItem[] = [
   { label: "Contact", mobileLabel: "Contact us", href: routes.contact },
 ];
 
+/**
+ * The header's button. On the Contact page "Make an enquiry" would link to
+ * the page the visitor is on, so it offers the way home instead.
+ */
+export const headerAction = {
+  enquiry: { label: "Make an enquiry", href: routes.contact },
+  home: { label: "Back to homepage", href: routes.home },
+};
+
 // Mobile menu sign-off; the cities come from the canonical contact offices.
 export const mobileMenuFooter = {
   eyebrow: "Our offices",

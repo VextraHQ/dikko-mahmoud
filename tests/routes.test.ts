@@ -14,7 +14,8 @@ describe("routes", () => {
   it("treats only launched pages as available", () => {
     expect(isRouteAvailable(routes.home)).toBe(true);
     expect(isRouteAvailable(routes.firm)).toBe(true);
-    expect(isRouteAvailable(routes.contact)).toBe(false);
+    expect(isRouteAvailable(routes.contact)).toBe(true);
+    expect(isRouteAvailable(routes.careers)).toBe(false);
   });
 
   it("launches only real, static route paths", () => {
@@ -40,7 +41,8 @@ describe("practice route availability", () => {
         `${routes.practiceArea("corporate-commercial-advisory")}#services`,
       ),
     ).toBe(true);
-    expect(isRouteAvailable(`${routes.contact}#form`)).toBe(false);
+    expect(isRouteAvailable(`${routes.contact}#enquiry`)).toBe(true);
+    expect(isRouteAvailable(`${routes.careers}#roles`)).toBe(false);
     expect(isRouteAvailable("#services")).toBe(true);
     expect(isRouteAvailable("https://example.com/practice-areas")).toBe(false);
   });

@@ -148,13 +148,7 @@ describe("shared content", () => {
         .find((g) => g.title === "Practice areas")!
         .links.map((l) => l.label),
     ).toEqual(titles);
-    expect(practiceEnquiryOptions.slice(0, -1).map((p) => p.label)).toEqual(
-      titles,
-    );
-    expect(practiceEnquiryOptions.at(-1)).toEqual({
-      value: "not-sure",
-      label: "Not sure yet",
-    });
+    expect(practiceEnquiryOptions.map((p) => p.label)).toEqual(titles);
     expect(practiceIndex).toHaveLength(9);
     for (const slide of heroSlides) {
       if (slide.practiceSlug)

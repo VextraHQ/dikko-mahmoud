@@ -54,8 +54,9 @@ search/group/URL rules, `profile-links.ts` the validated per-person `links[]`
 model and `profile-metadata.ts` the metadata shared by popup and page.
 `hooks/use-people-filters.ts` owns the URL syncing and `lib/preview.ts` the
 `allowPreview` switch (no-index only). `components/shared/enquiry-button.tsx` owns the one
-enquiry destination (mailto until `/contact` launches): `EnquiryLink` for text
-links and `EnquiryButton` for the arrow button. people-review.ts keeps internal
+enquiry destination (`/contact#enquiry` now that Contact is launched; a
+`practice` prop adds `?practice=slug` from practice pages): `EnquiryLink` for
+text links and `EnquiryButton` for the arrow button. people-review.ts keeps internal
 source notes, never rendered. Insights author IDs resolve through canonical people;
 the reusable byline handles missing authors without substituting someone else.
 The directory's editorial feature is selected by `peopleDirectoryLeadership`
@@ -230,20 +231,20 @@ Pages, layouts and section entries remain Server Components. Only state,
 framework client hooks, browser APIs or event handlers justify a client boundary.
 Server-rendered children may pass through a narrow client wrapper.
 
-| Client owner                         | State and side effects                                                                                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| `StickyHeader`                       | `useScrolledPast` (one IntersectionObserver, nullable state) and pathname-scoped mobile backing; fixed geometry           |
-| `SiteNavigation`                     | `usePathname` and exact/slash-boundary route matching                                                                     |
-| `MobileNavigation`                   | Controlled Sheet; closes on available-route/logo activation and, via `useMediaQueryChange`, on desktop resize             |
-| `PreviewDestination`, Sheet          | Radix Dialog focus management for unavailable routes/menu                                                                 |
-| Carousel, HeroCarousel/Copy/Controls | Embla fade/autoplay; `usePreloadAdjacentSlides` decodes neighbours; `useCarouselAutoplay` owns pause/stop rules           |
-| `RevealGroup`                        | Markup only; `useRevealOnScroll` owns the observer, focus/reduced-motion completion and cleanup                           |
-| `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                                    |
-| `PracticeAreaExplorer`               | Nullable selected index plus `useMediaQuery(mediaQueries.desktop)`                                                        |
-| `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; `useBringIntoView` focuses/scrolls the preview on mobile          |
-| `JourneyExplorer`                    | `useDirectionalSelection` plus desktop/reduced-motion `useMediaQuery`; controlled Accordion, end-bounded arrows           |
-| `VideoPoster`                        | Click-to-mount iframe/native video; player focus and close-to-trigger focus return; no provider request before activation |
-| `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag                    |
+| Client owner                         | State and side effects                                                                                                                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `StickyHeader`                       | `useScrolledPast` (one IntersectionObserver, nullable state) and pathname-scoped mobile backing; fixed geometry                                                                      |
+| `SiteNavigation`                     | `usePathname` and exact/slash-boundary route matching                                                                                                                                |
+| `MobileNavigation`                   | Controlled Sheet; closes on available-route/logo activation and, via `useMediaQueryChange`, on desktop resize; `useQuietFocusReturn` hides the returned-focus ring after a tap close |
+| `PreviewDestination`, Sheet          | Radix Dialog focus management for unavailable routes/menu                                                                                                                            |
+| Carousel, HeroCarousel/Copy/Controls | Embla fade/autoplay; `usePreloadAdjacentSlides` decodes neighbours; `useCarouselAutoplay` owns pause/stop rules                                                                      |
+| `RevealGroup`                        | Markup only; `useRevealOnScroll` owns the observer, focus/reduced-motion completion and cleanup                                                                                      |
+| `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                                                                                               |
+| `PracticeAreaExplorer`               | Nullable selected index plus `useMediaQuery(mediaQueries.desktop)`                                                                                                                   |
+| `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; `useBringIntoView` focuses/scrolls the preview on mobile                                                                     |
+| `JourneyExplorer`                    | `useDirectionalSelection` plus desktop/reduced-motion `useMediaQuery`; controlled Accordion, end-bounded arrows                                                                      |
+| `VideoPoster`                        | Click-to-mount iframe/native video; player focus and close-to-trigger focus return; no provider request before activation                                                            |
+| `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag                                                                               |
 
 The hero keeps its panel, CTA and controls outside changing slides. Only its
 opening image is explicitly preloaded; adjacent images are warmed after the
@@ -384,10 +385,13 @@ Toasts sit outside modal Radix dialogs, which hide them from assistive
 technology, so dialogs keep their own `role="status"` text alongside a toast.
 The user authorized preparation of Input, Textarea, Label, Field, Checkbox,
 NativeSelect, Separator and the React Hook Form adapter before secondary pages.
-These are local primitives, not an active enquiry form or submission service.
 `docs/forms.md` owns composition, ARIA wiring and validation ownership. Native
 controls/Field remain server-compatible; Radix and React Hook Form own narrow
-client boundaries. No schema/resolver package was added.
+client boundaries. Zod and `@hookform/resolvers` were added for the Contact
+enquiry form: `lib/enquiry.ts` owns the one schema used by the client form
+(`hooks/use-enquiry-form.ts`) and the preview Server Action
+(`app/(site)/contact/actions.ts`), which validates and sends nothing. See
+`docs/routes/contact.md`.
 `@portabletext/react` and `@portabletext/types` own rich article rendering and
 typed portable blocks; there is no active Sanity SDK or schema deployment.
 Portrait cards use Next Image.
