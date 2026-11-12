@@ -15,6 +15,7 @@ export function Hero() {
   return (
     <HeroCarousel
       aria-label="Our expertise"
+      data-header-dark
       className="bg-primary relative isolate grid text-white lg:min-h-[clamp(44rem,100svh,58.4375rem)]"
     >
       <div className="pointer-events-none relative z-10 mx-auto flex w-full max-w-360 flex-col items-start px-4 pt-10 pb-8 sm:px-8 sm:pt-16 sm:pb-12 lg:col-start-1 lg:row-start-1 lg:justify-end lg:pt-36 lg:pb-20 xl:px-20 xl:pt-48">

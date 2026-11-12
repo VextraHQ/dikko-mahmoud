@@ -74,7 +74,9 @@ button:not(:disabled),
   cursor: pointer;
 }
 
-:focus-visible {
+/* Headings focused by script (tabindex -1) after opening or navigating get no
+   ring; only things people tab to do. */
+:focus-visible:not([tabindex="-1"]) {
   outline: 2px solid var(--ring);
   outline-offset: 4px;
 }
@@ -116,5 +118,91 @@ html {
   scrollbar-width: none;
   &::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/*
+ * Type scale: one class per heading role, sized for phones first, then from
+ * `sm` (40rem) and `xl` (80rem) up. Use these instead of picking text sizes,
+ * so the same role looks the same on every page. Home keeps its own sizes
+ * while it is on visual hold. See docs/design-system.md.
+ *
+ * Role                 Phone  Desktop
+ * type-title           40     60 / 72   page title on listing pages
+ * type-title-detail    40     48 / 64   page title on detail pages
+ * type-statement       36     48 / 60   closing bands, big statements
+ * type-section         32     48        section heading
+ * type-subsection      24     30        heading inside a section
+ * type-card            20     24        card title
+ * type-row             18     20        list row title, names
+ */
+@utility type-title {
+  font-size: 2.5rem;
+  line-height: 1.08;
+  @media (width >= 40rem) {
+    font-size: 3.75rem;
+  }
+  @media (width >= 80rem) {
+    font-size: 4.5rem;
+  }
+}
+
+@utility type-title-detail {
+  font-size: 2.5rem;
+  line-height: 1.06;
+  @media (width >= 40rem) {
+    font-size: 3rem;
+  }
+  @media (width >= 80rem) {
+    font-size: 4rem;
+    line-height: 1.03;
+  }
+}
+
+@utility type-statement {
+  font-size: 2.25rem;
+  line-height: 1.08;
+  @media (width >= 40rem) {
+    font-size: 3rem;
+  }
+  @media (width >= 80rem) {
+    font-size: 3.75rem;
+    line-height: 1.04;
+  }
+}
+
+@utility type-section {
+  font-size: 2rem;
+  line-height: 1.2;
+  @media (width >= 40rem) {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+}
+
+@utility type-subsection {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  @media (width >= 40rem) {
+    font-size: 1.875rem;
+    line-height: 1.25;
+  }
+}
+
+@utility type-card {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  @media (width >= 40rem) {
+    font-size: 1.5rem;
+    line-height: 1.33;
+  }
+}
+
+@utility type-row {
+  font-size: 1.125rem;
+  line-height: 1.33;
+  @media (width >= 40rem) {
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
 }

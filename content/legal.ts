@@ -55,7 +55,6 @@ export const legalCopy = {
     "This page is a presentation preview. The firm’s approved text will appear here once supplied and confirmed.",
   datePending: "Update date awaiting firm approval",
   updatedLabel: "Last updated",
-  homeLabel: "Home",
 };
 
 /** Draft text and dates never appear merely because they were entered. */

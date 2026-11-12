@@ -6,6 +6,7 @@ export function FirmHeroSection() {
   return (
     <section
       id="firm-hero"
+      data-header-dark
       aria-labelledby="firm-heading"
       className="bg-navy-deep pb-12 text-white lg:pt-40 lg:pb-20"
     >
@@ -13,10 +14,7 @@ export function FirmHeroSection() {
         <div className="grid gap-8 lg:grid-cols-[2fr_1fr] lg:items-end lg:gap-16">
           <div>
             <Eyebrow className="text-white">{content.eyebrow}</Eyebrow>
-            <h1
-              id="firm-heading"
-              className="mt-6 font-serif text-4xl/[42px] sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
-            >
+            <h1 id="firm-heading" className="type-title mt-6 font-serif">
               {content.heading.map((line) => (
                 <span key={line} className="block">
                   {line}

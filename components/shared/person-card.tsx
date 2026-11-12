@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import { keepTogether } from "@/lib/typography";
 import { PortraitFallback } from "@/components/shared/portrait-fallback";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
@@ -68,22 +67,8 @@ export function PersonCard({
             />
           }
         />
-        <span
-          aria-hidden="true"
-          className="text-primary absolute top-2 right-2 flex size-8 items-center justify-center rounded-full border border-white/70 bg-white/85 transition-colors group-hover:bg-white sm:top-3 sm:right-3 sm:size-9"
-        >
-          <ArrowUpRight
-            strokeWidth={1.5}
-            className={cn(
-              "size-4 motion-safe:transition-transform",
-              imageHoverOnly
-                ? "motion-safe:ease-editorial motion-safe:duration-550 motion-safe:group-hover/portrait:translate-x-0.5 motion-safe:group-hover/portrait:-translate-y-0.5 motion-safe:group-focus-visible:translate-x-0.5 motion-safe:group-focus-visible:-translate-y-0.5"
-                : "motion-safe:group-hover:translate-x-0.5 motion-safe:group-hover:-translate-y-0.5",
-            )}
-          />
-        </span>
       </span>
-      <span className="decoration-primary/40 mt-4 font-serif text-lg/6 underline-offset-4 group-hover:underline sm:text-xl/7">
+      <span className="decoration-primary/40 type-row mt-4 font-serif underline-offset-4 group-hover:underline">
         {keepTogether(person.name)}
       </span>
       {role.trim() && (

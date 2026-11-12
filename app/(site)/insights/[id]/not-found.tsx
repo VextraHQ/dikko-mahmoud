@@ -36,9 +36,7 @@ export default async function InsightNotFound() {
           />
         </span>
         <Eyebrow className="mt-6">{copy.eyebrow}</Eyebrow>
-        <h1 className="mt-3 font-serif text-4xl/[1.1] sm:text-5xl/[1.05]">
-          {copy.title}
-        </h1>
+        <h1 className="type-title-detail mt-3 font-serif">{copy.title}</h1>
         <p className="text-muted-foreground mt-5 max-w-xl text-base/7">
           {copy.description}
         </p>
@@ -77,7 +75,7 @@ export default async function InsightNotFound() {
                     className="group flex items-start justify-between gap-4 rounded-sm py-4"
                   >
                     <span>
-                      <span className="text-foreground group-hover:text-primary block font-serif text-xl/7 transition-colors">
+                      <span className="text-foreground group-hover:text-primary type-row block font-serif transition-colors">
                         {article.title}
                       </span>
                       <span className="text-muted-foreground mt-1 block text-xs/5">

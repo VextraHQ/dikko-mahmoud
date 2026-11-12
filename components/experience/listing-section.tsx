@@ -1,7 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { ReviewNote } from "@/components/shared/review-note";
 import { SiteLink } from "@/components/layout/site-link";
-import { Eyebrow } from "@/components/ui/eyebrow";
 import { experienceCopy as copy } from "@/content/experience";
 import type { Experience } from "@/lib/experience";
 import { routes } from "@/lib/routes";
@@ -16,11 +15,7 @@ export function ExperienceListingSection({
       aria-labelledby="experience-listing-heading"
       className="mx-auto w-full max-w-360 px-4 pt-12 pb-4 sm:px-8 lg:pt-20 lg:pb-0 xl:px-20"
     >
-      <Eyebrow>{copy.title}</Eyebrow>
-      <h2
-        id="experience-listing-heading"
-        className="mt-5 font-serif text-4xl/[1.15] sm:text-5xl/[1.1]"
-      >
+      <h2 id="experience-listing-heading" className="type-section font-serif">
         {copy.listingHeading}
       </h2>
       {items.some((item) => item.preview) && (
@@ -36,7 +31,7 @@ export function ExperienceListingSection({
               <span className="text-primary text-[11px]/5 font-bold tracking-widest uppercase group-hover/experience:text-sky-200 group-focus-visible/experience:text-sky-200">
                 {item.category}
               </span>
-              <h3 className="mt-5 font-serif text-3xl/[1.2] lg:text-4xl/[1.15]">
+              <h3 className="type-subsection mt-5 font-serif">
                 {item.organisation}
               </h3>
               <p className="text-muted-foreground mt-5 text-sm/7 group-hover/experience:text-white/85 group-focus-visible/experience:text-white/85 sm:text-base/7">

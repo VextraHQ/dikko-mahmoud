@@ -8,10 +8,7 @@ export function FirmStorySection() {
       <div className="mx-auto grid w-full max-w-360 gap-8 px-4 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20 xl:px-20">
         <div>
           <Eyebrow>{content.eyebrow}</Eyebrow>
-          <h2
-            id="firm-story-heading"
-            className="mt-6 font-serif text-[32px]/10 sm:text-5xl/[1.08]"
-          >
+          <h2 id="firm-story-heading" className="type-section mt-6 font-serif">
             {content.heading.map((line) => (
               <span key={line} className="block">
                 {line}

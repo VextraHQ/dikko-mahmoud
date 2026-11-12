@@ -1,8 +1,9 @@
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import type { ReactNode } from "react";
-import { Check, ListChecks } from "lucide-react";
+import { Check } from "lucide-react";
 import { ArticleImage } from "@/components/insights/article-image";
 import { SiteLink } from "@/components/layout/site-link";
+import { eyebrowClass } from "@/components/ui/eyebrow";
 import { headingAnchor, safeArticleHref } from "@/lib/insights/article";
 import type {
   ImageBlock,
@@ -68,21 +69,14 @@ const components: PortableTextComponents = {
   types: {
     takeaways: ({ value }: { value: CalloutBlock }) => (
       <aside className="not-prose border-primary/15 my-10 rounded-2xl border bg-sky-50/60 p-6 sm:p-8">
-        <p className="text-primary flex items-center gap-2 text-xs/5 font-semibold tracking-widest uppercase">
-          <ListChecks
-            aria-hidden="true"
-            className="size-4"
-            strokeWidth={1.75}
-          />
-          {value.title}
-        </p>
+        <p className={eyebrowClass}>{value.title}</p>
         <ul className="mt-5 space-y-3 text-base/7">
           {value.items.map((item) => (
             <li key={item} className="text-foreground flex gap-3">
               <Check
                 aria-hidden="true"
                 className="text-primary mt-1.5 size-4 shrink-0"
-                strokeWidth={2}
+                strokeWidth={1.5}
               />
               {item}
             </li>
@@ -169,7 +163,7 @@ const proseClass = [
   "prose prose-slate max-w-none sm:prose-lg",
   "prose-p:text-slate-600 prose-li:text-slate-600 prose-li:marker:text-primary",
   "prose-headings:font-serif prose-headings:font-normal prose-headings:text-foreground prose-headings:scroll-mt-32",
-  "prose-h2:text-3xl/[1.2] sm:prose-h2:text-4xl/[1.15] prose-h3:text-2xl/8",
+  "prose-h2:text-2xl/[1.3] sm:prose-h2:text-3xl/[1.25] prose-h3:text-xl/7 sm:prose-h3:text-2xl/8",
   // Phones get a tighter rhythm; desktop keeps the roomier prose defaults.
   "max-sm:prose-h2:mt-10 max-sm:prose-h2:mb-3 max-sm:prose-h3:mt-8 max-sm:prose-h3:mb-2 max-sm:prose-p:my-4 max-sm:prose-li:my-1 max-sm:prose-ul:my-4 max-sm:prose-ol:my-4",
   "prose-strong:text-foreground prose-a:no-underline",

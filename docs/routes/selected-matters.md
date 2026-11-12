@@ -58,3 +58,9 @@ Register listing/details with the shared route/metadata system and sitemap.
 - Review 320–1440px, keyboard focus, reduced-motion CSS and server HTML reading.
 - Format, lint, typecheck, tests and a production build at this route checkpoint.
 - No CMS, providers, deployment, indexing or WebP source conversion in this pass.
+
+## Polish review · 12 November 2026
+
+- The listing has no "Selected matters" label above "A closer look at our
+  work."; the hero already carries it. Matter pages have no category label;
+  the trail names it (G2). The route stays hidden from the menus.

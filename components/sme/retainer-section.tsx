@@ -29,7 +29,7 @@ export function RetainerSection() {
             <Eyebrow>{copy.eyebrow}</Eyebrow>
             <h1
               id="sme-heading"
-              className="mt-6 max-w-3xl font-serif text-4xl/11 sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
+              className="type-title mt-6 max-w-3xl font-serif"
             >
               {copy.title}
             </h1>
@@ -49,10 +49,7 @@ export function RetainerSection() {
         aria-labelledby="sme-tracks-heading"
         className="mx-auto max-w-360 px-4 pb-12 sm:px-8 lg:pb-20 xl:px-20"
       >
-        <h2
-          id="sme-tracks-heading"
-          className="font-serif text-3xl/10 sm:text-4xl/11"
-        >
+        <h2 id="sme-tracks-heading" className="type-section font-serif">
           {copy.tracksHeading}
         </h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
@@ -65,9 +62,7 @@ export function RetainerSection() {
               <p aria-hidden="true" className="text-primary text-sm/6">
                 {formatIndex(index)}
               </p>
-              <h3 className="mt-5 font-serif text-3xl/10 sm:text-4xl/11">
-                {track.title}
-              </h3>
+              <h3 className="type-subsection mt-5 font-serif">{track.title}</h3>
               {track.description ? (
                 <p className="text-muted-foreground mt-6 text-base/7">
                   {track.description}
@@ -89,12 +84,6 @@ export function RetainerSection() {
                   ))}
                 </ul>
               ) : null}
-              <ArrowButton asChild size="sm" className="mt-8">
-                <a href={`mailto:${contact.email}`}>
-                  {copy.action}
-                  <span className="sr-only">: {track.title}</span>
-                </a>
-              </ArrowButton>
             </article>
           ))}
         </div>

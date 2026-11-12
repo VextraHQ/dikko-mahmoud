@@ -1,7 +1,5 @@
-import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { SiteLink } from "@/components/layout/site-link";
 import { ProfileBody } from "@/components/people/profile-body";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { PersonCard } from "@/components/shared/person-card";
@@ -13,7 +11,6 @@ import {
   resolveProfile,
 } from "@/lib/people/profiles";
 import { previewOptions } from "@/lib/preview";
-import { routes } from "@/lib/routes";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -35,33 +32,13 @@ export default async function PersonPage({ params }: Props) {
   const related = relatedProfiles(slug, previewOptions);
   return (
     <>
-      <ProfileBody
-        resolved={resolved}
-        variant="page"
-        backLink={
-          // A preparation notice until the People directory launches.
-          <SiteLink
-            href={routes.people}
-            className="text-primary decoration-primary/40 mb-8 -ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm font-semibold underline-offset-4 hover:underline lg:mb-12"
-          >
-            <ArrowLeft
-              aria-hidden="true"
-              strokeWidth={1.5}
-              className="size-4"
-            />
-            {profileCopy.backToPeople}
-          </SiteLink>
-        }
-      />
+      <ProfileBody resolved={resolved} variant="page" />
       {related.length ? (
         <section
           aria-labelledby="more-people-heading"
           className="mx-auto w-full max-w-360 px-4 pt-20 sm:px-8 lg:pt-28 xl:px-20"
         >
-          <h2
-            id="more-people-heading"
-            className="font-serif text-[2rem]/10 sm:text-5xl/[1.1]"
-          >
+          <h2 id="more-people-heading" className="type-section font-serif">
             {profileCopy.morePeopleHeading}
           </h2>
           <ul className="mt-8 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-6 lg:mt-10">

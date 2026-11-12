@@ -378,3 +378,15 @@ Local reference paths (read only): iProduce `types/blog.ts`,
 `sanity/schemaTypes/documents/academy-article.ts`, `lib/sanity/fetch/articles.ts`,
 `lib/sanity/queries.ts`, `lib/sanity/image.ts`, `components/academy/blog/`,
 `components/shared/reading-progress.tsx` and `scroll-to-top.tsx`.
+
+## Polish review · 12 November 2026
+
+- Cards, the featured badge and the key-takeaways box have no decorative
+  icons; card meta reads "date · reading time" (G4).
+- Article label shows the type only; the trail names the category (G1, G2).
+- Share: a labelled "Share" button in the byline, plus "Share this article"
+  above "Back to all insights" (A1, A2).
+- Phones: search plus one "Filters" button. The bottom sheet
+  (`components/insights/filter-sheet.tsx`) holds practice area, type and sort
+  as plain choices that apply at once. Before hydration and on desktop the
+  inline filters stay (I1).

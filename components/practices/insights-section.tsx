@@ -36,7 +36,7 @@ export function PracticeInsightsSection({
           <Eyebrow>{copy.eyebrow}</Eyebrow>
           <h2
             id="practice-insights-heading"
-            className="mt-3 font-serif text-3xl/10"
+            className="type-section mt-3 font-serif"
           >
             {copy.heading(practice.title)}
           </h2>

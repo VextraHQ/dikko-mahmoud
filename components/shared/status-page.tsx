@@ -26,6 +26,7 @@ export function StatusPage({
   return (
     <section
       aria-labelledby="status-heading"
+      data-header-dark
       className={cn(
         "bg-primary relative isolate overflow-hidden text-white",
         fill
@@ -43,7 +44,7 @@ export function StatusPage({
         <Eyebrow className="text-sky-200">{eyebrow}</Eyebrow>
         <h1
           id="status-heading"
-          className="mt-6 font-serif text-4xl/[1.08] text-balance sm:text-6xl/[1.06] xl:text-7xl/[1.04]"
+          className="type-title mt-6 font-serif text-balance"
         >
           {title}
         </h1>

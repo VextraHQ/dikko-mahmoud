@@ -59,9 +59,7 @@ export function InsightDetailPage({
         />
         <DetailHero
           headingId="article-heading"
-          eyebrow={[typeLabel(article.type), article.category]
-            .filter(Boolean)
-            .join(" · ")}
+          eyebrow={typeLabel(article.type)}
           title={article.title}
           lead={article.excerpt}
           credit={heroImage?.credit}
@@ -74,7 +72,7 @@ export function InsightDetailPage({
             />
           }
           footer={
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-between gap-3 sm:gap-4">
               <div className="flex min-w-0 items-center gap-3">
                 {article.authors[0] && (
                   <span
@@ -90,15 +88,17 @@ export function InsightDetailPage({
                     showRole
                     className="text-foreground mt-0 text-sm/6 font-medium"
                   />
-                  <p className="text-muted-foreground text-xs/5">
+                  <p className="text-[13px]/5 text-slate-600">
                     <time dateTime={article.publishedAt}>
                       {formatInsightDate(article.publishedAt)}
                     </time>
-                    {" · "}
+                    <span className="mx-1.5 font-bold text-slate-400">·</span>
                     {article.readTimeMinutes} {copy.minRead}
                     {article.revisedAt && (
                       <>
-                        {" · "}
+                        <span className="mx-1.5 font-bold text-slate-400">
+                          ·
+                        </span>
                         {copy.revised}{" "}
                         <time dateTime={article.revisedAt}>
                           {formatInsightDate(article.revisedAt)}
@@ -129,7 +129,7 @@ export function InsightDetailPage({
               <h2
                 id="article-references"
                 tabIndex={-1}
-                className="mt-4 scroll-mt-32 font-serif text-3xl/10"
+                className="type-subsection mt-4 scroll-mt-32 font-serif"
               >
                 {copy.references}
               </h2>
@@ -149,7 +149,7 @@ export function InsightDetailPage({
                         {formatIndex(index)}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-serif text-xl/7 group-hover/ref:underline">
+                        <span className="type-row block font-serif group-hover/ref:underline">
                           {ref.title}
                         </span>
                         <span className="text-muted-foreground text-xs/6">
@@ -172,7 +172,17 @@ export function InsightDetailPage({
               </ol>
             </section>
           )}
-          <p className="text-muted-foreground border-border mt-10 border-t pt-6 text-xs/6">
+          <div className="border-border mt-10 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-y py-4 print:hidden">
+            <p className="text-sm/6 font-medium">{copy.shareEnd}</p>
+            <div className="-mr-2">
+              <ArticleShareControls
+                path={routes.insight(article.id)}
+                title={article.title}
+                canonical={canonical}
+              />
+            </div>
+          </div>
+          <p className="text-muted-foreground mt-6 text-xs/6">
             {copy.disclaimer}
           </p>
           <SiteLink

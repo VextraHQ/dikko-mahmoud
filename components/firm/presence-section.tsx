@@ -13,10 +13,7 @@ export function PresenceSection() {
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
           <div>
             <Eyebrow>{content.eyebrow}</Eyebrow>
-            <h2
-              id="presence-heading"
-              className="mt-6 font-serif text-[32px]/10 sm:text-5xl/[1.08]"
-            >
+            <h2 id="presence-heading" className="type-section mt-6 font-serif">
               {content.heading.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -50,7 +47,7 @@ export function PresenceSection() {
                 className="text-primary size-8"
                 strokeWidth={1.5}
               />
-              <h3 className="mt-5 font-serif text-xl/7">
+              <h3 className="type-card mt-5 font-serif">
                 {office.city}
                 {office.note && ` · ${office.note}`}
               </h3>

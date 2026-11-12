@@ -3,6 +3,301 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-12 — Site-wide type scale
+
+- Outcome: serif headings now come from seven role classes defined once in
+  `app/globals.css` (`type-title`, `type-title-detail`, `type-statement`,
+  `type-section`, `type-subsection`, `type-card`, `type-row`) instead of
+  about 30 hand-picked sizes. Measured headings per page at 375px and 1440px
+  now sit only on scale steps (for example The Firm: 72, 60, 48, 30, 24 on
+  desktop; 40, 36, 32, 24, 20 on phones). Before, The Firm alone had 44, 42,
+  36, 32 and 30 px section-level sizes.
+- Changes: the People title is 72 on desktop like other landing pages;
+  the People co-founder heading, "Explore related articles", "Latest on…" and
+  SME tracks are section size (48); "Partners", "References" and legal
+  headings are subsection size; article body h2 is 24/30 (was 30/36), h3 is
+  20/24. The closing band is 36 on phones (was 30, smaller than sections).
+  The FAQ heading is the statement size everywhere; its per-page override
+  prop (`headingClassName`) was removed. 10px labels in the practice
+  catalogue and photo credit are now 11px.
+- Home unchanged: computed sizes checked on `/` (closing band 30/36 on phone,
+  FAQ 36/38.9, both 60 on desktop). The editorial cover label stays 10px
+  because Home uses it.
+- Files: `app/globals.css`, `app/(site)/page.tsx`,
+  `app/(site)/people/[slug]/page.tsx`, `app/(site)/insights/[id]/not-found.tsx`,
+  `app/(site)/practice-areas/page.tsx`, `app/(site)/the-firm/page.tsx`, and
+  heading classes across `components/{experience,firm,insights,legal,people,practices,shared,sme}`.
+  Docs: `design-system.md` (type scale table).
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed),
+  `knip` (clean). Build not run. Not reviewed by eye in the browser; sizes
+  were checked by computed style.
+
+## 2026-11-12 — Contact planning and revised HTML wireframe
+
+- Added `routes/contact.md` as a proposed review brief, linked from the docs
+  index. No Contact application route or delivery provider was implemented.
+- Prepared standalone `contact-plan-preview-v2.html` in the chat's visualization
+  folder. Removed Organisation and restored preferred office, which the original
+  proposal includes. Six fields remain; name, email and message are required.
+- Topic includes General enquiry, Not sure yet and the nine canonical practices.
+  Practice-page arrival preselects an editable topic. The preview reflects the
+  revised energy label and hidden Careers/Selected matters navigation links.
+- Added themed picker dialogs, mobile/desktop views, validation, sending,
+  simulated confirmation and a retryable delivery failure retaining entries.
+- Checks run for this planning artifact: JavaScript syntax check and Chrome
+  interaction checks for six fields, three required fields, preselection,
+  editable topic, validation focus, duplicate-send prevention, retained values
+  after failure and successful simulated retry. Captured desktop/mobile images.
+  Verified page width at 320, 390, 768 and 1440px and a mobile chooser within
+  viewport bounds. Formatting checks for the three changed Markdown files and
+  `git diff --check` passed.
+- Remaining decisions include inbox ownership, map presentation and exact pins,
+  approved FAQ/privacy copy and final imagery. The hero photo is temporary and
+  the wireframe footer is abbreviated. Repository runtime checks belong to the
+  later route implementation checkpoint.
+
+## 2026-11-12 — Phone archive rows: two text styles
+
+- Outcome: the phone archive rows stacked four text styles (uppercase
+  practice, serif title, grey author, navy type and date) in about 90px, the
+  practice names were cut off, and images centred against text of different
+  heights sat unevenly. Flat rows now show only the title (up to two lines,
+  filling each line before wrapping) and one "Type · date" line. The image is
+  96px and aligned to the top of the row. The practice and author stay on the
+  article page; the practice filter sits at the top of the list.
+- Files: `insights/article-card.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser at 375px: first five rows with images loaded.
+- Reverted: the user restored the files to the earlier version (category,
+  author, "Type · date" and an 80px image). The code no longer matches this
+  entry.
+
+## 2026-11-12 — Insights archive rows on phones
+
+- Outcome: kept compact rows for the phone archive (agreed after review: the
+  page is for finding one of many articles, so titles should scan quickly).
+  Two refinements:
+  - The type ("Article", "Case note", "Regulatory update") now leads each
+    row's meta line in navy. Full cards show it as an image badge, which the
+    rows had dropped even though it is a filter.
+  - Rows sit in one list split by thin dividers instead of 27 bordered boxes
+    (`CompactArticleCard flat`). Flat rows leave out the reading time so type
+    and date stay on one line.
+    The practice page's short insight list (`brief`) keeps its boxed rows.
+- Files: `insights/article-card.tsx`, `insights/listing-section.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser at 375px: first four rows, each meta line on one
+  line.
+
+## 2026-11-12 — Legal pages: no breadcrumb
+
+- Outcome: Privacy and Terms are standalone pages linked from the footer, so
+  "Home › Privacy Policy" (or "← Home" on phones) only repeated the logo. The
+  trail is removed; the pages open on their title, and the "Legal documents"
+  card handles switching. Removed the now-unused `legalCopy.homeLabel`.
+- Files: `components/legal/legal-page-layout.tsx`, `content/legal.ts`, docs.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser: Terms of Use at 375px.
+
+## 2026-11-12 — Legal pages: document list on phones
+
+- Outcome: on phones the Privacy and Terms pages opened with a filled navy
+  "tab" row above "← Home", so two navigation blocks came before the title,
+  in a style used nowhere else. The page now opens with the back link and the
+  title. The document list is one component on both sizes, styled like the
+  "On this page" cards (slate card, rail, navy marker on the current page). It
+  sits after the text on phones and in the sticky sidebar from `lg`. The
+  phone-only copy of the list is gone.
+- Files: `components/legal/legal-page-layout.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser: Privacy Policy at 375px and 1440px.
+
+## 2026-11-12 — Article share: same options on every device
+
+- Outcome: the user found the phone's own share sheet unreliable as the only
+  option (it differs by device; a Mac shows little more than Copy). Phones
+  now get the desktop row: copy link and LinkedIn icons, then a Share menu
+  with WhatsApp, X, "Share via another app" (where supported) and print.
+  Phones show "Share" as an icon (its name stays for screen readers), so the
+  row sits beside the author on one line. An earlier attempt that put the row
+  under the author looked detached and was dropped. The menu now flips
+  sideways near a screen edge instead of touching it.
+- Files: `insights/share-controls.tsx`, `insights/detail-page.tsx`, docs.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser at 375px: byline row, end row, and both menus
+  measured inside the screen (143–367px of 375).
+
+## 2026-11-12 — Logo size regression fixed
+
+- Outcome: the logo crossfade (header tone fixes, earlier today) stacked the
+  two logo files in a CSS grid. The grid row ignored the link's vertical
+  padding, so the logo grew from 48px to 60px tall on phones (60 to 72px on
+  desktop). `grid-rows-1` pins the row to the padded height, and the logo is
+  back to its original size: 180×48 at 375px, 192×60 at 1440px.
+- Files: `components/layout/brand-logo.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed).
+  Measured in the browser at both widths.
+
+## 2026-11-12 — Consistency pass before the contact form
+
+- Outcome: a page-by-page pass (code scan plus browser at 1440px and 375px:
+  profile, practice detail, The Firm, Insights) looking at labels, borders,
+  spacing and phone layouts.
+  - Small uppercase labels were hand-written in about ten places with four
+    sizes (10, 11, 12px), two weights and two letter-spacings. They now share
+    one style: `eyebrowClass` from `components/ui/eyebrow.tsx` (11px, bold,
+    widest), used by `Eyebrow` and by `dt`/`legend`/`span` labels. No more
+    10px labels.
+  - The practice detail cover no longer repeats the practice name that is
+    already the heading (same reasoning as G2).
+  - Borders: `border-slate-200` and `border-border` are the same colour; the
+    `slate-300` lines are the underlined inputs (intentional). No change.
+  - Phone layouts had no breakage. Header screenshots that looked
+    see-through were mid-fade; the live state read white and scrolled.
+- Files: `ui/eyebrow.tsx`, `insights/article-body.tsx`,
+  `insights/article-card.tsx`, `insights/filter-sheet.tsx`,
+  `firm/process-section.tsx`, `practices/detail-page.tsx`,
+  `practices/experience-section.tsx`, `legal/legal-page-layout.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Build not run.
+
+## 2026-11-12 — Insight card dividers
+
+- Outcome: the featured insight's divider above the byline was only as wide
+  as the byline (the column uses `items-start`), so it read as a stray short
+  underline. It now spans the column (`self-stretch`). Article cards used
+  `slate-100` for the same rule, which almost vanished on white, so they now
+  use the shared `border-border` (slate-200), like the card edge. The filter
+  sheet's dividers match. A layout sweep of the main routes at 1440px found
+  no other dividers cut short (the rest are deliberate column rules; Home is
+  on hold).
+- Files: `insights/hero-section.tsx`, `insights/article-card.tsx`,
+  `insights/filter-sheet.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser at 1440px: Insights featured card and grid.
+
+## 2026-11-12 — Profile contents card and focus list restyle
+
+- Outcome: the profile "On this page" sidebar now uses the shared
+  `PageContents` in the same bordered slate card as practice pages and
+  articles. `components/people/profile-contents.tsx` is deleted (replaced).
+  The hero's focus fallback drops the tags for the site's editorial list
+  (eyebrow, serif lines split by hairlines), matching the focus list below.
+- Files: `people/profile-body.tsx`, `people/profile-hero.tsx`,
+  `people/profile-contents.tsx` (deleted).
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Browser at 1440px: Bello's profile, hero and contents card.
+
+## 2026-11-12 — Full breadcrumb back; profile focus fallback
+
+- Outcome: G1 reversed at the user's request (the designer's trails start at
+  Home). From `md` up the trail is the full path again, e.g. "Home › Our
+  People › Bello Aminu Abdullahi", with `BreadcrumbPage` restored for the
+  current page (`aria-current="page"`, truncates). Phones keep the back link.
+  Profile pages without milestones show their areas of focus as tags in the
+  hero (`focusInHero` in `lib/people/profiles.ts`). Those areas then leave the
+  page body and the "On this page" list. The popup is unchanged.
+- Files: `components/ui/breadcrumb.tsx`, `shared/page-trail.tsx`,
+  `people/profile-hero.tsx`, `people/profile-sections.tsx`,
+  `lib/people/profiles.ts`, `tests/profiles.test.ts`. Reverted the G1
+  spacing change in `legal/legal-page-layout.tsx`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Build not run. Browser at 1440px: Bello's profile (full
+  trail and focus tags in the hero).
+
+## 2026-11-12 — Breadcrumb, meta line and profile hero refinements
+
+- Outcome: breadcrumb links are darker (slate-700, medium) with a hover
+  underline, and the chevrons are darker and slightly larger. Article meta
+  lines use darker text, bolder slate dots and a navy type label. Profile:
+  career milestones are a short timeline (rule, navy dot, year above line)
+  and sit inside the page hero, filling the empty space under the summary.
+  The contact icons sit beside the enquiry button on the page and in the
+  popup. Headings focused by script (`tabindex="-1"`) no longer show a focus
+  ring, so the name in the popup has no box.
+- Files: `components/ui/breadcrumb.tsx`, `insights/article-card.tsx`,
+  `insights/detail-page.tsx`, `people/milestone-list.tsx`,
+  `people/profile-hero.tsx`, `people/profile-intro.tsx`,
+  `people/profile-body.tsx`, `shared/detail-hero.tsx` (optional `details`),
+  `app/globals.css`.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` and `knip`, as
+  recorded below. Browser at 1440px: profile page hero (timeline dots on the
+  rule, button and icon on one row). The popup was not opened in the browser.
+
+## 2026-11-12 — Header tone fixes and review follow-ups
+
+- Outcome: "Make an enquiry" now follows the header's live tone, so it is
+  navy on the white header instead of white-on-white. Tone changes fade over
+  400ms instead of snapping (shell colour, border, shadow, text, nav pill,
+  button, logo crossfade). Reverted H2: the current page uses the designer's
+  filled pill again. Reverted P2: the Practice areas second paragraph is back.
+  Share menu order is WhatsApp, X, "Share via another app" (was "More apps"),
+  then print.
+- Files: `hooks/use-header-tone.ts` (new context), `sticky-header.tsx`,
+  `header-enquiry-button.tsx`, `brand-logo.tsx`, `site-navigation.tsx`,
+  `app/styles/surfaces.css`, `share-controls.tsx`, `content/insight-copy.ts`,
+  `content/practice-index.ts`, `practices/catalogue-section.tsx`, docs.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (164 passed) and
+  `knip` (clean). Build not run. Browser at 1440px on Practice areas: white
+  header with navy pill, navy enquiry button and navy logo; second intro
+  paragraph back; 400ms transitions confirmed in computed styles.
+
+## 2026-11-12 — Polish review batches 2–5 and G2/G3 (user-approved)
+
+- Outcome: the user asked to build everything left in one pass and review
+  after. Done: G2 (6 repeated labels), G3 (5 extra enquiry buttons), A1/A2
+  (labelled Share button; share row at the end of articles), G5 (phone
+  preview line), I1 (phone filters sheet), PR1/PR2 (profile page on the shared
+  hero; milestone list on page and popup), H1–H3 (header follows dark
+  sections, current page underlined, no "Home" in the desktop menu) and PE1
+  (no arrow circle on person cards, Home included). P1 held; P3 superseded.
+- New files: `hooks/use-header-over-dark.ts`,
+  `components/insights/filter-sheet.tsx`, `components/people/profile-hero.tsx`,
+  `components/people/milestone-list.tsx`.
+- Changed: `components/shared/detail-hero.tsx` (optional label, subtitle,
+  optional lead), share controls (per-row popover ids), toolbar, site shell,
+  preview banner, sticky header, site navigation, person card, profile body
+  and intro, profile page route, the dark heroes and footer
+  (`data-header-dark`), firm values and process sections, SME and practice
+  detail, experience listing and detail, practices hero, and content in
+  `insight-copy.ts`, `profiles.ts`, `firm.ts`. Removed the unused
+  `coreValues.action`, `workingWithUs.action`, `moreShare` and
+  `backToPeople` copy.
+- Checks run: format:check, lint, typecheck, test (19 files, 164 tests), knip
+  (clean) and `pnpm build` pass. Browser: The firm at 1440px (menu, underline,
+  header turning white past the hero), article share menus at 1440px, profile
+  at 1440px and 375px, Insights filters sheet and preview line at 375px.
+  Home was checked at 800px only; the 1440px Home pass is left to the user's
+  review.
+- Correction: the full desktop menu shows from 1440px, not 1024px, so H3's
+  "room at 1024–1280px" reason in the review was wrong. Below 1440px the menu
+  is the phone sheet.
+- Remaining: the user's review of all batches; nothing committed.
+
+## 2026-11-12 — Polish review batch 1 (G1, G4, P2; user-approved)
+
+- Outcome: first batch from the Polish Review decisions. The desktop
+  breadcrumb lists parent pages only (G1). Insight cards, the featured badge
+  and the key-takeaways box lose their decorative icons; card meta reads
+  "date · reading time"; all icons outside Home use a 1.5 line (G4). The
+  Practice areas listing keeps one intro paragraph; "Our practice areas
+  support…" is removed (P2).
+- Files: `components/shared/page-trail.tsx`, `components/ui/breadcrumb.tsx`,
+  `components/legal/legal-page-layout.tsx`, `components/insights/article-card.tsx`,
+  `components/insights/hero-section.tsx`, `components/insights/article-body.tsx`,
+  `components/practices/catalogue-section.tsx`, `content/practice-index.ts`,
+  `docs/design-system.md`.
+- Review page: G2 and G3 now have spot-by-spot wireframes. After checking the
+  code, G2 is 6 spots, not 9 (profile labels, "SME retainer" and "Our story"
+  are not repeats). Both wait for the user's decision.
+- Checks run: format:check, lint, typecheck, test (19 files, 164 tests) pass.
+  knip reported `BreadcrumbPage` (`components/ui/breadcrumb.tsx`) as unused;
+  the user chose to remove it. Browser: Insights listing and an
+  article at 1024px, Practice areas at 1024px, Privacy at 1024px and 375px.
+  Build not run.
+- Remaining: G2/G3 decisions; batches 2–5 (share, phone screens, profiles,
+  header and person cards).
+
 ## 2026-11-11 — Client correction batch
 
 - Outcome: the client's review corrections are in for local review. See

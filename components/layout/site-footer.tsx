@@ -26,7 +26,11 @@ function FooterLink({ label, href }: { label: string; href: string }) {
 
 export function SiteFooter() {
   return (
-    <footer id="site-footer" className="bg-navy-deep text-white">
+    <footer
+      id="site-footer"
+      data-header-dark
+      className="bg-navy-deep text-white"
+    >
       <div className="mx-auto w-full max-w-360 px-4 pt-24 pb-8 group-has-[.legal-page]/site-shell:pt-12 sm:px-8 sm:pt-32 lg:pt-48 lg:pb-10 xl:px-20">
         <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16 xl:grid-cols-[1.1fr_2.5fr]">
           <div className="min-w-0">

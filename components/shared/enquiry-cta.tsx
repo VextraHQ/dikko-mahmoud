@@ -24,10 +24,7 @@ export function EnquiryCta({
         <div className="grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
           <div>
             <Eyebrow>{enquiry.eyebrow}</Eyebrow>
-            <h2
-              id="enquiry-heading"
-              className="mt-6 font-serif text-3xl/9 sm:text-5xl/[1.08] xl:text-6xl/[1.04]"
-            >
+            <h2 id="enquiry-heading" className="type-statement mt-6 font-serif">
               {enquiry.heading.map((line) => (
                 <span key={line} className="block">
                   {line}

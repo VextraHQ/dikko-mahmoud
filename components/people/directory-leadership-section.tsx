@@ -50,7 +50,7 @@ export function DirectoryLeadershipSection({
             />
           </div>
           <figcaption className="mt-4">
-            <p className="decoration-primary/40 font-serif text-lg/6 underline-offset-4 group-hover:underline sm:text-xl/7">
+            <p className="decoration-primary/40 type-row font-serif underline-offset-4 group-hover:underline">
               {keepTogether(person.name)}
             </p>
             <p className="text-muted-foreground mt-2 text-xs/5 sm:text-sm/6">
@@ -63,7 +63,7 @@ export function DirectoryLeadershipSection({
         <Eyebrow>{copy.leadership.eyebrow}</Eyebrow>
         <h2
           id="people-leadership-heading"
-          className="mt-4 font-serif text-[32px]/[1.12] sm:text-4xl/[1.12] xl:text-[42px]/[1.1]"
+          className="type-section mt-4 font-serif"
         >
           {copy.leadership.heading.map((line) => (
             <span key={line} className="block">

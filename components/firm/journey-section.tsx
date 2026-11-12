@@ -40,10 +40,7 @@ export function JourneySection() {
         <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
           <div>
             <Eyebrow>{content.eyebrow}</Eyebrow>
-            <h2
-              id="journey-heading"
-              className="mt-6 font-serif text-[32px]/10 sm:text-5xl/[1.08]"
-            >
+            <h2 id="journey-heading" className="type-section mt-6 font-serif">
               {content.heading}
             </h2>
           </div>

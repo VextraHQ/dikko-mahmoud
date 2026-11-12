@@ -6,7 +6,9 @@ import {
   FilterSelect,
   underlineFieldClass,
 } from "@/components/shared/filter-select";
+import { InsightFilterSheet } from "@/components/insights/filter-sheet";
 import { useDelayedFlag } from "@/hooks/use-delayed-flag";
+import { useHydrated } from "@/hooks/use-hydrated";
 import { useInsightFilters } from "@/hooks/use-insight-filters";
 import { insightsCopy as copy } from "@/content/insight-copy";
 import { SiteLink } from "@/components/layout/site-link";
@@ -32,6 +34,9 @@ export function InsightsToolbar({
     useInsightFilters(query);
   // Most updates finish in a blink; only a slow one shows "Updating…".
   const slow = useDelayedFlag(pending);
+  // Phones swap the inline filters for one "Filters" sheet once it can open.
+  const hydrated = useHydrated();
+  const desktopOnly = hydrated ? "max-md:hidden" : undefined;
   return (
     <form
       action={routes.insights}
@@ -52,41 +57,58 @@ export function InsightsToolbar({
             "lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]",
         )}
       >
-        <div className="group/search relative min-w-0">
-          <label htmlFor="insights-search" className="sr-only">
-            {copy.searchLabel}
-          </label>
-          <Search
-            aria-hidden="true"
-            strokeWidth={1.5}
-            className="text-muted-foreground group-focus-within/search:text-primary pointer-events-none absolute top-1/2 left-0 size-4 -translate-y-1/2 transition-colors duration-200 motion-reduce:transition-none"
-          />
-          <Input
-            id="insights-search"
-            type="search"
-            name="q"
-            value={draft.q}
-            onChange={(event) => update({ q: event.target.value }, true)}
-            placeholder={copy.searchPlaceholder}
-            maxLength={120}
-            autoComplete="off"
-            className={cn(
-              underlineFieldClass,
-              "pr-14 pl-7 placeholder:text-slate-500 [&::-webkit-search-cancel-button]:appearance-none",
+        <div className="flex min-w-0 items-end gap-5">
+          <div className="group/search relative min-w-0 flex-1">
+            <label htmlFor="insights-search" className="sr-only">
+              {copy.searchLabel}
+            </label>
+            <Search
+              aria-hidden="true"
+              strokeWidth={1.5}
+              className="text-muted-foreground group-focus-within/search:text-primary pointer-events-none absolute top-1/2 left-0 size-4 -translate-y-1/2 transition-colors duration-200 motion-reduce:transition-none"
+            />
+            <Input
+              id="insights-search"
+              type="search"
+              name="q"
+              value={draft.q}
+              onChange={(event) => update({ q: event.target.value }, true)}
+              placeholder={copy.searchPlaceholder}
+              maxLength={120}
+              autoComplete="off"
+              className={cn(
+                underlineFieldClass,
+                "pr-14 pl-7 placeholder:text-slate-500 [&::-webkit-search-cancel-button]:appearance-none",
+              )}
+            />
+            {draft.q && (
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                onClick={clearQuery}
+                aria-label={copy.clearSearch}
+                title={copy.clearSearch}
+                className="text-primary absolute top-1/2 right-1 -translate-y-1/2 rounded-lg hover:bg-slate-200/70"
+              >
+                <X aria-hidden="true" strokeWidth={1.5} className="size-4" />
+              </Button>
             )}
-          />
-          {draft.q && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={clearQuery}
-              aria-label={copy.clearSearch}
-              title={copy.clearSearch}
-              className="text-primary absolute top-1/2 right-1 -translate-y-1/2 rounded-lg hover:bg-slate-200/70"
-            >
-              <X aria-hidden="true" strokeWidth={1.5} className="size-4" />
-            </Button>
+          </div>
+          {hydrated && (
+            <InsightFilterSheet
+              draft={draft}
+              facets={facets}
+              count={count}
+              onChange={(key, value) =>
+                update(
+                  key === "sort"
+                    ? { sort: value === "oldest" ? "oldest" : "newest" }
+                    : { [key]: value },
+                )
+              }
+              className="md:hidden"
+            />
           )}
         </div>
         {facets.practices.length > 0 && (
@@ -103,12 +125,18 @@ export function InsightsToolbar({
               ]}
               onChange={(practice) => update({ practice })}
               sheet
+              className={desktopOnly}
             />
           </>
         )}
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
+      <div
+        className={cn(
+          "mt-5 flex flex-wrap items-center justify-between gap-x-6 gap-y-4",
+          desktopOnly,
+        )}
+      >
         {facets.types.length > 1 && facets.types.length <= maxTypePills && (
           <fieldset className="max-w-full min-w-0">
             <legend className="sr-only">{copy.typeLabel}</legend>

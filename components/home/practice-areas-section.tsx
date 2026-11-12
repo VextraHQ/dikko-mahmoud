@@ -12,6 +12,7 @@ export function PracticeAreasSection() {
   if (!areas.length) return null;
   return (
     <section
+      data-header-dark
       id="practice-areas"
       aria-labelledby="practice-areas-heading"
       className="bg-primary py-12 text-white lg:py-24"

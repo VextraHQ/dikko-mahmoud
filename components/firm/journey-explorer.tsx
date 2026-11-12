@@ -46,7 +46,7 @@ function JourneyMedia({ item }: { item: JourneyItem }) {
         </div>
       </div>
       <figcaption className="bg-secondary px-4 py-4 text-white">
-        <p className="font-serif text-xl/7">{item.caption.title}</p>
+        <p className="type-row font-serif">{item.caption.title}</p>
         <p className="mt-1 text-xs/5 text-white/75">
           {item.caption.description}
         </p>
@@ -128,7 +128,7 @@ export function JourneyExplorer({ items }: { items: readonly JourneyItem[] }) {
                   <span className="text-primary w-16 shrink-0 font-serif text-2xl/9 sm:w-20 sm:text-3xl/10">
                     {item.year}
                   </span>
-                  <span className="text-navy-deep flex-1 font-serif text-xl/7 sm:text-2xl/8">
+                  <span className="text-navy-deep type-card flex-1 font-serif">
                     {item.title}
                   </span>
                 </AccordionTrigger>
@@ -224,7 +224,7 @@ export function JourneyExplorer({ items }: { items: readonly JourneyItem[] }) {
             open={index === 0}
             className="border-border border-b py-5"
           >
-            <summary className="cursor-pointer font-serif text-2xl/8">
+            <summary className="type-card cursor-pointer font-serif">
               {item.year} · {item.title}
             </summary>
             <p className="my-5 max-w-3xl text-sm/6 sm:text-base/7">

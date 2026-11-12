@@ -40,7 +40,7 @@ export function BreadcrumbLink({
   const Comp = asChild ? Slot : "a";
   return (
     <Comp
-      className="hover:text-primary inline-flex min-h-11 items-center rounded-sm text-slate-600 underline-offset-4 transition-colors duration-200 hover:underline motion-reduce:transition-none"
+      className="hover:text-primary inline-flex min-h-11 items-center rounded-sm font-medium text-slate-700 decoration-1 underline-offset-4 transition-colors duration-200 hover:underline motion-reduce:transition-none"
       {...props}
     />
   );
@@ -62,7 +62,7 @@ export function BreadcrumbPage({
 export function BreadcrumbSeparator() {
   return (
     <li role="presentation" aria-hidden="true" className="shrink-0">
-      <ChevronRight className="size-3.5 text-slate-300" strokeWidth={1.75} />
+      <ChevronRight className="size-4 text-slate-500" strokeWidth={1.5} />
     </li>
   );
 }

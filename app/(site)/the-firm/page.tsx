@@ -31,11 +31,7 @@ export default function TheFirmPage() {
       <ProcessSection />
       <FirmPeopleSection />
       <PresenceSection />
-      <FaqSection
-        intro={firmFaqIntro}
-        items={firmFaqs}
-        headingClassName="text-[32px]/10"
-      />
+      <FaqSection intro={firmFaqIntro} items={firmFaqs} />
       <EnquiryCta />
     </>
   );

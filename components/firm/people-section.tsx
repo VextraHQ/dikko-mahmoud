@@ -39,7 +39,7 @@ export function FirmPeopleSection() {
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <h2
               id="firm-people-heading"
-              className="mt-6 font-serif text-[32px]/10 sm:text-5xl/[1.08]"
+              className="type-section mt-6 font-serif"
             >
               {content.heading.map((line) => (
                 <span key={line} className="block">
@@ -77,9 +77,7 @@ export function FirmPeopleSection() {
         <div className="mt-8 space-y-12">
           {advisoryGroups.map((group) => (
             <div key={group.id}>
-              <h3 className="font-serif text-2xl/8 sm:text-3xl/9">
-                {group.name}
-              </h3>
+              <h3 className="type-subsection font-serif">{group.name}</h3>
               <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-8 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-10">
                 {group.personIds.flatMap((id) => {
                   const person = getPerson(id);
@@ -106,7 +104,7 @@ export function FirmPeopleSection() {
                         />
                       </div>
                     </div>
-                    <p className="mt-4 font-serif text-lg/6 sm:text-xl/7">
+                    <p className="type-row mt-4 font-serif">
                       {content.pendingPerson}
                     </p>
                     <p className="text-muted-foreground mt-2 text-xs/5 sm:text-sm/6">

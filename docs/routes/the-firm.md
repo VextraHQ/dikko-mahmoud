@@ -297,3 +297,10 @@ portable production assets; the exact Figma links are recorded above.
 - [Firm FAQ](</Users/nabeelhassan/Library/Application Support/CleanShot/media/media_AxSXbIXH8z/CleanShot 2026-10-29 at 5 .04.35@2x.png>).
 
 - [CTA and shared footer](</Users/nabeelhassan/Library/Application Support/CleanShot/media/media_dllPu4JGis/CleanShot 2026-10-29 at 5 .04.41@2x.png>).
+
+## Polish review · 12 November 2026
+
+- The Journey label reads "Our journey"; the hero already says "Since 1993"
+  (G2).
+- Core values and Working with us have no buttons; the header and the
+  closing band carry the enquiry ask (G3).

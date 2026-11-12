@@ -171,12 +171,17 @@ describe("profile routes and navigation", () => {
 describe("profile page sections", () => {
   it("lists only the sections a profile renders, ending with the enquiry", () => {
     const full = resolveProfile("bello-aminu-abdullahi", preview);
+    // Bello has no milestones, so his focus areas sit in the hero instead.
     expect(full && profileSectionLinks(full)).toEqual([
       { id: profileSectionIds.overview, label: "Overview" },
-      { id: profileSectionIds.focus, label: "Areas of focus" },
       { id: profileSectionIds.qualifications, label: "Qualifications" },
       { id: profileSectionIds.contact, label: "Working with Bello" },
     ]);
+    const withMilestones = resolveProfile("ab-mahmoud", preview);
+    expect(
+      withMilestones &&
+        profileSectionLinks(withMilestones).map((link) => link.id),
+    ).toContain(profileSectionIds.focus);
     if (!full) return;
     const bare = {
       ...full,

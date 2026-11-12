@@ -49,11 +49,9 @@ function FaqAnswer({ item }: { item: Faq }) {
 export function FaqSection({
   items,
   intro: content,
-  headingClassName,
 }: {
   items: readonly Faq[];
   intro: FaqIntro;
-  headingClassName?: string;
 }) {
   const visibleItems = visibleFaqs(items);
   if (!visibleItems.length) return null;
@@ -67,13 +65,7 @@ export function FaqSection({
         <div className="grid gap-6 lg:grid-cols-2 lg:items-end lg:gap-16">
           <div>
             <Eyebrow>{content.eyebrow}</Eyebrow>
-            <h2
-              id="faqs-heading"
-              className={cn(
-                "mt-4 font-serif text-4xl/[1.08] sm:text-5xl/[1.08] xl:text-6xl/[1.04]",
-                headingClassName,
-              )}
-            >
+            <h2 id="faqs-heading" className="type-statement mt-4 font-serif">
               {content.heading.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -94,7 +86,7 @@ export function FaqSection({
             {visibleItems.map((item) => (
               <AccordionItem key={item.id} value={item.id}>
                 <AccordionTrigger>
-                  <span className="text-muted-foreground group-data-[state=open]/accordion:text-foreground flex-1 font-serif text-xl/7 sm:text-2xl/8">
+                  <span className="text-muted-foreground group-data-[state=open]/accordion:text-foreground type-card flex-1 font-serif">
                     {item.question}
                   </span>
                 </AccordionTrigger>
@@ -113,7 +105,7 @@ export function FaqSection({
                 open={index === 0}
                 className="border-border border-b"
               >
-                <summary className="cursor-pointer py-6 font-serif text-xl/7 sm:text-2xl/8">
+                <summary className="type-card cursor-pointer py-6 font-serif">
                   {item.question}
                 </summary>
                 <FaqAnswer item={item} />
@@ -122,7 +114,7 @@ export function FaqSection({
           </noscript>
         </div>
         <div className="mt-8 rounded-2xl bg-white px-5 py-8 text-center sm:p-10 lg:mt-12">
-          <h3 className="font-serif text-xl/7 font-semibold">
+          <h3 className="type-card font-serif font-semibold">
             {content.supportHeading}
           </h3>
           <p className="text-muted-foreground mx-auto mt-2 max-w-2xl text-sm/6 sm:text-base/7">

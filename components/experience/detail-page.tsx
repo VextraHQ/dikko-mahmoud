@@ -29,10 +29,9 @@ export function ExperienceDetailPage({
           aria-labelledby="matter-heading"
           className="border-border border-b pt-4 pb-8 sm:pt-10 sm:pb-10 lg:pt-14 lg:pb-14"
         >
-          <Eyebrow>{experience.category}</Eyebrow>
           <h1
             id="matter-heading"
-            className="mt-4 max-w-5xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
+            className="type-title-detail max-w-5xl font-serif text-balance"
           >
             {experience.organisation}
           </h1>
@@ -48,7 +47,7 @@ export function ExperienceDetailPage({
             <Eyebrow>{copy.instructionsEyebrow}</Eyebrow>
             <h2
               id="instructions-heading"
-              className="mt-5 font-serif text-4xl/[1.15] sm:text-5xl/[1.1]"
+              className="type-section mt-5 font-serif"
             >
               {copy.instructionsHeading}
             </h2>
@@ -61,7 +60,7 @@ export function ExperienceDetailPage({
                   <span className="text-primary text-xs/5 font-semibold">
                     {formatIndex(index)}
                   </span>
-                  <h3 className="mt-4 font-serif text-3xl/[1.2]">
+                  <h3 className="type-subsection mt-4 font-serif">
                     {instruction.title}
                   </h3>
                   <p className="text-muted-foreground mt-5 max-w-3xl text-base/8">

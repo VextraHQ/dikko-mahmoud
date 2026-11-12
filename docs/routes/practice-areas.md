@@ -115,3 +115,15 @@ overflow; desktop and mobile menu navigation; keyboard Escape/focus return;
 service disclosure; manual experience next/end controls; filtering; unknown slug;
 no-JS content; and Home/Firm shared-header regression checks. Record actual results
 in the implementation log. A local build does not confirm deployment readiness.
+
+## Polish review · 12 November 2026
+
+- Listing: both intro paragraphs stay beside "Find the support you need."
+  (P2 was built, then reverted at the user's request on 12 Nov). The hero
+  cover no longer repeats "Our expertise" (G2).
+- Detail: no category label above the title; the trail names it (G2). The
+  button under "Working together" is removed; the hero button, the "Your
+  contact" card and the closing band stay (G3).
+- SME: the Advisory and Secretarial cards have no buttons; the hero button
+  and the closing band stay (G3).
+- Practice card numbering (01–12) stays as designed (P1 held).

@@ -30,7 +30,11 @@ export default function Home() {
       <PeopleSection />
       <InsightsSection />
       <FaqSection />
-      <EnquiryCta />
+      {/* Home is on visual hold: its closing band keeps the old 30px phone
+          heading until Home is reviewed against the type scale. */}
+      <div className="contents max-sm:[&_#enquiry-heading]:text-3xl/9">
+        <EnquiryCta />
+      </div>
     </>
   );
 }

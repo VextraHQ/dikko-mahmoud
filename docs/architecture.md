@@ -31,6 +31,17 @@ and mobile link navigation, with no tab state or Motion. Pending bodies/dates ar
 suppressed. SME uses its own content and server section, linked alongside practices.
 Print-only legal rules stay scoped in surfaces.css. Header tone includes SME/legal.
 
+Header tone: `headerTone` (`lib/navigation.ts`) gives each page its starting
+tone, used without JavaScript. Once mounted, `hooks/use-header-over-dark.ts`
+watches sections marked `data-header-dark` and `StickyHeader` follows what
+sits under the header.
+
+Detail heroes: `components/shared/detail-hero.tsx` serves articles, practice
+pages and standalone profiles (`components/people/profile-hero.tsx`). The
+profile popup keeps `components/people/profile-intro.tsx`; both use
+`components/people/milestone-list.tsx`. Insights phone filters live in
+`components/insights/filter-sheet.tsx`.
+
 Person profiles: `content/` holds the People records and copy
 (`people.ts`), the public ID/status list (`profile-manifest.ts`) and the
 server-only biography bodies (`profiles.ts`). The rules live in `lib/people/`:

@@ -2,6 +2,7 @@ import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { profileCopy as copy } from "@/content/profiles";
 import {
+  focusInHero,
   profileSectionIds as ids,
   type ResolvedProfile,
 } from "@/lib/people/profiles";
@@ -27,6 +28,9 @@ export function ProfileSections({
   const { profile, shortName, personalEmail } = resolved;
   const Heading = variant === "dialog" ? "h3" : "h2";
   const dialog = variant === "dialog";
+  // On the page, a profile without milestones shows its focus in the hero.
+  const showFocus =
+    Boolean(profile.focus?.length) && (dialog || !focusInHero(resolved));
   const section =
     "scroll-mt-28 border-border border-t pt-10 mt-10 lg:pt-12 lg:mt-12";
 
@@ -48,7 +52,7 @@ export function ProfileSections({
         <Eyebrow>{copy.overviewLabel}</Eyebrow>
         <Heading
           id={`${ids.overview}-heading`}
-          className="mt-5 font-serif text-[2rem]/10 text-balance sm:text-5xl/[1.1]"
+          className="type-section mt-5 font-serif text-balance"
         >
           {copy.overviewHeading.map((line) => (
             <span key={line} className="block">
@@ -69,7 +73,7 @@ export function ProfileSections({
             "lg:[&>section:first-child]:mt-0 lg:[&>section:first-child]:border-t-0 lg:[&>section:first-child]:pt-0",
         )}
       >
-        {profile.focus?.length ? (
+        {showFocus && profile.focus ? (
           <section
             id={ids.focus}
             aria-labelledby={`${ids.focus}-heading`}
@@ -82,10 +86,7 @@ export function ProfileSections({
               {profile.focus.map((item) => (
                 <li
                   key={item}
-                  className={cn(
-                    "border-border text-primary border-b py-4 font-serif text-xl/7 last:border-b-0 sm:py-5",
-                    !dialog && "sm:text-2xl/8",
-                  )}
+                  className="border-border text-primary type-row border-b py-4 font-serif last:border-b-0 sm:py-5"
                 >
                   {item}
                 </li>
@@ -123,7 +124,7 @@ export function ProfileSections({
         <Eyebrow>{copy.workingEyebrow}</Eyebrow>
         <Heading
           id={`${ids.contact}-heading`}
-          className="mt-4 font-serif text-2xl/8 sm:text-3xl/10"
+          className="type-subsection mt-4 font-serif"
         >
           {copy.contactHeading}
         </Heading>

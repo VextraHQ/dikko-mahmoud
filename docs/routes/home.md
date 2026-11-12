@@ -677,3 +677,12 @@ CarouselItem now has `relative`, containing those legends inside the existing
 viewport clipping without clipping control focus outlines or masking the root
 page's overflow. Form primitives are prepared separately; no form, new public
 page, CMS, service or submission behaviour is added to the homepage.
+
+## Polish review · 12 November 2026 (user-approved)
+
+- Shared changes that reach Home: the header follows what's under it (dark
+  over the hero and the practice band, white over light sections, fading
+  between the two) and the desktop menu has no "Home" (H1, H3). The current
+  page keeps its filled pill.
+  People cards have no arrow circle (PE1). Phones show the preview notice as
+  a thin line above the header (G5). Home's own sections are unchanged.

@@ -10,13 +10,16 @@
   inset: -1px;
   border: 1px solid rgb(255 255 255 / 22%);
   border-radius: inherit;
-  background: var(--secondary);
+  background-color: var(--secondary);
   box-shadow:
     0 8px 28px rgb(6 26 46 / 14%),
     inset 0 1px 0 rgb(255 255 255 / 20%);
   pointer-events: none;
   content: "";
-  transition: opacity 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  /* Colours ease too, so the dark-to-white tone change fades, never snaps. */
+  transition-property: opacity, background-color, border-color, box-shadow;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* The full shell remains visible when JS/IntersectionObserver is unavailable. */
@@ -39,17 +42,24 @@
 
 @supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
   .site-header-surface::before {
-    background:
-      linear-gradient(135deg, rgb(255 255 255 / 8%), transparent 55%),
-      rgb(6 26 46 / 78%);
+    /* Split so only the colour changes per tone; the faint sheen stays. */
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 8%),
+      transparent 55%
+    );
+    background-color: rgb(6 26 46 / 78%);
     -webkit-backdrop-filter: blur(24px) saturate(150%);
     backdrop-filter: blur(24px) saturate(150%);
   }
 
   .site-navigation-surface::before {
-    background:
-      linear-gradient(135deg, rgb(255 255 255 / 12%), transparent 65%),
-      rgb(6 26 46 / 44%);
+    background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / 12%),
+      transparent 65%
+    );
+    background-color: rgb(6 26 46 / 44%);
     -webkit-backdrop-filter: blur(16px) saturate(140%);
     backdrop-filter: blur(16px) saturate(140%);
   }
@@ -65,18 +75,21 @@
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
   .site-header-surface::before,
   .site-navigation-surface::before {
-    background: var(--secondary);
+    background-image: none;
+    background-color: var(--secondary);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
 }
 
-/* Practice detail pages use the supplied light header without shifting chrome. */
+/* The white header: light pages, and dark pages scrolled over light content. */
 [data-site-header][data-tone="light"] .site-header-surface::before,
 [data-site-header][data-tone="light"] .site-navigation-surface::before {
   border-color: var(--border);
-  background: rgb(255 255 255 / 95%);
-  box-shadow: 0 8px 28px rgb(6 26 46 / 5%);
+  background-color: rgb(255 255 255 / 95%);
+  box-shadow:
+    0 8px 28px rgb(6 26 46 / 5%),
+    inset 0 1px 0 rgb(255 255 255 / 0%);
 }
 
 /*

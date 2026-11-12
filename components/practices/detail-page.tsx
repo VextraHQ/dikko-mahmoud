@@ -1,6 +1,7 @@
+import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
-import { Eyebrow } from "@/components/ui/eyebrow";
+import { Eyebrow, eyebrowClass } from "@/components/ui/eyebrow";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import { EditorialCover } from "@/components/shared/editorial-cover";
 import { PersonCard } from "@/components/shared/person-card";
@@ -62,7 +63,6 @@ export function PracticeDetailPage({
         />
         <DetailHero
           headingId="practice-heading"
-          eyebrow={practice.category}
           title={practice.title}
           lead={detail?.introduction ?? practice.summary}
           media={
@@ -73,9 +73,7 @@ export function PracticeDetailPage({
               fill
               sizes="(min-width: 1440px) 680px, (min-width: 1024px) 48vw, 100vw"
               className="object-cover"
-              fallback={
-                <EditorialCover label={practice.title} markClassName="pb-0" />
-              }
+              fallback={<EditorialCover markClassName="pb-0" />}
             />
           }
           footer={<EnquiryButton>{copy.enquiryAction}</EnquiryButton>}
@@ -108,7 +106,7 @@ export function PracticeDetailPage({
                   <Eyebrow>{copy.needsEyebrow}</Eyebrow>
                   <h2
                     id="needs-heading"
-                    className="mt-6 font-serif text-[32px]/10 sm:text-5xl/13"
+                    className="type-section mt-6 font-serif"
                   >
                     {detail.needsHeading}
                   </h2>
@@ -121,7 +119,7 @@ export function PracticeDetailPage({
                         <p className="text-primary text-xs/5 font-bold">
                           {formatIndex(index)}
                         </p>
-                        <h3 className="mt-4 font-serif text-2xl/8">{need}</h3>
+                        <h3 className="type-card mt-4 font-serif">{need}</h3>
                       </li>
                     ))}
                   </ul>
@@ -163,7 +161,7 @@ export function PracticeDetailPage({
                 <Eyebrow>{copy.peopleEyebrow}</Eyebrow>
                 <h2
                   id="practice-people-heading"
-                  className="mt-6 font-serif text-[32px]/10 sm:text-5xl/13"
+                  className="type-section mt-6 font-serif"
                 >
                   {copy.peopleHeading}
                 </h2>
@@ -192,7 +190,7 @@ export function PracticeDetailPage({
                 <Eyebrow>{copy.workingEyebrow}</Eyebrow>
                 <h2
                   id="working-heading"
-                  className="mt-6 font-serif text-[32px]/10 sm:text-5xl/13"
+                  className="type-section mt-6 font-serif"
                 >
                   {workingWithUs.heading.map((line) => (
                     <span key={line} className="block">
@@ -208,19 +206,16 @@ export function PracticeDetailPage({
               <ol className="mt-8 grid gap-x-6 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
                 {workingWithUs.steps.map((step, index) => (
                   <li key={step.title} className="border-border border-t pt-5">
-                    <p className="text-primary text-[10px]/5 font-bold tracking-wider uppercase">
+                    <p className={eyebrowClass}>
                       {formatIndex(index)} / {step.label}
                     </p>
-                    <h3 className="mt-4 font-serif text-2xl/8">{step.title}</h3>
+                    <h3 className="type-card mt-4 font-serif">{step.title}</h3>
                     <p className="text-muted-foreground mt-4 text-sm/6">
                       {step.description}
                     </p>
                   </li>
                 ))}
               </ol>
-              <EnquiryButton className="mt-8">
-                {copy.enquiryAction}
-              </EnquiryButton>
             </section>
             <PracticeInsightsSection practice={practice} insights={insights} />
             {next && (
@@ -233,10 +228,10 @@ export function PracticeDetailPage({
                   className="group/next ease-editorial -mx-4 flex items-center justify-between gap-6 rounded-xl px-4 py-4 transition-colors duration-300 hover:bg-slate-50 motion-reduce:transition-none"
                 >
                   <span className="min-w-0">
-                    <span className="text-primary block text-[11px]/5 font-bold tracking-[0.14em] uppercase">
+                    <span className={cn(eyebrowClass, "block")}>
                       {copy.nextPracticeLabel} · {formatIndex(next.index)}
                     </span>
-                    <span className="mt-2 block font-serif text-2xl/8 sm:text-3xl/10">
+                    <span className="type-subsection mt-2 block font-serif">
                       {next.practice.title}
                     </span>
                   </span>
@@ -257,7 +252,6 @@ export function PracticeDetailPage({
         <FaqSection
           items={detail.faqs.items}
           intro={{ ...faqIntro, ...detail.faqs }}
-          headingClassName="text-[32px]/10"
         />
       ) : null}
       <EnquiryCta />

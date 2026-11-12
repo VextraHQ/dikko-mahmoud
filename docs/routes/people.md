@@ -502,3 +502,13 @@ Role pill labels are positioned containers for their hidden radios, fixing the
 mobile overflow exposed by the sample roster. The sample roster was removed on 3
 November at the user's request; synthetic people now exist only in
 `tests/fixtures/directory-people.ts`.
+
+## Polish review · 12 November 2026
+
+- The standalone profile uses the shared detail hero (`ProfileHero`): "Our
+  People" trail, role as the label, postnominals under the name, portrait in
+  the photo frame, enquiry button and links on the bottom rule. The sky band
+  and the separate back link are gone; phones get the trail's back link (PR1).
+- Career milestones are a year and description list (`MilestoneList`),
+  below the hero on the page and after the links in the popup (PR2).
+- Person cards have no arrow circle, on every page including Home (PE1).

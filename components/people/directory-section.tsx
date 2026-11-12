@@ -32,6 +32,7 @@ export function DirectorySection({ data }: { data: PeopleDirectoryData }) {
     <>
       <section
         aria-labelledby="people-directory-heading"
+        data-header-dark
         className="bg-navy-deep text-white"
       >
         <div className="mx-auto grid w-full max-w-360 gap-6 px-4 pt-8 pb-10 sm:px-8 sm:pt-10 sm:pb-12 lg:grid-cols-[1.6fr_1fr] lg:items-end lg:gap-20 lg:pt-36 lg:pb-14 xl:px-20">
@@ -39,7 +40,7 @@ export function DirectorySection({ data }: { data: PeopleDirectoryData }) {
             <Eyebrow className="text-white/80">{copy.eyebrow}</Eyebrow>
             <h1
               id="people-directory-heading"
-              className="mt-4 font-serif text-4xl/[1.1] text-balance sm:text-6xl/[1.04] lg:text-[clamp(2.5rem,4.15vw,4rem)]/[1.04]"
+              className="type-title mt-4 font-serif text-balance"
             >
               {copy.heading.map((line) => (
                 <span key={line} className="block">

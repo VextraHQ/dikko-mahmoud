@@ -29,7 +29,8 @@ export type PersonProfile = {
 export const profileCopy = {
   reviewNote:
     "Preview profile. Prepared from the firm’s company profile and awaiting confirmation by Dikko & Mahmoud before publication.",
-  backToPeople: "Back to our people",
+  homeLabel: "Home",
+  peopleLabel: "Our People",
   contentsLabel: "On this page",
   overviewLabel: "Overview",
   milestonesLabel: "Career milestones",

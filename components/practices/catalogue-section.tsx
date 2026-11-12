@@ -25,10 +25,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
           <div>
             <Eyebrow>{copy.eyebrow}</Eyebrow>
-            <h2
-              id="catalogue-heading"
-              className="mt-6 font-serif text-[32px]/10 sm:text-5xl/[1.08]"
-            >
+            <h2 id="catalogue-heading" className="type-section mt-6 font-serif">
               {copy.heading.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -84,11 +81,11 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
                       filterPractices("All areas").indexOf(practice),
                     )}
                   </span>
-                  <span className="text-muted-foreground text-[10px]/5 font-bold tracking-wider">
+                  <span className="text-muted-foreground text-[11px]/5 font-bold tracking-wider">
                     {practice.category}
                   </span>
                 </div>
-                <h3 className="mt-5 font-serif text-xl/7">{practice.title}</h3>
+                <h3 className="type-card mt-5 font-serif">{practice.title}</h3>
                 <p className="text-muted-foreground mt-5 text-sm/6">
                   {practice.summary}
                 </p>
@@ -139,10 +136,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
         >
           <div>
             <Eyebrow>{copy.smeHeading}</Eyebrow>
-            <h3
-              id="sme-heading"
-              className="mt-5 font-serif text-[28px]/9 sm:text-4xl/11"
-            >
+            <h3 id="sme-heading" className="type-subsection mt-5 font-serif">
               {smeRetainer.title}
             </h3>
           </div>
@@ -159,7 +153,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
                   <span className="text-primary text-xs/5 font-bold">
                     {formatIndex(index)}
                   </span>
-                  <span className="font-serif text-xl/7">{track.title}</span>
+                  <span className="type-row font-serif">{track.title}</span>
                 </li>
               ))}
             </ol>

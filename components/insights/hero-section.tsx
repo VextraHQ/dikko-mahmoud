@@ -1,4 +1,3 @@
-import { Sparkles } from "lucide-react";
 import { ArticleImage } from "@/components/insights/article-image";
 import { ArticleMeta } from "@/components/insights/article-card";
 import { InsightByline } from "@/components/shared/insight-byline";
@@ -16,6 +15,7 @@ export function InsightsHeroSection({
 }) {
   return (
     <section
+      data-header-dark
       aria-labelledby="insights-title"
       className="bg-navy-deep pb-12 text-white lg:pt-40 lg:pb-20"
     >
@@ -23,10 +23,7 @@ export function InsightsHeroSection({
         <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-20">
           <div>
             <Eyebrow className="text-white/75">{copy.series}</Eyebrow>
-            <h1
-              id="insights-title"
-              className="mt-6 font-serif text-[40px]/[1.08] sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
-            >
+            <h1 id="insights-title" className="type-title mt-6 font-serif">
               {copy.heading.map((line) => (
                 <span key={line} className="block">
                   {line}
@@ -49,18 +46,13 @@ export function InsightsHeroSection({
                   sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, 100vw"
                   className="ease-editorial motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover/feature:scale-[1.03]"
                 />
-                <span className="bg-primary absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs/5 font-semibold text-white ring-1 ring-white/30">
-                  <Sparkles
-                    aria-hidden="true"
-                    className="size-3.5"
-                    strokeWidth={1.75}
-                  />
+                <span className="bg-primary absolute top-4 left-4 z-10 inline-flex items-center rounded-full px-3 py-1 text-xs/5 font-semibold text-white ring-1 ring-white/30">
                   {copy.featured}
                 </span>
               </div>
               <div className="flex flex-col items-start justify-center p-6 sm:p-8 xl:p-10">
                 <Eyebrow className="text-primary">{featured.category}</Eyebrow>
-                <h2 className="mt-4 font-serif text-3xl/[1.15] sm:text-4xl/[1.15] xl:text-5xl/[1.1]">
+                <h2 className="type-section mt-4 font-serif">
                   <SiteLink
                     href={routes.insight(featured.id)}
                     className="decoration-primary/40 rounded-sm underline-offset-4 hover:underline"
@@ -71,7 +63,7 @@ export function InsightsHeroSection({
                 <p className="text-muted-foreground mt-5 text-base/7">
                   {featured.excerpt}
                 </p>
-                <div className="mt-6 border-t border-slate-200 pt-5">
+                <div className="border-border mt-6 self-stretch border-t pt-5">
                   <InsightByline
                     article={featured}
                     className="text-foreground mt-0 text-sm/6 font-medium"

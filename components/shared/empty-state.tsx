@@ -40,7 +40,7 @@ export function EmptyState({
       >
         <Icon strokeWidth={1.5} className="size-5" />
       </span>
-      <Heading className="mt-4 font-serif text-2xl/8 text-balance sm:text-[1.75rem]/9">
+      <Heading className="type-subsection mt-4 font-serif text-balance">
         {title}
       </Heading>
       <p className="text-muted-foreground mt-2 max-w-md text-sm/6 text-pretty">

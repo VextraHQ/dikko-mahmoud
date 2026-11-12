@@ -24,10 +24,7 @@ export function ServicesSection({
       className="border-border border-t py-12 lg:py-16"
     >
       <Eyebrow>{copy.servicesEyebrow}</Eyebrow>
-      <h2
-        id="services-heading"
-        className="mt-6 font-serif text-[32px]/10 sm:text-5xl/13"
-      >
+      <h2 id="services-heading" className="type-section mt-6 font-serif">
         {copy.servicesHeading}
       </h2>
       <p className="text-muted-foreground mt-6 text-sm/6 sm:text-base/7">
@@ -43,7 +40,7 @@ export function ServicesSection({
               className="last:border-b-0"
             >
               <AccordionTrigger>
-                <span className="text-primary flex-1 font-serif text-xl/7 sm:text-2xl/8">
+                <span className="text-primary type-card flex-1 font-serif">
                   {service.title}
                 </span>
               </AccordionTrigger>
@@ -64,7 +61,7 @@ export function ServicesSection({
             open={index < 2}
             className="border-border border-b last:border-b-0"
           >
-            <summary className="text-primary cursor-pointer py-5 font-serif text-xl/7">
+            <summary className="text-primary type-row cursor-pointer py-5 font-serif">
               {formatIndex(index)} · {service.title}
             </summary>
             <p className="text-muted-foreground pb-6 text-sm/6">

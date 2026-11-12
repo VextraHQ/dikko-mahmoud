@@ -80,11 +80,21 @@ export const profileSectionIds = {
   contact: "profile-contact",
 } as const;
 
-/** "On this page" entries: only sections the profile actually renders. */
-export function profileSectionLinks({ profile, shortName }: ResolvedProfile) {
+/**
+ * The page hero shows career milestones when supplied; without them it shows
+ * the areas of focus instead, so the hero never has an empty gap. Those focus
+ * areas then leave the page body, so they never appear twice.
+ */
+export function focusInHero({ person, profile }: ResolvedProfile) {
+  return !person.milestones?.length && Boolean(profile.focus?.length);
+}
+
+/** "On this page" entries: only sections the page actually renders. */
+export function profileSectionLinks(resolved: ResolvedProfile) {
+  const { profile, shortName } = resolved;
   return [
     { id: profileSectionIds.overview, label: profileCopy.overviewLabel },
-    ...(profile.focus?.length
+    ...(profile.focus?.length && !focusInHero(resolved)
       ? [{ id: profileSectionIds.focus, label: profileCopy.focusLabel }]
       : []),
     ...(profile.qualifications?.length

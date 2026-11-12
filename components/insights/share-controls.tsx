@@ -1,15 +1,18 @@
 "use client";
 import type React from "react";
-import { Check, Ellipsis, Link2, Printer, Share2 } from "lucide-react";
+import { useId } from "react";
+import { Check, Link2, Printer, Share2 } from "lucide-react";
 import { FaLinkedinIn, FaWhatsapp, FaXTwitter } from "react-icons/fa6";
 import { useArticleShare } from "@/hooks/use-article-share";
 import { insightsCopy as copy } from "@/content/insight-copy";
 
-// The page has one share row, so a fixed id and anchor name are safe.
-const menuId = "article-share-menu";
-
 const iconButton =
   "text-primary flex size-10 items-center justify-center rounded-full transition-colors hover:bg-slate-100 motion-reduce:transition-none";
+
+// Phones show the Share button as an icon, like its neighbours, so the row
+// fits beside the author; the word stays for screen readers.
+const shareButton =
+  "text-primary inline-flex min-h-10 items-center justify-center gap-2 rounded-full text-sm/6 font-medium transition-colors hover:bg-slate-100 max-sm:size-10 sm:px-3 motion-reduce:transition-none";
 
 const menuItem =
   "text-foreground flex min-h-11 w-full items-center gap-3 rounded-md px-3 text-left text-sm/6 hover:bg-slate-50";
@@ -21,9 +24,13 @@ function closeMenu(event: React.MouseEvent<HTMLElement>) {
 }
 
 /**
- * Quiet share row for the article byline: copy link and LinkedIn up front,
- * the rest (X, WhatsApp, other apps, print) in a small "More" menu. The menu
- * uses the browser's popover, so it closes on Escape or an outside click.
+ * Quiet share row for an article, the same on every device: copy link and
+ * LinkedIn as icons, then a "Share" menu for WhatsApp, X, the device's own
+ * share sheet (only where one exists) and print. Native share sheets differ
+ * by device (a Mac offers little more than Copy), so they are an extra, never
+ * the only way to share. The menu is the browser's popover, so it
+ * closes on Escape or an outside click. Each row gets its own menu id, so
+ * the byline and the end of the article can both have one.
  */
 export function ArticleShareControls({
   path,
@@ -36,6 +43,9 @@ export function ArticleShareControls({
 }) {
   const share = useArticleShare(path, title, canonical);
   const url = encodeURIComponent(share.url);
+  const id = useId();
+  const menuId = `share-menu-${id}`;
+  const anchor = `--share-${id.replace(/[^a-zA-Z0-9-]/g, "")}`;
 
   return (
     <div className="relative">
@@ -66,29 +76,21 @@ export function ArticleShareControls({
         <button
           type="button"
           popoverTarget={menuId}
-          className={`${iconButton} [anchor-name:--article-share]`}
-          aria-label={copy.moreShare}
-          title={copy.moreShare}
+          className={shareButton}
+          style={{ anchorName: anchor } as React.CSSProperties}
         >
-          <Ellipsis aria-hidden="true" className="size-4.5" strokeWidth={1.5} />
+          <Share2 aria-hidden="true" className="size-4.5" strokeWidth={1.5} />
+          <span className="max-sm:sr-only">{copy.shareButton}</span>
         </button>
       </div>
       <div
         id={menuId}
         popover="auto"
         onClick={closeMenu}
+        style={{ positionAnchor: anchor } as React.CSSProperties}
         // Without anchor positioning the browser shows the menu centred.
-        className="border-border w-56 rounded-xl border bg-white p-1.5 shadow-lg [position-anchor:--article-share] [position-area:bottom_span-left] [position-try-fallbacks:flip-block] supports-[position-area:bottom]:[inset:auto] supports-[position-area:bottom]:m-0 supports-[position-area:bottom]:mt-2"
+        className="border-border w-56 rounded-xl border bg-white p-1.5 shadow-lg [position-area:bottom_span-left] [position-try-fallbacks:flip-inline,flip-block,flip-block_flip-inline] supports-[position-area:bottom]:[inset:auto] supports-[position-area:bottom]:m-0 supports-[position-area:bottom]:mt-2"
       >
-        <a
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${url}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={menuItem}
-        >
-          <FaXTwitter aria-hidden="true" className="text-primary size-4" />
-          {copy.shareX}
-        </a>
         <a
           href={`https://wa.me/?text=${encodeURIComponent(`${title} ${share.url}`)}`}
           target="_blank"
@@ -97,6 +99,15 @@ export function ArticleShareControls({
         >
           <FaWhatsapp aria-hidden="true" className="text-primary size-4" />
           {copy.shareWhatsApp}
+        </a>
+        <a
+          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${url}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={menuItem}
+        >
+          <FaXTwitter aria-hidden="true" className="text-primary size-4" />
+          {copy.shareX}
         </a>
         {share.native && (
           <button

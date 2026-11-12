@@ -56,11 +56,15 @@ export const insightsCopy = {
   copyFailedHint: "Select and copy the address shown below instead.",
   shareFailed: "Couldn’t open sharing",
   manualCopy: "Article address",
-  nativeShare: "More apps",
+  nativeShare: "Share via another app",
   shareLinkedIn: "Share on LinkedIn",
   shareX: "Share on X",
   shareWhatsApp: "Share on WhatsApp",
-  moreShare: "More ways to share",
+  shareButton: "Share",
+  filters: "Filters",
+  showResults: (count: number) =>
+    `Show ${count} ${count === 1 ? "insight" : "insights"}`,
+  shareEnd: "Share this article",
   revised: "Revised",
   practiceStrip: {
     eyebrow: "Insights",

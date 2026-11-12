@@ -29,7 +29,7 @@ export function InsightListingSection({ data }: { data: InsightPage }) {
       <h2
         id="insight-archive-heading"
         tabIndex={-1}
-        className="scroll-mt-28 font-serif text-4xl/[1.15] sm:text-5xl/[1.1]"
+        className="type-section scroll-mt-28 font-serif"
       >
         {copy.archiveHeading}
       </h2>
@@ -42,7 +42,7 @@ export function InsightListingSection({ data }: { data: InsightPage }) {
           />
           {data.items.length ? (
             <RevealGroup>
-              <ul className="mt-8 grid items-stretch gap-3 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7">
+              <ul className="max-sm:divide-border max-sm:border-border mt-8 grid items-stretch max-sm:divide-y max-sm:border-y sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 lg:gap-7">
                 {data.items.map((article, index) => (
                   <li
                     key={article.id}

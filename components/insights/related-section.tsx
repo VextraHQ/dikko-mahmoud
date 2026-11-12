@@ -24,7 +24,7 @@ export function RelatedInsightsSection({
             <Eyebrow>{copy.relatedEyebrow}</Eyebrow>
             <h2
               id="related-insights-heading"
-              className="mt-4 font-serif text-3xl/10 sm:text-4xl/11"
+              className="type-section mt-4 font-serif"
             >
               {copy.relatedHeading}
             </h2>

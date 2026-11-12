@@ -74,7 +74,29 @@ white cover the light text and glass navigation treatments on navy surfaces.
 - Common body treatments map to `text-base/6`, `text-lg/7`, and `text-sm` with
   suitable leading. Use standard utilities where they match.
 - Keep custom font-family bridges only; do not mirror every Figma type style
-  into a custom CSS variable. One-off display sizes may use a local utility.
+  into a custom CSS variable.
+- Serif headings use the type scale in `app/globals.css` (12 Nov): one class
+  per role instead of hand-picked sizes, so a role looks the same on every
+  page. Pick the role, not a size:
+
+  | Class               | Phone | Desktop (`sm` / `xl`) | Use                         |
+  | ------------------- | ----- | --------------------- | --------------------------- |
+  | `type-title`        | 40    | 60 / 72               | Page title, listing pages   |
+  | `type-title-detail` | 40    | 48 / 64               | Page title, detail pages    |
+  | `type-statement`    | 36    | 48 / 60               | Closing band, FAQ statement |
+  | `type-section`      | 32    | 48                    | Section heading             |
+  | `type-subsection`   | 24    | 30                    | Heading inside a section    |
+  | `type-card`         | 20    | 24                    | Card title, accordion item  |
+  | `type-row`          | 18    | 20                    | List row title, names       |
+
+  Article body headings follow the same steps (h2 as subsection, h3 as card).
+  Big numerals and years (stats, milestones, list indexes) are figures, not
+  headings, and keep their own sizes. Running text: lead 18/20, body 16,
+  supporting 14, meta 13, labels 11 (`eyebrowClass`); nothing smaller except
+  the logo's text fallback and the editorial cover label (Home hold).
+
+- Home keeps its sizes while it is on visual hold. Its closing band keeps a
+  30px phone heading through a scoped override in `app/(site)/page.tsx`.
 - Local Latin variable font files cover weights 400–700, with Newsreader optical
   sizing. `next/font/local` hosts them without build-time Google Fonts requests.
   OFL licence files are retained alongside them.
@@ -102,10 +124,19 @@ white cover the light text and glass navigation treatments on navy surfaces.
   `strokeWidth={1.5}` and `aria-hidden`.
 - `ArrowUpRight` means "go to this page" (CTAs, cards, jump links).
   `ArrowRight` means "next" (the next-practice row).
-- A secondary page shows where it sits with the shared `Breadcrumb`
-  (`components/ui/breadcrumb.tsx`), not a lone "Home ↗" link. Examples:
-  "Home › Terms of Use" on the Legal pages, and "Home › Practice areas ›
-  SME retainer".
+- A secondary page shows where it sits with `PageTrail`
+  (`components/shared/page-trail.tsx`). On desktop it is the full trail the
+  designer drew, from "Home" to the current page ("Home › Our People › Bello
+  Aminu Abdullahi"): links are slate-700 and underline on hover, and the
+  current page is plain slate-500 text (`BreadcrumbPage`) that truncates.
+  Phones keep the back link. G1 (parents only) was tried and reverted on
+  12 Nov, because a single item didn't read as a way back.
+- Legal pages (Privacy, Terms) have no trail: they stand alone, the logo goes
+  home and the "Legal documents" card switches between them.
+- Icons appear only on things you can press or must recognise. Insight type
+  pills, card meta (date, reading time), "Featured" and "Key takeaways" are
+  text only. Every Lucide icon uses `strokeWidth={1.5}` (12 Nov, G4); Home's
+  own icons wait for the Home review.
 
 ### Arrow buttons
 
@@ -194,22 +225,57 @@ the narrow client boundary and missing-content selection rules.
   profile and feature shows the same initials treatment until photographs
   arrive. Card grids use the 4:5 portrait crop.
 
-### Detail page hero (2026-11-10)
+### Detail page hero (2026-11-10, updated 12 Nov)
 
-- Articles and practice areas share `DetailHero`
-  (`components/shared/detail-hero.tsx`), a split hero. The eyebrow starts
-  level with the photo's top edge, and the footer rule (byline or enquiry
-  button) sits on its bottom edge. On desktop the photo runs to the page
-  edge. On phones it comes first, full width, then the text.
-- The eyebrow carries the type and category ("Article · Intellectual
-  Property & Technology"). The meta line is plain text with mid-dots.
-  Icons appear only on things you can press.
-- Article share is one quiet row in the byline: copy link, LinkedIn and a
-  "More" menu (X, WhatsApp, other apps on supported devices, print). Line
-  icons at 18px have no circles. The menu is a native popover anchored
-  under its button. Browsers without anchor positioning show it centred.
-- Matter pages have no photo, so they keep a text hero with the same
-  category eyebrow.
+- Articles, practice areas and standalone profiles share `DetailHero`
+  (`components/shared/detail-hero.tsx`), a split hero. The label (or the
+  heading, when there is no label) starts level with the photo's top edge, and
+  the footer rule (byline or enquiry button) sits on its bottom edge. On
+  desktop the photo runs to the page edge. On phones it comes first, full
+  width, then the text.
+- Labels only where they add something (G2): articles show the type
+  ("Article"), profiles the role. Practice and matter pages have no label,
+  because the trail above already names the group.
+- Article share (A1, A2, revised 12 Nov): the same on every device. Copy link
+  and LinkedIn as icons, then "Share", which opens our own menu: WhatsApp, X,
+  "Share via another app" (only where the device has a share sheet) and
+  print. The device's share sheet is never the only route, because it
+  differs by device (on a Mac it offers little more than Copy). On phones
+  "Share" is an icon too, so the row stays beside the author. A second row,
+  "Share this article", sits above "Back to all insights". Each menu is a
+  native popover under its own button that flips sideways near a screen
+  edge.
+- Profiles: the portrait fills the photo frame and career milestones sit in
+  the hero under the summary as a short timeline (`MilestoneList`: rule,
+  navy dot, year above its line). Profiles without milestones show their
+  areas of focus there instead, as a serif list split by hairlines, and those areas leave the page body
+  (`focusInHero`). Contact icons sit beside the enquiry button. The popup
+  keeps its own intro (`ProfileIntro`) with the same row and list. No share
+  or print on profiles.
+- Small uppercase labels all use one style, `eyebrowClass` (11px, bold,
+  widest tracking): `Eyebrow` for plain labels, the class for `dt`, `legend`
+  or `span` labels. Quieten with `text-muted-foreground`; never resize.
+- Breadcrumb links are slate-700 with a hover underline; chevrons slate-500.
+  Meta lines use slate-600 text, bold slate-400 dots and a navy type label.
+- One enquiry ask per page plus the header and the closing band (G3). Named
+  asks (the practice contact card, "Enquire about …") stay.
+
+### Header (12 Nov, H1–H3)
+
+- The header follows what's under it: dark over sections marked
+  `data-header-dark` (dark heroes, the Home practice band, the footer, status
+  pages), white everywhere else (`hooks/use-header-over-dark.ts`). Without
+  JavaScript, each page keeps its own tone from `headerTone`.
+- The current page keeps the designer's filled pill (white on the dark
+  header, navy on the white one). The H2 underline was tried and reverted.
+- Tone changes fade over 400ms (`ease-editorial`): the shell's colour,
+  border and shadow, the text, the nav pill, the enquiry button (which reads
+  the live tone from `useHeaderTone`) and a crossfade between the two logos.
+- The desktop menu leaves out "Home" (the logo links home); the phone menu
+  keeps it.
+- Phones show the preview notice as a thin line above the header that
+  scrolls away (G5). Desktop keeps the floating pill.
+- Person cards have no arrow circle; hover underlines the name (PE1).
 
 ### Typesetting
 

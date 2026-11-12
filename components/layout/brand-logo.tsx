@@ -10,13 +10,13 @@ const logos = [
     src: "/brand/logo-white.png",
     width: 900,
     height: 303,
-    className: "block group-data-[tone=light]/site-header:hidden",
+    className: "group-data-[tone=light]/site-header:opacity-0",
   },
   {
     src: "/brand/navy-logo.png",
     width: 352,
     height: 116,
-    className: "hidden group-data-[tone=light]/site-header:block",
+    className: "opacity-0 group-data-[tone=light]/site-header:opacity-100",
   },
 ];
 
@@ -30,16 +30,23 @@ export function BrandLogo({
       onClick={onClick}
       aria-label="Dikko & Mahmoud — Home"
       className={cn(
-        "flex h-15 w-45 shrink-0 items-center rounded-lg py-1.5 xl:h-18.5 xl:w-48",
+        "grid h-15 w-45 shrink-0 grid-rows-1 items-center rounded-lg py-1.5 xl:h-18.5 xl:w-48",
         className,
       )}
     >
-      {/* The header tone picks the file; the hidden one leaves the a11y tree. */}
+      {/* Both files stack in one grid cell and crossfade with the header
+          tone. The link's label names the firm, so the images are decorative. */}
       {logos.map((logo) => (
-        <span key={logo.src} className={cn("h-full w-full", logo.className)}>
+        <span
+          key={logo.src}
+          className={cn(
+            "ease-editorial col-start-1 row-start-1 h-full w-full transition-opacity duration-400 motion-reduce:transition-none",
+            logo.className,
+          )}
+        >
           <ImageWithFallback
             src={logo.src}
-            alt="Dikko & Mahmoud, Solicitors and Advocates, established 1993"
+            alt=""
             width={logo.width}
             height={logo.height}
             loading="eager"

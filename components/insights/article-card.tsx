@@ -1,13 +1,5 @@
-import {
-  ArrowUpRight,
-  CalendarDays,
-  Clock,
-  FileText,
-  Landmark,
-  Megaphone,
-  Scale,
-  type LucideIcon,
-} from "lucide-react";
+import { eyebrowClass } from "@/components/ui/eyebrow";
+import { ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
 import { ArticleImage } from "@/components/insights/article-image";
 import { InsightByline } from "@/components/shared/insight-byline";
@@ -20,13 +12,6 @@ import {
   type InsightCard,
   type InsightType,
 } from "@/types/insights";
-
-const typeIcons: Record<InsightType, LucideIcon> = {
-  article: FileText,
-  "case-note": Scale,
-  "regulatory-update": Landmark,
-  "firm-news": Megaphone,
-};
 
 export function typeLabel(type: InsightType) {
   return insightTypes.find((item) => item.value === type)?.label;
@@ -43,15 +28,13 @@ function InsightTypeBadge({
   type: InsightType;
   className?: string;
 }) {
-  const Icon = typeIcons[type];
   return (
     <span
       className={cn(
-        "text-primary inline-flex items-center gap-1.5 rounded-full bg-white px-2.5 py-1 text-xs/5 font-medium ring-1 ring-slate-900/10",
+        "text-primary inline-flex items-center rounded-full bg-white px-2.5 py-1 text-xs/5 font-medium ring-1 ring-slate-900/10",
         className,
       )}
     >
-      <Icon aria-hidden="true" className="size-3.5" strokeWidth={1.75} />
       {typeLabel(type)}
     </span>
   );
@@ -69,31 +52,28 @@ export function ArticleMeta({
   showReadTime?: boolean;
   className?: string;
 }) {
-  const TypeIcon = typeIcons[article.type];
-  const item = "inline-flex items-center gap-1.5";
-  const icon = "size-3.5 shrink-0 text-primary/70";
+  // Plain text parts split by a visible middle dot; the type leads in navy.
+  const item =
+    "not-first:before:mr-2 not-first:before:font-bold not-first:before:text-slate-400 not-first:before:content-['·']";
   return (
     <p
       className={cn(
-        "text-muted-foreground flex flex-wrap items-center gap-x-4 gap-y-1 text-xs/6",
+        "flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px]/6 text-slate-600",
         className,
       )}
     >
       {showType && (
-        <span className={item}>
-          <TypeIcon aria-hidden="true" className={icon} strokeWidth={1.75} />
+        <span className={cn(item, "text-primary font-semibold")}>
           {typeLabel(article.type)}
         </span>
       )}
       <span className={item}>
-        <CalendarDays aria-hidden="true" className={icon} strokeWidth={1.75} />
         <time dateTime={article.publishedAt}>
           {formatInsightDate(article.publishedAt)}
         </time>
       </span>
       {showReadTime && (
         <span className={item}>
-          <Clock aria-hidden="true" className={icon} strokeWidth={1.75} />
           {article.readTimeMinutes} {copy.minRead}
         </span>
       )}
@@ -121,16 +101,14 @@ function ArticleCard({ article }: { article: InsightCard }) {
           />
         </div>
         <div className="flex flex-1 flex-col p-5 lg:p-6">
-          <p className="text-primary text-[11px]/5 font-semibold tracking-wider uppercase">
-            {article.category}
-          </p>
-          <h3 className="group-hover/article:text-primary mt-2 font-serif text-2xl/8 text-balance transition-colors duration-300 motion-reduce:transition-none">
+          <p className={eyebrowClass}>{article.category}</p>
+          <h3 className="group-hover/article:text-primary type-card mt-2 font-serif text-balance transition-colors duration-300 motion-reduce:transition-none">
             {article.title}
           </h3>
           <p className="text-muted-foreground mt-3 line-clamp-3 text-sm/6">
             {article.excerpt}
           </p>
-          <div className="mt-auto flex items-end justify-between gap-4 border-t border-slate-100 pt-5">
+          <div className="border-border mt-auto flex items-end justify-between gap-4 border-t pt-5">
             <div className="min-w-0">
               <InsightByline
                 article={article}
@@ -156,21 +134,30 @@ function ArticleCard({ article }: { article: InsightCard }) {
 /**
  * One-line row card: small image, category, title and date. Used for short
  * lists and for the archive on phones, where full cards scroll too far.
- * `brief` drops the category and reading time, for lists that already name
- * the practice, so the title gets the room.
+ * `brief` drops the category, type and reading time, for lists that already
+ * name the practice, so the title gets the room. `flat` drops the box and the
+ * reading time, for lists that split rows with dividers instead (the phone
+ * archive), so type and date fit on one line.
  */
 export function CompactArticleCard({
   article,
   brief = false,
+  flat = false,
 }: {
   article: InsightCard;
   brief?: boolean;
+  flat?: boolean;
 }) {
   return (
     <article className="h-full min-w-0">
       <SiteLink
         href={routes.insight(article.id)}
-        className="group/compact hover:border-primary/40 flex h-full items-center gap-4 rounded-xl border border-slate-200 bg-white p-3 transition-colors duration-300 focus-visible:outline-offset-4 motion-reduce:transition-none"
+        className={cn(
+          "group/compact flex h-full items-center gap-4 focus-visible:outline-offset-4",
+          flat
+            ? "py-4"
+            : "hover:border-primary/40 border-border rounded-xl border bg-white p-3 transition-colors duration-300 motion-reduce:transition-none",
+        )}
       >
         <div className="relative isolate size-20 shrink-0 overflow-hidden rounded-lg bg-slate-100">
           <ArticleImage
@@ -182,11 +169,9 @@ export function CompactArticleCard({
         </div>
         <div className="min-w-0">
           {!brief && (
-            <p className="text-primary truncate text-[11px]/5 font-semibold tracking-wider uppercase">
-              {article.category}
-            </p>
+            <p className={cn(eyebrowClass, "truncate")}>{article.category}</p>
           )}
-          <h3 className="group-hover/compact:text-primary line-clamp-2 font-serif text-lg/6 transition-colors duration-300 motion-reduce:transition-none">
+          <h3 className="group-hover/compact:text-primary type-row line-clamp-2 font-serif transition-colors duration-300 motion-reduce:transition-none">
             {article.title}
           </h3>
           <InsightByline
@@ -195,8 +180,8 @@ export function CompactArticleCard({
           />
           <ArticleMeta
             article={article}
-            showType={false}
-            showReadTime={!brief}
+            showType={!brief}
+            showReadTime={!brief && !flat}
             className="mt-1"
           />
         </div>
@@ -205,7 +190,11 @@ export function CompactArticleCard({
   );
 }
 
-/** Archive item: the full card from small tablets up, a compact row on phones. */
+/**
+ * Archive item: the full card from small tablets up; on phones a compact row
+ * in a divided list, with the type leading its meta line (the image badge
+ * that shows the type on full cards is too small to keep there).
+ */
 export function ArchiveCard({ article }: { article: InsightCard }) {
   return (
     <>
@@ -213,7 +202,7 @@ export function ArchiveCard({ article }: { article: InsightCard }) {
         <ArticleCard article={article} />
       </div>
       <div className="sm:hidden">
-        <CompactArticleCard article={article} />
+        <CompactArticleCard article={article} flat />
       </div>
     </>
   );

@@ -7,6 +7,7 @@ export function ExperienceHeroSection() {
   return (
     <section
       aria-labelledby="experience-heading"
+      data-header-dark
       className="bg-navy-deep relative isolate overflow-hidden text-white"
     >
       {/* Temporary shared concept: replace final sources before WebP export.
@@ -30,7 +31,7 @@ export function ExperienceHeroSection() {
         <Eyebrow className="text-white/90">{copy.title}</Eyebrow>
         <h1
           id="experience-heading"
-          className="mt-6 max-w-4xl font-serif text-[40px]/[1.08] text-balance sm:text-6xl/[1.08] xl:text-7xl/[1.08]"
+          className="type-title mt-6 max-w-4xl font-serif text-balance"
         >
           {copy.heading.map((line) => (
             <span key={line} className="block">

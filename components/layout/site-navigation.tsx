@@ -29,6 +29,10 @@ import { isRouteAvailable, routes } from "@/lib/routes";
 import { cn } from "@/lib/utils";
 import { formatIndex } from "@/lib/format";
 
+const desktopNavigation = navigation.filter(
+  (item) => item.href !== routes.home,
+);
+
 export function SiteNavigation({
   mobile = false,
   onNavigate,
@@ -41,11 +45,12 @@ export function SiteNavigation({
   const isActive = (href: string) =>
     isRouteAvailable(href) && isActivePath(pathname, href);
   // Hover and the open menu share one tint; the active pill keeps its own
-  // colours so an open menu never washes it out on either header tone.
+  // colours so an open menu never washes it out on either header tone. Colours
+  // ease over the header's 400ms so a tone change fades with the shell.
   const itemClass = (href: string) =>
     cn(
       "rounded-full",
-      "flex h-11 items-center gap-1.5 px-3 text-sm font-semibold transition-colors motion-reduce:transition-none",
+      "ease-editorial flex h-11 items-center gap-1.5 px-3 text-sm font-semibold transition-colors duration-400 motion-reduce:transition-none",
       isActive(href)
         ? "bg-white text-secondary group-data-[tone=light]/site-header:bg-primary group-data-[tone=light]/site-header:text-white"
         : "hover:bg-white/12 data-[state=open]:bg-white/12 group-data-[tone=light]/site-header:hover:bg-slate-100 group-data-[tone=light]/site-header:data-[state=open]:bg-slate-100",
@@ -145,7 +150,8 @@ export function SiteNavigation({
       className="site-navigation-surface relative isolate rounded-full p-1"
     >
       <NavigationMenuList className="flex items-center gap-1">
-        {navigation.map((item) => (
+        {/* The logo already links home; the phone menu keeps "Home". */}
+        {desktopNavigation.map((item) => (
           <NavigationMenuItem
             key={item.href}
             value={item.href === routes.practiceAreas ? "practices" : item.href}

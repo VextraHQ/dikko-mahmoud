@@ -83,7 +83,7 @@ export const firmStory = {
 } as const;
 
 export const journeyIntro = {
-  eyebrow: "Our journey · Since 1993",
+  eyebrow: "Our journey",
   heading: "Our story, through the years.",
   description:
     "Built on public service. Shaped by people. Explore the moments that continue to define Dikko & Mahmoud.",
@@ -147,7 +147,6 @@ export const coreValues = {
   heading: ["Experience that", "works for you."],
   description:
     "Transparency, accountability, efficiency and professionalism guide the way we work. Our mission is to deliver innovative legal services informed by international best practice.",
-  action: "Make an enquiry",
   items: [
     {
       title: "Transparency",
@@ -178,7 +177,6 @@ export const workingWithUs = {
   introduction: "A considered process, shaped around your matter.",
   description:
     "We work with your nominated team to understand the brief, develop the strategy and communicate delivery. Your information is held in confidence, subject to your authorisation and legal obligations.",
-  action: "Make an enquiry",
   steps: [
     {
       label: "Begin",

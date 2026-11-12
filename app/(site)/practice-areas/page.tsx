@@ -27,7 +27,6 @@ export default async function PracticesPage({
       <FaqSection
         intro={{ ...faqIntro, ...practiceHubFaq }}
         items={practiceHubFaq.items}
-        headingClassName="text-[32px]/10"
       />
       <EnquiryCta />
     </>

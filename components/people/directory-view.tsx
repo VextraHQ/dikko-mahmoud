@@ -119,7 +119,7 @@ export function DirectoryView({
               <div className="mb-6 flex items-baseline justify-between gap-4">
                 <h2
                   id={`people-group-${group.id}`}
-                  className="font-serif text-2xl/8 sm:text-3xl/9"
+                  className="type-subsection font-serif"
                 >
                   {group.label}
                 </h2>
@@ -143,7 +143,7 @@ export function DirectoryView({
             <div className="mb-6 flex items-baseline justify-between gap-4">
               <h2
                 id="people-results-heading"
-                className="font-serif text-2xl/8 sm:text-3xl/9"
+                className="type-subsection font-serif"
               >
                 {copy.resultsLabel}
               </h2>
