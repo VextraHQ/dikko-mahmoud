@@ -70,8 +70,8 @@ export const firmFaqIntro: FaqIntro = {
     "Our origins, our approach and the people behind more than three decades of legal practice.",
 };
 
-// Only the first expanded answer is supplied. The remaining source questions
-// stay explicit review slots until the client supplies/approves their answers.
+// The design supplies only the first answer. The other questions stay marked
+// for review until the firm supplies or approves their answers.
 export const firmFaqs: Faq[] = [
   {
     id: "firm-established",
@@ -109,8 +109,7 @@ export const contactFaqIntro: FaqIntro = {
     "A few practical details to help you prepare your enquiry or arrange a visit.",
 };
 
-// Drafts from the approved Contact wireframe; the firm still has to approve
-// the wording.
+// Draft wording; the firm still has to approve it.
 export const contactFaqs: Faq[] = [
   {
     id: "contact-include",

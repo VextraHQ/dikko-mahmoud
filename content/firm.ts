@@ -3,7 +3,7 @@ import { requirePerson } from "@/content/people";
 
 const founder = requirePerson("ab-mahmoud");
 
-// Source-supplied preview copy. Office/portrait media await approved originals.
+// Copy from the client's design. Office and portrait photographs are pending.
 export const firmBrand = {
   name: "Dikko & Mahmoud",
   descriptor: "Solicitors and Advocates",
@@ -74,7 +74,8 @@ export const firmHero = {
 export const firmStory = {
   eyebrow: "Our story",
   heading: ["A firm built for", "decisions that matter."],
-  // Retained source wording; repeated opening and the pronoun need editorial review.
+  // The client's own wording. The repeated opening and the pronoun need an
+  // editorial pass with the firm.
   paragraphs: [
     "For more than three decades, Dikko & Mahmoud has advised businesses, institutions and individuals through decisions that matter.",
     "Their experience as Attorneys General of Kano and Kebbi States respectively informed the firm’s foundation: a practice with an understanding of public institutions and the legal questions facing private clients.",

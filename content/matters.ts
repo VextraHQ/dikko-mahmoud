@@ -16,9 +16,9 @@ export type SelectedMatter = {
   qualifier: string;
 };
 
-// User-approved preview copy, drawn from the screenshots and the firm's
-// published experience: https://dikkoandmahmoud.com/experiences/
-// Card copy follows the user's selected-matters design (30 Oct 2026).
+// Preview copy based on the design and the firm's published experience:
+// https://dikkoandmahmoud.com/experiences/
+// Each matter needs client consent before it is published.
 export const matterRecords: SelectedMatter[] = [
   {
     id: "bureau-public-enterprises",

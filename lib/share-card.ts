@@ -16,13 +16,15 @@ type ShareFont = {
  * License). A missing file falls back to the generator's built-in sans.
  */
 const fontFiles = [
-  { name: "Newsreader", file: "app/fonts/share/newsreader.ttf", weight: 400 },
-  { name: "Manrope", file: "app/fonts/share/manrope.ttf", weight: 600 },
+  { name: "Newsreader", file: "newsreader.ttf", weight: 400 },
+  { name: "Manrope", file: "manrope.ttf", weight: 600 },
 ] as const;
 
-async function readOptional(file: string) {
+// The folder is written out in full so the build can tell which files this
+// reads. A fully dynamic path would pull the whole project into the server.
+async function readShareFont(file: string) {
   try {
-    const data = await readFile(join(process.cwd(), file));
+    const data = await readFile(join(process.cwd(), "app/fonts/share", file));
     return data.buffer.slice(
       data.byteOffset,
       data.byteOffset + data.byteLength,
@@ -42,7 +44,7 @@ export function loadShareCardAssets() {
     );
     const fonts: ShareFont[] = [];
     for (const font of fontFiles) {
-      const data = await readOptional(font.file);
+      const data = await readShareFont(font.file);
       if (data)
         fonts.push({
           name: font.name,

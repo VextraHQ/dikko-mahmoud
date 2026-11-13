@@ -3,6 +3,190 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-13 — Commercial terms removed; checklist rules in one place
+
+- Removed fees, prices, payment milestones and contract clauses from the
+  repository so other developers do not see them. Deleted
+  `docs/scope-addendum.md`. `LICENSE` now defers ownership and use to the
+  services agreement. Edited `NOTICE.md`, `docs/handover-checklist.md`,
+  `docs/roadmap.md`, `docs/client-alignment.md`, `docs/README.md`,
+  `docs/environment.md`, `docs/integrations/email.md` and `sanity.md`, and
+  redacted earlier log entries in this file and the October archive. Scope
+  (nine practices, SME page, Terms of Use) is still recorded.
+- AGENTS.md and `.claude/rules/workflow.md` now say to keep commercial terms out
+  of the repository. Earlier versions remain in git history.
+- The checklist update rules live only in `docs/workflow.md`; AGENTS.md and
+  `.claude/rules/workflow.md` point to them. The roadmap's "Open reminders"
+  keeps only WebP and motion and links to the checklist for everything else.
+- Documentation only. `pnpm format:check` and `git diff --check` passed, and a
+  repository search finds no fee or payment terms. Runtime checks were not
+  repeated.
+
+## 2026-11-13 — Checklist and email-plan corrections
+
+- `docs/integrations/email.md`: email templates, shell and previews are planned
+  in `components/email/`, not `lib/email/`, because `lib/` holds only `.ts`.
+  Rendering, sending and spam checks stay in `lib/email/`.
+- `docs/handover-checklist.md`: six stock photos are unused (three team, three
+  testimonial), not three. Found by searching `app`, `components`, `content`,
+  `lib` and `docs` for each file in `public/`.
+- Documentation only. `pnpm format:check` ran; runtime checks were not repeated.
+
+## 2026-11-13 — Agent checklist workflow
+
+- Added checklist reading/updating to AGENTS.md, Claude's workflow rule and
+  the docs reading order. `docs/workflow.md` owns the detailed update rules:
+  relevant items only, evidence-backed completion, separate approvals and
+  production verification, partial-work notes and preserved whole-site audit
+  dates. Unchecked items do not authorise deferred work.
+- Recorded the instruction in the delivery checklist. This is agent guidance,
+  not automated enforcement or a claim that other delivery items were audited.
+- Documentation only. `pnpm format:check`, local checklist/workflow links and
+  anchors, and `git diff --check` passed. Runtime checks were not repeated.
+
+## 2026-11-13 — README audience balance
+
+- Kept the branded header and moved technology badges below the website
+  overview. Rewrote features for general readers and condensed developer setup
+  and tooling details, with the full guides remaining in docs. Retained an
+  honest preview/enquiry-delivery note and the compact folder map.
+- Documentation only. Formatting, local links/assets, documented package
+  commands and whitespace checks passed; runtime checks were not repeated.
+
+## 2026-11-13 — Branded project README
+
+- Refined the README into a stable project introduction using iProduce's
+  presentation structure: existing light/dark logos, technology badges,
+  overview, implemented features, stack and setup. Detailed delivery status
+  stays in the project docs. Local-content and simulated-enquiry notes remain
+  explicit; no live CMS, email delivery or launch claim was added.
+- Documentation only. Formatting, local README links/assets, package commands
+  and `git diff --check` passed. Runtime checks were not repeated.
+
+## 2026-11-13 — README overview refinement
+
+- Shortened the README at the user's request to a project overview: purpose,
+  current preview status, main stack, setup, useful commands, a compact folder
+  map and documentation/licence links. Removed the detailed route inventory,
+  publication rules and contributor handoff material from the overview; those
+  remain in the existing project docs.
+- Documentation only; no runtime changes. Verification: formatting, README
+  links/commands and `git diff --check` passed. Runtime checks were not repeated.
+
+## 2026-11-12 — README onboarding refresh
+
+- Reorganised the README around local setup, available routes, outstanding work,
+  preview/publication rules, commands and the current folder map. Updated the
+  stale enquiry-form description to reflect the built preview action and made
+  the absence of real email delivery/CMS connections explicit.
+- Included the codebase cleanup, scoped motion, shared form validation, Git and
+  Claude checks, licence split and links to current route/integration/handover
+  documentation. Kept Careers deferred and distinguished route availability
+  from production approval; no runtime code or dependencies changed.
+- Verification: formatting, lint, typecheck and 180 tests passed, along with
+  `git diff --check`. Validated all 26 README links and 11 documented pnpm
+  commands against local files and `package.json`. Build/browser checks were
+  not repeated for this documentation-only change.
+
+## 2026-11-12 — Full-site handover checklist and remaining scope audit
+
+- Created `handover-checklist.md`, separating built preview routes/corrections
+  from client approval, remaining visual work, CMS/email integration, migration,
+  production QA and handover. Checked against the agreed scope; no client
+  acceptance is assumed. Careers remains deferred, not removed from the agreed scope.
+- Recorded two remaining proposal requirements: People office filtering and
+  optional Insight document downloads. Added them to the route briefs, Sanity
+  plan and roadmap rather than treating existing filters/rich text as complete.
+- Corrected current Careers guidance and stale practice-carousel visibility
+  statements; linked the checklist from the README, docs index and roadmap.
+  Historical implementation-log entries remain unchanged.
+- Named the planned server-only `SANITY_REVALIDATE_SECRET` consistently in
+  `.env.example`, environment docs and the Sanity plan. It is not wired to code.
+- Added backup/restore, rollback, recovery access and operational ownership
+  planning to `environment.md`. No provider, backup or monitoring service was
+  installed, configured or tested in this documentation pass.
+- Verification: `pnpm format:check`, `pnpm lint`, `pnpm typecheck`, `pnpm test`
+  (180 passed), `pnpm knip` and `pnpm build` passed. The build generated 67
+  static pages and kept `/contact` static. `git diff --check` and local Markdown
+  link checks passed. No fresh browser review or production/provider checks were
+  performed; runtime source and dependencies were not changed in this pass.
+
+## 2026-11-12 — Licence wording refinement
+
+- Restored the copyright heading and numbered layout requested by the user.
+  Contract details later moved out of the repository (see the 2026-11-13 entry).
+- Ran `git diff --check` and the implementation-log formatting check.
+
+## 2026-11-12 — Ownership correction and integration planning alignment
+
+- Corrected LICENSE and README so ownership follows the services agreement,
+  and distinguished asset ownership from publication permission. This
+  supersedes the blanket code-ownership description in the earlier clean-up
+  entry below. Contract details later moved out of the repository (see the
+  2026-11-13 entry).
+- Expanded the proposed Sanity plan to cover homepage featuring, settings,
+  editorial content, staff editing/training and firm-owned production accounts.
+  Added a Studio UX review based on iProduce's structure, singleton pages,
+  grouped fields, scoped FAQ templates, image guidance and creation options.
+- Recorded the user's confirmation that a Careers design exists. Careers
+  implementation remains deferred until the client answers the recruitment
+  questions, with CMS-managed vacancies and email/external applications kept
+  in the agreed scope.
+- Reviewed iProduce's email shell, templates, previews, HTML/plain-text render
+  helper and contact sender. The email plan now distinguishes firm delivery
+  from receipt failure, calls for retry/deduplication planning and uses the
+  reference's lib/email template/preview folder pattern.
+- These are ownership notices and planning-document changes. Provider and CMS
+  implementation remains a subsequent checkpoint. Review the proposed editor
+  workflow and both email audiences before settling the technical plan.
+- Verification: targeted formatting checks for the changed Markdown files and
+  `git diff --check` passed. No runtime source or dependency changes were made
+  in this pass.
+
+## 2026-11-12 — Codebase clean-up (repo items, docs, structure, comments, speed)
+
+- Repo: added `LICENSE` (code owned by Vextra; firm materials stay the
+  firm's) and `NOTICE.md` (shadcn/ui, fonts, stock photos);
+  `package.json` gained `license` and `author`. Security headers in
+  `next.config.ts`, with the content policy in report-only mode. Firm
+  structured data for search engines (`lib/structured-data.ts`), emitted on
+  Home only when the site is indexable. `.env.example` lists the variables
+  the code reads and the planned ones. `.githooks/commit-msg` limits the
+  commit subject to 72 characters. Rules now allow Vercel Analytics.
+  Removed the unreferenced `public/brand/logo-favicon.png` (2.5 MB; it is
+  still in git history).
+- Plan docs (nothing built): `integrations/sanity.md`,
+  `integrations/email.md`, `environment.md` (variables, headers, launch
+  checklist).
+- Structure: `video-poster` moved to `components/firm/`; `status-page`,
+  `error-view`, `not-found-view` and `share-card` moved to the new
+  `components/system/`. `jsonLdString` moved from `lib/insights/article.ts` to
+  `lib/structured-data.ts`. Hooks stay flat. Left alone after checking:
+  `back-link` and `section-link` (helpers of shared components),
+  `content/enquiry.ts` (site-wide enquiry band copy), `biome.json`
+  (documented editor diagnostics), `types/` (for Sanity).
+- Comments: 25 comments that read like conversation notes were rewritten to
+  state the fact and its source. No behaviour changed.
+- Route docs: `routes/sme-retainer.md`, `routes/legal.md`,
+  `routes/system-pages.md`, `routes/careers.md` (not built). `docs/README.md`
+  index rewritten; `handoffs/` moved to `archive/handoffs/`; roadmap gained
+  status rows and an "Open reminders" list (WebP, motion, privacy line,
+  content policy, licence and contract).
+- Speed: `/contact` is pre-built (the practice preselection is read in the
+  browser by `enquiry-arrival.tsx`). Office maps load on request
+  (`office-map.tsx`). `app/icon.png` resized from 512 to 192 px (279 KB to
+  53 KB). `lib/share-card.ts` reads fonts from a fixed folder, which removes
+  a build warning that the whole project was being bundled into the server.
+  Not changed: `/practice-areas` and `/insights` still render per visit
+  (their filters are server-side); all 43 browser-side components were
+  checked and each needs to be.
+- Checks: `pnpm format:check`, `lint`, `typecheck`, `test` (180 passed),
+  `knip` (clean), `build` (passed, no warnings; `/contact` static). Browser:
+  practice arrival still preselects; a map loads when pressed; the share
+  card renders with brand fonts; no content-policy reports on Contact or
+  People in development. Not done: a full click-through for the content
+  policy on a deployed build, and a speed measurement (waits for motion).
+
 ## 2026-11-12 — Removed `components/contact/field-line.ts`
 
 - Outcome: `components/` holds only `.tsx`. The Contact form's underline

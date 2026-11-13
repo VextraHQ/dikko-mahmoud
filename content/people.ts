@@ -37,10 +37,9 @@ export const peopleHome = {
   action: "Meet our lawyers",
 };
 
-// The /people directory. The heading comes from the designer's frame; the
-// description is a draft for firm confirmation and names only the partners
-// (no wider-team claims, per client feedback) until the full roster is
-// supplied.
+// The /people directory. The heading comes from the design; the description
+// is a draft for firm confirmation. It names only the partners and makes no
+// claims about the wider team until the firm supplies the full roster.
 export const peopleDirectory = {
   eyebrow: "Our People",
   heading: ["Experienced minds.", "A personal commitment."],
@@ -81,8 +80,8 @@ export const peopleDirectory = {
   },
 };
 
-// Names and roles supplied in the user's design references. Final portraits
-// and publication approval remain pending; this is not the full team roster.
+// Names and roles come from the client's design files. Portraits and
+// publication approval are pending. This is not the full team.
 export const people: Person[] = [
   {
     id: "ab-mahmoud",

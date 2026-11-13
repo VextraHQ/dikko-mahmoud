@@ -269,7 +269,7 @@ Publication gates remain explicit:
 
 This is a completed implementation checkpoint with content gates, not final
 client visual/content or launch approval. The historical kickoff prompt remains
-in `../handoffs/the-firm-next-chat.md`; follow the current source here for review.
+in `../archive/handoffs/the-firm-next-chat.md`; follow the current source here for review.
 
 ## Local screenshot index
 

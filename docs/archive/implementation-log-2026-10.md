@@ -1136,8 +1136,8 @@ entry or the current docs may supersede them.
 
 - Created client-alignment.md and scope-addendum.md before runtime edits. The
   addendum remains a draft awaiting client acknowledgement: nine practice areas,
-  SME retainer and Terms at the existing ₦1,400,000 fee. Original proposal PDF
-  untouched. Updated current guide/index/roadmap, source ownership and layout
+  SME retainer and Terms. (Commercial terms removed on 2026-11-13; the addendum
+  file was later removed from the repository.) Updated current guide/index/roadmap, source ownership and layout
   rules; preserved historical entries and concurrent user refinements.
 - Public practice-index.ts now drives Home, hero labels, menu, hub metadata,
   footer and future enquiry choices. Full detail/experience stays server-owned.

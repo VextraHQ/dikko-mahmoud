@@ -11,7 +11,7 @@ import {
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 /**
- * The site's one toast region (shadcn `sonner` wrapper, as in iproduce-africa),
+ * The site's one toast region (a shadcn-style `sonner` wrapper),
  * themed to the firm: white surface, slate hairline, navy text and icons, the
  * site font and a soft navy shadow. Sonner injects unlayered CSS that outranks
  * Tailwind utilities, so the theme goes through its CSS variables and inline

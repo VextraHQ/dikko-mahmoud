@@ -9,7 +9,9 @@ identity, imagery and content, so most content is gated.
 
 1. `README.md`, including the "Where things live" map.
 2. `docs/roadmap.md` for the active milestone and `docs/client-alignment.md`
-   for the current client-approved corrections.
+   for the current client-approved corrections. Check the relevant items in
+   `docs/handover-checklist.md`; `docs/workflow.md` → "Delivery checklist" says
+   how to update them.
 3. The rule file for the area you are changing:
 
    | File                          | Covers                                        |
@@ -30,8 +32,11 @@ identity, imagery and content, so most content is gated.
 
 - Don't invent client claims, people, practice areas, contact details,
   testimonials, awards, metrics or imagery.
-- Don't connect Sanity, Resend, Upstash, analytics, databases or deployment
-  services during this checkpoint.
+- Keep commercial terms out of the repository: fees, prices, payment
+  milestones, contract clauses and support or maintenance terms.
+- Don't connect Sanity, Resend, Upstash, databases or deployment services
+  during this checkpoint. Vercel Analytics is the one approved exception
+  (`app/layout.tsx`).
 - Preserve the homepage visual hold and unrelated uncommitted work.
 - The supplied Figma frames and the user's screenshots are the design
   reference; resolve missing states without starting a new wireframe phase.

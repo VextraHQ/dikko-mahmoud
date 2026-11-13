@@ -10,6 +10,16 @@
 | `tests/`      | Vitest tests for `lib/` and `content/`                       | Real-looking sample people/clients |
 | `docs/`       | Approved intent, status and history                          | Planned work described as done     |
 
+## Component folders
+
+- `components/<route>/`: sections and pieces for one page or feature.
+- `components/shared/`: used by two or more feature folders. A piece only one
+  feature uses lives in that feature's folder until a second one needs it.
+- `components/system/`: used only by route files in `app/` (404 and error
+  views, the generated share-card image).
+- `components/layout/`: the site shell (header, footer, navigation).
+- `components/ui/`: design-system primitives with no site content.
+
 ## File types
 
 Don't mix `.ts` and `.tsx` in a folder. `components/` holds only `.tsx`;

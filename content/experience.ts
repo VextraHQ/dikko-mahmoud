@@ -34,8 +34,8 @@ export type ExperienceRecord = {
   claim?: { value: string; label: string; qualification: string };
 };
 
-// Supplied firm brochure, PDF pages 18–21. Separate instructions are not
-// merged into a single case or presented as successful outcomes.
+// Source: the firm's brochure, PDF pp. 18–21. Separate instructions stay
+// separate records and are never described as successful outcomes.
 export const experienceRecords: readonly ExperienceRecord[] = [
   {
     matterId: "bureau-public-enterprises",

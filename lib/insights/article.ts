@@ -139,7 +139,3 @@ export function cleanArticleShareUrl(origin: string, path: string): string {
   url.hash = "";
   return url.href;
 }
-
-export function jsonLdString(value: unknown): string {
-  return JSON.stringify(value).replace(/</g, "\\u003c");
-}

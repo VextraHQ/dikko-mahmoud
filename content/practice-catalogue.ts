@@ -32,8 +32,9 @@ export type PracticeDetail = {
 
 export type Practice = PracticeSummary & { detail?: PracticeDetail };
 
-// Nine titles/categories/summaries supplied in the 30 Oct design screenshots.
-// Detail copy is intentionally optional; do not fabricate the other eight pages.
+// The nine titles, categories and summaries come from the client's design.
+// Detail copy is optional: only one practice has it so far. Never write detail
+// copy for the others; the firm supplies it.
 const corporateDetail: PracticeDetail = {
   introduction:
     "Practical legal guidance for everyday business decisions and complex commercial matters.",
@@ -70,7 +71,7 @@ const corporateDetail: PracticeDetail = {
       role: "Provided legal advisory services and represented the company in contract negotiations.",
       services: ["Commercial Advisory", "Contract Negotiation"],
     },
-    // Full organisation name supplied in the brochure, PDF page 20; consent pending.
+    // Organisation name from the firm's brochure (PDF p. 20); consent pending.
     {
       id: "gas-restructuring",
       publicationStatus: "pending",

@@ -125,7 +125,7 @@ html {
  * Type scale: one class per heading role, sized for phones first, then from
  * `sm` (40rem) and `xl` (80rem) up. Use these instead of picking text sizes,
  * so the same role looks the same on every page. Home keeps its own sizes
- * while it is on visual hold. See docs/design-system.md.
+ * until its design review is complete. See docs/design-system.md.
  *
  * Role                 Phone  Desktop
  * type-title           40     60 / 72   page title on listing pages

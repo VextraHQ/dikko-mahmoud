@@ -1,5 +1,13 @@
 # People profiles and shared navigation
 
+## Remaining proposal requirement · 12 November 2026
+
+The directory currently filters by role and practice, with search. The proposal
+also includes filtering by office. Confirm office assignments with the firm's
+final roster, then add office references and filtering during the CMS pass.
+Do not infer an office from biography text or change the approved presentation
+before that data is available. See [the handover checklist](../handover-checklist.md).
+
 ## Approved editorial directory update (3 November 2026)
 
 The user approved Codex's desktop/mobile wireframe after reviewing the designer's

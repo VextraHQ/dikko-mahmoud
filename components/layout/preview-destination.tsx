@@ -5,7 +5,8 @@ import type { ReactElement } from "react";
 import { Button } from "@/components/ui/button";
 import { previewNotice } from "@/content/navigation";
 
-// Secondary routes are outside this checkpoint. Keep actions explicit.
+// Marks a link whose destination is not available yet (for example a social
+// profile without a confirmed address): it shows a notice instead of navigating.
 export function PreviewDestination({ children }: { children: ReactElement }) {
   return (
     <Dialog.Root>

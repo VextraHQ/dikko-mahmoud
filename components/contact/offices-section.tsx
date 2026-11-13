@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { OfficeMap } from "@/components/contact/office-map";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { contact } from "@/content/contact";
 import { contactOffices as copy } from "@/content/contact-page";
@@ -6,8 +7,8 @@ import { directionsUrl, mapEmbedUrl } from "@/lib/maps";
 
 /**
  * "Find us": one card per office with a map, address, phone and directions.
- * Maps load only as they near the screen. Until the firm confirms each pin
- * they search by address (docs/routes/contact.md).
+ * Each map loads when the visitor asks for it. Until the firm confirms each
+ * pin, maps search by address (docs/routes/contact.md).
  */
 export function ContactOfficesSection() {
   return (
@@ -28,12 +29,11 @@ export function ContactOfficesSection() {
               key={office.city}
               className="border-border flex flex-col overflow-hidden rounded-2xl border bg-white"
             >
-              <iframe
-                title={copy.mapTitle(office.city)}
+              <OfficeMap
                 src={mapEmbedUrl(office)}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="aspect-16/10 w-full border-0 bg-slate-100"
+                title={copy.mapTitle(office.city)}
+                showLabel={copy.showMapLabel(office.city)}
+                showAction={copy.showMap}
               />
               <div className="flex flex-1 flex-col p-5 lg:p-6">
                 <Eyebrow className="text-muted-foreground">

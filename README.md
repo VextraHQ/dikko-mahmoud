@@ -1,124 +1,95 @@
-# Dikko & Mahmoud Website
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./public/brand/logo-white.png" />
+    <img src="./public/brand/navy-logo.png" alt="Dikko & Mahmoud" width="260" />
+  </picture>
 
-The site is a no-index local presentation preview. Home, The Firm, the nine
-Practice area routes, People directory/profiles, Selected matters listing/details, Insights listing/articles, SME retainer, Privacy Policy and Terms of Use are implemented
-for review. The client-feedback corrections are specified in
-[client alignment](docs/client-alignment.md); the proposed scope inclusions are in
-[the draft addendum](docs/scope-addendum.md). The original proposal is unchanged.
+  <h1>Dikko & Mahmoud</h1>
+  <p>The firm's practice areas, people and legal insights.</p>
+  <p>Designed and developed by Vextra.</p>
+</div>
 
-Home retains its hero, firm story, practice selector, People, Insights, FAQ and CTA.
-The selector, hub, menus, footer and future enquiry choices share nine practices.
-Testimonials are removed. Client/logo and representative-matter collections render
-only approved records; all currently stored client/matter records await consent,
-so those Home sections and their spacing are omitted. The user restored pending
-practice-detail experience for no-index design review with a preview note; its
-publication status remains pending and it is excluded when indexing is enabled.
+## About the website
 
-Selected matters now has four sourced organisation-led experience previews. Its
-explicit no-index exception shows pending instructions with an approval note;
-Home remains approved-only. Replace temporary images before WebP conversion
-(see `docs/media-review.md`).
+The Dikko & Mahmoud website introduces the firm, the people behind its work and
+the legal services it provides. It gives visitors a place to explore the firm's
+experience, read its publications and find information about getting in touch.
 
-The Firm retains Journey and the agreed preview presentation. SME has Advisory
-and Secretarial tracks with explicit missing-copy notices. Legal pages share an
-editorial reading layout and actual document links; firm-approved legal text and
-update dates have not been supplied and are not invented. People biography drafts
-and article-author support are prepared without publishing unconfirmed claims.
+The design uses the firm's navy palette, serif headings and generous spacing,
+with layouts suited to phones, tablets and larger screens.
 
-Visual identity, approved media, final practice naming/Capital Markets placement,
-biographies, article copy, publication permissions and legal/SME text remain review
-gates. People directory/profiles are available for local review. Insights now shares a 27-article demo catalogue with Home, with server pagination
-and rich article reading tools. Careers and Contact remain separate implementation checkpoints. Providers and deployment are not connected.
-The user-added Analytics and existing hero autoplay remain intact.
+## What you'll find
 
-## Stack
+- **The Firm:** its story, leadership, values and approach to working with clients.
+- **Practice areas:** nine areas of practice, with individual pages explaining
+  the services within each.
+- **Our People:** a searchable directory and detailed lawyer profiles, available
+  both as popups and individual pages.
+- **Selected matters:** summaries of representative experience, subject to
+  publication approval.
+- **Legal Insights:** articles and updates with search, topic filters, author
+  information, references and related reading.
+- **Contact:** office details, maps, frequently asked questions and an enquiry form.
+- **Supporting information:** SME retainer services, Privacy Policy and Terms of Use.
 
-- Next.js 16 with the App Router
-- React 19
-- TypeScript in strict mode
-- Tailwind CSS 4
-- Shadcn-style Button/Sheet/Accordion/NavigationMenu/Breadcrumb, Embla Carousel, Lucide UI icons
-  and React Icons for social brands; shared form controls and React Hook Form
-  adapter prepared for the later enquiry page; Motion is scoped to Firm Journey
-  content transitions, hero autoplay and article reading progress
-- Portable Text React renderer and typed blocks; Sonner for copy/share feedback
-- ESLint 9 with the Next.js Core Web Vitals and TypeScript rules
-- Prettier with Tailwind class sorting
-- pnpm
+Reading tools, sharing options and consistent navigation support the experience
+across the site.
 
-## Getting started
+## Project information
 
-Requirements:
+The current website is a presentation preview for review. Final content,
+photography and service connections are still being completed; enquiry submissions
+are simulated and do not send email. The [roadmap](docs/roadmap.md) and
+[handover checklist](docs/handover-checklist.md) record the current delivery status.
 
-- Node.js 20.9 or newer
-- pnpm 10
+## Technology
 
-Install dependencies and start the development server:
+Built with Next.js, React, TypeScript and Tailwind CSS, with reusable components
+for a consistent interface. Forms use React Hook Form and Zod; articles use
+Portable Text.
+
+<p>
+  <img src="https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js 16" />
+  <img src="https://img.shields.io/badge/React_19-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 19" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS_4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS 4" />
+</p>
+
+## Running locally
+
+For developers working on the project, use Node.js 20.9 or newer and pnpm 10.
 
 ```bash
 pnpm install
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-No environment variables are required during the setup phase. Copy
-`.env.example` to `.env.local` only when approved integrations introduce local
-configuration.
-
-## Useful commands
-
-```bash
-pnpm dev        # Start the local development server
-pnpm build      # Create a production build
-pnpm start      # Run the production build
-pnpm format     # Format the repository
-pnpm format:check # Check formatting without writing
-pnpm lint       # Run ESLint
-pnpm typecheck  # Generate Next.js types and run TypeScript checks
-pnpm test       # Run Vitest unit tests (pnpm test:watch while working)
-```
+Open [localhost:3000](http://localhost:3000). The current preview needs no service
+credentials. Use `pnpm build` to create a production build and `pnpm test` to run
+the tests. Further setup and development guidance is in the
+[documentation](docs/README.md).
 
 ## Where things live
 
 ```text
-app/                    Routes, layouts, metadata, global styles
-  (site)/               Every public page; @profile is the profile popup
-components/
-  <page>/               Sections for one page (home, firm, people, practices…)
-  shared/               Pieces used by several pages (PersonCard, EmptyState…)
-  layout/               Header, footer, SiteLink
-  ui/                   shadcn-style primitives (Button, Select, Sheet…)
-content/                Copy, records and ready-to-render lists, by domain
-hooks/                  Browser behaviour, one use-*.ts per file
-lib/                    Pure rules and helpers
-  people/               People rules: roster, profiles, directory, links
-  insights/             Article repository, paging/query, rich-text and metadata rules
-  routes.ts, metadata.ts, publication.ts, preview.ts …
-tests/                  Vitest tests for lib/ and content/ (fixtures/ for fake data)
-public/                 Static assets
-sanity/                 Reserved CMS boundary; Sanity is not configured
-docs/                   Specs, roadmap and the implementation log
-  routes/               One spec per page
-  archive/              Older log months and superseded guides
-scripts/                Command-line helpers (social images, log archive)
-.claude/rules/          Short coding rules by area (read before editing)
-.claude/hooks/          Claude Code hooks: format on edit, checks at end of turn
-.githooks/              Git pre-commit check (enabled by `pnpm install`)
+app/          Website pages and layouts
+components/   Page sections and reusable components
+content/      Website copy and content records
+hooks/        Interactive behaviour
+lib/          Shared logic and helpers
+types/        Content types
+tests/        Automated tests
+public/       Images, logos and other assets
+sanity/       Reserved for content management integration
+docs/         Project guides, specifications and delivery notes
 ```
 
-A request flows one way: a page in `app/` asks `lib/` or `content/` for
-ready data, then hands it to `components/`. Components draw; hooks handle
-browser behaviour; `lib/` decides; `content/` stores. The `@/*` alias resolves
-from the repository root. See `.claude/rules/structure.md` for the import
-rules and how to add a page, section, hook or rule. ESLint enforces the
-import direction and keeps server-only modules out of client components.
+## Documentation and ownership
 
-## Current boundary
+The [project documentation](docs/README.md) contains the design references,
+page specifications and guidance for maintaining the website. Contributors
+should read [AGENTS.md](AGENTS.md) before making changes.
 
-CMS, email, database, rate limiting and deployment remain outside this
-presentation milestone. The user-added analytics component is preserved. The supplied Figma frames define the design direction. This is a local visual
-review checkpoint, not a publication-ready website. See the homepage brief for
-known gaps and review decisions.
-
-See [`docs/README.md`](./docs/README.md) for the documentation reading order.
+Developed by Vextra for Dikko & Mahmoud. Ownership and usage follow the project
+agreement and [LICENSE](LICENSE). Third-party acknowledgements are in
+[NOTICE.md](NOTICE.md).

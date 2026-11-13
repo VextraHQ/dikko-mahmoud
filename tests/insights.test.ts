@@ -10,7 +10,6 @@ import {
   formatInsightDate,
   headingAnchor,
   imagePosition,
-  jsonLdString,
   readingProgress,
   safeArticleHref,
   shortenText,
@@ -42,6 +41,7 @@ import {
 } from "@/lib/insights/repository";
 import { headerTone } from "@/lib/navigation";
 import { isRouteAvailable, routes } from "@/lib/routes";
+import { jsonLdString } from "@/lib/structured-data";
 import type { InsightBlock, InsightSource } from "@/types/insights";
 const preview = { allowPreview: true, now: Date.UTC(2026, 10, 3) };
 const launch = { ...preview, allowPreview: false };

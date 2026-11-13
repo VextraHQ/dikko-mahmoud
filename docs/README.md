@@ -6,43 +6,50 @@ small so a developer or agent can resume work without relying on chat history.
 ## Reading order
 
 1. `../AGENTS.md` and the matching `../.claude/rules/` file
-2. `roadmap.md`
+2. `roadmap.md` and the relevant `handover-checklist.md` items
 3. `client-alignment.md`, then `architecture.md`
 4. `workflow.md`
-5. `design-system.md`, `layout-system.md`, and the affected `routes/` brief for UI work
-   (`routes/practice-areas.md` for the active Practice areas checkpoint)
+5. `design-system.md`, `layout-system.md`, and the affected `routes/` spec for UI work
 6. `forms.md` when composing inputs, validation and field messages
 7. `testing.md` when adding helpers, content rules or tests
-8. the latest `implementation-log.md` entry (older months are in `archive/`)
+8. `integrations/` and `environment.md` before connecting any outside service
+9. the latest `implementation-log.md` entry (older months are in `archive/`)
 
 ## Ownership
 
-| Document                                | Owns                                                                       |
-| --------------------------------------- | -------------------------------------------------------------------------- |
-| `client-alignment.md`                   | Current client-feedback implementation, source boundaries and acceptance   |
-| `scope-addendum.md`                     | Draft nine-practice, SME and Terms inclusions at unchanged fee             |
-| `roadmap.md`                            | Current milestone and future work gates                                    |
-| `architecture.md`                       | Folder ownership and technical boundaries                                  |
-| `workflow.md`                           | Change and verification process                                            |
-| `design-system.md`                      | Brand roles, Tailwind/shadcn rules, and primitives                         |
-| `layout-system.md`                      | Width, spacing, and responsive composition                                 |
-| `routes/home.md`                        | Figma references, section map, content gaps, and build order               |
-| `routes/the-firm.md`                    | Firm implementation, interactions, reuse, source gaps and acceptance       |
-| `routes/people.md`                      | Editorial directory, profile-popup/page and eight-item navigation spec     |
-| `routes/selected-matters.md`            | Approved listing/details, source copy, preview consent and media gate      |
-| `routes/insights.md`                    | Implemented listing/articles, CMS contract, reading UX and edge cases      |
-| `routes/contact.md`                     | Proposed Contact layout, six-field enquiry form, states and open decisions |
-| `insights-media.md`                     | Stock-photo sources, delivery dimensions and image crop review             |
-| `routes/practice-areas.md`              | Practice hub/menu/detail implementation, sources and remaining content     |
-| `handoffs/people-profiles-next-chat.md` | Executable Claude prompt for the bounded profile/navigation slice          |
-| `handoffs/insights-next-chat.md`        | Original Insights implementation brief, retained as a review checklist     |
-| `handoffs/the-firm-next-chat.md`        | Historical scoped Firm kickoff prompt                                      |
-| `forms.md`                              | Form primitives, accessible composition and validation ownership           |
-| `testing.md`                            | Vitest setup, what is and isn't tested, test conventions                   |
-| `media-review.md`                       | Replace temporary images before WebP conversion                            |
-| `social-sharing.md`                     | Social artwork exports, metadata wiring and share-preview verification     |
-| `implementation-log.md`                 | Append-only factual implementation history (current month)                 |
-| `archive/`                              | Older log months and the previous long agent guide                         |
+| Document                     | Owns                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------ |
+| `roadmap.md`                 | Current milestone, status of each page, open reminders                               |
+| `handover-checklist.md`      | Full delivery checklist: built previews, approvals, integration, launch and handover |
+| `client-alignment.md`        | Client feedback as implemented, source boundaries and acceptance                     |
+| `architecture.md`            | Folder ownership and technical boundaries                                            |
+| `workflow.md`                | Change and verification process                                                      |
+| `design-system.md`           | Brand roles, type scale, Tailwind/shadcn rules and primitives                        |
+| `layout-system.md`           | Width, spacing and responsive composition                                            |
+| `forms.md`                   | Form primitives, accessible composition and validation ownership                     |
+| `testing.md`                 | Vitest setup, what is and isn't tested, test conventions                             |
+| `environment.md`             | Variables, security headers, publication switch, backup/recovery and launch          |
+| `integrations/sanity.md`     | Plan: which content moves to Sanity, fields, order of work (not built)               |
+| `integrations/email.md`      | Plan: enquiry email delivery, templates, spam checks (not built)                     |
+| `routes/home.md`             | Home: Figma references, section map, content gaps                                    |
+| `routes/the-firm.md`         | The Firm: implementation, interactions, source gaps and acceptance                   |
+| `routes/practice-areas.md`   | Practice hub, menu and detail pages; sources and remaining content                   |
+| `routes/people.md`           | People directory, profile popup and page                                             |
+| `routes/selected-matters.md` | Matters listing and details, source copy, consent and media gate                     |
+| `routes/insights.md`         | Insights listing and articles, CMS contract, reading experience                      |
+| `routes/contact.md`          | Contact page and enquiry form: approved spec, states, preview submission             |
+| `routes/sme-retainer.md`     | SME retainer page and its two tracks                                                 |
+| `routes/legal.md`            | Privacy Policy and Terms of Use: approval rules                                      |
+| `routes/system-pages.md`     | 404 and error pages: where each one appears                                          |
+| `routes/careers.md`          | Careers: not built; what is needed first                                             |
+| `insights-media.md`          | Stock-photo sources, delivery dimensions and image crop review                       |
+| `media-review.md`            | Temporary images to replace before WebP conversion                                   |
+| `social-sharing.md`          | Social artwork exports, metadata wiring and share-preview checks                     |
+| `implementation-log.md`      | Append-only factual implementation history (current month)                           |
+| `archive/`                   | Older log months, the previous long agent guide and old kickoff prompts              |
+
+Ownership and licences for the repository itself are in `../LICENSE` and
+`../NOTICE.md`.
 
 Code is the source of truth for implemented behavior. Documentation owns
 approved intent and current status. Do not document planned work as complete,

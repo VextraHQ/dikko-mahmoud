@@ -90,37 +90,38 @@ remain outside this presentation checkpoint.
 
 ## Ownership
 
-| Location                       | Responsibility                                                                                      |
-| ------------------------------ | --------------------------------------------------------------------------------------------------- |
-| `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, user-added analytics                                 |
-| `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                                      |
-| `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                                        |
-| `app/(site)/practice-areas/`   | Hub query handling, static detail parameters and practice metadata                                  |
-| `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                                   |
-| `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                                  |
-| `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                                 |
-| `app/styles/surfaces.css`      | Header material pseudo-elements and browser/preference fallbacks                                    |
-| `components/layout/`           | Shared chrome and unavailable-destination notice                                                    |
-| `components/home/`             | Homepage section entries and their local interactive presentation                                   |
-| `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation                          |
-| `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections                          |
-| `components/shared/`           | Facts/FAQ sections, PersonCard, VideoPoster, RevealGroup, media fallback, EmptyState and EnquiryCta |
-| `components/ui/`               | Shared controls, form primitives, Accordion, Carousel, Marquee and Sonner toasts                    |
-| `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts                    |
-| `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                            |
-| `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                                          |
-| `content/site.ts`              | Site name, description, fallback URL, locale and the `indexable` launch switch                      |
-| `content/system-pages.ts`      | Copy for the 404 and error pages                                                                    |
-| `app/robots.ts`, `sitemap.ts`  | Robots rules from `indexable`; sitemap from `launchedRoutes`                                        |
-| `app/not-found.tsx`            | Branded 404 inside `SiteShell`, no-index                                                            |
-| `app/**/error.tsx`, global     | Error boundaries rendering the shared `ErrorView`                                                   |
-| `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state                      |
-| `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries               |
-| `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                                      |
-| `types/`                       | Shared contracts only when multiple domains need them                                               |
-| `public/`, `app/fonts/`        | Local approved assets; variable fonts and their licences                                            |
-| `sanity/`                      | Reserved boundary; no active CMS integration                                                        |
-| `docs/`                        | Durable decisions, status, source references and dated implementation history                       |
+| Location                       | Responsibility                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `app/layout.tsx`               | Local fonts, global stylesheet, root metadata, Vercel Analytics                                                             |
+| `app/(site)/layout.tsx`        | Renders `SiteShell` (header, skip link, main landmark, footer)                                                              |
+| `app/(site)/the-firm/page.tsx` | Thin Firm route composition and metadata; inherited no-index                                                                |
+| `app/(site)/practice-areas/`   | Hub query handling, static detail parameters and practice metadata                                                          |
+| `app/(site)/page.tsx`          | Thin Server Component composing homepage sections                                                                           |
+| `app/globals.css`              | Tailwind import, semantic theme/animation bridges, global defaults                                                          |
+| `app/styles/motion.css`        | Custom entrance keyframes, reveal and marquee progressive fallbacks                                                         |
+| `app/styles/surfaces.css`      | Header material pseudo-elements and browser/preference fallbacks                                                            |
+| `components/layout/`           | Shared chrome and unavailable-destination notice                                                                            |
+| `components/home/`             | Homepage section entries and their local interactive presentation                                                           |
+| `components/firm/`             | Firm section entries, responsive Journey and founder/advisory presentation                                                  |
+| `components/practices/`        | Hub catalogue, shared detail presentation, service and experience sections                                                  |
+| `components/shared/`           | Pieces two or more feature folders use: facts/FAQ sections, PersonCard, RevealGroup, media fallback, EmptyState, EnquiryCta |
+| `components/system/`           | Pieces only route files use: 404 and error views (`status-page`), and the generated share-card image                        |
+| `components/ui/`               | Shared controls, form primitives, Accordion, Carousel, Marquee and Sonner toasts                                            |
+| `content/`                     | Code-owned navigation, firm editorial collections, canonical people and contacts                                            |
+| `lib/routes.ts`                | Route registry (`routes.*`) and `launchedRoutes`, the list of live pages                                                    |
+| `lib/metadata.ts`              | Shared site/page metadata builders and site URL resolution                                                                  |
+| `content/site.ts`              | Site name, description, fallback URL, locale and the `indexable` launch switch                                              |
+| `content/system-pages.ts`      | Copy for the 404 and error pages                                                                                            |
+| `app/robots.ts`, `sitemap.ts`  | Robots rules from `indexable`; sitemap from `launchedRoutes`                                                                |
+| `app/not-found.tsx`            | Branded 404 inside `SiteShell`, no-index                                                                                    |
+| `app/**/error.tsx`, global     | Error boundaries rendering the shared `ErrorView`                                                                           |
+| `hooks/`                       | Reusable client hooks: browser APIs, observers, media queries, selection state                                              |
+| `lib/`                         | Pure helpers (format, content rules, video), media queries, future service boundaries                                       |
+| `tests/`                       | Vitest unit tests for `lib/` and `content/` (see `testing.md`)                                                              |
+| `types/`                       | Shared contracts only when multiple domains need them                                                                       |
+| `public/`, `app/fonts/`        | Local approved assets; variable fonts and their licences                                                                    |
+| `sanity/`                      | Reserved boundary; no active CMS integration                                                                                |
+| `docs/`                        | Durable decisions, status, source references and dated implementation history                                               |
 
 Keep full section entry files named `*-section.tsx`; supporting components keep
 descriptive names. Contracts used by one content module stay in that module.
@@ -400,9 +401,9 @@ with its approved desktop/mobile selection contract.
 ESLint owns linting and Prettier owns formatting/class ordering. Biome is an
 optional editor diagnostic with Tailwind parsing, not a second formatting stack.
 
-Preserve the user-added Analytics component. New CMS, email, database,
-rate-limiting, analytics, deployment and consent work require their own approved
-scope. No provider credentials or service clients belong in presentation
+Vercel Analytics is approved and loaded in `app/layout.tsx`. New CMS, email,
+database, rate-limiting, deployment and consent work require their own approved
+scope; the plans are in `docs/integrations/`. No provider credentials or service clients belong in presentation
 components. Secondary pages, remaining homepage sections and the later motion
 and Claude collaboration passes remain separately scoped.
 

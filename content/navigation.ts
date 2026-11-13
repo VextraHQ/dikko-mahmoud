@@ -9,8 +9,9 @@ type NavigationItem = {
 // Availability comes from `launchedRoutes` in lib/routes.ts.
 export const navigation: readonly NavigationItem[] = [
   { label: "Home", href: routes.home },
-  // Selected matters and Careers stay built but hidden until client consent
-  // and launch readiness; re-add their links here and in the footer.
+  // Selected matters (built) and Careers (not built yet) are left out of the
+  // menus until the firm consents and they are ready. Re-add their links here
+  // and in the footer.
   { label: "The firm", href: routes.firm },
   { label: "Practice areas", href: routes.practiceAreas },
   { label: "Our People", href: routes.people },

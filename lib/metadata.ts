@@ -25,7 +25,7 @@ const twitterImage = {
 };
 
 /**
- * A page's generated branded card (see components/shared/share-card.tsx),
+ * A page's generated branded card (see components/system/share-card.tsx),
  * served by the `share-card.png` route beside the page.
  */
 export function shareCardImage(path: string, alt: string): ShareImage {

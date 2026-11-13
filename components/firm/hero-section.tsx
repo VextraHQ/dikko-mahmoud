@@ -1,4 +1,4 @@
-import { VideoPoster } from "@/components/shared/video-poster";
+import { VideoPoster } from "@/components/firm/video-poster";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmHero as content } from "@/content/firm";
 

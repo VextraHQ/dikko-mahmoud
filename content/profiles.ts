@@ -5,9 +5,9 @@ import type { ProfileLink } from "@/lib/people/profile-links";
 // out of client bundles. Availability comes from content/profile-manifest.ts;
 // the selection rules (resolveProfile and friends) live in lib/people/profiles.ts.
 //
-// Drafted from the company profile brochure (PDF pp. 27–30) and the supplied
-// Mahmoud profile screenshot. Uncertain items are omitted here and listed in
-// content/people-review.ts for firm confirmation.
+// Drafted from the firm's company profile brochure (PDF pp. 27–30) and the
+// profile of A.B. Mahmoud the client supplied. Uncertain items are left out
+// here and listed in content/people-review.ts for firm confirmation.
 export type PersonProfile = {
   personId: string;
   fullName: string;

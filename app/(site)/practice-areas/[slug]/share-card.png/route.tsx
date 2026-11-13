@@ -1,4 +1,4 @@
-import { renderShareCard } from "@/components/shared/share-card";
+import { renderShareCard } from "@/components/system/share-card";
 import { firmBrand } from "@/content/firm";
 import { getPractice } from "@/content/practice-catalogue";
 import { practiceCopy } from "@/content/practice-index";

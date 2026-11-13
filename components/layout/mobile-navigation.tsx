@@ -51,7 +51,7 @@ export function MobileNavigation() {
             Explore Dikko &amp; Mahmoud. Secondary pages are coming soon.
           </SheetDescription>
           <div className="short:mb-3 mb-6 flex h-15 items-center justify-between">
-            {/* The sheet now also shows at 80–90rem; keep its compact logo there. */}
+            {/* The sheet also shows at 80–90rem; keep its compact logo there. */}
             <BrandLogo
               className="xl:h-15 xl:w-45"
               onClick={() => setOpen(false)}

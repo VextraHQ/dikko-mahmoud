@@ -1,7 +1,7 @@
 import { practiceIndex } from "@/content/practice-index";
 
-// Source hero headlines/media are retained; practice labels use the shared index.
-// Original image fills were recovered from the native Figma local-copy export.
+// Hero headlines and images come from the client's Figma file. Practice labels
+// come from the shared practice index.
 const sourceHeroSlides = [
   {
     id: "dispute-resolution",

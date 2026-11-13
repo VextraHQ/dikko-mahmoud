@@ -3,8 +3,14 @@
 - Check `git status --short` and the current diff before editing. Preserve
   unrelated work and keep changes scoped to the active milestone in
   `docs/roadmap.md`.
-- Do not connect Sanity, Resend, Upstash, analytics, databases or deployment
-  services during the presentation checkpoint.
+- Check and update the relevant `docs/handover-checklist.md` items; the rules
+  are in `docs/workflow.md` → "Delivery checklist".
+- Keep fees, prices, payment and contract terms out of the repository.
+- Do not connect Sanity, Resend, Upstash, databases or deployment services
+  during the presentation checkpoint. Vercel Analytics is the one approved
+  exception (`app/layout.tsx`).
+- Commit subjects are 72 characters or fewer (`.githooks/commit-msg` checks);
+  details go in the body after a blank line.
 - The homepage is on visual review hold: shared extractions are fine only if
   Home looks the same.
 
@@ -21,7 +27,7 @@ pnpm build   # at handoffs and route/layout/config/dependency changes
 Use the dev server and targeted formatting while iterating visually. Record
 only checks that ran; a local build does not prove deployment readiness.
 
-Automated (see `.claude/settings.json`, `.githooks/pre-commit`): edited files
+Automated (see `.claude/settings.json`, `.githooks/`): edited files
 are formatted and linted, a finished turn with changes runs the four checks
 above, and commits check staged files. ESLint enforces the import direction in
 `structure.md`.

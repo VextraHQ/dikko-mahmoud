@@ -10,8 +10,9 @@ import { InsightsSection } from "@/components/home/insights-section";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { FaqSection } from "@/components/home/faq-section";
 import { siteConfig } from "@/content/site";
-import { createPageMetadata } from "@/lib/metadata";
+import { createPageMetadata, getSiteUrl } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
+import { firmStructuredData, jsonLdString } from "@/lib/structured-data";
 
 export const metadata: Metadata = createPageMetadata({
   description: siteConfig.description,
@@ -19,8 +20,15 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function Home() {
+  const structured = firmStructuredData(getSiteUrl());
   return (
     <>
+      {structured && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonLdString(structured) }}
+        />
+      )}
       <Hero />
       <FirmAtAGlanceSection />
       <FirmStorySection />
@@ -30,8 +38,8 @@ export default function Home() {
       <PeopleSection />
       <InsightsSection />
       <FaqSection />
-      {/* Home is on visual hold: its closing band keeps the old 30px phone
-          heading until Home is reviewed against the type scale. */}
+      {/* Home has not been reviewed against the type scale yet, so its
+          closing band keeps the earlier 30px phone heading. */}
       <div className="contents max-sm:[&_#enquiry-heading]:text-3xl/9">
         <EnquiryCta />
       </div>

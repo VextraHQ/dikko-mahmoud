@@ -4,8 +4,8 @@ import type {
   InsightType,
 } from "@/types/insights";
 
-// SERVER DATA: user-authorised layout samples, not commissioned firm
-// publications. The repository excludes every demoOnly record at launch.
+// SERVER DATA: sample articles that exist to show the layouts. They are not
+// firm publications. The repository excludes every demoOnly record at launch.
 // Article bodies live in content/insight-bodies.ts.
 
 /** Unsplash photographs, credited separately from their alt text. */

@@ -1,7 +1,8 @@
 // Internal source notes keyed to canonical people. Never import into public UI
 // and never render as biography text. Profile bodies live in content/profiles.ts.
-// Source: company profile brochure PDF pp. 27–30 and the supplied Mahmoud
-// profile screenshot. Each item needs firm confirmation before publication.
+// Source: the firm's company profile brochure (PDF pp. 27–30) and the profile
+// of A.B. Mahmoud the client supplied. Each item needs firm confirmation
+// before publication.
 export const profileSourceNotes = [
   {
     personId: "ab-mahmoud",

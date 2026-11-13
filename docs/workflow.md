@@ -2,11 +2,40 @@
 
 ## Before work
 
-1. Read `AGENTS.md`, `docs/README.md`, and `docs/roadmap.md`.
+1. Read `AGENTS.md`, `docs/README.md`, `docs/roadmap.md` and the relevant
+   `docs/handover-checklist.md` items.
 2. Confirm the requested work belongs to the active milestone.
 3. Inspect `git status --short` and the current diff.
 4. Read the canonical document for the affected concern.
 5. Preserve unrelated changes.
+
+## Delivery checklist
+
+`handover-checklist.md` is the shared delivery tracker for all agents.
+
+- Before a task, identify its relevant items and check their recorded state
+  against the current implementation and latest user decisions. The roadmap
+  and authorised scope still govern what may be started.
+- After meaningful work, update only the items affected by that task. Do not
+  audit or rewrite unrelated sections simply to keep every session busy.
+- Tick an item only when its stated acceptance is met. For partial completion,
+  record what is done and what remains, or split implementation, approval and
+  external verification into separate items. Never turn a local test pass into
+  client approval, publication consent or proof of production delivery.
+- Link to the dated implementation-log entry for new completion evidence,
+  including checks actually run and any remaining dependency. Keep approval
+  decisions in client alignment and behaviour in the affected route spec.
+- Correct a stale affected item when current evidence contradicts it, and
+  explain the correction in the log. Do not infer approval from a preview or
+  silently discard outstanding work.
+- Keep the checklist's whole-site audit date unless the whole site was actually
+  rechecked. Date individual updates through the log instead.
+- At a handoff, mention relevant checklist changes and remaining gates. If the
+  task changes no checklist state, leave its boxes alone; do not add a completed
+  item for every routine edit or question.
+
+This is a working instruction, not automatic verification. An unchecked item
+does not authorise provider activation, deployment or deferred implementation.
 
 ## Working rules
 

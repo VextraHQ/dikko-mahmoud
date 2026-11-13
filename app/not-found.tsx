@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SiteShell } from "@/components/layout/site-shell";
-import { NotFoundView } from "@/components/shared/not-found-view";
+import { NotFoundView } from "@/components/system/not-found-view";
 import { systemPages } from "@/content/system-pages";
 
 const content = systemPages.notFound;

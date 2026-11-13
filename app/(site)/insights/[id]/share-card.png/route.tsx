@@ -1,4 +1,4 @@
-import { renderShareCard } from "@/components/shared/share-card";
+import { renderShareCard } from "@/components/system/share-card";
 import { insightsCopy } from "@/content/insight-copy";
 import { formatInsightDate } from "@/lib/insights/article";
 import { getInsight } from "@/lib/insights/repository";

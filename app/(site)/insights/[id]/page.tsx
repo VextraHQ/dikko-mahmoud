@@ -9,7 +9,7 @@ import {
   insightArticleMetadata,
   insightStructuredData,
 } from "@/lib/insights/metadata";
-import { jsonLdString } from "@/lib/insights/article";
+import { jsonLdString } from "@/lib/structured-data";
 import { getSiteUrl } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
 

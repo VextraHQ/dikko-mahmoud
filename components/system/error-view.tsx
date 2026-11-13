@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { StatusPage } from "@/components/shared/status-page";
+import { StatusPage } from "@/components/system/status-page";
 import { ArrowButton } from "@/components/ui/arrow-button";
 import { systemPages } from "@/content/system-pages";
 import { useReportError } from "@/hooks/use-report-error";

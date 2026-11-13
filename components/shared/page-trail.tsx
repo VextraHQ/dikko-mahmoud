@@ -17,7 +17,7 @@ export type TrailItem = { label: string; href?: string };
  * Where a detail page sits. Pass the full trail, Home first and the current
  * page last, e.g. Home › Practice areas › Advisory › Corporate…
  *
- * - From `md` up: the whole trail, as the designer drew it. Links are
+ * - From `md` up: the whole trail, as in the design. Links are
  *   underlined on hover; the current page is plain text that truncates.
  * - On phones: one back link to the section (the second item) plus the
  *   group in between, when there is one: "← Practice areas / Advisory".

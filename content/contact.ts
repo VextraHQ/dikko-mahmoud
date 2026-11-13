@@ -1,6 +1,7 @@
 import type { OfficePin } from "@/lib/maps";
 
-// Supplied desktop/mobile footer references. Confirm publication details before launch.
+// Office details come from the client's footer design. Confirm each with the
+// firm before launch.
 //
 // `pin`: the office's map position, confirmed with the firm during the
 // Contact page work. Until then Directions route to the address. Never guess

@@ -11,8 +11,9 @@ From the client's review email; implemented for local review.
 - A.B. Mahmoud, SAN is "Co-founder & Managing Partner" everywhere. The separate
   `founderRole` field is gone; `role` holds the full title and wraps on cards.
 - Selected matters and Careers are hidden from the header, mobile menu and
-  footer until consent and launch readiness. Both pages stay built, and their
-  approval checks are unchanged. Careers stays in the delivery plan.
+  footer until consent and launch readiness. Selected matters stays built with
+  its approval checks unchanged. Careers is not built; its supplied design
+  stays in the delivery plan pending the firm's recruitment-process response.
 - Home firm-story card: the 1993 / 30+ / presence figures are removed; they
   stay in "The firm at a glance". The branded D&M cover stays until the
   photoshoot supplies the office photograph.
@@ -59,12 +60,12 @@ below. Existing header/mobile navigation, hero autoplay, Firm Journey, identity
 and imagery remain within their current review boundaries. All routes stay
 no-index. CMS, providers and deployment are separate milestones.
 
-Sources reviewed: `Website Feedback.docx` in the user's Downloads; the 16 September
-2026 `Vextra_Proposal_Dikko_Mahmoud.pdf` and `Dikko  Mahmoud Profile.pdf` in
-`~/Documents/Dikko & Mahmoud Docs/`; the supplied Practice areas screenshots.
-The brochure is content evidence, not publication consent or a current roster.
-The latest client feedback controls requested corrections; the user's approved
-scope additions are recorded in [scope-addendum.md](scope-addendum.md).
+Sources reviewed: the client's website feedback, the agreed project scope, the
+firm's profile brochure and the supplied Practice areas screenshots. The brochure
+is content evidence, not publication consent or a current roster. The latest
+client feedback controls requested corrections. The user approved three scope
+additions (nine practices, the SME page and Terms of Use), which await the firm's
+written acknowledgement. Commercial terms are kept outside this repository.
 
 ## Before and after
 
@@ -114,7 +115,7 @@ is copied from those repositories.
 
 ## Implementation batches and gates
 
-1. Create this spec and the draft addendum before runtime changes; update current
+1. Create this spec before runtime changes; update current
    docs without rewriting historical logs.
 2. Apply catalogue consistency, removals, consent filtering and copy corrections.
 3. Add SME and legal route previews, metadata and registry entries.
@@ -148,19 +149,21 @@ Transportation Company Ltd; its matter remains hidden pending consent.
   Record actual results in the implementation log; local checks are not launch
   approval.
 
-## Requirements for pages not yet built
+## Route-specific requirements and remaining approvals
 
-Recorded from `Website Feedback.docx` so whoever builds these routes (people,
-Claude or Codex) applies the client's corrections from the start. Each page
-still needs its own design approval and should keep the no-index switch,
-`createPageMetadata`, `SiteLink`/`routes.*` and the `launchedRoutes` step.
+Recorded from `Website Feedback.docx` and later agreed checkpoints. People,
+Insights and Contact now have implemented previews; Careers remains deferred.
+Retain the no-index switch, `createPageMetadata`, `SiteLink`/`routes.*` and the
+`launchedRoutes` step. Client acceptance and supplied content remain separate
+from implementation. The complete delivery list is in
+[handover-checklist.md](handover-checklist.md).
 
 ### People (`/people`, `/people/[slug]`)
 
 - The menu item is "Our People"; keep that label. On 1 November the user also
   confirmed Selected matters as a separate main-menu entry, not a replacement.
   The approved profile popup/shareable-page slice and Claude handoff are in
-  `routes/people.md` and `handoffs/people-profiles-next-chat.md`; the directory
+  `routes/people.md` and `archive/handoffs/people-profiles-next-chat.md`; the directory
   was authorized on 2 November and is implemented for review (see the
   "People directory" section of `routes/people.md`).
 - Show only the four partners until the firm supplies counsel and associate
@@ -191,8 +194,11 @@ when indexing is enabled. The existing firm/client/matter approval rules stand.
 
 ### Careers (`/careers`)
 
-- Already in the main menu but has no design. It shows the "coming soon"
-  notice until a design is approved and the route is launched.
+- A design has been supplied. Implementation waits for the firm's response on
+  its recruitment process; Careers remains in the proposal's scope.
+- Hidden from the header, mobile menu and footer until ready. The route is
+  reserved, not implemented. See [the Careers brief](routes/careers.md) for
+  the CMS vacancy and email/external-application requirements.
 
 ### Contact (`/contact`)
 

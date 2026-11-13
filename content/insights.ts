@@ -11,7 +11,7 @@ export const insightsHome = {
   featuredLabel: "Featured perspective",
 };
 
-/** Canonical author lookup retained for real articles and the CMS boundary. */
+/** Finds an article's author in the People records. */
 export function getInsightAuthor(article: { authorId?: string | null }) {
   return article.authorId ? getPerson(article.authorId) : undefined;
 }

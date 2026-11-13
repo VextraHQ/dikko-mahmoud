@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ContactHeroSection } from "@/components/contact/hero-section";
 import { ContactPanel } from "@/components/contact/contact-panel";
+import { EnquiryArrival } from "@/components/contact/enquiry-arrival";
 import { EnquiryForm } from "@/components/contact/enquiry-form";
 import { ContactOfficesSection } from "@/components/contact/offices-section";
 import { FaqSection } from "@/components/shared/faq-section";
 import { enquiryForm as copy } from "@/content/contact-page";
 import { contactFaqIntro, contactFaqs } from "@/content/faqs";
-import { practiceTitle } from "@/content/practice-index";
-import { practiceFromQuery } from "@/lib/enquiry";
 import { createPageMetadata } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
 import { submitEnquiry } from "./actions";
@@ -19,14 +19,7 @@ export const metadata: Metadata = createPageMetadata({
   path: routes.contact,
 });
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  // A practice page's enquiry button preselects its area of law.
-  const practice = practiceFromQuery((await searchParams).practice);
-
+export default function ContactPage() {
   return (
     <>
       <ContactHeroSection />
@@ -45,12 +38,16 @@ export default async function ContactPage({
             <p className="text-muted-foreground mt-4 text-[15px]/6">
               {copy.intro} {copy.requiredNote}
             </p>
-            <EnquiryForm
-              key={practice}
-              practice={practice}
-              arrivalLabel={practiceTitle(practice)}
-              submitAction={submitEnquiry}
-            />
+            {/* The page is pre-built, so the address is read in the browser:
+                the plain form shows first, then `EnquiryArrival` preselects
+                the practice a visitor came from. */}
+            <Suspense
+              fallback={
+                <EnquiryForm practice="" submitAction={submitEnquiry} />
+              }
+            >
+              <EnquiryArrival submitAction={submitEnquiry} />
+            </Suspense>
           </div>
           <ContactPanel />
         </div>

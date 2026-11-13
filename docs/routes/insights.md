@@ -1,5 +1,14 @@
 # Insights — layout and content contract
 
+## Remaining proposal requirement · 12 November 2026
+
+The proposal includes optional document attachments/downloads on articles.
+Today's `InsightSource` and renderer have no document-download field or control.
+Add the file contract, CMS validation and accessible presentation during the
+integration pass, showing nothing when an article has no file. The current rich
+article layout does not complete this requirement. See
+[the handover checklist](../handover-checklist.md).
+
 ## Status and scope · 3 November 2026
 
 Implemented for local visual review. The user supplied

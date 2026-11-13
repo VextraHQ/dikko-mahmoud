@@ -1,5 +1,5 @@
-// Contact page copy. Approved layout: docs/routes/contact.md. The notice,
-// confirmation and FAQ wording are drafts until the firm approves them.
+// Contact page copy. Spec: docs/routes/contact.md. The notice, confirmation
+// and FAQ wording are drafts until the firm approves them.
 
 export const contactHero = {
   eyebrow: "Contact Dikko & Mahmoud",
@@ -137,4 +137,6 @@ export const contactOffices = {
   officeLabel: "Office",
   directions: "Get directions",
   mapTitle: (city: string) => `Map of the ${city} office`,
+  showMap: "Show map",
+  showMapLabel: (city: string) => `Show map of the ${city} office`,
 };

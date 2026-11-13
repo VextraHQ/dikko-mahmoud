@@ -36,9 +36,11 @@ Approved wireframe: https://claude.ai/artifact/7pDBPikTonXoHnRH4uBF3B
      confirmed); "Before you send" note. Presence, socials and the note are
      desktop only.
    - Form heading "Need legal expertise? Let's talk." (`type-section`).
-4. **Find us. Let's talk.** (`type-section`) Three office cards: an
-   embedded Google map (loads lazily, searched by address until pins are
-   confirmed), eyebrow Office or Liaison office, city (`type-card`),
+4. **Find us. Let's talk.** (`type-section`) Three office cards: a "Show
+   map" button that loads the embedded Google map when pressed (the map is
+   heavy and most visitors only need the address; it searches by address
+   until pins are confirmed), eyebrow Office or Liaison office, city
+   (`type-card`),
    address, phone link where one exists (Lagos has none yet) and "Get
    directions" through `directionsUrl`.
 5. **FAQ.** The shared FAQ section with Contact questions ("Before you get in
@@ -86,10 +88,14 @@ Order and rules:
 ### Arriving from a practice page
 
 `enquiryHref(email, { practice })` links to `/contact?practice=<slug>#enquiry`.
-The page checks the slug against the practice catalogue and, when it is
+The form checks the slug against the practice catalogue and, when it is
 valid, preselects "A legal matter" and that practice, with a line saying it
 was picked and can be changed. Unknown values are ignored. Names, emails and
 messages never go in the URL.
+
+The Contact page is pre-built, so the slug is read in the browser
+(`components/contact/enquiry-arrival.tsx`): the plain form shows first and
+the preselection follows once the page has loaded.
 
 ### States
 
@@ -118,7 +124,9 @@ the body of that action; the form does not change.
 - `lib/enquiry.ts`: Zod schema, default values, `practiceFromQuery`.
 - `lib/maps.ts`: `mapEmbedUrl` beside `directionsUrl`.
 - `app/(site)/contact/page.tsx` and `actions.ts`.
-- `components/contact/*`: hero, panel, form, offices sections.
+- `components/contact/*`: hero, panel, form, offices sections;
+  `enquiry-arrival.tsx` (reads `?practice=`), `office-map.tsx` (map on
+  request).
 
 ## Needs the firm
 

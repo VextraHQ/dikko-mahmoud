@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Keeps commit subjects short: the first line is at most 150 characters.
+# Put the detail in the body, after a blank line.
+# Skip once with: git commit --no-verify
+
+subject=$(head -n 1 "$1")
+
+# Merges, reverts and fixups are written by git.
+case "$subject" in
+  Merge\ * | Revert\ * | fixup!\ * | squash!\ *) exit 0 ;;
+esac
+
+length=${#subject}
+if [ "$length" -gt 150 ]; then
+  echo "commit-msg: the first line is $length characters; keep it to 150 or fewer." >&2
+  echo "Example: 'feat(contact): add enquiry form', then a blank line, then details." >&2
+  exit 1
+fi
