@@ -34,7 +34,7 @@ export function PaginationItem(props: ComponentProps<"li">) {
 }
 
 const linkClass =
-  "text-primary inline-flex min-h-11 min-w-11 items-center justify-center gap-1 rounded-full px-3 text-sm/6 font-medium transition-colors duration-180 hover:bg-slate-100 motion-reduce:transition-none";
+  "text-primary inline-flex min-h-11 min-w-11 items-center justify-center gap-1 rounded-full px-3 text-sm/6 font-medium transition-colors duration-200 hover:bg-slate-100 motion-reduce:transition-none";
 
 export function PaginationLink({
   className,

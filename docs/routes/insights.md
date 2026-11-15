@@ -176,9 +176,12 @@ scroll, with safe-area spacing and accessible name “Back to article top”. It
 not a live region announcing every percent. Activation returns to the article
 heading and manages keyboard focus there. No-JS gets a normal top anchor.
 
-Subtle Motion is authorised for this reading feedback only; keep it out of prose
-entrances. Reduced motion keeps the useful progress indication but removes spring
-lag, smooth scrolling and entrance/hover movement. Respect the existing Sonner
+The ring is drawn straight from the scroll position (`ringRef`, no animation
+library); keep motion out of prose entrances. Opening an article from an archive
+card grows the card picture into the article picture (`insightPictureName`,
+design-system.md → "Motion system"); the featured card and phone rows simply
+fade with the page. Reduced motion keeps the useful progress indication but
+removes smooth scrolling and entrance/hover movement. Respect the existing Sonner
 position: copying success/failure must not cover the control or obscure reading;
 verify placement at narrow widths and with long error messages.
 

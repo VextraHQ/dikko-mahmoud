@@ -5,7 +5,8 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/utils";
 
 // Small shadcn-style wrapper over the installed Radix Dialog. Callers own the
-// panel geometry; this keeps the portal, overlay and short opacity fade.
+// panel geometry; this keeps the portal and overlay. The open and close
+// animations live in app/styles/motion.css, keyed on `data-slot`.
 export const Dialog = DialogPrimitive.Root;
 
 export const DialogTrigger = DialogPrimitive.Trigger;
@@ -21,12 +22,13 @@ export function DialogContent({
 }: ComponentProps<typeof DialogPrimitive.Content>) {
   return (
     <DialogPrimitive.Portal>
-      <DialogPrimitive.Overlay className="bg-navy-deep/60 fixed inset-0 z-60 opacity-100 motion-safe:transition-opacity motion-safe:duration-200 motion-safe:starting:opacity-0" />
+      <DialogPrimitive.Overlay
+        data-slot="dialog-overlay"
+        className="bg-navy-deep/60 fixed inset-0 z-60"
+      />
       <DialogPrimitive.Content
-        className={cn(
-          "fixed z-60 opacity-100 outline-none motion-safe:transition-opacity motion-safe:duration-200 motion-safe:starting:opacity-0",
-          className,
-        )}
+        data-slot="dialog-content"
+        className={cn("fixed z-60 outline-none", className)}
         {...props}
       >
         {children}

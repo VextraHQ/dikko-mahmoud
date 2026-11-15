@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { Eyebrow, eyebrowClass } from "@/components/ui/eyebrow";
 import { workingWithUs as content } from "@/content/firm";
 import { formatIndex } from "@/lib/format";
@@ -5,9 +6,9 @@ import { formatIndex } from "@/lib/format";
 export function ProcessSection() {
   return (
     <section aria-labelledby="process-heading" className="py-12 lg:py-24">
-      <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
+      <RevealGroup className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-          <div>
+          <div data-reveal>
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <h2 id="process-heading" className="type-section mt-6 font-serif">
               {content.heading.map((line) => (
@@ -17,7 +18,7 @@ export function ProcessSection() {
               ))}
             </h2>
           </div>
-          <div>
+          <div data-reveal data-reveal-order={1}>
             <p className="text-base/7 lg:text-lg/7">{content.introduction}</p>
             <p className="text-muted-foreground mt-6 text-sm/6 sm:text-base/7">
               {content.description}
@@ -28,6 +29,8 @@ export function ProcessSection() {
           {content.steps.map((step, index) => (
             <li
               key={step.title}
+              data-reveal={index < 3 || undefined}
+              data-reveal-order={index}
               className="group/step border-border hover:border-primary/60 ease-editorial border-t pt-6 transition-colors duration-500 hover:bg-sky-50/60 motion-reduce:transition-none"
             >
               <p className={eyebrowClass}>
@@ -42,7 +45,7 @@ export function ProcessSection() {
             </li>
           ))}
         </ol>
-      </div>
+      </RevealGroup>
     </section>
   );
 }

@@ -1,3 +1,4 @@
+import { pictureZoomClass } from "@/components/ui/picture-zoom";
 import { ArticleImage } from "@/components/insights/article-image";
 import { ArticleMeta } from "@/components/insights/article-card";
 import { InsightByline } from "@/components/shared/insight-byline";
@@ -36,7 +37,7 @@ export function InsightsHeroSection({
           </p>
         </div>
         {featured && (
-          <article className="group/feature text-foreground mt-10 overflow-hidden rounded-2xl bg-white lg:mt-14">
+          <article className="group/feature group/picture text-foreground mt-10 overflow-hidden rounded-2xl bg-white lg:mt-14">
             <div className="grid lg:grid-cols-2">
               <div className="relative isolate aspect-4/3 overflow-hidden lg:aspect-auto lg:min-h-104">
                 <ArticleImage
@@ -44,7 +45,7 @@ export function InsightsHeroSection({
                   title={featured.title}
                   eager
                   sizes="(min-width: 1440px) 640px, (min-width: 1024px) 45vw, 100vw"
-                  className="ease-editorial motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover/feature:scale-[1.03]"
+                  className={pictureZoomClass}
                 />
                 <span className="bg-primary absolute top-4 left-4 z-10 inline-flex items-center rounded-full px-3 py-1 text-xs/5 font-semibold text-white ring-1 ring-white/30">
                   {copy.featured}

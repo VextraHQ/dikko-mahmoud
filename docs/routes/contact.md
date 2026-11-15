@@ -44,7 +44,9 @@ Approved wireframe: https://claude.ai/artifact/7pDBPikTonXoHnRH4uBF3B
    address, phone link where one exists (Lagos has none yet) and "Get
    directions" through `directionsUrl`.
 5. **FAQ.** The shared FAQ section with Contact questions ("Before you get in
-   touch."). Answers are drafts for the firm.
+   touch."). Answers are drafts for the firm. No "Still have questions?" box
+   (`askFirm={false}`): the form is on this page. Elsewhere that box's button
+   goes to this page's form, not to email.
 6. **No closing enquiry band** (it would link back to this page), then the
    shared footer.
 
@@ -80,7 +82,10 @@ Order and rules:
 - Labels sit above underlined fields, 16px text, at least 44px targets, red
   line and message for errors. Focus is a 2px navy rule under the field, not
   the site-wide outline box; choices keep the light-blue ring inside the
-  cell or row.
+  cell or row. The message is the one boxed field (14 November, user's
+  choice): a soft rounded slate box about six lines tall that turns white
+  with a navy edge when active, because a bare line undersold the space to
+  write.
 - Privacy and relationship notice above the send button: "By sending, you
   acknowledge our privacy policy. Sending an enquiry does not create a
   lawyer–client relationship." Wording to be approved by the firm.
@@ -102,10 +107,12 @@ the preselection follows once the page has loaded.
 - **Errors:** checked when a field is left, then as the visitor types. On
   send, focus moves to the first problem.
 - **Sending:** the button shows "Sending…" and ignores further clicks.
-- **Received (preview):** the form is replaced by a confirmation that says
-  plainly nothing was sent, repeats what the visitor entered, explains what
-  happens next without promising a response time, and offers "Send another
-  enquiry". A toast backs it up; the result never lives only in the toast.
+- **Received (preview):** the form is replaced by a confirmation in the
+  form's own style (no icon badge or tinted boxes): a navy rule, "Enquiry
+  received" eyebrow in green with a small tick, "Thank you, {first name}." serif heading, a quiet
+  amber-ruled line saying nothing was sent, the entered details as hairline
+  rows like the fields, "What happens next" without promising a response time,
+  and a "Send another enquiry" button. A toast backs it up; the result never lives only in the toast.
 - **Failed:** an inline alert keeps every entry and offers "Try again" or the
   firm's email.
 

@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { ArrowUpRight } from "lucide-react";
 import { OfficeMap } from "@/components/contact/office-map";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -16,17 +17,27 @@ export function ContactOfficesSection() {
       aria-labelledby="offices-heading"
       className="border-border border-t py-14 lg:py-24"
     >
-      <div className="mx-auto max-w-360 px-4 sm:px-8 xl:px-20">
-        <h2 id="offices-heading" className="type-section font-serif">
+      <RevealGroup className="mx-auto max-w-360 px-4 sm:px-8 xl:px-20">
+        <h2
+          data-reveal
+          id="offices-heading"
+          className="type-section font-serif"
+        >
           {copy.heading}
         </h2>
-        <p className="text-muted-foreground mt-4 max-w-2xl text-base/7">
+        <p
+          data-reveal
+          data-reveal-order={1}
+          className="text-muted-foreground mt-4 max-w-2xl text-base/7"
+        >
           {copy.description}
         </p>
         <ul className="mt-10 grid gap-5 md:grid-cols-3 lg:gap-6">
-          {contact.offices.map((office) => (
+          {contact.offices.map((office, index) => (
             <li
               key={office.city}
+              data-reveal={index < 3 || undefined}
+              data-reveal-order={index}
               className="border-border flex flex-col overflow-hidden rounded-2xl border bg-white"
             >
               <OfficeMap
@@ -68,7 +79,7 @@ export function ContactOfficesSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </RevealGroup>
     </section>
   );
 }

@@ -3,6 +3,16 @@ import type { HTMLAttributes, ReactNode } from "react";
 import { PreviewDestination } from "@/components/layout/preview-destination";
 import { isRouteAvailable } from "@/lib/routes";
 
+/**
+ * An underline that draws in from the left on hover or keyboard focus, for
+ * navigation-style links (footer, contact actions). Put `group/underline` on
+ * the link and this class on a span around its text, so the line sits under
+ * the words rather than at the bottom of the tap area. Links inside running
+ * text keep an ordinary, always-visible underline.
+ */
+export const drawnUnderlineClass =
+  "box-decoration-clone bg-linear-to-r from-current to-current bg-no-repeat bg-position-[0_100%] bg-size-[0%_1px] group-hover/underline:bg-size-[100%_1px] group-focus-visible/underline:bg-size-[100%_1px] motion-safe:transition-[background-size] motion-safe:duration-300 motion-safe:ease-editorial";
+
 type SiteLinkProps = Omit<HTMLAttributes<HTMLElement>, "children"> & {
   href: string;
   children: ReactNode;

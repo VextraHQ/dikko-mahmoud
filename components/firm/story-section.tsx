@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { cn } from "@/lib/utils";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { firmStory as content } from "@/content/firm";
@@ -5,8 +6,8 @@ import { firmStory as content } from "@/content/firm";
 export function FirmStorySection() {
   return (
     <section aria-labelledby="firm-story-heading" className="py-12 lg:py-24">
-      <div className="mx-auto grid w-full max-w-360 gap-8 px-4 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20 xl:px-20">
-        <div>
+      <RevealGroup className="mx-auto grid w-full max-w-360 gap-8 px-4 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20 xl:px-20">
+        <div data-reveal>
           <Eyebrow>{content.eyebrow}</Eyebrow>
           <h2 id="firm-story-heading" className="type-section mt-6 font-serif">
             {content.heading.map((line) => (
@@ -16,7 +17,11 @@ export function FirmStorySection() {
             ))}
           </h2>
         </div>
-        <div className="space-y-6 text-sm/6 sm:text-base/7">
+        <div
+          data-reveal
+          data-reveal-order={1}
+          className="space-y-6 text-sm/6 sm:text-base/7"
+        >
           {content.paragraphs.map((paragraph, index) => (
             <p
               key={paragraph}
@@ -32,7 +37,7 @@ export function FirmStorySection() {
             </p>
           ))}
         </div>
-      </div>
+      </RevealGroup>
     </section>
   );
 }

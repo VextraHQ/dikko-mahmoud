@@ -176,7 +176,7 @@ export function ChoiceTiles({
         <p
           id={errorId}
           role="alert"
-          className="text-destructive mt-2 text-[13px]/5 font-medium"
+          className="text-destructive motion-safe:animate-message-in mt-2 text-[13px]/5 font-medium"
         >
           {error}
         </p>
@@ -212,13 +212,13 @@ function Tick({ className }: { className?: string }) {
     <span
       aria-hidden="true"
       className={cn(
-        "group-has-checked/choice:border-primary group-has-checked/choice:bg-primary grid size-5 shrink-0 place-items-center rounded-full border border-slate-300 text-white transition-colors",
+        "group-has-checked/choice:border-primary group-has-checked/choice:bg-primary grid size-5 shrink-0 place-items-center rounded-full border border-slate-300 text-white transition-colors duration-300 ease-in-out motion-reduce:transition-none",
         className,
       )}
     >
       <Check
         strokeWidth={2.5}
-        className="size-3 scale-0 transition-transform group-has-checked/choice:scale-100 motion-reduce:transition-none"
+        className="size-3 scale-0 transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-has-checked/choice:scale-100 motion-reduce:transition-none"
       />
     </span>
   );

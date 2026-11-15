@@ -41,8 +41,10 @@ catalogue in CSS or create a parallel TypeScript token system.
   an active/group animation override a generic `motion-reduce:animate-none`.
   If a breakpoint overrides a transition property, supply its corresponding
   reduced-motion override too and verify the generated desktop CSS in-browser.
-- Add Motion only for an approved choreography/presence requirement. Simple
-  interaction feedback remains CSS/Tailwind and does not require a package.
+- There is no animation library (Motion was removed on 2026-11-14). Use the
+  native patterns in "Motion system" below. Ask before adding a library; it is
+  worth it only for springs, drag or reordering layouts, which this site does
+  not have.
 
 ## Brand roles observed in Figma
 
@@ -268,9 +270,11 @@ the narrow client boundary and missing-content selection rules.
   JavaScript, each page keeps its own tone from `headerTone`.
 - The current page keeps the designer's filled pill (white on the dark
   header, navy on the white one). The H2 underline was tried and reverted.
-- Tone changes fade over 400ms (`ease-editorial`): the shell's colour,
-  border and shadow, the text, the nav pill, the enquiry button (which reads
-  the live tone from `useHeaderTone`) and a crossfade between the two logos.
+- The header never animates. Tone, shell, nav pill, enquiry button (which
+  reads the live tone from `useHeaderTone`) and logo all switch instantly, on
+  scroll, on refresh and on a page change. The floating pill is the default
+  look, so nothing changes when JavaScript loads; without JavaScript
+  (`@media (scripting: none)`) the full shell shows.
 - The desktop menu leaves out "Home" (the logo links home); the phone menu
   keeps it.
 - Phones show the preview notice as a thin line above the header that
@@ -467,8 +471,8 @@ retaining its defaults. Firm selects the pale facts surface and its explicit FAQ
 intro/items. VideoPoster uses the existing ImageWithFallback, EditorialCover and
 Button; no media source means no play control. Journey composes the shared
 Accordion and small Button arrows. All new layout/state classes stay beside
-components. No new stylesheet or token set is needed; Motion is now scoped to
-Journey’s approved content swaps.
+components. No new stylesheet or token set is needed; Journey's year change is CSS (see
+"Motion system").
 Unapproved concept imagery and replacement portraits remain covers/initials;
 missing historical/FAQ copy and team assignments stay explicit review slots.
 
@@ -490,13 +494,55 @@ hovering names/captions cannot move or zoom their pictures. Static text has no
 translation; colour/rule/surface feedback uses about 500ms. Location cards keep
 soft shadows without vertical movement.
 
-Journey alone uses Motion (12.x), with LazyMotion/domAnimation and keyed
-AnimatePresence panels: a 650ms 16px directional entrance, a 250ms 10px exit and
-550ms short copy entrance. Radix height timing is local to Journey at every width:
-550ms opening/400ms closing; shared FAQ timing is unchanged. This resolves a
+Journey used Motion (12.x) until 14 November; it is now CSS only. A change of
+year is one 350ms beat on `ease-soft` (after Animate UI's accordion; 300ms
+first blinked, then 500ms felt slow): the cards resize (opening and closing alike), the copy fades
+in from a 2px blur without moving, and the new picture fades in over the old one, which stays
+underneath until covered. The earlier separate timings (650ms 16px picture slide,
+250ms exit, 550ms copy, 550/400ms height) read as jittery. Shared FAQ timing is
+unchanged. This resolves a
 content-presence need rather than replacing simple CSS. Reduced motion renders
 static panels immediately, including during an in-flight transition; SSR and
 no-JS history remain readable. No new scroll observer or autoplay is introduced.
+
+## Motion system — 2026-11-14
+
+Approved in the "Dikko & Mahmoud Motion Plan" artifact and built without a
+library. Calm and quick: motion confirms what the visitor did or shows where
+something came from; it never performs.
+
+| Speed    | Time  | Used for                                     |
+| -------- | ----- | -------------------------------------------- |
+| Fast     | 200ms | Hover, press, colour, underline, error lines |
+| Base     | 300ms | Menus, accordions                            |
+| Slow     | 500ms | Picture zoom                                 |
+| Entrance | 600ms | Section reveals (12px rise and fade)         |
+
+- One curve, `ease-editorial` (`cubic-bezier(0.22,1,0.36,1)`). Things leaving
+  use `ease-in` at about two-thirds of the time (a 300ms open closes in 200ms).
+- One picture zoom: 3% over 500ms (`pictureZoomClass` in
+  `components/ui/picture-zoom.tsx`), triggered by `group/picture`.
+- One beat per change: when several things change together they share one
+  time and curve, only one thing changes size and the rest fade.
+- Reduced motion keeps everything still; content is never hidden without
+  JavaScript.
+
+Patterns:
+
+| Pattern          | How                                                                                                                                | Where                                                       |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- |
+| Section reveal   | `RevealGroup` + `data-reveal`/`data-reveal-order`                                                                                  | Headings and the first row of cards; never legal text       |
+| Menus and popups | `motion.css` keyframes on `data-slot` + `data-state`; popups fade in over 200ms from 98.5% scale, no blur, and fade out over 150ms | Phone menu (links stagger in), dialogs, People popup        |
+| Dropdowns        | `grow-in`: 200ms from the trigger, 95% scale and 2px blur                                                                          | Filter and Contact dropdowns                                |
+| Choice tiles     | Tick scales in over 300ms with a slight overshoot                                                                                  | Contact enquiry tiles                                       |
+| Accordions       | Radix height keyframes, 350ms `ease-soft`, 16px edge fade, 2px blur in                                                             | Journey and every FAQ, Home included                        |
+| Link underline   | `drawnUnderlineClass` in `site-link.tsx`, drawn left to right                                                                      | Footer links; body links keep a normal underline            |
+| Form feedback    | `animate-message-in` on errors, `animate-rise-in` on the receipt                                                                   | Contact form; the send button turns its arrow into a loader |
+
+Page changes are instant: no page fade, no hero entrance, and the header stays
+still. Motion is kept for what the visitor does (menus, accordions, popups,
+hover) and for sections scrolling into view. The footer, legal text and form
+fields never animate on arrival.
 
 ## Practice menu and detail primitives — 2026-10-31
 

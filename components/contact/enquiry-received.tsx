@@ -1,14 +1,19 @@
 import type { Ref } from "react";
-import { Check } from "lucide-react";
+import { ArrowLeft, CircleCheck } from "lucide-react";
+import { ArrowButton } from "@/components/ui/arrow-button";
+import { Eyebrow, eyebrowClass } from "@/components/ui/eyebrow";
 import { enquiryForm, reasonCopy } from "@/content/contact-page";
 import { practiceTitle } from "@/content/practice-index";
+import { cn } from "@/lib/utils";
 
 const copy = enquiryForm.received;
 
 /**
- * Shown in place of the form after sending. During the preview it says
- * plainly that nothing was sent, repeats what the visitor entered and
- * explains what happens next without promising a response time.
+ * Shown in place of the form after sending, in the form's own language:
+ * an eyebrow, a serif heading and hairline rows like the fields above it.
+ * During the preview it says plainly that nothing was sent, repeats what the
+ * visitor entered and explains what happens next without promising a
+ * response time.
  */
 export function EnquiryReceived({
   ref,
@@ -40,21 +45,29 @@ export function EnquiryReceived({
       ref={ref}
       tabIndex={-1}
       role="status"
-      className="border-border mt-8 rounded-2xl border bg-white p-6 outline-none sm:p-8"
+      className="motion-safe:animate-rise-in border-secondary mt-8 border-t-2 pt-8 outline-none"
     >
-      <span className="grid size-11 place-items-center rounded-full bg-green-50 text-green-800">
-        <Check aria-hidden="true" className="size-5" strokeWidth={2} />
-      </span>
-      <h3 className="type-subsection mt-4 font-serif">{copy.heading}</h3>
-      <p className="mt-3 inline-block rounded-full border border-dashed border-amber-400 bg-amber-50 px-3 py-0.5 text-xs/5 font-semibold text-amber-900">
-        {copy.previewBadge}
+      {/* One small green tick: the only colour that says "done". */}
+      <Eyebrow className="flex items-center gap-2 text-green-700">
+        <CircleCheck aria-hidden="true" className="size-4" strokeWidth={2} />
+        {copy.eyebrow}
+      </Eyebrow>
+      <h3 className="type-subsection mt-4 font-serif">
+        {copy.heading(enquiry.name.split(" ")[0])}
+      </h3>
+      <p className="text-muted-foreground mt-4 border-l-2 border-amber-300 pl-4 text-sm/6">
+        {copy.previewNote}
       </p>
-      <p className="text-muted-foreground mt-3 text-[15px]/6">
-        {copy.thanks(enquiry.name.split(" ")[0])}
-      </p>
-      <dl className="border-border mt-5 grid grid-cols-[max-content_1fr] gap-x-5 gap-y-2 border-t pt-5 text-sm/6">
+
+      <h4 className={cn(eyebrowClass, "text-muted-foreground mt-10")}>
+        {copy.summary}
+      </h4>
+      <dl className="border-border mt-3 border-t text-[15px]/6">
         {rows.map(([term, detail]) => (
-          <div key={term} className="contents">
+          <div
+            key={term}
+            className="border-border grid gap-1 border-b py-4 sm:grid-cols-[10rem_1fr] sm:gap-6"
+          >
             <dt className="text-muted-foreground">{term}</dt>
             <dd className="min-w-0 wrap-anywhere whitespace-pre-line">
               {detail}
@@ -62,16 +75,21 @@ export function EnquiryReceived({
           </div>
         ))}
       </dl>
-      <p className="text-secondary mt-5 rounded-xl bg-sky-50 px-4 py-3 text-sm/6">
-        <strong>{copy.nextHeading}</strong> {copy.nextText}
-      </p>
-      <button
+
+      <div className="mt-10 grid gap-2 sm:grid-cols-[10rem_1fr] sm:gap-6">
+        <h4 className="type-row font-serif">{copy.nextHeading}</h4>
+        <p className="text-muted-foreground text-[15px]/6">{copy.nextText}</p>
+      </div>
+
+      <ArrowButton
         type="button"
+        size="sm"
+        icon={ArrowLeft}
         onClick={onStartAgain}
-        className="text-primary mt-5 min-h-11 text-sm font-semibold underline underline-offset-4"
+        className="mt-10"
       >
         {copy.again}
-      </button>
+      </ArrowButton>
     </div>
   );
 }

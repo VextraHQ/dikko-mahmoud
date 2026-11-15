@@ -146,7 +146,7 @@ export function InsightsToolbar({
                 (option) => (
                   <label
                     key={option.value}
-                    className="has-checked:border-primary has-checked:bg-primary has-focus-visible:ring-primary relative shrink-0 cursor-pointer rounded-full border border-slate-300 px-4 py-2 text-sm/5 whitespace-nowrap text-slate-700 transition-colors duration-180 hover:border-slate-400 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-offset-2 motion-reduce:transition-none"
+                    className="has-checked:border-primary has-checked:bg-primary has-focus-visible:ring-primary relative shrink-0 cursor-pointer rounded-full border border-slate-300 px-4 py-2 text-sm/5 whitespace-nowrap text-slate-700 transition-colors duration-200 hover:border-slate-400 has-checked:text-white has-focus-visible:ring-2 has-focus-visible:ring-offset-2 motion-reduce:transition-none"
                   >
                     <input
                       type="radio"

@@ -45,7 +45,7 @@ export function ProfileDialog({
   labels: ProfileDialogLabels;
   children: ReactNode;
 }) {
-  const { contentRef, close, focusHeading } = useProfileDialog(href);
+  const { contentRef, open, close, focusHeading } = useProfileDialog(href);
   const { scrollRef, outOfView } = useHeadingOutOfView<HTMLDivElement>();
   const { status: copyStatus, copy } = useCopyLink({
     copied: labels.copiedLink,
@@ -55,9 +55,9 @@ export function ProfileDialog({
   useDocumentMetadata(metadata);
   return (
     <Dialog
-      open
-      onOpenChange={(open) => {
-        if (!open) close();
+      open={open}
+      onOpenChange={(next) => {
+        if (!next) close();
       }}
     >
       <DialogContent

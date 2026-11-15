@@ -1,3 +1,5 @@
+import { pictureZoomClass } from "@/components/ui/picture-zoom";
+import { cn } from "@/lib/utils";
 import { PersonCard } from "@/components/shared/person-card";
 import { keepTogether } from "@/lib/typography";
 import { EditorialCover } from "@/components/shared/editorial-cover";
@@ -31,7 +33,7 @@ export function FirmPeopleSection() {
                 role={founder.role}
                 sizes="(min-width: 1440px) 440px, (min-width: 1024px) 35vw, (min-width: 640px) 448px, calc(100vw - 32px)"
                 imageHoverOnly
-                portraitClassName="aspect-square transition-colors duration-550 ease-editorial motion-reduce:transition-none"
+                portraitClassName="aspect-square transition-colors duration-500 ease-editorial motion-reduce:transition-none"
               />
             </div>
           )}
@@ -87,7 +89,7 @@ export function FirmPeopleSection() {
                           <PersonCard
                             person={person}
                             imageHoverOnly
-                            portraitClassName="aspect-square transition-colors duration-550 ease-editorial motion-reduce:transition-none"
+                            portraitClassName="aspect-square transition-colors duration-500 ease-editorial motion-reduce:transition-none"
                             sizes="(min-width: 1440px) 400px, (min-width: 1024px) 30vw, 46vw"
                           />
                         </li>,
@@ -96,8 +98,8 @@ export function FirmPeopleSection() {
                 })}
                 {pendingSlots(group.id, group.pendingSlots).map((slot) => (
                   <li key={slot.id} className="min-w-0">
-                    <div className="group/portrait hover:ring-primary/20 ease-editorial relative isolate aspect-square overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-550 motion-reduce:transition-none">
-                      <div className="motion-safe:ease-editorial absolute inset-0 motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02]">
+                    <div className="group/picture hover:ring-primary/20 ease-editorial relative isolate aspect-square overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-500 motion-reduce:transition-none">
+                      <div className={cn("absolute inset-0", pictureZoomClass)}>
                         <EditorialCover
                           mark={slot.mark}
                           markClassName="pb-0 text-6xl sm:text-8xl"

@@ -111,10 +111,10 @@ an extra inset between its artwork and the page gutter. Its source asset,
 rendered size and reserved link dimensions are preserved.
 
 Scroll changes neither height, padding, position nor logo scale. One fixed
-marker at 64px controls an opacity-only surface crossfade. The nav pill
-material fades away as the full shell appears, keeping the controls in exactly
-the same positions with 44px item targets. Without enhancement, the full shell
-remains visible for readability while scrolling.
+marker at 64px switches the surface instantly (no fade): the nav pill
+material gives way to the full shell, keeping the controls in exactly the same
+positions with 44px item targets. Without JavaScript, the full shell remains
+visible for readability while scrolling.
 The mobile Sheet remains a separate solid, focus-managed surface.
 
 Selected clients use the shared content cap/gutters, a left-aligned heading and
@@ -225,7 +225,7 @@ three from `lg`. Presence pairs introduction/media from `lg`; contact cards use
 one/two/three columns and the canonical Lagos liaison label.
 
 Journey switches at `lg` (64rem): 44% index, 49% stable media panel, with arrows
-below the media. The desktop figure uses a stable grid for overlapping keyed Motion panels;
+below the media. The desktop figure uses a stable grid where the new picture fades in over the previous one;
 mobile/tablet keeps its figure inside the disclosure row.
 Year labels reserve space for Today; content wraps naturally. Founder content
 pairs a smaller editorial card with biography/milestones on desktop and stacks
@@ -237,10 +237,9 @@ centred and sized for the smaller mobile squares. Neutral slots do not pose
 as real lawyers. Shared CTA/footer overlap uses the existing contract.
 
 Firm picture frames and all reading text remain stationary during hover. A local
-picture group owns the inner 2% zoom and soft shadow, with 550ms eased entry and
-return; names/captions cannot trigger it. Static text uses only colour/rule
-feedback. Motion offsets belong to Journey’s incoming/outgoing content, never
-the page container or layout geometry.
+picture group owns the inner 3% zoom (`pictureZoomClass`, 500ms); names and
+captions cannot trigger it. Static text uses only colour/rule feedback. Nothing
+moves the page container or layout geometry; Journey content fades in place.
 
 ## Practice areas
 

@@ -1,5 +1,6 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { useSitePathname } from "@/hooks/use-site-pathname";
 import { SiteLink } from "@/components/layout/site-link";
@@ -45,12 +46,11 @@ export function SiteNavigation({
   const isActive = (href: string) =>
     isRouteAvailable(href) && isActivePath(pathname, href);
   // Hover and the open menu share one tint; the active pill keeps its own
-  // colours so an open menu never washes it out on either header tone. Colours
-  // ease over the header's 400ms so a tone change fades with the shell.
+  // colours so an open menu never washes it out on either header tone.
   const itemClass = (href: string) =>
     cn(
       "rounded-full",
-      "ease-editorial flex h-11 items-center gap-1.5 px-3 text-sm font-semibold transition-colors duration-400 motion-reduce:transition-none",
+      "flex h-11 items-center gap-1.5 px-3 text-sm font-semibold",
       isActive(href)
         ? "bg-white text-secondary group-data-[tone=light]/site-header:bg-primary group-data-[tone=light]/site-header:text-white"
         : "hover:bg-white/12 data-[state=open]:bg-white/12 group-data-[tone=light]/site-header:hover:bg-slate-100 group-data-[tone=light]/site-header:data-[state=open]:bg-slate-100",
@@ -63,8 +63,13 @@ export function SiteNavigation({
     return (
       <nav aria-label="Mobile navigation">
         <ul className="divide-y divide-white/10 border-y border-white/10">
-          {navigation.map((item) => (
-            <li key={item.href}>
+          {navigation.map((item, index) => (
+            // `--i` staggers the links as the menu opens (app/styles/motion.css).
+            <li
+              key={item.href}
+              data-menu-item
+              style={{ "--i": index } as CSSProperties}
+            >
               {item.href === routes.practiceAreas ? (
                 <Accordion type="single" collapsible>
                   <AccordionItem value="practices" className="border-0">

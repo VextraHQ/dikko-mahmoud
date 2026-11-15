@@ -14,7 +14,7 @@ export function HeaderEnquiryButton() {
     <ArrowButton
       asChild
       variant={tone === "light" ? "default" : "inverse"}
-      className="duration-400 **:data-[slot=button-arrow]:transition-colors **:data-[slot=button-arrow]:duration-400"
+      className="transition-none motion-safe:transition-[scale]"
     >
       <SiteLink href={action.href}>{action.label}</SiteLink>
     </ArrowButton>

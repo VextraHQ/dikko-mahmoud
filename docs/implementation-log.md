@@ -3,6 +3,316 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-15 — People popup fades in and out
+
+- Reviewed in the "Motion Before and After" artifact. The user chose: keep the
+  Journey and the phone menu as they are, leave the dropdowns and FAQs, and
+  give the People popup the proposed opening plus a closing fade.
+- Popups (`dialog-overlay`, `dialog-content` in `app/styles/motion.css`): open
+  in 200ms `ease-editorial` from 98.5% scale with no blur; close in 150ms
+  `ease-in`. The phone filter picker uses the same dialog, so it changes too.
+  Sheets and dropdowns are unchanged.
+- Closing the profile popup (button, Escape, backdrop) used to go back in
+  history at once, so its exit never played. `useProfileDialog` now closes the
+  dialog first and calls `router.back()` when its fade finishes, or straight
+  away when nothing animates (reduced motion). Browser Back still closes it
+  instantly.
+- Checked in headless Chrome against a production build (`next start` on port
+  3100): open fades in 200ms with no blur; button and Escape fade out over
+  150ms, then the URL returns to `/people` and focus goes back to the card;
+  browser Back closes at once; reduced motion opens and closes instantly; the
+  heading takes focus on every opening. In the dev server, React's
+  double-run of effects can leave focus on the card instead of the heading.
+  The phone filter picker was not checked by eye.
+- Checks: build, format:check, lint, typecheck and test (180) pass.
+- Peer review found that Escape followed at once by browser Back went back
+  twice, skipping People. The fade's callback now goes back only if the page
+  is still on the profile URL. Rechecked in the dev server: Escape then Back
+  after 20, 60 and 120ms lands on `/people`; button and Escape closes, Forward
+  reopening and closing again all work. format:check, lint, typecheck and test
+  (180) pass; build not rerun.
+
+## 2026-11-15 — Page-level motion removed; header is still
+
+- The user asked for clean motion without over-engineering: nothing should
+  animate on a page change or refresh, and the header should never animate.
+- Removed: the page fade (`PageTransition`, React `ViewTransition`), the
+  Insights card-to-article picture morph, the hero rise-in (`data-enter` on
+  every inner hero), and the two fixes added for them the day before
+  (`useSettled`/`data-settled`, `useMarkEntered` with its inline script).
+  `detail-hero.tsx`, the Contact hero, `site-shell.tsx`, `preview-banner.tsx`
+  and `app/layout.tsx` are back to HEAD.
+- Header: no transitions on the shell, tone, logo, nav items or enquiry button
+  (the button keeps its press scale). The floating pill is now the default
+  look and the full shell shows once scrolled, so nothing changes when
+  JavaScript loads; `@media (scripting: none)` keeps the full shell without
+  JavaScript (`app/styles/surfaces.css`).
+- Kept: accordions, menus, popups, dropdowns, the choice tick, section reveals
+  on scroll, hover feedback, `useSelection`, picture zoom and the Contact work.
+- Checked in headless Chrome: The Firm → Privacy runs no view transition and
+  no animation or transition inside the header at 1440px and 390px; the
+  header loads with the pill already showing. format:check, lint, typecheck
+  and test (180) pass. Build not run.
+
+## 2026-11-14 — Hero rise-in plays once per visit
+
+- The inner-page heroes (`data-enter`) rose in on every page change and
+  refresh, which read as the top of the page sliding each time. Before the
+  motion pass (HEAD 01c30de) only Home's carousel animated. The rise now plays
+  on the first page of a visit only; later pages and refreshes in the same tab
+  show the hero in place, and the page fade still runs.
+- How: `useMarkEntered` (called from `PageTransition`) sets `data-entered` on
+  `<html>` and a session flag one second after the first page loads; an
+  inline script in `app/layout.tsx` (`lib/entrance.ts`) restores the
+  attribute before paint on refresh; `motion.css` turns the entrance off under
+  `:root[data-entered]`. `<html>` has `suppressHydrationWarning` for that
+  attribute.
+- Files: `lib/entrance.ts`, `hooks/use-mark-entered.ts`,
+  `components/layout/page-transition.tsx`, `app/layout.tsx`,
+  `app/styles/motion.css`, `tests/entrance.test.ts`, `docs/design-system.md`.
+- Checked in headless Chrome: a fresh tab on The Firm runs `rise-in`; after
+  that, navigating to Contact and refreshing run none. format:check, lint,
+  typecheck and test (181) pass. Build not run.
+
+## 2026-11-14 — Header stops animating on refresh and page change
+
+- The header's 400ms fades (tone, frosted surface, nav pills, enquiry button,
+  logo) now run only while reading. On a refresh or a page change the header
+  shows its final look at once; fades switch back on 250ms later.
+- Files: `hooks/use-settled.ts` (new), `components/layout/sticky-header.tsx`
+  (`data-settled`), `app/styles/surfaces.css` (no transitions until settled),
+  `docs/design-system.md`.
+- Checked in headless Chrome at 1440px: The Firm → Contact and The Firm →
+  Privacy (dark to light) switch with 0s transitions, and 0.4s returns after
+  about 250ms. format:check, lint, typecheck and test (180) pass. Build not
+  run.
+
+## 2026-11-14 — Animate UI style touches; sliding header pill reverted
+
+- A sliding header pill (one element moving to the current page) was built and
+  removed the same day: it sat under the header's frosted-glass layer, so it
+  showed as a blurred glow and flashed while moving. The header is back to
+  one solid pill per item, and the nav colour fade is back to 400ms to match
+  the header's tone change (an earlier motion pass had set 200ms).
+- Kept: dropdowns (`select-content`) grow in from the trigger over 200ms with
+  a 95% scale and 2px blur (`grow-in`); dialogs, including the People popup,
+  open over 300ms on `ease-soft` with a 2px blur and close with it; Contact
+  choice-tile ticks scale in over 300ms with a slight overshoot.
+- Journey left as is pending a design discussion.
+- Files: `components/layout/site-navigation.tsx`, `app/styles/motion.css`,
+  `components/contact/choice-tiles.tsx`, `docs/design-system.md`.
+- Checks: format:check, lint, typecheck, test. Browser pane: Insights nav item
+  has its own white pill, 400ms fade, no sliding element. Headless Chrome
+  earlier: `grow-in`, `pop-in` with blur and the tick easing ran. Build not
+  rerun.
+
+## 2026-11-14 — Practice filters keep the scroll position
+
+- Clicking a Practice areas filter (for example Transactional) filtered
+  correctly but jumped to the top of the page, because the filter chips are
+  page links and Next scrolls to the top on navigation. They now pass
+  `scroll={false}`, so the list filters in place.
+- File: `components/practices/catalogue-section.tsx`.
+- Checks: format:check, lint, typecheck, test (180 passed); headless Chrome at
+  1440 and 375 kept the scroll position (1029 and 1136) after the click.
+
+## 2026-11-14 — Accordion colours stop blinking; practice arrow slowed
+
+- Measured frame by frame in headless Chrome: on `ease-soft` the card colour
+  swap did most of its change in the first 100ms, so the closing navy card and
+  the opening pale card both passed through grey around 75ms (the "blink").
+  Card, chevron and title colours now use `ease-in-out` over the same 350ms;
+  height keeps `ease-soft`. They now cross around 150ms and land together.
+- Still open (needs a decision): in single-open accordions the clicked row
+  moves up when the item above closes (159px on the Home FAQ, 108px on
+  Journey).
+- Home practice list arrow: the turn ran 350ms but its white fill and the row
+  text ran 200ms, so the fill landed first. Arrow, fill, text and the side bar
+  now move as one 500ms `ease-soft` beat (homepage hold: timing only).
+- Files: `components/ui/accordion.tsx`, `components/shared/faq-section.tsx`,
+  `components/firm/journey-explorer.tsx`,
+  `components/home/practice-area-explorer.tsx`.
+- Checks: format:check, lint, typecheck, test (180 passed); headless frame
+  samples on Home and The Firm. Build not rerun.
+
+## 2026-11-14 — Accordions follow Animate UI; profile contact links restyled
+
+- Accordions now copy Animate UI's Radix accordion natively: 350ms on a new
+  `ease-soft` curve (`cubic-bezier(0.215, 0.61, 0.355, 1)`), the bottom 16px of
+  the opening panel fades through a mask (`@property --accordion-edge`
+  animated with the height), and the answer fades in from a 2px blur; closing
+  plays in reverse. Journey, every FAQ, card colours and chevrons share the
+  same 350ms beat. Animate UI itself was not installed: it needs the Motion
+  library, which would add back about 46 KB to every page.
+- Profile contact links (hero and popup) are now text links ("Email" with a
+  small icon, drawn underline) instead of round icon buttons, on phone and
+  desktop. Copy in `profileCopy.linkNames`.
+- Files: `app/globals.css`, `app/styles/motion.css`,
+  `components/ui/accordion.tsx`, `components/firm/journey-explorer.tsx`,
+  `components/shared/faq-section.tsx`, `components/people/profile-links.tsx`,
+  `profile-hero.tsx`, `profile-intro.tsx`, `content/profiles.ts`, docs
+  (design-system, the-firm, people).
+- Checks: format:check, lint, typecheck, test (180 passed). Headless Chrome
+  confirmed the 350ms height, edge and blur animations on Home and The Firm and
+  screenshotted the profile links at 1440 and 375. Build not rerun.
+
+## 2026-11-14 — Every "Make an enquiry" opens the Contact form
+
+- The closing enquiry band (`EnquiryCta`, on most pages) and the SME page
+  button still opened email. Both now use the shared `EnquiryButton`, which
+  goes to `/contact#enquiry` while Contact is live. Email links that are
+  contact details (footer, office cards, profiles, the form's failure note)
+  stay as email.
+- Files: `components/shared/enquiry-cta.tsx`,
+  `components/sme/retainer-section.tsx`.
+
+## 2026-11-14 — Contact message field is a soft box
+
+- Asked for an unbiased view, I recommended keeping underlines for the
+  single-line fields but boxing the message, since an empty underlined area
+  undersells how much to write. The user agreed. The message is now a rounded
+  pale slate box (about six lines), slate edge, navy edge and white fill when
+  active, red edge on error; the site-wide outline is switched off as on the
+  other fields, kept in high-contrast mode.
+- Files: `components/contact/enquiry-form.tsx`, `docs/routes/contact.md`.
+- Checked by screenshots in headless Chrome at 1440px (empty and active).
+
+## 2026-11-14 — Enquiry confirmation restyled
+
+- The user said the confirmation looked AI-generated and off-theme (green tick
+  badge, dashed amber pill, blue "What happens next" box). It now uses the
+  form's own language: a navy rule, eyebrow, serif "Thank you, {name}."
+  heading, an amber-ruled preview line, the details as hairline rows, "What
+  happens next" as a serif label beside its text, and the standard arrow
+  button. At the user's request the eyebrow then gained one small green
+  tick in green text, the only colour cue. Copy keys changed in
+  `content/contact-page.ts` (`eyebrow`,
+  `heading(firstName)`, `previewNote`, `summary`); wording is unchanged apart
+  from the heading.
+- Files: `components/contact/enquiry-received.tsx`, `content/contact-page.ts`,
+  `docs/routes/contact.md`.
+- Checked by submitting a test enquiry in headless Chrome at 1440px and 375px
+  and reviewing screenshots. format:check, lint, typecheck and test run below.
+
+## 2026-11-14 — Calmer card rows; FAQ help goes to Contact
+
+- The user found the card rows blinked: the FAQ and Journey changed colour,
+  height and text in 300ms, and the round button swapped colour instantly.
+  Card rows now change as one 500ms beat on the editorial curve: background,
+  button colour, chevron turn, height (open and close alike) and the Journey's
+  text and picture fade. Other accordions keep 300ms. Native timing was the
+  problem, not the lack of a library, so Motion stays out.
+- Home's FAQ now uses the same cards as every other page, at the user's
+  request; `FaqSection` lost its `variant` prop.
+- The "Still have questions?" button went to email; it is now the shared
+  `EnquiryButton`, so it opens the Contact form (`/contact#enquiry`). Contact
+  hides the box (`askFirm={false}`) because its form is already on the page.
+  The header and footer enquiry links stay everywhere.
+- Files: `components/ui/accordion.tsx`, `components/firm/journey-explorer.tsx`,
+  `components/shared/faq-section.tsx`, `components/home/faq-section.tsx`,
+  `app/(site)/contact/page.tsx`, `app/globals.css`, `app/styles/motion.css`,
+  `docs/design-system.md`, `docs/routes/the-firm.md`, `docs/routes/contact.md`.
+- Checked in headless Chrome: Home, Contact and Firm FAQs and the Journey run
+  every part at 500ms; the help button links to `/contact#enquiry`; Contact
+  shows no help button. Not yet watched by eye.
+
+## 2026-11-14 — Native motion pass; Motion library removed
+
+- The user chose native over the Motion library ("if native is the best, then
+  we'll go for it"), asking above all for seamless page changes. The approved
+  plan is now built with CSS and React's `ViewTransition`; `motion` is removed
+  from `package.json`, and the 46 KB compressed chunk no longer ships (no Motion
+  code in the built client bundles).
+- One rhythm: 200ms fast, 300ms base, 500ms picture zoom, 600ms entrances, one
+  curve, exits in `ease-in` at about two-thirds of the time. Inner-page
+  durations of 150, 180 and 550ms were normalised; Home files were not touched.
+- Heroes rise in from CSS (`data-enter`), including the detail hero used by
+  articles, practices and profiles. The Firm (story, Journey, values, process,
+  presence), the practice catalogue and Contact's offices reveal their headings
+  and first row of cards as they scroll in.
+- Phone menu, sheets and dialogs (including the People popup) open and close
+  with CSS keyed on `data-state`; the phone menu links stagger in.
+- Journey: rewritten without Motion. `useDirectionalSelection` became
+  `useSelection` (current and previous year), which replaces the earlier note
+  that the hook was left as is. Inner-page FAQs now use the Journey's card rows;
+  Home passes `variant="line"` and looks the same.
+- Pictures share one 3% zoom (`pictureZoomClass`); footer links draw their
+  underline (`drawnUnderlineClass`).
+- Page changes: `PageTransition` in `SiteShell` fades the old page out (150ms)
+  and the new one in (300ms). It is keyed on route segments so filters and the
+  People popup do not fade the page; a `template.tsx` was rejected because it
+  also wraps the popup's slot. The header and preview note are held still. The
+  approved "shared portraits" could not apply to People, whose cards open the
+  popup while staying on the page, so the shared picture is used where a page
+  really changes: an Insights archive card grows into the article picture.
+- Contact: error lines ease in, the receipt rises in, and the send button turns
+  its arrow into a loader while sending (`ArrowButton busy`).
+- The Insights reading ring writes its progress straight to the circle
+  (`pathLength={1}`) instead of through a Motion value.
+- Files: `app/globals.css`, `app/styles/motion.css`; `components/ui/`
+  (accordion, arrow-button, button, dialog, form, pagination, picture-zoom,
+  select, sheet); `components/layout/` (page-transition, preview-banner,
+  site-footer, site-link, site-navigation, site-shell); `components/shared/`
+  (detail-hero, faq-section, filter-select, person-card); The Firm, practices,
+  people, experience, insights, contact, legal and SME sections;
+  `components/home/faq-section.tsx` (passes `variant="line"` only);
+  `hooks/use-selection.ts`, `hooks/use-article-reading.ts`; `package.json`,
+  `pnpm-lock.yaml`; `.claude/rules/components.md`, `docs/design-system.md`
+  ("Motion system"), `docs/architecture.md`, `docs/layout-system.md`,
+  `docs/roadmap.md`, `docs/handover-checklist.md`, `docs/routes/the-firm.md`,
+  `docs/routes/insights.md`.
+- Checks: format:check, lint, typecheck, test (180) and build pass; knip
+  reports nothing. The browser pane was hidden (it stops rendering), so the
+  motion was recorded in headless Chrome against the dev server instead:
+  page fades at 150ms out and 300ms in after 100ms, with the header held still
+  (Insights card to article, The Firm to Contact); the card picture growing
+  into the article picture over 400ms, and an unpaired card picture now
+  leaving with the page (it lingered for 400ms before the `:only-child` rule);
+  no page fade when the People popup opens; the phone menu at 300ms in and
+  200ms out with its links staggered; the popup's pop-in; FAQ cards white and
+  navy, Home's FAQ still hairline rows; section reveals at 600ms with an 80ms
+  stagger; reduced motion completes a page change in under 60ms with no
+  animation. Not yet watched by eye or tried on a real iPhone.
+
+## 2026-11-14 — Motion plan approved
+
+- The user approved the motion and polish plan (artifact "Dikko & Mahmoud
+  Motion Plan"): three speeds plus an entrance speed, one picture zoom, one
+  beat per change, and all four decisions: page transitions with shared
+  portraits, FAQ cards on practice pages and Contact, the hero picture settle,
+  and the drawn link underline. Home stays on hold. Nothing built yet.
+- Open question put to the user: keep the Motion library or move to native
+  CSS and browser APIs. Measured: Motion's shared chunk is about 46 KB
+  compressed (140 KB raw) and loads on The Firm and Insights articles.
+
+## 2026-11-14 — Firm Journey rows match the designer's cards
+
+- The user reported that the open year's minus sign did not close it. On
+  phones and tablets it did close. From desktop width the selected year is
+  meant to stay open beside its picture, but it still showed a minus, which
+  looked broken.
+- Rows are now the designer's rounded cards: pale slate when closed, navy
+  when open or selected, with a round button. Below `lg` the button is a
+  chevron that turns over on open; from `lg` it is an arrow towards the
+  picture. Phone pictures sit inside the open card with rounded corners.
+- Follow-up: the round button's colours faded with the card, so mid-change it
+  matched the card and seemed to vanish. It now swaps at once while the card
+  fades over 300ms (was 500ms), and the desktop arrow nudges on hover only for
+  years that are not selected.
+- The user then reported the year change felt jittery: text, picture and cards
+  each moved on their own timing (text 550ms with a slide, picture 650ms in and
+  250ms out with slides, cards 550/400ms). It is now one 300ms beat on the
+  editorial curve: cards resize, text fades in place, the new picture fades in
+  over the old one. `useDirectionalSelection` still reports a direction that
+  nothing reads now; left as is.
+- Files: `components/firm/journey-explorer.tsx`, `docs/routes/the-firm.md`,
+  `docs/design-system.md`, `docs/architecture.md`.
+- Checked in the browser at 375px (open, close, switch) and 1440px
+  (selection stays, arrow shown). The one-beat timing was confirmed from the
+  running animations (all 300ms); the browser pane was hidden, so the motion
+  itself was not watched. format:check, lint, typecheck and test
+  (180) pass; build not rerun.
+
 ## 2026-11-13 — Commercial terms removed; checklist rules in one place
 
 - Removed fees, prices, payment milestones and contract clauses from the

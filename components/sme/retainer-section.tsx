@@ -1,10 +1,9 @@
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ReviewNote } from "@/components/shared/review-note";
 import { practiceCopy } from "@/content/practice-index";
-import { ArrowButton } from "@/components/ui/arrow-button";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { EnquiryCta } from "@/components/shared/enquiry-cta";
 import { smeRetainer as copy } from "@/content/sme";
-import { contact } from "@/content/contact";
 import { routes } from "@/lib/routes";
 import { formatIndex } from "@/lib/format";
 import { PageTrail } from "@/components/shared/page-trail";
@@ -38,9 +37,7 @@ export function RetainerSection() {
             <p className="text-muted-foreground text-base/8 lg:text-lg/8">
               {copy.description}
             </p>
-            <ArrowButton asChild className="mt-7">
-              <a href={`mailto:${contact.email}`}>{copy.action}</a>
-            </ArrowButton>
+            <EnquiryButton className="mt-7">{copy.action}</EnquiryButton>
           </div>
         </div>
         <ReviewNote className="mt-8">{copy.reviewNote}</ReviewNote>

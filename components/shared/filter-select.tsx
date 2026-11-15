@@ -177,7 +177,7 @@ export function FilterSelect({
                       aria-pressed={selected}
                       onClick={() => select(option.value)}
                       className={cn(
-                        "text-foreground focus-visible:ring-primary/50 flex min-h-12 w-full items-center justify-between gap-4 rounded-lg px-3 py-3 text-left text-sm/6 transition-colors duration-150 hover:bg-slate-100 focus-visible:bg-slate-100 focus-visible:ring-2 focus-visible:outline-none! focus-visible:ring-inset motion-reduce:transition-none forced-colors:focus-visible:outline-2!",
+                        "text-foreground focus-visible:ring-primary/50 flex min-h-12 w-full items-center justify-between gap-4 rounded-lg px-3 py-3 text-left text-sm/6 transition-colors duration-200 hover:bg-slate-100 focus-visible:bg-slate-100 focus-visible:ring-2 focus-visible:outline-none! focus-visible:ring-inset motion-reduce:transition-none forced-colors:focus-visible:outline-2!",
                         selected && "text-primary bg-sky-50 font-medium",
                       )}
                     >

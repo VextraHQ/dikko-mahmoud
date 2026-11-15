@@ -1,7 +1,6 @@
 "use client";
 import type { ReactNode } from "react";
 import { ArrowUp, ArrowUpRight } from "lucide-react";
-import { motion, useTransform } from "motion/react";
 import { useSonner } from "sonner";
 import { SiteLink } from "@/components/layout/site-link";
 import { ContentsList } from "@/components/shared/contents-list";
@@ -21,9 +20,8 @@ export function ReadingExperience({
   contents: ArticleContentsItem[];
   practices: { slug: string; title: string }[];
 }) {
-  const { bodyRef, progress, visible, active, select, returnToTop } =
+  const { bodyRef, ringRef, visible, active, select, returnToTop } =
     useArticleReading(contents.map((item) => item.id));
-  const ringOffset = useTransform(progress, (value) => 138.23 * (1 - value));
   const { toasts } = useSonner();
   const contentsList = (
     <ContentsList
@@ -111,7 +109,8 @@ export function ReadingExperience({
               strokeWidth="2"
               className="text-slate-200"
             />
-            <motion.circle
+            <circle
+              ref={ringRef}
               cx="24"
               cy="24"
               r="22"
@@ -119,8 +118,8 @@ export function ReadingExperience({
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
-              strokeDasharray="138.23"
-              style={{ strokeDashoffset: ringOffset }}
+              pathLength={1}
+              strokeDasharray="1"
             />
           </svg>
           <ArrowUp aria-hidden="true" className="size-5" strokeWidth={1.5} />
