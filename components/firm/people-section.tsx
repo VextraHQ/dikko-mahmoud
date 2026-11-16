@@ -54,7 +54,7 @@ export function FirmPeopleSection() {
                 {keepTogether(founder.biography)}
               </p>
             )}
-            {founder?.milestones && (
+            {founder?.milestones?.length ? (
               <dl className="border-border my-6 grid grid-cols-2 gap-6 border-y py-6">
                 {founder.milestones.map((milestone) => (
                   <div key={milestone.year}>
@@ -67,7 +67,7 @@ export function FirmPeopleSection() {
                   </div>
                 ))}
               </dl>
-            )}
+            ) : null}
             <p className="text-muted-foreground text-sm/6 sm:text-base/7">
               {content.closing}
             </p>

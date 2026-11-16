@@ -102,7 +102,7 @@ Careers is the remaining unbuilt primary route checkpoint. Contact delivery
 | 5g. Contact page and enquiry form           | Review   | Reason-first form, preview submission, offices and maps; no email delivery yet             |
 | 5h. Codebase clean-up                       | Review   | Licence, security headers, plan docs, folder tidy, comment pass, quick speed wins          |
 | 5i. Careers                                 | Waiting  | Design supplied; build waits for the firm's recruitment requirements (`routes/careers.md`) |
-| 5j. Motion                                  | Review   | Native motion pass from the approved plan; no animation library; Home unchanged            |
+| 5j. Motion                                  | Complete | Native CSS motion, no animation library; signed off 15 November; Home unchanged            |
 | 6. CMS and service integrations             | Later    | Plans in `integrations/`; providers connected only when their scope is approved            |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                             |
 
@@ -116,9 +116,8 @@ reminders:
   after the temporary images are replaced (`media-review.md`). The site already
   resizes and converts photos for visitors, so this mainly makes the repository
   and builds lighter.
-- **Motion.** The native pass (5j) is built for review, with the rules in
-  `design-system.md` → "Motion system". Still to do: watch it on a real iPhone
-  and measure site speed now that the Motion library is gone.
+- **Motion.** Signed off on 15 November (5j). The rules are in
+  `design-system.md` → "Motion system"; add nothing new without a reason.
 
 ## Foundation completion gate
 

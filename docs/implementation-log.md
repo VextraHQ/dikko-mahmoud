@@ -3,6 +3,33 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-15 — Motion signed off; speed and layout stress check
+
+- Motion (5j) signed off by the user; checklist and roadmap updated.
+- Speed, lab-measured in headless Chrome against a local production build
+  (`next start`), so not a deployed-site measurement. Phone profile: 390px,
+  4× CPU slowdown, slow 4G (150ms, 1.6 Mbps), cache off. Eleven main pages:
+  largest paint 1.1–2.2s (Insights listing slowest), layout shift at most
+  0.031, blocking time at most 198ms (Home), JavaScript 250–393 KB
+  compressed. Desktop, unthrottled: largest paint under 130ms, no shift and
+  no blocking. Final numbers wait for real media.
+- Layout stress test on thirteen inner pages at 320, 390, 768 and 1440px
+  (Home untouched): real content has no overflow; doubled firm-supplied text
+  (headings, names, paragraphs, captions) wraps everywhere; with every image
+  blocked, covers and initials replace photos, and the Contact hero falls back
+  to its navy background.
+- Fixed: a single very long word in a large heading (tested with
+  "Constitutionalisation") pushed pages 50–70px sideways at 320px and
+  overflowed the Contact office cards at 768px. `h1`–`h4` now use
+  `overflow-wrap: anywhere` (`app/globals.css`), which only breaks a word that
+  cannot fit its line. Heading sizes on Home, The Firm, People, a practice
+  page, Insights and Contact at all four widths are identical before and
+  after. The Firm's founder milestones no longer render an empty bordered box
+  when the list is empty.
+- Practice detail services keep their hairline accordion (supplied reference
+  7.50.16); practice FAQs, when supplied, already use the shared card FAQ.
+- Checks: build, format:check, lint, typecheck and test (180) pass.
+
 ## 2026-11-15 — People popup fades in and out
 
 - Reviewed in the "Motion Before and After" artifact. The user chose: keep the

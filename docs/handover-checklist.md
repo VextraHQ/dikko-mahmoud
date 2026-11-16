@@ -140,16 +140,18 @@ ownership and final client acceptance are not verified by this checklist.
 - [ ] Review the six unused stock photos (`public/images/stock/team-01`–`03`
       and `testimonial-01`–`03`) during the authorised media cleanup; do not
       mistake the Avatar package removal for an image cleanup.
-- [ ] Complete the separately approved motion/polish pass with reduced-motion
+- [x] Complete the separately approved motion/polish pass with reduced-motion
       behaviour, preserving existing header, hero autoplay and Journey interactions.
-      Built natively, with the Motion library removed (implementation log,
-      2026-11-14 "Native motion pass"). Still open: watch every pattern in a
-      visible browser and on a real iPhone, and the user's sign-off.
+      Built natively with no animation library; reviewed in the "Motion Before
+      and After" artifact and signed off by the user on 15 November 2026
+      (implementation log, 2026-11-15).
 - [ ] After consent, deliberately reconnect any approved practice experience
       carousel and restore eligible links. Its current commented-out presentation
       will not reappear just because a record becomes approved.
 - [ ] Review all layouts again with real short/long content, missing images and
       empty/single/multiple records. No orphan headings, gaps or dead controls.
+      Stress-tested on 15 November with lengthened and missing content (see the
+      implementation log); repeat once the firm's real content arrives.
 
 ## 5. Sanity integration and migration
 
