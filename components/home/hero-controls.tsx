@@ -119,7 +119,7 @@ export function HeroControls() {
             aria-label={`Show slide ${index + 1}: ${slide.practice}`}
             aria-current={index === selectedIndex ? "true" : undefined}
             onClick={() => scrollTo(index)}
-            className="group flex h-11 min-w-0 flex-1 items-center"
+            className="group flex h-11 min-w-0 flex-1 items-center rounded-sm focus-visible:bg-white/20 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none focus-visible:ring-inset"
           >
             <ProgressLine
               active={index === selectedIndex}
