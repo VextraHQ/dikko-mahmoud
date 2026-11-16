@@ -40,7 +40,7 @@ export function BreadcrumbLink({
   const Comp = asChild ? Slot : "a";
   return (
     <Comp
-      className="hover:text-primary inline-flex min-h-11 items-center rounded-sm font-medium text-slate-700 decoration-1 underline-offset-4 transition-colors duration-200 hover:underline motion-reduce:transition-none"
+      className="hover:text-primary focus-visible:ring-ring inline-flex min-h-11 items-center rounded-sm font-medium text-slate-700 decoration-1 underline-offset-4 transition-colors duration-200 hover:underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none"
       {...props}
     />
   );

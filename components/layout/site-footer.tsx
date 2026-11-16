@@ -10,7 +10,7 @@ import { firmBrand } from "@/content/firm";
 import { footer } from "@/content/footer";
 
 const footerLinkClass =
-  "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 ease-editorial motion-reduce:transition-none hover:text-white hover:underline focus-visible:text-white sm:min-h-9";
+  "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 ease-editorial motion-reduce:transition-none hover:text-white hover:underline focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none sm:min-h-9";
 
 const officeActionClass =
   "inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sky-200 underline-offset-4 hover:text-white hover:underline sm:min-h-9";

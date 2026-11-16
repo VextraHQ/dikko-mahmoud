@@ -21,6 +21,7 @@ export function SectionLink({
     <a
       {...props}
       href={`#${sectionId}`}
+      className="focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       onClick={(event) => {
         onClick?.(event);
         if (event.defaultPrevented || event.metaKey || event.ctrlKey) return;
