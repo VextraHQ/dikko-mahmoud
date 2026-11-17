@@ -3,6 +3,20 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-17 — Mobile menu no longer scrolls the page on close
+
+- Fixed: every close of the mobile navigation sheet scrolled the page up
+  (413px per close at 375px on Home). Radix Dialog returns focus to the
+  trigger with a plain `focus()`, and with the trigger in the sticky header
+  plus `scroll-padding-top: 7rem` the browser scrolled to it each time.
+  `hooks/use-quiet-focus-return.ts` now returns focus itself with
+  `preventScroll`, so focus still lands on the menu button for keyboard and
+  screen-reader users.
+- Checked in the in-app browser at 375px: four open/close cycles stay at the
+  same scroll position and focus is back on "Open navigation menu". Not
+  checked on a real iPhone.
+- Checks: format:check, lint, typecheck, test (180 passed).
+
 ## 2026-11-15 — Motion signed off; speed and layout stress check
 
 - Motion (5j) signed off by the user; checklist and roadmap updated.
