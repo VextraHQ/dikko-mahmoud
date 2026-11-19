@@ -1,3 +1,4 @@
+import { pictureZoomClass } from "@/components/ui/picture-zoom";
 import { keepTogether } from "@/lib/typography";
 import { PortraitFallback } from "@/components/shared/portrait-fallback";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
@@ -33,15 +34,19 @@ export function PersonCard({
   fullPageLoad?: boolean;
   sizes?: string;
 }) {
+  // The picture zooms on hover of the whole card, or of the picture alone
+  // when `imageHoverOnly` is set.
   const cardClassName = cn(
     "group flex h-full w-full flex-col rounded-xl text-left",
+    !imageHoverOnly && "group/picture",
     className,
   );
   const content = (
     <>
       <span
         className={cn(
-          "group/portrait relative isolate block aspect-4/5 w-full overflow-hidden rounded-xl bg-slate-200",
+          "relative isolate block aspect-4/5 w-full overflow-hidden rounded-xl bg-slate-200",
+          imageHoverOnly && "group/picture",
           portraitClassName,
         )}
       >
@@ -50,20 +55,12 @@ export function PersonCard({
           alt={person.portrait?.alt ?? ""}
           fill
           sizes={sizes}
-          className={cn(
-            "object-cover motion-safe:transition-transform",
-            imageHoverOnly
-              ? "motion-safe:ease-editorial motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]"
-              : "motion-safe:duration-500 motion-safe:group-hover:scale-[1.03]",
-          )}
+          className={cn("object-cover", pictureZoomClass)}
           style={{ objectPosition: person.portrait?.position }}
           fallback={
             <PortraitFallback
               initials={person.initials}
-              className={cn(
-                imageHoverOnly &&
-                  "motion-safe:ease-editorial motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]",
-              )}
+              className={pictureZoomClass}
             />
           }
         />

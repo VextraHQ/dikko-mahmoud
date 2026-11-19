@@ -1,11 +1,12 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { coreValues as content } from "@/content/firm";
 
 export function ValuesSection() {
   return (
     <section aria-labelledby="values-heading" className="py-12 lg:py-24">
-      <div className="mx-auto grid w-full max-w-360 gap-10 px-4 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20 xl:px-20">
-        <div>
+      <RevealGroup className="mx-auto grid w-full max-w-360 gap-10 px-4 sm:px-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20 xl:px-20">
+        <div data-reveal>
           <Eyebrow>{content.eyebrow}</Eyebrow>
           <h2 id="values-heading" className="type-section mt-6 font-serif">
             {content.heading.map((line) => (
@@ -16,7 +17,7 @@ export function ValuesSection() {
           </h2>
           <p className="mt-8 max-w-md text-base/7">{content.description}</p>
         </div>
-        <dl>
+        <dl data-reveal data-reveal-order={1}>
           {content.items.map((item) => (
             <div
               key={item.title}
@@ -31,7 +32,7 @@ export function ValuesSection() {
             </div>
           ))}
         </dl>
-      </div>
+      </RevealGroup>
     </section>
   );
 }

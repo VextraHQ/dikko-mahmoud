@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { MapPin } from "lucide-react";
 import { keepTogether } from "@/lib/typography";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -9,9 +10,9 @@ import { contact } from "@/content/contact";
 export function PresenceSection() {
   return (
     <section aria-labelledby="presence-heading" className="py-12 lg:py-24">
-      <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
+      <RevealGroup className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-20">
-          <div>
+          <div data-reveal>
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <h2 id="presence-heading" className="type-section mt-6 font-serif">
               {content.heading.map((line) => (
@@ -25,7 +26,11 @@ export function PresenceSection() {
             </p>
             <p className="text-primary mt-6 text-sm/6">{contact.hours}</p>
           </div>
-          <div className="hover:ring-primary/25 ease-editorial relative isolate aspect-2/1 overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-550 motion-reduce:transition-none">
+          <div
+            data-reveal
+            data-reveal-order={1}
+            className="hover:ring-primary/25 ease-editorial relative isolate aspect-2/1 overflow-hidden rounded-xl ring-1 ring-transparent transition-colors duration-500 motion-reduce:transition-none"
+          >
             <ImageWithFallback
               src={content.media.src}
               alt={content.media.alt}
@@ -37,9 +42,11 @@ export function PresenceSection() {
           </div>
         </div>
         <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-12 lg:grid-cols-3">
-          {contact.offices.map((office) => (
+          {contact.offices.map((office, index) => (
             <li
               key={office.city}
+              data-reveal={index < 3 || undefined}
+              data-reveal-order={index}
               className="group/office border-border hover:border-primary/30 focus-within:border-primary/30 ease-editorial flex min-w-0 flex-col rounded-xl border bg-slate-50 p-6 transition-colors duration-500 focus-within:bg-sky-50/70 hover:bg-sky-50/70 motion-reduce:transition-none"
             >
               <MapPin
@@ -69,7 +76,7 @@ export function PresenceSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </RevealGroup>
     </section>
   );
 }

@@ -34,13 +34,13 @@ export function BrandLogo({
         className,
       )}
     >
-      {/* Both files stack in one grid cell and crossfade with the header
-          tone. The link's label names the firm, so the images are decorative. */}
+      {/* Both files stack in one grid cell and swap with the header tone.
+          The link's label names the firm, so the images are decorative. */}
       {logos.map((logo) => (
         <span
           key={logo.src}
           className={cn(
-            "ease-editorial col-start-1 row-start-1 h-full w-full transition-opacity duration-400 motion-reduce:transition-none",
+            "col-start-1 row-start-1 h-full w-full",
             logo.className,
           )}
         >

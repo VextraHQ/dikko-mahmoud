@@ -111,17 +111,18 @@ export const enquiryForm = {
   retry: "Try again",
   // Shown instead of the form after a preview submission.
   received: {
-    heading: "Enquiry received",
-    previewBadge: "Preview only: nothing was sent",
-    thanks: (firstName: string) =>
-      `Thank you, ${firstName}. On the live site this confirms your enquiry reached the firm.`,
+    eyebrow: "Enquiry received",
+    heading: (firstName: string) => `Thank you, ${firstName}.`,
+    previewNote:
+      "Preview only: nothing was sent. On the live site this confirms your enquiry reached the firm.",
+    summary: "Your enquiry",
     about: "About",
     topic: "Topic",
     practice: "Area of law",
     practiceNone: "Left to the team",
     email: "Email",
     message: "Message",
-    nextHeading: "What happens next.",
+    nextHeading: "What happens next",
     nextText:
       // Draft: no reply promise until the firm confirms its process.
       "The team will review your enquiry and get in touch if we can help. For anything urgent, call one of our offices.",

@@ -161,7 +161,7 @@ plugs in. Use `formatIndex`/`formatCount` from `lib/format.ts` for "01"-style
 labels and `initialsFrom` for avatar initials.
 
 Current hooks: `useMediaQuery`, `useMediaQueryChange`, `useScrolledPast`,
-`useRevealOnScroll`, `useBringIntoView`, `useDirectionalSelection` and
+`useRevealOnScroll`, `useBringIntoView`, `useSelection` and
 `usePreloadAdjacentSlides`. shadcn primitives in `components/ui/` (such as
 Carousel) keep their own internal state, as generated.
 
@@ -218,13 +218,17 @@ surface/browser-preference rules. Scope selectors with component classes or
 `data-*` attributes. Do not add CSS modules or stylesheets to component folders.
 Use Tailwind v4 `@theme` bridges; no parallel token catalogue or `@apply` layer.
 
-Motion is CSS-first. The FAQ uses Radix height-variable CSS keyframes; button
-press and focus feedback stay in Tailwind. The user has now approved Motion
-for Firm Journey content transitions, using LazyMotion/domAnimation and keyed
-AnimatePresence media panels. The homepage hero alone uses
-`embla-carousel-autoplay` (see design-system.md → hero). Broader Motion
-choreography remains later; do not move simple hover feedback into JavaScript. Sections
-continue to own their layout and content when wrapped by a motion helper.
+Motion is native, with no animation library (design-system.md → "Motion
+system"). Keyframes live in `app/styles/motion.css` and key off Radix
+`data-state` and `data-slot`; tokens (`animate-rise-in`,
+`animate-fade-in`, `animate-message-in`) are in `app/globals.css`. Shared
+pieces: `pictureZoomClass` (`components/ui/picture-zoom.tsx`, server-safe so
+both kinds of component import it), `drawnUnderlineClass`
+(`components/layout/site-link.tsx`), `AccordionChevron` and the accordion's
+`variant="card"`. Page changes are instant (no page transition or hero
+entrance), and the header has no transitions. The homepage hero alone uses
+`embla-carousel-autoplay` (see design-system.md → hero). Sections keep their
+layout and content when wrapped by `RevealGroup`.
 
 ## Server and client boundaries
 
@@ -243,7 +247,7 @@ Server-rendered children may pass through a narrow client wrapper.
 | `ClientLogoMarquee`                  | Readiness and explicit pause state; CSS animation and static fallbacks                                                                                                               |
 | `PracticeAreaExplorer`               | Nullable selected index plus `useMediaQuery(mediaQueries.desktop)`                                                                                                                   |
 | `MatterExplorer`                     | One selected index, initially BPE; click/keyboard only; `useBringIntoView` focuses/scrolls the preview on mobile                                                                     |
-| `JourneyExplorer`                    | `useDirectionalSelection` plus desktop/reduced-motion `useMediaQuery`; controlled Accordion, end-bounded arrows                                                                      |
+| `JourneyExplorer`                    | `useSelection` (current and previous year) plus desktop `useMediaQuery`; controlled Accordion, end-bounded arrows                                                                    |
 | `VideoPoster`                        | Click-to-mount iframe/native video; player focus and close-to-trigger focus return; no provider request before activation                                                            |
 | `TestimonialCarousel`                | Existing Embla/Fade composition; manual controls/counter; reduced-motion duration; no autoplay or drag                                                                               |
 
@@ -411,8 +415,8 @@ and Claude collaboration passes remain separately scoped.
 
 Journey retains one responsive Accordion index/content DOM and one selected
 record. At `lg`, the selected media is presented separately in a persistent
-right-hand grid, allowing old/new keyed media to overlap during a directional
-Motion slide/fade. Exiting media is immediately aria-hidden/inert. Controls stay
+right-hand grid, allowing old/new keyed media to overlap while the new picture
+fades in on top. Exiting media is immediately aria-hidden/inert. Controls stay
 mounted outside the changing panels. Below `lg`, a small media presentation
 duplication keeps the figure inside its disclosure row; that row can close. Empty mobile
 selection derives 1993 on desktop; explicit selections survive resizing. A

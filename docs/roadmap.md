@@ -102,7 +102,7 @@ Careers is the remaining unbuilt primary route checkpoint. Contact delivery
 | 5g. Contact page and enquiry form           | Review   | Reason-first form, preview submission, offices and maps; no email delivery yet             |
 | 5h. Codebase clean-up                       | Review   | Licence, security headers, plan docs, folder tidy, comment pass, quick speed wins          |
 | 5i. Careers                                 | Waiting  | Design supplied; build waits for the firm's recruitment requirements (`routes/careers.md`) |
-| 5j. Motion                                  | Later    | Site animations in the style of the iProduce Africa site; its own milestone                |
+| 5j. Motion                                  | Complete | Native CSS motion, no animation library; signed off 15 November; Home unchanged            |
 | 6. CMS and service integrations             | Later    | Plans in `integrations/`; providers connected only when their scope is approved            |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                             |
 
@@ -116,10 +116,8 @@ reminders:
   after the temporary images are replaced (`media-review.md`). The site already
   resizes and converts photos for visitors, so this mainly makes the repository
   and builds lighter.
-- **Motion.** Add animations in the style of the iProduce Africa site. This is
-  design work with its own milestone (5j): today the rules allow moving parts
-  only in the Firm Journey and the Home hero, Home is on visual hold, and every
-  animation needs a reduced-motion path. Measure site speed after it lands.
+- **Motion.** Signed off on 15 November (5j). The rules are in
+  `design-system.md` → "Motion system"; add nothing new without a reason.
 
 ## Foundation completion gate
 

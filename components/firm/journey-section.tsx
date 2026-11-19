@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import {
   JourneyExplorer,
   type JourneyItem,
@@ -36,20 +37,24 @@ export function JourneySection() {
       aria-labelledby="journey-heading"
       className="py-12 lg:py-24"
     >
-      <div className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
+      <RevealGroup className="mx-auto w-full max-w-360 px-4 sm:px-8 xl:px-20">
         <div className="mb-10 grid gap-6 lg:mb-14 lg:grid-cols-[1.3fr_1fr] lg:items-end lg:gap-16">
-          <div>
+          <div data-reveal>
             <Eyebrow>{content.eyebrow}</Eyebrow>
             <h2 id="journey-heading" className="type-section mt-6 font-serif">
               {content.heading}
             </h2>
           </div>
-          <p className="text-primary text-sm/6 sm:text-base/7">
+          <p
+            data-reveal
+            data-reveal-order={1}
+            className="text-primary text-sm/6 sm:text-base/7"
+          >
             {content.description}
           </p>
         </div>
         <JourneyExplorer items={items} />
-      </div>
+      </RevealGroup>
     </section>
   );
 }

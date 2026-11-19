@@ -1,24 +1,23 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { keepTogether } from "@/lib/typography";
 import { BrandLogo } from "@/components/layout/brand-logo";
-import { SiteLink } from "@/components/layout/site-link";
+import { drawnUnderlineClass, SiteLink } from "@/components/layout/site-link";
 import { SocialLinks } from "@/components/layout/social-links";
 import { directionsUrl } from "@/lib/maps";
 import { routes } from "@/lib/routes";
+import { cn } from "@/lib/utils";
 import { contact } from "@/content/contact";
 import { firmBrand } from "@/content/firm";
 import { footer } from "@/content/footer";
 
+// Footer links brighten and draw their underline in on hover or focus.
 const footerLinkClass =
-  "inline-flex min-h-11 items-center rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 ease-editorial motion-reduce:transition-none hover:text-white hover:underline focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none sm:min-h-9";
-
-const officeActionClass =
-  "inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sky-200 underline-offset-4 hover:text-white hover:underline sm:min-h-9";
+  "group/underline inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm/6 text-sky-200 transition-colors duration-200 ease-editorial motion-reduce:transition-none hover:text-white focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none sm:min-h-9";
 
 function FooterLink({ label, href }: { label: string; href: string }) {
   return (
     <SiteLink href={href} className={footerLinkClass}>
-      {label}
+      <span className={drawnUnderlineClass}>{label}</span>
     </SiteLink>
   );
 }
@@ -56,28 +55,32 @@ export function SiteFooter() {
                     {office.telephone && (
                       <a
                         href={`tel:${office.telephone}`}
-                        className={officeActionClass}
+                        className={footerLinkClass}
                       >
                         <Phone
                           aria-hidden="true"
                           strokeWidth={1.5}
                           className="size-3.5"
                         />
-                        {office.phone}
+                        <span className={drawnUnderlineClass}>
+                          {office.phone}
+                        </span>
                       </a>
                     )}
                     <a
                       href={directionsUrl(office)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={officeActionClass}
+                      className={footerLinkClass}
                     >
                       <MapPin
                         aria-hidden="true"
                         strokeWidth={1.5}
                         className="size-3.5"
                       />
-                      {footer.directions}
+                      <span className={drawnUnderlineClass}>
+                        {footer.directions}
+                      </span>
                       <span className="sr-only">
                         {" "}
                         {footer.directionsTo(office.city)}
@@ -132,14 +135,18 @@ export function SiteFooter() {
                 </h2>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="ease-editorial mt-3 inline-flex min-h-11 max-w-full items-center gap-2 rounded-sm text-sm/6 text-sky-200 underline-offset-4 transition-colors duration-300 hover:text-white hover:underline motion-reduce:transition-none"
+                  className={cn(footerLinkClass, "mt-3 max-w-full gap-2")}
                 >
                   <Mail
                     aria-hidden="true"
                     strokeWidth={1.5}
                     className="size-4 shrink-0"
                   />
-                  <span className="min-w-0 wrap-anywhere">{contact.email}</span>
+                  <span
+                    className={cn(drawnUnderlineClass, "min-w-0 wrap-anywhere")}
+                  >
+                    {contact.email}
+                  </span>
                 </a>
               </div>
               <div className="sm:col-span-2 lg:col-span-1 lg:self-end">

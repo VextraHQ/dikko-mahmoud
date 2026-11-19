@@ -81,7 +81,7 @@ export function SelectItem({
     <Primitive.Item
       data-slot="select-item"
       className={cn(
-        "group/item data-[state=checked]:text-primary relative flex min-h-11 w-full min-w-0 cursor-default items-center rounded-lg py-3 pr-10 pl-3 text-sm/5 transition-colors duration-150 outline-none! select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-slate-100 data-[state=checked]:bg-sky-50 data-[state=checked]:font-medium motion-reduce:transition-none forced-colors:data-highlighted:outline-2!",
+        "group/item data-[state=checked]:text-primary relative flex min-h-11 w-full min-w-0 cursor-default items-center rounded-lg py-3 pr-10 pl-3 text-sm/5 transition-colors duration-200 outline-none! select-none data-disabled:pointer-events-none data-disabled:opacity-50 data-highlighted:bg-slate-100 data-[state=checked]:bg-sky-50 data-[state=checked]:font-medium motion-reduce:transition-none forced-colors:data-highlighted:outline-2!",
         className,
       )}
       {...props}

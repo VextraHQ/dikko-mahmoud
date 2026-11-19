@@ -53,7 +53,7 @@ export default function ContactPage() {
         </div>
       </section>
       <ContactOfficesSection />
-      <FaqSection intro={contactFaqIntro} items={contactFaqs} />
+      <FaqSection intro={contactFaqIntro} items={contactFaqs} askFirm={false} />
     </>
   );
 }

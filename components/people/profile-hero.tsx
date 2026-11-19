@@ -52,7 +52,7 @@ export function ProfileHero({ resolved }: { resolved: ResolvedProfile }) {
           ) : null
         }
         footer={
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             <EnquiryButton>{copy.enquireAbout(shortName)}</EnquiryButton>
             <ProfileLinks
               links={links}

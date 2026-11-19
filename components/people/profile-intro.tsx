@@ -41,7 +41,7 @@ export function ProfileIntro({ resolved }: { resolved: ResolvedProfile }) {
             {keepTogether(profile.summary)}
           </p>
         )}
-        <div className="mt-7 flex flex-wrap items-center gap-3">
+        <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
           <EnquiryButton>{copy.enquireAbout(shortName)}</EnquiryButton>
           <ProfileLinks
             links={links}
@@ -63,7 +63,7 @@ export function ProfileIntro({ resolved }: { resolved: ResolvedProfile }) {
       <ProfilePortrait
         person={person}
         sizes="(min-width: 1024px) 420px, (min-width: 640px) 448px, 100vw"
-        className="order-first aspect-4/3 sm:max-w-md lg:order-none lg:aspect-5/4 lg:max-w-none"
+        className="order-first aspect-4/3 sm:max-w-md lg:order-0 lg:aspect-5/4 lg:max-w-none"
       />
     </div>
   );

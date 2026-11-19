@@ -46,6 +46,14 @@ export const profileCopy = {
   enquireAbout: (name: string) => `Enquire about ${name}`,
   directEmail: (name: string) => `Or email ${name} directly:`,
   contactLinksLabel: (name: string) => `Contact ${name}`,
+  /** Visible names for a person's contact links; screen readers hear the
+      fuller label from `profileLinkLabel`. */
+  linkNames: {
+    email: "Email",
+    phone: "Call",
+    linkedin: "LinkedIn",
+    website: "Website",
+  },
   morePeopleHeading: "Meet more of our people",
   /** Plain strings only: passed to the client dialog shell. */
   dialog: {

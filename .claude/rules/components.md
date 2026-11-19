@@ -33,8 +33,12 @@ paths:
   stylesheets.
 - Hover feedback stays in CSS. Use the `ease-editorial` class for the site
   easing curve.
-- Runtime motion is approved only for Firm Journey content swaps and the
-  homepage hero autoplay (`useCarouselAutoplay`; keep its pause rules).
+- There is no animation library. Motion is CSS: keyframes keyed on Radix
+  `data-state` and `RevealGroup` for sections. Page changes are instant and
+  the header never animates. Follow the
+  speeds and curve in `docs/design-system.md` → "Motion system". The homepage
+  hero autoplay (`useCarouselAutoplay`; keep its pause rules) is the only
+  timed motion.
 - Selected matters change on click, tap or keyboard only, never on hover.
 - Missing or failed media falls back to intentional typography or brand
   covers, never a stock image or someone else's photo.

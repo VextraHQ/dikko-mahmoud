@@ -1,26 +1,32 @@
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { ImageWithFallback } from "@/components/shared/image-with-fallback";
 import {
   Accordion,
+  AccordionChevron,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { ArrowButton } from "@/components/ui/arrow-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { contact } from "@/content/contact";
 import { type Faq, type FaqIntro, visibleFaqs } from "@/content/faqs";
 import { firmBrand } from "@/content/firm";
 import { cn } from "@/lib/utils";
 
-function FaqAnswer({ item }: { item: Faq }) {
+function FaqAnswer({ item, onCard = false }: { item: Faq; onCard?: boolean }) {
   return (
     <div
       className={cn(
         "grid gap-6 pb-7",
+        onCard && "px-5 pb-6 sm:px-6",
         item.media && "lg:grid-cols-[1fr_15rem] lg:gap-12",
       )}
     >
-      <p className="text-muted-foreground max-w-3xl text-sm/6 sm:text-base/7">
+      <p
+        className={cn(
+          "max-w-3xl text-sm/6 sm:text-base/7",
+          onCard ? "text-white/85" : "text-muted-foreground",
+        )}
+      >
         {item.answer}
       </p>
       {item.media && (
@@ -49,9 +55,11 @@ function FaqAnswer({ item }: { item: Faq }) {
 export function FaqSection({
   items,
   intro: content,
+  askFirm = true,
 }: {
   items: readonly Faq[];
   intro: FaqIntro;
+  askFirm?: boolean;
 }) {
   const visibleItems = visibleFaqs(items);
   if (!visibleItems.length) return null;
@@ -82,16 +90,25 @@ export function FaqSection({
             type="single"
             collapsible
             defaultValue={visibleItems[0].id}
+            className="space-y-3"
           >
             {visibleItems.map((item) => (
-              <AccordionItem key={item.id} value={item.id}>
-                <AccordionTrigger>
-                  <span className="text-muted-foreground group-data-[state=open]/accordion:text-foreground type-card flex-1 font-serif">
+              <AccordionItem
+                key={item.id}
+                value={item.id}
+                variant="card"
+                className="bg-white hover:bg-sky-50"
+              >
+                <AccordionTrigger
+                  className="gap-4 rounded-2xl px-5 py-5 focus-visible:-outline-offset-2 sm:px-6"
+                  indicator={<AccordionChevron />}
+                >
+                  <span className="text-navy-deep type-card flex-1 font-serif transition-colors duration-350 ease-in-out group-data-[state=open]/accordion:text-white">
                     {item.question}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent>
-                  <FaqAnswer item={item} />
+                  <FaqAnswer item={item} onCard />
                 </AccordionContent>
               </AccordionItem>
             ))}
@@ -113,17 +130,19 @@ export function FaqSection({
             ))}
           </noscript>
         </div>
-        <div className="mt-8 rounded-2xl bg-white px-5 py-8 text-center sm:p-10 lg:mt-12">
-          <h3 className="type-card font-serif font-semibold">
-            {content.supportHeading}
-          </h3>
-          <p className="text-muted-foreground mx-auto mt-2 max-w-2xl text-sm/6 sm:text-base/7">
-            {content.supportDescription}
-          </p>
-          <ArrowButton asChild size="sm" className="mt-6">
-            <a href={`mailto:${contact.email}`}>{content.supportAction}</a>
-          </ArrowButton>
-        </div>
+        {askFirm && (
+          <div className="mt-8 rounded-2xl bg-white px-5 py-8 text-center sm:p-10 lg:mt-12">
+            <h3 className="type-card font-serif font-semibold">
+              {content.supportHeading}
+            </h3>
+            <p className="text-muted-foreground mx-auto mt-2 max-w-2xl text-sm/6 sm:text-base/7">
+              {content.supportDescription}
+            </p>
+            <EnquiryButton size="sm" className="mt-6">
+              {content.supportAction}
+            </EnquiryButton>
+          </div>
+        )}
       </div>
     </section>
   );

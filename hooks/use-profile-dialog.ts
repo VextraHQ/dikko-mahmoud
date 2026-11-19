@@ -4,15 +4,17 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Route-backed profile dialog. Closing (button, Escape, overlay) goes back
- * through the intercepted history entry, so browser Back closes and Forward
- * reopens. Route dialogs have no co-located trigger, so on unmount focus
- * returns to the origin page's card for this profile when it is still there.
+ * Route-backed profile dialog. Closing (button, Escape, overlay) fades the
+ * dialog out, then goes back through the intercepted history entry, so
+ * browser Back closes (instantly) and Forward reopens. Route dialogs have no
+ * co-located trigger, so on unmount focus returns to the origin page's card
+ * for this profile when it is still there.
  */
 export function useProfileDialog(href?: string) {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
-  const closing = useRef(false);
+  const [closedHref, setClosedHref] = useState<string | null>(null);
+  const open = closedHref !== (href ?? "");
   // Captured on first render, before Radix moves focus into the dialog. The
   // link that opened it is usually still focused; a page can hold several
   // links to one profile (e.g. practice pages). Safari doesn't focus on click.
@@ -21,7 +23,15 @@ export function useProfileDialog(href?: string) {
   );
 
   useEffect(() => {
-    closing.current = false;
+    if (open) return;
+    const profileUrl = window.location.href;
+    const fades = contentRef.current?.getAnimations() ?? [];
+    void Promise.allSettled(fades.map((fade) => fade.finished)).then(() => {
+      if (window.location.href === profileUrl) router.back();
+    });
+  }, [open, router]);
+
+  useEffect(() => {
     if (!href) return;
     // A task (not a frame) so it also runs in background tabs, after Radix's
     // own unmount focus, which onCloseAutoFocus prevents.
@@ -40,10 +50,9 @@ export function useProfileDialog(href?: string) {
 
   return {
     contentRef,
+    open,
     close() {
-      if (closing.current) return;
-      closing.current = true;
-      router.back();
+      setClosedHref(href ?? "");
     },
     /** Long dialogs start at their heading rather than the first control. */
     focusHeading(event: Event) {

@@ -48,7 +48,7 @@ export function StickyHeader({ children }: { children: ReactNode }) {
         data-tone={light ? "light" : "dark"}
         data-scrolled={scrolled ?? undefined}
         className={cn(
-          "group/site-header ease-editorial sticky top-0 z-40 transition-colors duration-400 motion-reduce:transition-none lg:h-0",
+          "group/site-header sticky top-0 z-40 lg:h-0",
           light ? "text-primary" : "text-white",
         )}
       >

@@ -20,8 +20,13 @@ export function SheetContent({
 }: ComponentProps<typeof SheetPrimitive.Content>) {
   return (
     <SheetPrimitive.Portal>
-      <SheetPrimitive.Overlay className="fixed inset-0 z-40 bg-black/40" />
+      <SheetPrimitive.Overlay
+        data-slot="sheet-overlay"
+        className="fixed inset-0 z-40 bg-black/40"
+      />
+      {/* Slides in from the right; the animation is in app/styles/motion.css. */}
       <SheetPrimitive.Content
+        data-slot="sheet-content"
         className={cn(
           "bg-navy-deep fixed inset-0 z-50 overflow-y-auto px-4 py-6 text-white sm:left-auto sm:w-md",
           className,

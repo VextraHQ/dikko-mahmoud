@@ -91,17 +91,22 @@ wireframe graphics as public-site photographs.
 - Desktop from `lg`: year/title index with selected description on the left;
   corresponding media/caption and small previous/next controls on the right.
   Start at 1993 and keep one selection. Clicking the selected year leaves it open.
+  Rows are the designer's rounded cards: pale when closed, navy when selected,
+  with a round button at the end. On desktop that button is an arrow towards
+  the picture (the selected year cannot close, so it never shows a minus).
 - Mobile/tablet: a single-open, collapsible Accordion. Start at 1993; its text,
   media and caption sit directly under the selected year. The current item can
   close. Keep the years visible and omit redundant desktop paging controls.
+  The round button is a chevron that turns over when the year opens; the
+  open card holds the text, then the picture and caption.
 - Rows and arrows update one selection. Disable arrows at chronological ends.
   No looping, autoplay, hover selection, scroll hijacking or parallel carousel.
 - Use the shared shadcn/Radix Accordion where its composition fits. Preserve
   keyboard activation/focus, expanded/controls relationships and reduced motion.
   Prefer one responsive DOM when readable; never force elaborate CSS to avoid
   a small presentational duplication. Maintain one content collection/state.
-- The user now approved Motion for restrained Journey content swaps, informed
-  by iProduce’s short-distance easing. Keep hover feedback in CSS. No hand-written
+- Journey content swaps are CSS only since 14 November (no Motion library).
+  Keep hover feedback in CSS. No hand-written
   measurement effect or new scroll observer is required; scroll-driven history
   remains a reference only.
 - Each milestone owns optional media/caption. Missing media uses the existing
@@ -232,13 +237,17 @@ feedback, with stationary text and ordinary semantics. Picture feedback is now
 a stationary-frame 550ms zoom/shadow, triggered by the picture area itself rather
 than names/captions. Contact cards keep soft shadows without vertical movement.
 Hero/presence media retain a fine hover edge. Journey rows/arrows have hover and
-keyboard-focus feedback; selected copy/media now use the user-approved scoped
-Motion slide/fade (650ms incoming media, 250ms exit, 550ms copy). Desktop media
+keyboard-focus feedback. Changing year is one 350ms beat on `ease-soft` (14 November): the
+cards resize, the copy fades in from a 2px blur and the new picture fades in over the old one, with
+no sideways slides. Desktop media
 lives in a persistent grid while mobile media stays in the active disclosure.
-Selection remains activation-only. CSS movement is motion-safe; a live Motion
-preference query cancels transitions immediately under reduced motion. FAQ/CTA
-feedback and Home defaults remain. No registry or theme reset was installed.
-The broader choreography pass remains separately scoped.
+Selection remains activation-only. All movement is `motion-safe`, so reduced
+motion shows each year at once. No registry or theme reset was installed.
+
+Since the 14 November motion pass, the story, Journey, values, process and
+presence headings and their first row of cards fade up once as they scroll in
+(`RevealGroup`), and the FAQ uses the rounded card rows shared with the
+Journey (navy when open, white chevron), now on Home too.
 
 ## Implemented checkpoint and remaining approvals
 

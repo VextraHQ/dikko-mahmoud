@@ -134,7 +134,9 @@ focus to the originating card on close. Use an accessible dialog title and omit
 one giant aria-describedby spanning the biography. Explicitly test focus return
 because route-backed dialogs do not automatically have a co-located DialogTrigger.
 Use a labelled close button with a 44px target. Reduced motion is immediate;
-otherwise use a short CSS opacity transition, without route-layout translation.
+otherwise the popup fades in over 200ms (98.5% to full scale, no blur) and
+closes with a 150ms fade before going back in history. Browser Back closes it
+at once. No route-layout translation.
 These requirements follow the [WAI modal-dialog pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/).
 
 ## Canonical data and preview approval
@@ -283,8 +285,12 @@ popup (cards are plain links, so no-JS visits load the standalone page).
   `links: { platform, value, label? }[]` with one platform list (`linkedin`,
   `email`, `phone`, `website`) for the future schema `options.list` and for
   defensive filtering of fetched data. Values are validated (http(s) URLs only,
-  so a bare domain never becomes a site path), deduplicated and ordered. Icons
-  render only for supplied links; firm social accounts stay in the footer.
+  so a bare domain never becomes a site path), deduplicated and ordered. Links
+  render only when supplied; firm social accounts stay in the footer. Since 14
+  November they show as quiet text links beside the enquiry button (small icon
+  plus "Email", "Call", "LinkedIn" or "Website" from `profileCopy.linkNames`,
+  drawn underline on hover, 44px tap height, an arrow on external links), not
+  round icon buttons; screen readers hear the full `profileLinkLabel`.
 - **Popup bar.** The name (and role from `sm`) fades into the bar once the
   heading scrolls out of view; a copy-link button copies the canonical URL and
   announces "Link copied". Both are decorative/additive; the heading still

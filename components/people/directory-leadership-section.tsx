@@ -1,3 +1,5 @@
+import { pictureZoomClass } from "@/components/ui/picture-zoom";
+import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import { keepTogether } from "@/lib/typography";
 import { ReviewNote } from "@/components/shared/review-note";
@@ -27,7 +29,7 @@ export function DirectoryLeadershipSection({
         className="group block self-start rounded-xl"
       >
         <figure>
-          <div className="group/portrait relative isolate aspect-4/3 w-full overflow-hidden rounded-xl bg-slate-100 sm:max-w-sm lg:max-w-none">
+          <div className="group/picture relative isolate aspect-4/3 w-full overflow-hidden rounded-xl bg-slate-100 sm:max-w-sm lg:max-w-none">
             <ImageWithFallback
               src={person.portrait?.src}
               alt={person.portrait?.alt ?? ""}
@@ -35,7 +37,7 @@ export function DirectoryLeadershipSection({
               fill
               sizes="(min-width: 1440px) 360px, (min-width: 1024px) 28vw, (min-width: 640px) 384px, 92vw"
               style={{ objectPosition: person.portrait?.position }}
-              className="motion-safe:ease-editorial object-cover motion-safe:transition-transform motion-safe:duration-550 motion-safe:group-hover/portrait:scale-[1.02] motion-safe:group-focus-visible:scale-[1.02]"
+              className={cn("object-cover", pictureZoomClass)}
               fallback={
                 <PortraitFallback
                   initials={person.initials}

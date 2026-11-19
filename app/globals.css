@@ -39,6 +39,9 @@
   --font-sans: var(--font-manrope), Arial, sans-serif;
   /* The site's signature ease-out curve; use as the `ease-editorial` class. */
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  /* A softer ease-out for accordions (the `ease-soft` class), after Animate
+     UI's accordion: it settles gently instead of snapping into place. */
+  --ease-soft: cubic-bezier(0.215, 0.61, 0.355, 1);
   --animate-practice-caption: practice-caption-enter 400ms
     cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
   /* Same entrance, a beat after the title, so the summary arrives second. */
@@ -48,8 +51,20 @@
   --animate-slide-progress: slide-progress var(--duration) linear both;
   --animate-marquee: marquee var(--duration) linear infinite;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-  --animate-accordion-down: accordion-down 260ms cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-accordion-up: accordion-up 200ms ease-out;
+  /* Opening and closing share one speed and curve: in a single-open list one
+     row closes while another opens, and matching timings keep the rows
+     between them moving smoothly. */
+  --animate-accordion-down: accordion-down 350ms
+    cubic-bezier(0.215, 0.61, 0.355, 1);
+  --animate-accordion-up: accordion-up 350ms cubic-bezier(0.215, 0.61, 0.355, 1);
+  /* Shared entrances (keyframes in styles/motion.css). Speeds follow the
+     motion rules in docs/design-system.md: 200ms fast, 300ms base, 500ms
+     slow, 600ms entrances. */
+  --animate-rise-in: rise-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  /* The Journey picture fades on the accordion's 350ms beat. */
+  --animate-card-fade: fade-in 350ms cubic-bezier(0.215, 0.61, 0.355, 1) both;
+  --animate-message-in: message-in 200ms cubic-bezier(0.22, 1, 0.36, 1) both;
 
   @keyframes marquee {
     from {
@@ -103,6 +118,12 @@ html {
   h2,
   h3 {
     text-wrap: balance;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    overflow-wrap: anywhere;
   }
   p,
   li,

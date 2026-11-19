@@ -201,7 +201,7 @@ export function EnquiryForm({
                   maxLength={messageLimits.max}
                   aria-required
                   placeholder={reasonText.placeholder}
-                  className={cn(underlineFieldClass, "min-h-32 px-0 py-3")}
+                  className="hover:border-primary/60 focus-visible:border-primary aria-invalid:border-destructive mt-1 min-h-40 rounded-xl border-slate-300 bg-slate-50 px-4 py-3 text-base/7 shadow-none transition-[border-color,box-shadow,background-color] duration-200 focus-visible:bg-white focus-visible:shadow-[inset_0_0_0_1px_var(--primary)] focus-visible:ring-0 focus-visible:outline-none! aria-invalid:shadow-[inset_0_0_0_1px_var(--destructive)] aria-invalid:ring-0 forced-colors:focus-visible:outline-2!"
                 />
               </FormControl>
               <p className="text-muted-foreground mt-1 text-[13px]/5">
@@ -230,7 +230,7 @@ export function EnquiryForm({
         {failed && (
           <div
             role="alert"
-            className="rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm/6 text-red-900"
+            className="motion-safe:animate-message-in rounded-xl border border-red-200 bg-red-50 px-4 py-3.5 text-sm/6 text-red-900"
           >
             <p className="text-destructive font-semibold">
               {copy.failedHeading}
@@ -264,7 +264,7 @@ export function EnquiryForm({
             type="submit"
             size="lg"
             disabled={sending}
-            aria-busy={sending}
+            busy={sending}
           >
             {sending ? copy.sending : failed ? copy.retry : copy.send}
           </ArrowButton>

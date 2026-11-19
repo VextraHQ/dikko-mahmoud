@@ -1,6 +1,5 @@
-import { ArrowButton } from "@/components/ui/arrow-button";
+import { EnquiryButton } from "@/components/shared/enquiry-button";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { contact } from "@/content/contact";
 import { enquiry } from "@/content/enquiry";
 import { cn } from "@/lib/utils";
 
@@ -35,9 +34,9 @@ export function EnquiryCta({
               {enquiry.description}
             </p>
           </div>
-          <ArrowButton asChild className="justify-self-start">
-            <a href={`mailto:${contact.email}`}>{enquiry.action}</a>
-          </ArrowButton>
+          <EnquiryButton className="justify-self-start">
+            {enquiry.action}
+          </EnquiryButton>
         </div>
       </div>
     </section>

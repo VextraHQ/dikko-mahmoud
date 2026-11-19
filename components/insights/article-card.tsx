@@ -1,3 +1,4 @@
+import { pictureZoomClass } from "@/components/ui/picture-zoom";
 import { eyebrowClass } from "@/components/ui/eyebrow";
 import { ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
@@ -86,14 +87,14 @@ function ArticleCard({ article }: { article: InsightCard }) {
     <article className="h-full min-w-0">
       <SiteLink
         href={routes.insight(article.id)}
-        className="group/article ease-editorial hover:border-primary/40 flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors duration-300 focus-visible:outline-offset-4 motion-reduce:transition-none"
+        className="group/article group/picture ease-editorial hover:border-primary/40 flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors duration-300 focus-visible:outline-offset-4 motion-reduce:transition-none"
       >
         <div className="relative isolate aspect-16/10 overflow-hidden bg-slate-100">
           <ArticleImage
             image={article.image}
             title={article.title}
             sizes="(min-width: 1440px) 400px, (min-width: 1024px) 30vw, (min-width: 640px) 46vw, 92vw"
-            className="ease-editorial motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover/article:scale-[1.04]"
+            className={pictureZoomClass}
           />
           <InsightTypeBadge
             type={article.type}
@@ -153,7 +154,7 @@ export function CompactArticleCard({
       <SiteLink
         href={routes.insight(article.id)}
         className={cn(
-          "group/compact flex h-full items-center gap-4 focus-visible:outline-offset-4",
+          "group/compact group/picture flex h-full items-center gap-4 focus-visible:outline-offset-4",
           flat
             ? "py-4"
             : "hover:border-primary/40 border-border rounded-xl border bg-white p-3 transition-colors duration-300 motion-reduce:transition-none",
@@ -164,7 +165,7 @@ export function CompactArticleCard({
             image={article.image}
             title={article.title}
             sizes="80px"
-            className="ease-editorial motion-safe:transition-transform motion-safe:duration-700 motion-safe:group-hover/compact:scale-[1.06]"
+            className={pictureZoomClass}
           />
         </div>
         <div className="min-w-0">

@@ -55,8 +55,8 @@ export function PracticeAreaExplorer({
                   }}
                   className={cn(
                     "lg:short:min-h-12 lg:short:py-2 relative grid min-h-18 w-full grid-cols-[1.5rem_1fr_2rem] items-center gap-3 py-5 text-left text-white/70 hover:text-white sm:gap-4 lg:min-h-13 lg:py-2.5",
-                    "transition-[color,transform] duration-[200ms,160ms] ease-[ease] motion-reduce:transition-none",
-                    "before:ease-editorial lg:short:before:inset-y-2 before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-300 motion-reduce:before:transition-none lg:before:inset-y-2.5",
+                    "ease-soft transition-[color,transform] duration-[500ms,160ms] motion-reduce:transition-none",
+                    "before:ease-soft lg:short:before:inset-y-2 before:absolute before:inset-y-5 before:-left-3 before:w-0.5 before:scale-y-0 before:bg-white before:transition-transform before:duration-500 motion-reduce:before:transition-none lg:before:inset-y-2.5",
                     active && "text-white before:scale-y-100",
                     !(isDesktop && active) &&
                       "motion-safe:active:scale-[0.985]",
@@ -71,7 +71,8 @@ export function PracticeAreaExplorer({
                     strokeWidth={1.5}
                     className={cn(
                       "size-8 rounded-full border border-white/25 p-1.5",
-                      "transition-[transform,color,background-color,border-color] duration-[350ms,200ms,200ms,200ms] ease-[cubic-bezier(0.22,1,0.36,1),ease,ease,ease] motion-reduce:transition-none",
+                      // The turn, the white fill and the row text move as one 500ms beat.
+                      "ease-soft transition-[transform,color,background-color,border-color] duration-500 motion-reduce:transition-none",
                       active &&
                         "text-primary rotate-135 border-white bg-white lg:rotate-45",
                     )}

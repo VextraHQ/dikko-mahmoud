@@ -1,3 +1,4 @@
+import { RevealGroup } from "@/components/shared/reveal-group";
 import { Plus, Minus, ArrowUpRight } from "lucide-react";
 import { SiteLink } from "@/components/layout/site-link";
 import { ArrowButton } from "@/components/ui/arrow-button";
@@ -21,9 +22,9 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
       aria-labelledby="catalogue-heading"
       className="py-12 lg:py-24"
     >
-      <div className="mx-auto max-w-360 px-4 sm:px-8 xl:px-20">
+      <RevealGroup className="mx-auto max-w-360 px-4 sm:px-8 xl:px-20">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
-          <div>
+          <div data-reveal>
             <Eyebrow>{copy.eyebrow}</Eyebrow>
             <h2 id="catalogue-heading" className="type-section mt-6 font-serif">
               {copy.heading.map((line) => (
@@ -33,7 +34,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
               ))}
             </h2>
           </div>
-          <div>
+          <div data-reveal data-reveal-order={1}>
             <p className="text-base/7">{copy.introduction}</p>
             <p className="text-muted-foreground mt-6 text-sm/6">
               {copy.description}
@@ -51,6 +52,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
                       ? routes.practiceAreas
                       : routes.practiceFilter(item.toLowerCase())
                   }
+                  scroll={false}
                   aria-current={filter === item ? "page" : undefined}
                   className={cn(
                     "ease-editorial inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-semibold whitespace-nowrap transition-colors duration-300",
@@ -162,7 +164,7 @@ export function CatalogueSection({ filter }: { filter: PracticeFilter }) {
             </ArrowButton>
           </div>
         </aside>
-      </div>
+      </RevealGroup>
     </section>
   );
 }
