@@ -16,7 +16,7 @@ export function SocialLinks({
   itemClassName?: string;
 }) {
   const item = cn(
-    "flex size-11 items-center justify-center rounded-full text-sm font-bold transition-colors",
+    "flex size-11 items-center justify-center rounded-full text-sm font-bold transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-offset-2",
     itemClassName,
   );
   return (

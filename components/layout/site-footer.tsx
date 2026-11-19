@@ -12,7 +12,7 @@ import { footer } from "@/content/footer";
 
 // Footer links brighten and draw their underline in on hover or focus.
 const footerLinkClass =
-  "group/underline inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm/6 text-sky-200 transition-colors duration-200 ease-editorial motion-reduce:transition-none hover:text-white focus-visible:text-white sm:min-h-9";
+  "group/underline inline-flex min-h-11 items-center gap-1.5 rounded-sm text-sm/6 text-sky-200 transition-colors duration-200 ease-editorial motion-reduce:transition-none hover:text-white focus-visible:text-white focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none sm:min-h-9";
 
 function FooterLink({ label, href }: { label: string; href: string }) {
   return (

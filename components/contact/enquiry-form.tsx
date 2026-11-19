@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { Controller, useWatch } from "react-hook-form";
 import { SiteLink } from "@/components/layout/site-link";
 import { ChoiceTiles } from "@/components/contact/choice-tiles";
@@ -67,6 +67,9 @@ export function EnquiryForm({
     control: form.control,
     name: ["reason", "practice", "message"],
   });
+  // Clearing the area of law removes the button that was pressed, so focus
+  // moves back to the question instead of falling to the page body.
+  const practiceRef = useRef<HTMLFieldSetElement>(null);
   const reasonText = reasonCopy(reason);
 
   if (sent) {
@@ -86,7 +89,11 @@ export function EnquiryForm({
           {copy.arrival(arrivalLabel)}
         </p>
       )}
-      <form onSubmit={onSubmit} noValidate className="mt-8 grid gap-7">
+      <form
+        onSubmit={onSubmit}
+        noValidate
+        className="mt-8 grid grid-cols-1 gap-7"
+      >
         <Controller
           control={form.control}
           name="reason"
@@ -120,33 +127,35 @@ export function EnquiryForm({
               <div className="border-border motion-safe:animate-in motion-safe:fade-in border-t pt-6">
                 <ChoiceTiles
                   name="practice"
-                  label={copy.practiceLegend}
+                  label={`${copy.practiceLegend} ${copy.optional}`}
                   legend={
-                    <span className="flex items-baseline justify-between gap-4">
-                      <span>
-                        {copy.practiceLegend}{" "}
-                        <span className={quiet}>{copy.optional}</span>
-                      </span>
-                      {field.value && (
-                        <button
-                          type="button"
-                          onClick={() => field.onChange("")}
-                          className="text-primary min-h-8 text-[13px] font-semibold underline underline-offset-4"
-                        >
-                          {copy.clearChoice}
-                        </button>
-                      )}
-                    </span>
+                    <>
+                      {copy.practiceLegend}{" "}
+                      <span className={quiet}>{copy.optional}</span>
+                    </>
                   }
+                  legendAction={
+                    field.value ? (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          field.onChange("");
+                          practiceRef.current?.focus();
+                        }}
+                        className="text-primary min-h-8 text-[13px] font-semibold underline underline-offset-4"
+                      >
+                        {copy.clearChoice}
+                      </button>
+                    ) : undefined
+                  }
+                  hint={copy.practiceHint}
                   choices={practiceEnquiryOptions}
                   value={field.value}
                   onChange={field.onChange}
                   placeholder={copy.practicePlaceholder}
                   variant="index"
+                  fieldsetRef={practiceRef}
                 />
-                <p className="text-muted-foreground mt-3 text-[13px]/5">
-                  {copy.practiceHint}
-                </p>
               </div>
             )}
           />
