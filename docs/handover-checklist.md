@@ -233,6 +233,9 @@ nothing; no genuine email-delivery test has passed yet.
 - [ ] Complete responsive/cross-browser review across 320–1440px, with real
       content, keyboard/focus checks, form errors and representative screen-reader
       checks. Review reduced motion, no-JS reading and article/legal printing.
+      The [19 November accessibility correction](implementation-log.md#2026-11-19--accessibility-pr-review-correction)
+      preserves contents-link styling alongside the PR's focus improvements;
+      local checks passed, but this does not close the final browser review.
 - [ ] Measure final performance after media and motion, including mobile LCP,
       layout stability and interaction responsiveness. Fix material regressions.
 - [ ] Run formatting, lint, typecheck, tests, unused-code review and production

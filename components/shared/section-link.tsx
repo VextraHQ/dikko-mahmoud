@@ -2,6 +2,7 @@
 
 import type { ComponentProps } from "react";
 import { scrollToSection } from "@/lib/scroll";
+import { cn } from "@/lib/utils";
 
 type Props = Omit<ComponentProps<"a">, "href"> & {
   /** Id of the section on this page. */
@@ -15,13 +16,17 @@ export function SectionLink({
   sectionId,
   onNavigate,
   onClick,
+  className,
   ...props
 }: Props) {
   return (
     <a
       {...props}
       href={`#${sectionId}`}
-      className="focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+      className={cn(
+        "focus-visible:ring-ring focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event);
         if (event.defaultPrevented || event.metaKey || event.ctrlKey) return;

@@ -3,6 +3,21 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-19 — Accessibility PR review correction
+
+- Corrected `components/shared/section-link.tsx` on the accessibility PR branch:
+  merge the caller's classes with the new keyboard focus classes. Contents
+  navigation keeps its spacing, minimum target height, nested indentation and
+  active marker across articles, practice pages and profiles.
+- This addresses the review regression without changing content, consent or
+  route behaviour. The final cross-browser/accessibility release checklist item
+  remains open; this small correction does not complete that wider review.
+- Checks: formatting, lint, typecheck, 188 tests, unused-code check and production
+  build passed. A rendered-HTML probe confirmed target height, active styling,
+  nested indentation, focus classes and link semantics are preserved. Browser
+  and screen-reader checks were not repeated; the PR author's checks remain
+  separately reported. No service integrations or publication gates changed.
+
 ## 2026-11-17 — Mobile menu no longer scrolls the page on close
 
 - Fixed: every close of the mobile navigation sheet scrolled the page up
