@@ -49,6 +49,8 @@ export function ChoiceTiles({
   name,
   label,
   legend,
+  legendAction,
+  hint,
   choices,
   value,
   onChange,
@@ -64,6 +66,11 @@ export function ChoiceTiles({
   /** Plain-text question, for the phone dropdown's accessible name. */
   label: string;
   legend: ReactNode;
+  /** A control beside the legend (such as "Clear choice"). It is kept out of
+   * the group's name so screen readers hear the question, not the action. */
+  legendAction?: ReactNode;
+  /** A note under the choices, read as part of the group's description. */
+  hint?: ReactNode;
   choices: readonly Choice[];
   value: string;
   onChange: (value: string) => void;
@@ -78,16 +85,36 @@ export function ChoiceTiles({
   className?: string;
 }) {
   const look = looks[variant];
+  const labelId = `${name}-legend-text`;
+  const hintId = `${name}-hint`;
   const errorId = `${name}-error`;
+  const describedBy =
+    [hint ? hintId : null, error ? errorId : null].filter(Boolean).join(" ") ||
+    undefined;
   return (
     <fieldset
       ref={fieldsetRef}
       tabIndex={-1}
-      aria-describedby={error ? errorId : undefined}
-      className={cn("min-w-0 outline-none", className)}
+      aria-invalid={error ? true : undefined}
+      aria-describedby={describedBy}
+      aria-labelledby={labelId}
+      className={cn(
+        "min-w-0 outline-none",
+        // The form focuses this fieldset when the question is the first
+        // error. It is not in the tab order, so the ring is shown here rather
+        // than through the global tab-focus rule.
+        "focus:outline-ring focus:outline-2 focus:outline-offset-4 focus:outline-solid",
+        className,
+      )}
     >
-      <legend className="text-secondary w-full text-sm/6 font-semibold">
-        {legend}
+      <legend
+        id={`${name}-legend`}
+        className="text-secondary w-full text-sm/6 font-semibold"
+      >
+        <span className="flex items-baseline justify-between gap-4">
+          <span id={labelId}>{legend}</span>
+          {legendAction}
+        </span>
       </legend>
       <div
         className={cn(
@@ -99,6 +126,7 @@ export function ChoiceTiles({
         {choices.map((choice, index) => (
           <label
             key={choice.value}
+            htmlFor={`${name}-tile-${choice.value}`}
             className={cn(
               "group/choice ease-editorial relative flex cursor-pointer transition-colors duration-300 motion-reduce:transition-none",
               "has-focus-visible:outline-ring has-focus-visible:outline-2",
@@ -110,6 +138,7 @@ export function ChoiceTiles({
               type="radio"
               required={required}
               name={`${name}-tile`}
+              id={`${name}-tile-${choice.value}`}
               value={choice.value}
               checked={value === choice.value}
               onChange={() => onChange(choice.value)}
@@ -141,7 +170,8 @@ export function ChoiceTiles({
           <SelectTrigger
             aria-label={label}
             aria-required={required}
-            aria-invalid={Boolean(error)}
+            aria-invalid={error ? true : undefined}
+            aria-describedby={describedBy}
             onBlur={onBlur}
             className={cn(
               underlineFieldClass,
@@ -172,6 +202,11 @@ export function ChoiceTiles({
           </SelectContent>
         </Select>
       </div>
+      {hint && (
+        <p id={hintId} className="text-muted-foreground mt-3 text-[13px]/5">
+          {hint}
+        </p>
+      )}
       {error && (
         <p
           id={errorId}
