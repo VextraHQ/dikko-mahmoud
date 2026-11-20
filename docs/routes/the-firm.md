@@ -63,7 +63,9 @@ wireframe graphics as public-site photographs.
 5. **Core values:** “Experience that works for you.” with Transparency,
    Accountability, Efficiency and Professionalism. Use supplied descriptions,
    divider-based rows and the existing ArrowButton. No accordion is needed for
-   this short readable list.
+   this short readable list. **Awards and recognition** follows it, before
+   Working with us, with its archive at `/the-firm/awards`; see "Awards and
+   recognition contract" below.
 6. **Working with us:** “From the first brief to final delivery.” and six source
    steps: Your brief; Gather the facts; Develop the strategy; Discuss the advice;
    Put the plan to work; Close the engagement. Use a semantic ordered list,
@@ -118,6 +120,111 @@ wireframe graphics as public-site photographs.
   history or derive milestones from the wireframe's illustrative wording.
 - Without JavaScript, the historical text must remain readable through a simple
   static/disclosure fallback. No empty timeline shell or offscreen focus targets.
+
+## Awards and recognition contract · updated 20 November 2026
+
+Reference: Figma frame `142-7940` in "Dikko - Mahmoud Dev" (Awards and
+recognition, after Core values). First agreed on 19 November in the "Awards
+Section Plan" artifact (https://claude.ai/artifact/WQrYup6qz5JhXjLhyr6iTU). On
+20 November the user asked for the full design now, with only the content
+missing: numbered selectable rows, a picture that follows the selection, "Show
+more awards", the "About these awards" note and the archive page. One archive
+page only; no page per award. Out of scope: filters, awards on profiles and
+Sanity.
+
+**Layout.** The designer's layout: section eyebrow and heading across the top,
+then the picture on the left and the list on the right from `lg`; stacked on
+phones (picture first). Copy, in British English:
+
+- Eyebrow "Awards and recognition"; heading "Celebrating the achievements of
+  our people and our firm."
+- Sub-eyebrow "Milestones of recognition"; sub-heading "Honours through the
+  years."; intro "Awards recognising our people and our practice."
+- Under the list: a rule, the "Show more awards" button (to the archive), then
+  "About these awards": "Each award identifies the recipient, year and
+  awarding organisation."
+
+**Entries.** The three newest awards, newest year first; awards from the same
+year keep their record order. Each row:
+
+- A 48px circle numbered 01, 02, 03, joined to the next by a thin line. The
+  selected row's circle is filled navy; the others are outlined and darken on
+  hover.
+- The year as an eyebrow, then the award title (serif). Year and title form
+  one button (`aria-pressed`); the first award is selected on load.
+- One line below: the recipient, then "Awarded by" and the awarding body. The
+  recipient is "The firm" or the person's name, linked to the profile only
+  while that profile is live (`availableProfileSlugs`).
+
+**Picture.** Follows the selected award: the award's `image` when it has one,
+otherwise `EditorialCover`. Clicking only changes the supporting photograph;
+every award's year, title, recipient and awarding body stay visible without
+it. A short hint above the list reads "Select an award to view its
+photograph." Selection changes on click, tap or keyboard only; nothing animates
+until the visitor picks a row.
+
+- From `lg`: beside the list, the new picture fading in over the previous one
+  (`animate-card-fade`, the Journey's beat). It stretches to the list's height,
+  clamped between 360px and 620px, and stays in view (sticky) beside long lists.
+- Below `lg`: the photograph sits directly under the selected award row (16:9),
+  like the Journey accordion, so a tap never changes a picture that is off
+  screen.
+- A photo needs a recorded source and rights before it is added; the Figma
+  boardroom image waits for the designer to confirm both. Until real photos
+  arrive every row shows the same cover, so the click has little to show.
+- Later, if the archive grows long: the desktop picture may follow the entry
+  being read as the visitor scrolls (no forced scrolling or tall entries).
+  The Firm keeps click selection, since its three rows are visible together.
+
+**Archive.** `/the-firm/awards` (`routes.awards`; trail Home › The Firm ›
+Awards): heading "Honours through the years.", intro, and every publishable
+award in the same selectable list, followed by the enquiry banner. It launches
+in the no-index preview, and on the public site once an award is approved
+(`availableAwardIds`); otherwise it is a 404 and "Show more awards" shows the
+"being prepared" notice.
+
+**Records.** `content/awards.ts` holds the copy, the slot labels and
+`awardRecords`, which starts empty; no award, name, date or body is invented.
+Each record: `id`, `title`, `year` (number), `awardingBody`, `recipient`
+(`{ type: "firm" }` or `{ type: "person"; personId }`), optional `image` (`src`,
+`alt`), `category` and `link`, and `publicationStatus`. The fields match a
+future Sanity `award` document.
+
+**Rule.** `lib/awards.ts`: `newestAwards` returns the publishable awards,
+newest first, with the recipient label and linkable slug; `awardList` limits
+them, or returns labelled slots in the preview while there are none. Approved
+awards always show; pending awards show only in the no-index preview, with the
+site's review note ("Some awards are awaiting the firm's approval.", hidden
+while `siteConfig.reviewNotes` is off); withheld awards never show.
+
+**States.**
+
+| Publishable awards | Public site                                  | Review preview                       |
+| ------------------ | -------------------------------------------- | ------------------------------------ |
+| None               | No section, no gap; archive 404              | Three slots on The Firm, six on page |
+| 1 to 3             | All of them on The Firm and the archive      | Same                                 |
+| 4 or more          | The three newest on The Firm; all on archive | Same                                 |
+
+Preview slots read "Year", "Award title" and "Awarded by [Awarding body]", as in
+the design. They come from section copy, never from records.
+
+**Files.** `content/awards.ts`, `lib/awards.ts`, `lib/routes.ts`,
+`components/firm/award-explorer.tsx` (client: selection and picture),
+`components/firm/awards-section.tsx`,
+`components/firm/awards-archive-section.tsx`,
+`app/(site)/the-firm/awards/page.tsx`, one line in
+`app/(site)/the-firm/page.tsx`, `tests/awards.test.ts` and
+`tests/fixtures/awards.ts`.
+
+**Acceptance.**
+
+- Tests: only publishable awards show; newest first; the Firm limit; profile
+  links only for live profiles; slots only in preview with no records.
+- No overflow from 320 to 1440px. Picture stays within 360–620px on desktop and
+  16:9 on phones.
+- The public build renders no Awards section while `awardRecords` is empty, and
+  Core values runs straight into Working with us.
+- Reduced motion swaps the picture without a fade. Home is unchanged.
 
 ## People records, cards and future profiles
 

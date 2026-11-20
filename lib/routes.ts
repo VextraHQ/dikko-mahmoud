@@ -2,6 +2,7 @@ import { practiceIndex as practiceCatalogue } from "@/content/practice-index";
 import { availableProfileSlugs, directoryPeople } from "@/lib/people/roster";
 import { previewOptions } from "@/lib/preview";
 import { availableMatterIds } from "@/content/matter-manifest";
+import { availableAwardIds } from "@/content/awards";
 
 // Every internal page address lives here. Components link with `routes.*`,
 // never a hand-typed path, so renaming a page is a one-line change.
@@ -10,6 +11,7 @@ const practiceAreasPath = "/practice-areas";
 export const routes = {
   home: "/",
   firm: "/the-firm",
+  awards: "/the-firm/awards",
   practiceAreas: practiceAreasPath,
   practiceFilter: (category: string) =>
     `${practiceAreasPath}?category=${encodeURIComponent(category)}`,
@@ -43,6 +45,9 @@ export const launchedRoutes: readonly string[] = [
   routes.terms,
   routes.insights,
   routes.contact,
+  ...(previewOptions.allowPreview || availableAwardIds(previewOptions).length
+    ? [routes.awards]
+    : []),
   ...practiceCatalogue.map((practice) => routes.practiceArea(practice.slug)),
   ...(directoryPeople(previewOptions).length ? [routes.people] : []),
   ...availableProfileSlugs(previewOptions).map((slug) => routes.person(slug)),

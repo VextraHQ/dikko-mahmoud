@@ -3,6 +3,73 @@
 Append-only factual history for the current month. Older entries are in
 `docs/archive/` (for example `archive/implementation-log-2026-10.md`).
 
+## 2026-11-20 — Awards: photo under the selected row on phones
+
+- Codex review: on phones the photo sat above the whole list, so a tap could
+  change a picture that was off screen. Below `lg` the photo now sits directly
+  under the selected award row; desktop keeps the side picture and crossfade.
+- Added the hint "Select an award to view its photograph."; trimmed the
+  archive intro to match. Scroll-following imagery is noted in the spec as a
+  later option for a long archive only.
+- Files: `components/firm/award-explorer.tsx`, `content/awards.ts`,
+  `routes/the-firm.md`.
+- Checked in the dev server at 375 and 1440px: picture under row 03 after
+  selecting it on the phone, desktop picture 600×620, no overflow.
+
+## 2026-11-20 — Awards: full design and archive page
+
+- At the user's request, built the whole Awards design so only the content is
+  missing: rows numbered 01–03 in circles (selected row filled), year eyebrow,
+  title, "Awarded by", a picture that follows the selected award with the
+  Journey's fade, "Show more awards" and the "About these awards" note.
+  Preview slots now read "Year", "Award title", "Awarded by [Awarding body]".
+- Added the archive `/the-firm/awards` (one page, no page per award): trail,
+  heading, intro and every award in the same selectable list. It launches in
+  preview and, publicly, once an award is approved.
+- This replaces the 19 November choices of identical circles, a hidden note
+  and no archive yet.
+- Files: `content/awards.ts`, `lib/awards.ts`, `lib/routes.ts`,
+  `components/firm/award-explorer.tsx`, `awards-section.tsx`,
+  `awards-archive-section.tsx`, `app/(site)/the-firm/awards/page.tsx`,
+  `tests/awards.test.ts`; spec, checklist, roadmap.
+- Checked in the dev server: selection and picture swap on The Firm, archive
+  at 1440 and 375px, no horizontal overflow, archive is no-index.
+
+## 2026-11-19 — Awards section built on The Firm
+
+- Added Awards and recognition after Core values, following the contract in
+  `routes/the-firm.md`: heading, branded cover (360–620px tall on desktop,
+  16:9 on phones), and up to three awards with the year in matching circles,
+  the recipient (profile link only when the profile may be shown) and the
+  awarding body.
+- `awardRecords` is empty, so the no-index preview shows three neutral slots
+  and the public build renders no section. Pending awards carry the site
+  review note.
+- Files: `content/awards.ts`, `lib/awards.ts`,
+  `components/firm/awards-section.tsx`, `app/(site)/the-firm/page.tsx`,
+  `tests/awards.test.ts`, `tests/fixtures/awards.ts`, `.claude/launch.json`
+  (dev preview); spec, checklist and roadmap (5k → Review).
+- Checked in the dev server at 320, 1024 and 1440px: no horizontal overflow.
+- Remaining: the firm's award records and the boardroom image's source and
+  rights.
+
+## 2026-11-19 — Awards section planned and specified
+
+- The designer supplied the Awards and recognition section for The Firm (Figma
+  `142-7940`, after Core values). Planned in the "Awards Section Plan"
+  artifact, reviewed by Codex, and approved by the user.
+- Agreed: keep the designer's layout; the year sits inside identical circles
+  with the three newest awards first; each entry names the recipient (a profile
+  link only when live); the repeated "About these awards" caption shows only
+  with a firm-supplied note; the picture follows the list within 360–620px on
+  desktop and is 16:9 on phones; the branded cover stays until the boardroom
+  image's source and rights are confirmed; three neutral preview slots while
+  there are no records; British spelling.
+- Scope: The Firm section only. The archive (`/the-firm/awards`), filters and
+  "View all awards" come later; once launched the archive stays available.
+- Docs: contract added to `routes/the-firm.md`; checklist and roadmap (5k)
+  updated. No code changed. format:check passes.
+
 ## 2026-11-19 — Accessibility PR review correction
 
 - Corrected `components/shared/section-link.tsx` on the accessibility PR branch:

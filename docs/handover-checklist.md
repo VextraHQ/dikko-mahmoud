@@ -125,6 +125,14 @@ ownership and final client acceptance are not verified by this checklist.
 
 - [ ] Design and build **Awards** after the records/layout are agreed; omit an
       empty section while there is no approved content.
+      Layout agreed on 19 November 2026 (Figma `142-7940`; contract in
+      [routes/the-firm.md](routes/the-firm.md) → "Awards and recognition
+      contract"). Built 19 November 2026; on 20 November extended to
+      the full design (numbered selectable rows, picture follows the selection,
+      "Show more awards", note) plus the `/the-firm/awards` archive. The public
+      build omits both while there are no approved records. Still needed: the
+      firm's award records and photos with source/rights, including the
+      designer's boardroom image.
 - [ ] Build **Careers** after the firm's response, with an introduction,
       CMS-managed open/closed vacancies and email/external application links.
       Keep it in scope but hidden until ready. No ATS/CV-upload workflow is agreed.

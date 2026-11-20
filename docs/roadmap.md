@@ -103,6 +103,7 @@ Careers is the remaining unbuilt primary route checkpoint. Contact delivery
 | 5h. Codebase clean-up                       | Review   | Licence, security headers, plan docs, folder tidy, comment pass, quick speed wins          |
 | 5i. Careers                                 | Waiting  | Design supplied; build waits for the firm's recruitment requirements (`routes/careers.md`) |
 | 5j. Motion                                  | Complete | Native CSS motion, no animation library; signed off 15 November; Home unchanged            |
+| 5k. Awards                                  | Review   | Firm section and archive built 19–20 November; records and photo rights from the firm      |
 | 6. CMS and service integrations             | Later    | Plans in `integrations/`; providers connected only when their scope is approved            |
 | 7. Launch readiness                         | Later    | Content, accessibility, SEO, security, and deployment verified                             |
 

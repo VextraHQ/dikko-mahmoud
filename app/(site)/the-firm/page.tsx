@@ -3,6 +3,7 @@ import { FirmHeroSection } from "@/components/firm/hero-section";
 import { FirmStorySection } from "@/components/firm/story-section";
 import { JourneySection } from "@/components/firm/journey-section";
 import { ValuesSection } from "@/components/firm/values-section";
+import { AwardsSection } from "@/components/firm/awards-section";
 import { ProcessSection } from "@/components/firm/process-section";
 import { FirmPeopleSection } from "@/components/firm/people-section";
 import { PresenceSection } from "@/components/firm/presence-section";
@@ -28,6 +29,7 @@ export default function TheFirmPage() {
       <FirmFactsSection surface="pale" />
       <JourneySection />
       <ValuesSection />
+      <AwardsSection />
       <ProcessSection />
       <FirmPeopleSection />
       <PresenceSection />
